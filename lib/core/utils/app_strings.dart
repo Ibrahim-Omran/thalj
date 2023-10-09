@@ -18,4 +18,26 @@ class AppStrings {
   static const String agreeTermAndConditions = 'أوافق على تطبيق الشروط والأحكام.';
   static const String saveAndCompleteProject = 'احفظ و اكمل انشاء حسابك';
 
+
+  // product information
+  static const String productInfo = 'معلومات المنتج';
+  static const String senderInfo = 'معلومات المرسل';
+  static const String region = 'المنطقة:';
+  static const String addressDetails = 'تفاصيل العنوان:';
+  static const String buildingNumber = 'رقم المبني:';
+  static const String floorNumber = 'رقم الدور:';
+  static const String apartmentNumber = 'رقم الشقه:';
+  static const String specialMarque = 'علامه مميزه:';
+  static const String phoneNumberInfo = 'رقم الهاتف:';
+  static const String recipientInfo = 'معلومات المرسل إليه';
+  static const String shippingInformation = 'معلومات الشحنه';
+  static const String shippingDescription = 'وصف الشحنة:';
+  static const String shippingType= 'نوع الشحنة:';
+  static const String weight= 'الوزن:';
+  static const String temp= 'الحراره:';
+  static const String humidity= 'الرطوبه:';
+  static const String sendOffer= 'أرسل عرض';
+
+
+
 }
