@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thalj/features/home/presentation/screens/Home_Screen/Home_Screen.dart';
 
 import '../../features/auth/presentation/screens/signin_screen.dart';
 
@@ -12,7 +13,7 @@ class AppRoutes {
   static Route? generateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.intitlRoute:
-        return MaterialPageRoute(builder: (_) => const SignInScreen());
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
 
       default:
         return MaterialPageRoute(
