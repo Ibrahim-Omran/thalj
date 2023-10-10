@@ -5,4 +5,5 @@ class AppAssets{
   static const String appLogo = '${baseUrl}Logo.svg';
   static const String loadingVerify = '${baseUrl}loading_verification.svg';
   static const String successfullyVerify = '${baseUrl}successfully_verify.svg';
+  static const String infoProductIcon = '${baseUrl}info_product_icon.svg';
 }
