@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:thalj/core/routes/app_routes.dart';
-import 'package:thalj/core/utils/app_colors.dart';
-import 'package:thalj/core/utils/app_strings.dart';
-import 'package:thalj/core/utils/commons.dart';
-import 'package:thalj/features/auth/presentation/components/logo.dart';
 
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_text_style.dart';
+import '../components/logo.dart';
+import '../components/back_arrow.dart';
 import '../components/button.dart';
+import '../components/phone_form_field.dart';
 import '../components/text_filed.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   late bool _isChecked = false;
   late bool _isPassword = true;
-
+  late bool _isConfirmPassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,13 +29,15 @@ class _SignInScreenState extends State<SignInScreen> {
         child: SingleChildScrollView(
           child: SafeArea(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const LogoWidget(),
+                const BackArrow(),
+                const Center(child: LogoWidget()),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      AppStrings.signIn,
+                      AppStrings.signUp,
                       style: boldStyle(),
                     ),
                   ],
@@ -47,7 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      AppStrings.signInHint,
+                      AppStrings.signUpHint,
                       style: regularStyle(),
                     ),
                   ],
@@ -57,10 +59,24 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 MyFormField(
                   type: TextInputType.text,
+                  hint: "محمد",
+                  maxLines: 1,
+                  readonly: false,
+                  title: AppStrings.signUpHint,
+                ),
+                 SizedBox(
+                  height: 15.h,
+                ),
+                const PhoneForm(),
+                 SizedBox(
+                  height: 15.h,
+                ),
+                MyFormField(
+                  type: TextInputType.text,
                   hint: "example@mail.com",
                   maxLines: 1,
                   readonly: false,
-                  title: AppStrings.emailOrPhone,
+                  title: AppStrings.email,
                 ),
                  SizedBox(
                   height: 15.h,
@@ -78,18 +94,38 @@ class _SignInScreenState extends State<SignInScreen> {
                   type: TextInputType.text,
                   maxLines: 1,
                   readonly: false,
-                  title: AppStrings.password,
+                  title: AppStrings.createPassword,
                   hint: 'كلمه المرور',
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  TextButton(
+                 SizedBox(
+                  height: 15.h,
+                ),
+                MyFormField(
+                  prefixIcon: _isConfirmPassword ?Icons.visibility_outlined:Icons.visibility_off_outlined,
+                  prefixIconPressed:(){
+                    setState(() {
+                      _isConfirmPassword = !_isConfirmPassword;
+                    });
 
-                        onPressed: () {},
-                    child: Text(
-                      AppStrings.forgetPassword,
-                      style: underLineStyle()
-                    ),
-                  ),
+
+                  } ,
+                  isPassword: _isConfirmPassword,
+                  type: TextInputType.text,
+                  maxLines: 1,
+                  readonly: false,
+                  title: AppStrings.confirmPassword,
+                  hint: 'تآكيد كلمه المرور',
+                ),
+
+
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                          AppStrings.agreeTermAndConditions,
+                          style: regularStyle()
+                      ),
                   Checkbox(
                       value: _isChecked,
                       onChanged: (bool? value) {
@@ -98,30 +134,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         });
                       }),
                 ]),
-                PublicButton(backgroundColor: AppColors.primary, function: () {  }, text: AppStrings.signIn,),
-                 SizedBox(height: 15.h,),
-                Row(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                 TextButton(onPressed: (){
-                   navigate(context: context, route: Routes.signup);
-                 }, child:  Text(AppStrings.subscription,style: underLineStyle(),),),
+                PublicButton(backgroundColor: AppColors.primary, function: () {  }, text: AppStrings.saveAndCompleteProject,),
 
-                  Text(AppStrings.donAccount,style: regularStyle(),),
-
-
-                ],),
-                Row(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(onPressed: (){
-                      navigate(context: context, route: Routes.ownerScreen);
-                    }, child:  Text(AppStrings.pressHere,style: underLineStyle(),),),
-
-                  Text(AppStrings.register,style: regularStyle(),),
-
-
-                ],),
               ],
             ),
           ),
