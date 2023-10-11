@@ -16,8 +16,7 @@ class AppStrings {
   static const String createPassword = 'انشئ رقمك السري';
   static const String confirmPassword = 'تأكيد الرقم السري';
   static const String agreeTermAndConditions = 'أوافق على تطبيق الشروط والأحكام';
-  static const String agreeTermAndConditions =
-      'أوافق على تطبيق الشروط والأحكام.';
+
   static const String saveAndCompleteProject = 'احفظ و اكمل انشاء حسابك';
   static const String register = 'اذا كنت مالك';
   static const String pressHere = 'اضغط هنا';
@@ -69,4 +68,8 @@ class AppStrings {
   static const String doneChecking =
       'تم التأكد من جميع المستندات، و يمكنك البدأ مباشرتاً';
   static const String startDelivery = 'بدأ الشحن';
+
+  //vaild
+  static const String vaildForm = 'يجب ملئ الحقل';
+
 }

@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../../core/widgets/back_button.dart';
-
+import 'package:thalj/features/auth/presentation/components/back_arrow.dart';
 class CustomAppBarProductInfo extends StatelessWidget {
   const CustomAppBarProductInfo({
     super.key,
@@ -36,7 +34,7 @@ class CustomAppBarProductInfo extends StatelessWidget {
               Theme.of(context).textTheme.displayLarge!.copyWith(fontSize: 18),
         ),
         const Spacer(),
-        CustomBackButton(onTap: onTap)
+      const BackArrow(),
       ],
     );
   }
