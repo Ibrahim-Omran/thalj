@@ -17,7 +17,6 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  late bool _isChecked = false;
   late bool _isPassword = true;
 
   @override
@@ -81,20 +80,13 @@ class _SignInScreenState extends State<SignInScreen> {
                   hint: 'كلمه المرور',
                 ),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton(
                         onPressed: () {},
                         child: Text(AppStrings.forgetPassword,
                             style: underLineStyle()),
                       ),
-                      Checkbox(
-                          value: _isChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              _isChecked = value ?? false;
-                            });
-                          }),
+
                     ]),
                 CustomButton(
                   onPressed: () {
