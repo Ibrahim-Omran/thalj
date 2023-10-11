@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:thalj/core/utils/app_assets.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 
+
 part 'document_checking_event.dart';
 part 'document_checking_state.dart';
 

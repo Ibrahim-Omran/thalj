@@ -12,6 +12,7 @@ class Routes {
   static const String intitlRoute = '/';
   static const String signup = '/signup';
   static const String ownerScreen = '/owner';
+  static const String homeScreen = '/home';
 
   static const String productInformationScreen = '/productInformationScreen';
   static const String uploadingSupportingDocumentsScreen =
@@ -28,10 +29,10 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case Routes.ownerScreen:
         return MaterialPageRoute(builder: (_) => const OwnerScreen());
+
+      case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
 
-        return MaterialPageRoute(
-            builder: (_) => const UploadingSupportingDocumentsScreen());
       case Routes.productInformationScreen:
         return MaterialPageRoute(
             builder: (_) => const ProductInformationScreen());

@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: AppStrings.appName,
             theme: getAppTheme(),
-            initialRoute: Routes.documentsCheckScreen,
+            initialRoute: Routes.intitlRoute,
             onGenerateRoute: AppRoutes.generateRoute,
           ),
         );

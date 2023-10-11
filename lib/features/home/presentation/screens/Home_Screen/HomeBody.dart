@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:thalj/core/routes/app_routes.dart';
 import 'package:thalj/core/utils/app_colors.dart';
 import 'package:thalj/core/utils/app_text_style.dart';
+import 'package:thalj/core/utils/commons.dart';
+
+import '../../../../auth/presentation/components/back_arrow.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -29,6 +33,9 @@ class HomeBody extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                  const BackArrow(),
+
+                    const Spacer(),
                     Column(children: [
                       Text('مرحبا بك',
                           style: boldStyle(color: Colors.white, fontSize: 20)),
@@ -77,15 +84,17 @@ class HomeBody extends StatelessWidget {
             ],
           ),
         ),
-    InkWell(
-      onTap: (){},
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
+    Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: InkWell(
+                  onTap: (){
+                    navigate(context: context, route: Routes.productInformationScreen);
+                  },
                   child: SizedBox(
                     width: 200,
                     child: Card(
@@ -160,243 +169,243 @@ class HomeBody extends StatelessWidget {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: SizedBox(
-                    width: 200,
-                    child: Card(
-                      color: const Color(0xffF0F3FD),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'المنطقة',
-                                  style: boldStyle(fontSize: 15),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Icon(
-                                  Icons.location_on_outlined,
-                                  color: AppColors.primary,
-                                  size: 20,
-                                )
-                              ],
-                            ),
+              ),
+              Expanded(
+                child: SizedBox(
+                  width: 200,
+                  child: Card(
+                    color: const Color(0xffF0F3FD),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                'المنطقة',
+                                style: boldStyle(fontSize: 15),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Icon(
+                                Icons.location_on_outlined,
+                                color: AppColors.primary,
+                                size: 20,
+                              )
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 10,left: 20),
-                                    child: Text(
-                                      'المنطقة المرسل اليها',
-                                      style: boldStyle(fontSize: 15),
-                                    ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 10,left: 20),
+                                  child: Text(
+                                    'المنطقة المرسل اليها',
+                                    style: boldStyle(fontSize: 15),
                                   ),
                                 ),
+                              ),
 
-                                const Image(
-                                  image: AssetImage('assets/images/loc.png'),
-                                  height: 20,
-                                  width: 30,
-                                )
-                              ],
-                            ),
+                              const Image(
+                                image: AssetImage('assets/images/loc.png'),
+                                height: 20,
+                                width: 30,
+                              )
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'نوع المنتج',
-                                  style: boldStyle(fontSize: 15),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Image(
-                                  image: AssetImage('assets/images/moka.png'),
-                                  height: 20,
-                                  width: 30,
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                'نوع المنتج',
+                                style: boldStyle(fontSize: 15),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Image(
+                                image: AssetImage('assets/images/moka.png'),
+                                height: 20,
+                                width: 30,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    width: 200,
-                    child: Card(
-                      color:const Color(0xffF0F3FD),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'المنطقة',
-                                  style: boldStyle(fontSize: 15),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Icon(
-                                  Icons.location_on_outlined,
-                                  color: AppColors.primary,
-                                  size: 20,
-                                )
-                              ],
-                            ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: SizedBox(
+                  width: 200,
+                  child: Card(
+                    color:const Color(0xffF0F3FD),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                'المنطقة',
+                                style: boldStyle(fontSize: 15),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Icon(
+                                Icons.location_on_outlined,
+                                color: AppColors.primary,
+                                size: 20,
+                              )
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 10,left: 20),
-                                    child: Text(
-                                      'المنطقة المرسل اليها',
-                                      style: boldStyle(fontSize: 15),
-                                    ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 10,left: 20),
+                                  child: Text(
+                                    'المنطقة المرسل اليها',
+                                    style: boldStyle(fontSize: 15),
                                   ),
                                 ),
+                              ),
 
-                                const Image(
-                                  image: AssetImage('assets/images/loc.png'),
-                                  height: 20,
-                                  width: 30,
-                                )
-                              ],
-                            ),
+                              const Image(
+                                image: AssetImage('assets/images/loc.png'),
+                                height: 20,
+                                width: 30,
+                              )
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'نوع المنتج',
-                                  style: boldStyle(fontSize: 15),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Image(
-                                  image: AssetImage('assets/images/moka.png'),
-                                  height: 20,
-                                  width: 30,
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                'نوع المنتج',
+                                style: boldStyle(fontSize: 15),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Image(
+                                image: AssetImage('assets/images/moka.png'),
+                                height: 20,
+                                width: 30,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
-                Expanded(
-                  child: SizedBox(
-                    width: 200,
-                    child: Card(
-                      color: const Color(0xffF0F3FD),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'المنطقة',
-                                  style: boldStyle(fontSize: 15),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Icon(
-                                  Icons.location_on_outlined,
-                                  color: AppColors.primary,
-                                  size: 20,
-                                )
-                              ],
-                            ),
+              ),
+              Expanded(
+                child: SizedBox(
+                  width: 200,
+                  child: Card(
+                    color: const Color(0xffF0F3FD),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                'المنطقة',
+                                style: boldStyle(fontSize: 15),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Icon(
+                                Icons.location_on_outlined,
+                                color: AppColors.primary,
+                                size: 20,
+                              )
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 10,left: 20),
-                                    child: Text(
-                                      'المنطقة المرسل اليها',
-                                      style: boldStyle(fontSize: 15),
-                                    ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 10,left: 20),
+                                  child: Text(
+                                    'المنطقة المرسل اليها',
+                                    style: boldStyle(fontSize: 15),
                                   ),
                                 ),
+                              ),
 
-                                const Image(
-                                  image: AssetImage('assets/images/loc.png'),
-                                  height: 20,
-                                  width: 30,
-                                )
-                              ],
-                            ),
+                              const Image(
+                                image: AssetImage('assets/images/loc.png'),
+                                height: 20,
+                                width: 30,
+                              )
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'نوع المنتج',
-                                  style: boldStyle(fontSize: 15),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Image(
-                                  image: AssetImage('assets/images/moka.png'),
-                                  height: 20,
-                                  width: 30,
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                'نوع المنتج',
+                                style: boldStyle(fontSize: 15),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Image(
+                                image: AssetImage('assets/images/moka.png'),
+                                height: 20,
+                                width: 30,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+                ),
+              )
+            ],
+          ),
+        )
+      ],
     )
       ],
     );
