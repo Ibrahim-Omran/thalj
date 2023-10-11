@@ -12,6 +12,7 @@ class AppStrings {
   static const String signUpHint = 'يرجى ملء النموذج التالي لإنشاء حسابك';
   static const String name = 'ادخل الاسم بالكامل';
   static const String email = 'ادخل بريدك الالكتروني';
+  static const String ownerEmail = 'ادخل البريد الالكتروني للمالك';
   static const String phoneNumber = 'ادخل رقم الهاتف';
   static const String createPassword = 'انشئ رقمك السري';
   static const String confirmPassword = 'تأكيد الرقم السري';

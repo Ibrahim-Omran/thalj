@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:thalj/core/widgets/custom_button.dart';
 
 import '../../../../core/utils/app_strings.dart';
@@ -30,6 +31,16 @@ class _OwnerScreenState extends State<OwnerScreen> {
                 const BackArrow(),
                 const Center(child: LogoWidget()),
                 MyFormField(
+
+
+
+                  type: TextInputType.text,
+                  maxLines: 1,
+                  readonly: false,
+                  title: AppStrings.ownerEmail,
+                  hint: 'example@mail.com',
+                ),
+                MyFormField(
                   prefixIcon: _isPassword
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
@@ -49,7 +60,8 @@ class _OwnerScreenState extends State<OwnerScreen> {
                   height: 15.h,
                 ),
                 CustomButton(
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                   text: AppStrings.signIn,
                 ),
               ],
