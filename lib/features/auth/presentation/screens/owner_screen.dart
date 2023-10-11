@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thalj/core/widgets/custom_button.dart';
 
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../components/logo.dart';
-import '../components/back_arrow.dart';
-import '../components/button.dart';
+import '../../../../core/widgets/logo.dart';
+import '../../../../core/widgets/back_arrow.dart';
 import '../components/text_filed.dart';
 
 class OwnerScreen extends StatefulWidget {
@@ -30,20 +29,15 @@ class _OwnerScreenState extends State<OwnerScreen> {
               children: [
                 const BackArrow(),
                 const Center(child: LogoWidget()),
-
-
-
-
-
                 MyFormField(
-                  prefixIcon: _isPassword ?Icons.visibility_outlined:Icons.visibility_off_outlined,
-                  prefixIconPressed:(){
+                  prefixIcon: _isPassword
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
+                  prefixIconPressed: () {
                     setState(() {
                       _isPassword = !_isPassword;
                     });
-
-
-                  } ,
+                  },
                   isPassword: _isPassword,
                   type: TextInputType.text,
                   maxLines: 1,
@@ -51,14 +45,13 @@ class _OwnerScreenState extends State<OwnerScreen> {
                   title: AppStrings.passOwner,
                   hint: 'كلمه المرور',
                 ),
-                SizedBox(height: 15.h,),
-                PublicButton(backgroundColor: AppColors.primary, function: () {  }, text: AppStrings.signIn,),
-
-
-
-
-
-
+                SizedBox(
+                  height: 15.h,
+                ),
+                CustomButton(
+                  onPressed: () {},
+                  text: AppStrings.signIn,
+                ),
               ],
             ),
           ),

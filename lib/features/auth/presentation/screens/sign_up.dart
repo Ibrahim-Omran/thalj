@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/routes/app_routes.dart';
+import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/utils/commons.dart';
+import 'package:thalj/core/widgets/custom_button.dart';
 
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_text_style.dart';
-import '../components/logo.dart';
-import '../components/back_arrow.dart';
-import '../components/button.dart';
+import '../../../../core/widgets/logo.dart';
+import '../../../../core/widgets/back_arrow.dart';
 import '../components/phone_form_field.dart';
 import '../components/text_filed.dart';
 
@@ -48,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ],
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 15.h,
                   ),
                   Row(
@@ -60,23 +59,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ],
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 15.h,
                   ),
                   MyFormField(
-
                     type: TextInputType.text,
                     hint: "محمد",
                     maxLines: 1,
                     readonly: false,
                     title: AppStrings.signUpHint,
-
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 15.h,
                   ),
                   const PhoneForm(),
-                   SizedBox(
+                  SizedBox(
                     height: 15.h,
                   ),
                   MyFormField(
@@ -86,18 +83,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     readonly: false,
                     title: AppStrings.email,
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 15.h,
                   ),
                   MyFormField(
-                    prefixIcon: _isPassword ?Icons.visibility_outlined:Icons.visibility_off_outlined,
-                    prefixIconPressed:(){
+                    prefixIcon: _isPassword
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
+                    prefixIconPressed: () {
                       setState(() {
                         _isPassword = !_isPassword;
                       });
-
-
-                    } ,
+                    },
                     isPassword: _isPassword,
                     type: TextInputType.text,
                     maxLines: 1,
@@ -105,18 +102,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     title: AppStrings.createPassword,
                     hint: 'كلمه المرور',
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 15.h,
                   ),
                   MyFormField(
-                    prefixIcon: _isConfirmPassword ?Icons.visibility_outlined:Icons.visibility_off_outlined,
-                    prefixIconPressed:(){
+                    prefixIcon: _isConfirmPassword
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
+                    prefixIconPressed: () {
                       setState(() {
                         _isConfirmPassword = !_isConfirmPassword;
                       });
-
-
-                    } ,
+                    },
                     isPassword: _isConfirmPassword,
                     type: TextInputType.text,
                     maxLines: 1,
@@ -124,16 +121,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     title: AppStrings.confirmPassword,
                     hint: 'تآكيد كلمه المرور',
                   ),
-
-
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                            AppStrings.agreeTermAndConditions,
-                            style: regularStyle()
-                        ),
+                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    Text(AppStrings.agreeTermAndConditions,
+                        style: regularStyle()),
                     Checkbox(
                         value: _isChecked,
                         onChanged: (bool? value) {
@@ -142,12 +132,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           });
                         }),
                   ]),
-                  PublicButton(backgroundColor: AppColors.primary, function: () {
-                    navigate(context: context, route: Routes.uploadingSupportingDocumentsScreen);
-
-
-                  }, text: AppStrings.saveAndCompleteProject,),
-
+                  CustomButton(
+                    onPressed: () {
+                      navigate(
+                          context: context,
+                          route: Routes.uploadingSupportingDocumentsScreen);
+                    },
+                    text: AppStrings.saveAndCompleteProject,
+                  ),
                 ],
               ),
             ),
@@ -157,4 +149,3 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 }
-

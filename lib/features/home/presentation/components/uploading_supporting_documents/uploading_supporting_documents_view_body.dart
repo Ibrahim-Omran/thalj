@@ -1,14 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/routes/app_routes.dart';
 import 'package:thalj/core/utils/commons.dart';
-import 'package:thalj/features/auth/presentation/components/logo.dart';
+import 'package:thalj/core/widgets/logo.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_text_style.dart';
-import '../../../../auth/presentation/components/back_arrow.dart';
+import '../../../../../core/widgets/back_arrow.dart';
 import 'custom_container.dart';
 
 class UploadingSupportingDocumentsViewBody extends StatelessWidget {
@@ -31,11 +30,10 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
             const Center(
               child: LogoWidget(),
             ),
-             SizedBox(
+            SizedBox(
               height: 12.h,
             ),
-            Text(AppStrings.uploadingSupportingDocuments,
-                style: boldStyle()),
+            Text(AppStrings.uploadingSupportingDocuments, style: boldStyle()),
             SizedBox(
               height: 12.h,
             ),
@@ -167,9 +165,11 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            ElevatedButton(onPressed: (){
-              navigate(context: context, route: Routes.documentsCheckScreen);
-            },
+            ElevatedButton(
+                onPressed: () {
+                  navigate(
+                      context: context, route: Routes.documentsCheckScreen);
+                },
                 child: Container(
                   width: 351.w,
                   height: 47.h,
@@ -177,7 +177,9 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                   child: Center(
                     child: Text(
                       AppStrings.saveData,
-                      style:boldStyle().copyWith(color: Colors.white,fontSize: 16.0) ,),
+                      style: boldStyle()
+                          .copyWith(color: Colors.white, fontSize: 16.0),
+                    ),
                   ),
                 )),
           ],
