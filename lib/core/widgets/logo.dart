@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/app_assets.dart';
+import '../utils/app_assets.dart';
 
 class LogoWidget extends StatelessWidget {
   const LogoWidget({super.key});
@@ -17,9 +17,11 @@ class LogoWidget extends StatelessWidget {
     final heightFactor = logoHeight / screenHeight;
 
     return SizedBox(
-      width: screenWidth * widthFactor,
-      height: screenHeight * heightFactor,
-      child: Image.asset(AppAssets.appLogo,fit: BoxFit.contain,)
-    );
+        width: screenWidth * widthFactor,
+        height: screenHeight * heightFactor,
+        child: Image.asset(
+          AppAssets.appLogo,
+          fit: BoxFit.contain,
+        ));
   }
 }

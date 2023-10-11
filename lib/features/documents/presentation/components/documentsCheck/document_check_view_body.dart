@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/utils/app_text_style.dart';
+import 'package:thalj/core/widgets/custom_app_bar_product_info.dart';
 import 'package:thalj/features/documents/presentation/bloc/document_checking_bloc/document_checking_bloc.dart';
 import 'package:thalj/features/documents/presentation/components/documentsCheck/custom_button_delivery.dart';
-import 'package:thalj/features/documents/presentation/components/documentsCheck/custom_documents_appbar.dart';
 
 class DocumentCheckBiewBody extends StatefulWidget {
   const DocumentCheckBiewBody({
@@ -31,12 +31,11 @@ class _DocumentCheckBiewBodyState extends State<DocumentCheckBiewBody> {
           child: state is DocumentCheckingLoading
               ? Column(
                   children: [
-                    CustomAppBarDocumentsCheck(
-                      title: AppStrings.documentCheck,
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
+                    CustomAppBar(
+                        title: AppStrings.documentCheck,
+                        onTap: () {
+                          Navigator.pop(context);
+                        }),
                     const Spacer(),
                     Image.asset(state.img),
                     Text(
@@ -59,10 +58,11 @@ class _DocumentCheckBiewBodyState extends State<DocumentCheckBiewBody> {
               : state is DocumentCheckingSuccess
                   ? Column(
                       children: [
-                        CustomAppBarDocumentsCheck(
-                          title: AppStrings.documentCheck,
-                          onTap: () {},
-                        ),
+                        CustomAppBar(
+                            title: AppStrings.documentCheck,
+                            onTap: () {
+                              Navigator.pop(context);
+                            }),
                         const Spacer(),
                         Image.asset(state.img),
                         Text(
