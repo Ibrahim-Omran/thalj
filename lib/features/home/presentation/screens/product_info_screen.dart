@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/utils/app_assets.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/widgets/custom_button.dart';
-import '../components/product_info/custom_app_bar_product_info.dart';
+import '../../../../core/widgets/custom_app_bar_product_info.dart';
 import '../components/product_info/custom_sender_and_recipient_info.dart';
 import '../components/product_info/custom_shipping_info.dart';
 
@@ -22,10 +22,12 @@ class ProductInformationScreen extends StatelessWidget {
             SizedBox(
               height: 62.h,
             ),
-            CustomAppBarProductInfo(
-              url: AppAssets.infoProductIcon,
+            CustomAppBar(
+              img: AppAssets.infoProductIcon,
               title: AppStrings.productInfo,
-              onTap: () {Navigator.pop(context);},
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
             SizedBox(
               height: 24.h,
@@ -67,11 +69,8 @@ class ProductInformationScreen extends StatelessWidget {
             SizedBox(
               height: 32.h,
             ),
-
             CustomButton(
-              onPressed: () {
-
-              },
+              onPressed: () {},
               text: AppStrings.sendOffer,
             ),
             SizedBox(

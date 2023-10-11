@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:thalj/core/utils/app_assets.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
@@ -8,10 +8,10 @@ import '../../../../../core/utils/app_text_style.dart';
 
 Widget customContainer(
     {required String textFrontOrBack,
-      required String textFrontOrBack2,
-      required String mainText,
-      required double height,
-      required double width}) {
+    required String textFrontOrBack2,
+    required String mainText,
+    required double height,
+    required double width}) {
   return Container(
     height: height,
     width: width,
@@ -23,7 +23,11 @@ Widget customContainer(
       children: [
         Padding(
           padding: EdgeInsets.only(top: 18.0.h, bottom: 18.0.h),
-          child: SvgPicture.asset('assets/images/upload.svg'),
+          child: Image.asset(
+            AppAssets.upload,
+            height: 28.h,
+            width: 28.w,
+          ),
         ),
         Text(mainText, style: regularStyle()),
         Row(
