@@ -62,40 +62,42 @@ class CustomShippingInfo extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
-          Row(
-            textDirection: TextDirection.rtl,
-            children: [
-              Text(
-                '${AppStrings.weight} $weight',
-                textDirection: TextDirection.rtl,
-                style: Theme.of(context)
-                    .textTheme
-                    .displayMedium!
-                    .copyWith(fontSize: 14),
-              ),
-              SizedBox(
-                width: 35.5.w,
-              ),
-              Text(
-                '${AppStrings.temp} $temp',
-                textDirection: TextDirection.rtl,
-                style: Theme.of(context)
-                    .textTheme
-                    .displayMedium!
-                    .copyWith(fontSize: 14),
-              ),
-              SizedBox(
-                width: 35.5.w,
-              ),
-              Text(
-                '${AppStrings.humidity} $humidity',
-                textDirection: TextDirection.rtl,
-                style: Theme.of(context)
-                    .textTheme
-                    .displayMedium!
-                    .copyWith(fontSize: 14),
-              ),
-            ],
+          FittedBox(
+            child: Row(
+              textDirection: TextDirection.rtl,
+              children: [
+                Text(
+                  '${AppStrings.weight} $weight',
+                  textDirection: TextDirection.rtl,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayMedium!
+                      .copyWith(fontSize: 14),
+                ),
+                SizedBox(
+                  width: 35.5.w,
+                ),
+                Text(
+                  '${AppStrings.temp} $temp',
+                  textDirection: TextDirection.rtl,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayMedium!
+                      .copyWith(fontSize: 14),
+                ),
+                SizedBox(
+                  width: 35.5.w,
+                ),
+                Text(
+                  '${AppStrings.humidity} $humidity',
+                  textDirection: TextDirection.rtl,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayMedium!
+                      .copyWith(fontSize: 14),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 10.h,
