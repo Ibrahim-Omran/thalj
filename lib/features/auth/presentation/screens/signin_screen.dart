@@ -98,7 +98,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         });
                       }),
                 ]),
-                PublicButton(backgroundColor: AppColors.primary, function: () {  }, text: AppStrings.signIn,),
+                PublicButton(backgroundColor: AppColors.primary, function: () {
+                  navigate(context: context, route: Routes.homeScreen);
+                }, text: AppStrings.signIn,),
                  SizedBox(height: 15.h,),
                 Row(
                    mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thalj/core/utils/app_colors.dart';
 
+import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_text_style.dart';
 
 class MyFormField extends StatelessWidget {
@@ -15,7 +16,6 @@ class MyFormField extends StatelessWidget {
   final Widget? widget;
   TextEditingController? controller;
   bool readonly = false;
-  final dynamic validation;
   bool isPassword;
 
   MyFormField(
@@ -32,7 +32,7 @@ class MyFormField extends StatelessWidget {
         required this.readonly,
          this.hintStyle,
         required this.title,
-        this.validation})
+      })
       : super(key: key);
 
   @override
@@ -84,10 +84,17 @@ class MyFormField extends StatelessWidget {
               )
                   : null,
             ),
-            validator: validation,
+          //  validator: vaild,
           ),
         ),
       ],
     );
   }
+}
+
+String ? vaild (value) {
+  if (value.isEmpty) {
+    return AppStrings.vaildForm;
+  }
+  return null;
 }

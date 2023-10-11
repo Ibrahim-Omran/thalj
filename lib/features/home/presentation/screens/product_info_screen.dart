@@ -25,7 +25,7 @@ class ProductInformationScreen extends StatelessWidget {
             CustomAppBarProductInfo(
               url: AppAssets.infoProductIcon,
               title: AppStrings.productInfo,
-              onTap: () {},
+              onTap: () {Navigator.pop(context);},
             ),
             SizedBox(
               height: 24.h,
