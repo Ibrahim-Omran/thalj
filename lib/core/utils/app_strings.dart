@@ -73,4 +73,12 @@ class AppStrings {
   //vaild
   static const String vaildForm = 'يجب ملئ الحقل';
 
+  //productDetails
+  static const String productDetails = 'تفاصيل العرض';
+  static const String productName = 'الاسم كامل';
+  static const String price = 'السعر';
+  static const String number = 'رقم الهاتف';
+  static const String send = 'ارسال';
+
+
 }

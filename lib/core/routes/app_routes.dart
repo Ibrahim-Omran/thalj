@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:thalj/features/auth/presentation/screens/owner_screen.dart';
 import 'package:thalj/features/auth/presentation/screens/sign_up.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/Home_Screen.dart';
+import 'package:thalj/features/home/presentation/screens/Home_Screen/offers.dart';
+import 'package:thalj/features/home/presentation/screens/Home_Screen/product_details.dart';
+import 'package:thalj/features/home/presentation/screens/Home_Screen/profile.dart';
 
 import '../../features/auth/presentation/screens/signin_screen.dart';
 import 'package:thalj/features/documents/presentation/screens/documents_screen.dart';
@@ -18,6 +21,9 @@ class Routes {
   static const String uploadingSupportingDocumentsScreen =
       '/uploadingSupportingDocumentsScreen';
   static const String documentsCheckScreen = '/documentsCheckScreen';
+  static const String offersScreen = '/offer';
+  static const String profileScreen = '/profile';
+  static const String productDetails = '/productDetails';
 }
 
 class AppRoutes {
@@ -41,6 +47,15 @@ class AppRoutes {
             builder: (_) => const UploadingSupportingDocumentsScreen());
       case Routes.documentsCheckScreen:
         return MaterialPageRoute(builder: (_) => const DocumentsCheckScreen());
+
+      case Routes.offersScreen:
+        return MaterialPageRoute(builder: (_) => const Offers());
+
+      case Routes.profileScreen:
+        return MaterialPageRoute(builder: (_) => const Profile());
+
+      case Routes.productDetails:
+        return MaterialPageRoute(builder: (_) => const ProductDetails());
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(
