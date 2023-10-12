@@ -10,4 +10,5 @@ class AppAssets {
   static const String loadingChecking = '${baseUrl}LoadingChecking.png';
 
   static const String upload = '${baseUrl}upload.png';
+  static const String moka = '${baseUrl}moka.png';
 }
