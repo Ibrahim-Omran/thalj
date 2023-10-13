@@ -31,9 +31,6 @@ class _OwnerScreenState extends State<OwnerScreen> {
                 const BackArrow(),
                 const Center(child: LogoWidget()),
                 MyFormField(
-
-
-
                   type: TextInputType.text,
                   maxLines: 1,
                   readonly: false,
@@ -57,11 +54,10 @@ class _OwnerScreenState extends State<OwnerScreen> {
                   hint: 'كلمه المرور',
                 ),
                 SizedBox(
-                  height: 15.h,
+                  height: 40.h,
                 ),
                 CustomButton(
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   text: AppStrings.signIn,
                 ),
               ],
