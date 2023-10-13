@@ -16,12 +16,17 @@ class AppStrings {
   static const String phoneNumber = 'ادخل رقم الهاتف';
   static const String createPassword = 'انشئ رقمك السري';
   static const String confirmPassword = 'تأكيد الرقم السري';
-  static const String agreeTermAndConditions = 'أوافق على تطبيق الشروط والأحكام';
+  static const String agreeTermAndConditions =
+      'أوافق على تطبيق الشروط والأحكام';
 
   static const String saveAndCompleteProject = 'احفظ و اكمل انشاء حسابك';
   static const String register = 'اذا كنت مالك';
   static const String pressHere = 'اضغط هنا';
   static const String passOwner = 'ادخل الرقم السري للمالك';
+
+  static const String home = 'الرئيسية';
+  static const String offers = 'العروض';
+  static const String myProfile = 'حسابي';
 
   // product information
   static const String productInfo = 'معلومات المنتج';
@@ -79,6 +84,4 @@ class AppStrings {
   static const String price = 'السعر';
   static const String number = 'رقم الهاتف';
   static const String send = 'ارسال';
-
-
 }
