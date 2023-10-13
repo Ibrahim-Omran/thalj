@@ -33,9 +33,7 @@ class _DocumentCheckBiewBodyState extends State<DocumentCheckBiewBody> {
                   children: [
                     CustomAppBar(
                         title: AppStrings.documentCheck,
-                        onTap: () {
-                          Navigator.pop(context);
-                        }),
+                       ),
                     const Spacer(),
                     Image.asset(state.img),
                     Text(
@@ -60,9 +58,7 @@ class _DocumentCheckBiewBodyState extends State<DocumentCheckBiewBody> {
                       children: [
                         CustomAppBar(
                             title: AppStrings.documentCheck,
-                            onTap: () {
-                              Navigator.pop(context);
-                            }),
+                           ),
                         const Spacer(),
                         Image.asset(state.img),
                         Text(

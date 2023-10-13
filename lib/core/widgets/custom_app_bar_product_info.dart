@@ -7,12 +7,10 @@ class CustomAppBar extends StatelessWidget {
     super.key,
     this.img,
     required this.title,
-    required this.onTap,
   });
 
   final String? img;
   final String title;
-  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
