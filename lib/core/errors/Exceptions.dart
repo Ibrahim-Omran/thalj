@@ -1,4 +1,4 @@
-import 'ErrorModel.dart';
+import '../network/ErrorModel.dart';
 
 class ServerExceptions implements Exception
 {
