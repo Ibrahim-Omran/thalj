@@ -27,7 +27,7 @@ TextStyle boldStyle({
     _textStyle(
       textDeco: TextDecoration.none,
       color: color,
-      fontSize: fontSize,
+      fontSize: fontSize.sp,
       fontWeight: FontWeight.w700,
     );
 

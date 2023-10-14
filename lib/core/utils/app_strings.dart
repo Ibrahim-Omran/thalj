@@ -64,6 +64,8 @@ class AppStrings {
   static const String uploadDriverCard = '٥. قم برفع كارت التشغيل';
   static const String uploadTransferDocument = '٦. قم برفع وثيقة نقل';
   static const String saveData = 'حفظ البيانات';
+  static const String front = 'الأمامية';
+  static const String back = 'الخلفية';
 
 //Documents Check Screen
   static const String documentCheck = 'التحقق من المستندات';
@@ -88,4 +90,15 @@ class AppStrings {
 
   //internet connection
   static const String noInternet = 'No Internet Connection';
+
+  //driver data sent to owner
+  static const String identityProof = 'اثبات شخصية (الهوية)';
+  static const String residenceCard = 'بطاقة الإقامة :';
+  static const String drivingLicense  = ' : رخصة القيادة';
+  static const String vehicleRegistration = ' : استمارة المركبة';
+  static const String operatingCard = ': كارت التشغيل ';
+  static const String transferDocument = ': وثيقة نقل';
+  static const String requestAccept = 'قبول الطلب';
+  static const String requestReject = 'رفض الطلب';
+
 }
