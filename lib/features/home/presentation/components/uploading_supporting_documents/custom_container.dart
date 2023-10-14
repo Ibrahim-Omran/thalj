@@ -16,7 +16,7 @@ Widget customContainer(
     height: height,
     width: width,
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(8.r),
       color: AppColors.lightBlue.withOpacity(.63),
     ),
     child: Column(

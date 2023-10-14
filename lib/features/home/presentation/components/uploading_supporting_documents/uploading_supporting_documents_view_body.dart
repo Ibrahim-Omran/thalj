@@ -49,7 +49,7 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
               children: [
                 customContainer(
                     mainText: AppStrings.frontId,
-                    textFrontOrBack: 'الخلفية',
+                    textFrontOrBack: AppStrings.back,
                     height: 160.0.h,
                     width: 176.0.w,
                     textFrontOrBack2: AppStrings.frontId2),
@@ -58,7 +58,7 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                 ),
                 customContainer(
                     mainText: AppStrings.frontId,
-                    textFrontOrBack: 'الأمامية',
+                    textFrontOrBack: AppStrings.front,
                     height: 160.0.h,
                     width: 176.0.w,
                     textFrontOrBack2: AppStrings.frontId2),
@@ -79,7 +79,7 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
               children: [
                 customContainer(
                     mainText: AppStrings.frontId,
-                    textFrontOrBack: 'الخلفية',
+                    textFrontOrBack:  AppStrings.back,
                     height: 160.0.h,
                     width: 176.0.w,
                     textFrontOrBack2: AppStrings.frontId2),
@@ -88,7 +88,7 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                 ),
                 customContainer(
                     mainText: AppStrings.frontId,
-                    textFrontOrBack: 'الأمامية',
+                    textFrontOrBack:  AppStrings.front,
                     height: 160.0.h,
                     width: 176.0.w,
                     textFrontOrBack2: AppStrings.frontId2),

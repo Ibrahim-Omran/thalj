@@ -5,6 +5,7 @@ import 'package:thalj/features/home/presentation/screens/Home_Screen/Home_Screen
 import 'package:thalj/features/home/presentation/screens/Home_Screen/offers.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/product_details.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/profile.dart';
+import 'package:thalj/features/home/presentation/screens/driver_data_sent_to_owner.dart';
 
 import '../../features/auth/presentation/screens/signin_screen.dart';
 import 'package:thalj/features/documents/presentation/screens/documents_screen.dart';
@@ -24,6 +25,7 @@ class Routes {
   static const String offersScreen = '/offer';
   static const String profileScreen = '/profile';
   static const String productDetails = '/productDetails';
+  static const String driverDataSentToOwner = '/driverDataSentToOwner';
 }
 
 class AppRoutes {
@@ -56,6 +58,9 @@ class AppRoutes {
 
       case Routes.productDetails:
         return MaterialPageRoute(builder: (_) => const ProductDetails());
+
+      case Routes.driverDataSentToOwner:
+        return MaterialPageRoute(builder: (_) => const DriverDataSentToOwner());
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(
