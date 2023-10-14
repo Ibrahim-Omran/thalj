@@ -84,4 +84,8 @@ class AppStrings {
   static const String price = 'السعر';
   static const String number = 'رقم الهاتف';
   static const String send = 'ارسال';
+
+
+  //internet connection
+  static const String noInternet = 'No Internet Connection';
 }
