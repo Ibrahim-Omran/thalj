@@ -1,5 +1,6 @@
 class AppStrings {
   static const String appName = 'تلج';
+  static const String welcome = 'آهلا يك في ثلج';
   static const String signIn = 'تسجيل دخول';
   static const String signInHint = 'يرجى تسجيل الدخول إلى حسابك للمتابعة';
   static const String emailOrPhone = 'ادخل البريد الالكتروني او رقم الهاتف';

@@ -5,7 +5,9 @@ import 'package:phone_form_field/phone_form_field.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/widgets/custom_button.dart';
 
+import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_text_style.dart';
+import '../../../../core/utils/commons.dart';
 import '../../../../core/widgets/logo.dart';
 import '../../../../core/widgets/back_arrow.dart';
 import '../../domain/repository.dart';
@@ -185,9 +187,9 @@ class SignUpScreen extends StatelessWidget {
                       if (_formKey.currentState!.validate()) {
                         BlocProvider.of<RegisterBloc>(context)
                             .add(RegisterSubmitted());
-                        /*navigate(
+                        navigate(
                            context: context,
-                           route: Routes.uploadingSupportingDocumentsScreen);*/
+                           route: Routes.uploadingSupportingDocumentsScreen);
                       }
                     },
                     text: AppStrings.saveAndCompleteProject,

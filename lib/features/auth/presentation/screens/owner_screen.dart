@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/utils/commons.dart';
 
@@ -9,34 +8,26 @@ import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/logo.dart';
 import '../../../../core/widgets/back_arrow.dart';
-import '../../domain/repository.dart';
-import '../bloc/owner_login_bloc/bloc__owner_login_events.dart';
-import '../bloc/owner_login_bloc/bloc__owner_login_states.dart';
-import '../bloc/owner_login_bloc/bloc_owner_login.dart';
+
 import '../components/text_filed.dart';
 
-
 class OwnerScreen extends StatelessWidget {
-   OwnerScreen({super.key});
+  OwnerScreen({super.key});
 
   late bool _isPassword = true;
-   final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
-   final TextEditingController _userNameController = TextEditingController();
-   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:BlocProvider(create:(context) =>
-            OwnerLoginBloc(authRepository: context.read<AuthRepository>())
-          ,child: _ownerScreenView(),)
-    );
+        body: _ownerScreenView(context),);
   }
 
-  Widget _ownerScreenView ()
-  {
-    return  Padding(
+  Widget _ownerScreenView(BuildContext context) {
+    return Padding(
       padding: const EdgeInsets.all(20.0),
       child: SingleChildScrollView(
         child: SafeArea(
@@ -47,52 +38,40 @@ class OwnerScreen extends StatelessWidget {
               children: [
                 const BackArrow(),
                 const Center(child: LogoWidget()),
-                BlocBuilder<OwnerLoginBloc,OwnerLoginState>(builder: (context,state){
-                  return MyFormField(
-                    controller:_userNameController ,
-                    type: TextInputType.text,
-                    maxLines: 1,
-                    readonly: false,
-                    title: AppStrings.ownerEmail,
-                    hint: 'example@mail.com',
-                    onSubmit: (value) => BlocProvider.of<OwnerLoginBloc>(context)
-                        .add(OwnerLoginUserName(userName: value)),
-
-                  );
-                }),
-               BlocBuilder<OwnerLoginBloc,OwnerLoginState>(builder: (context, state){
-                 return  MyFormField(
-                   controller: _passwordController,
-                   prefixIcon: _isPassword
-                       ? Icons.visibility_outlined
-                       : Icons.visibility_off_outlined,
-                   prefixIconPressed: () {
-                     _isPassword = !_isPassword;
-                     BlocProvider.of<OwnerLoginBloc>(context).add(OwnerLoginToggleObscureText(isPassword: _isPassword));
-                   },
-                   isPassword: _isPassword,
-                   type: TextInputType.text,
-                   maxLines: 1,
-                   readonly: false,
-                   title: AppStrings.passOwner,
-                   hint: 'كلمه المرور',
-                 );
-               }),
+                MyFormField(
+                  controller: _userNameController,
+                  type: TextInputType.text,
+                  maxLines: 1,
+                  readonly: false,
+                  title: AppStrings.ownerEmail,
+                  hint: 'example@mail.com',
+                ),
+                MyFormField(
+                  controller: _passwordController,
+                  prefixIcon: _isPassword
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
+                  prefixIconPressed: () {
+                    _isPassword = !_isPassword;
+                  },
+                  isPassword: _isPassword,
+                  type: TextInputType.text,
+                  maxLines: 1,
+                  readonly: false,
+                  title: AppStrings.passOwner,
+                  hint: 'كلمه المرور',
+                ),
                 SizedBox(
                   height: 40.h,
                 ),
-                BlocBuilder<OwnerLoginBloc,OwnerLoginState>(builder: (context,state){
-                  return CustomButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()){
-                        BlocProvider.of<OwnerLoginBloc>(context).add(OwnerLoginSubmitted());
-                        navigate(context: context, route: Routes.driverDoc);
-
-                      }
-                    },
-                    text: AppStrings.signIn,
-                  );
-                }),
+                CustomButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      navigate(context: context, route: Routes.driverDoc);
+                    }
+                  },
+                  text: AppStrings.signIn,
+                ),
               ],
             ),
           ),
@@ -101,4 +80,3 @@ class OwnerScreen extends StatelessWidget {
     );
   }
 }
-

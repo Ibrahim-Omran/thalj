@@ -1,9 +1,14 @@
 class ErrorMessageModel  {
-  final bool success;
-  final int statusCode;
+
   final String statusMessage;
 
-  const ErrorMessageModel({required this.success,
-    required this.statusCode,
+  const ErrorMessageModel(
+      {
+
     required this.statusMessage});
+
+  factory ErrorMessageModel.fromJson(Map<String, dynamic> json) =>
+      ErrorMessageModel(
+
+          statusMessage: json["msg"]);
 }

@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+
+import '../../../core/errors/Exceptions.dart';
+import '../../../core/network/ErrorModel.dart';
+import '../../../core/utils/toast.dart';
 
 
 
 class LoginRemoteDataSource {
-
-
-  Future<void> login({required String email, required String password}) async {
+  Future<bool> login({required String email, required String password}) async {
     try {
       final response = await http.post(
         Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/login'),
@@ -16,16 +20,19 @@ class LoginRemoteDataSource {
       );
 
       if (response.statusCode == 200) {
+        // Login successful
         print(response.body);
-        // Login successful, handle the response as needed
+        return true;
       } else {
-        // Login failed, handle the response or throw an exception
-        throw Exception("user Not Found");
-        print(response.statusCode.toString());
+        // Login failed
+        print(response.body);
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(text: errorMessageModel.statusMessage, state: ToastStates.error);
+        throw ServerExceptions(errorMessageModel: errorMessageModel);
       }
     } catch (e) {
-      print(e.toString());
+      rethrow;
     }
   }
-
 }

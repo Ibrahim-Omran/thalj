@@ -5,9 +5,11 @@ class AuthRepository {
   AuthRepository(this.loginRemoteDataSource);
 
 
-  Future<void> login({required String email, password}) async {
+  Future<bool> login({required String email, password,}) async {
+    bool isAuthenticated = false;
 
-  await loginRemoteDataSource.login(email: email,password: password);
+    isAuthenticated = await loginRemoteDataSource.login(email: email,password: password);
+    return isAuthenticated;
 
   }
 

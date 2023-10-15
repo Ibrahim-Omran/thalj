@@ -1,30 +1,35 @@
-
-
-
-import 'login_submission_state.dart';
-
 class LoginState {
   final String userName;
   final String password;
   final bool obscureText;
-  final LoginSubmissionStatues submissionStatues;
+  final bool isSubmitting;
+  final bool isSuccess;
+  final String? error;
 
-  LoginState(
-      {this.userName = '',
-      this.password = '',
-        required this.obscureText,
-      this.submissionStatues = const InitialLoginSubmissionStatue()});
+  LoginState({
+    this.userName = '',
+    this.password = '',
+    this.obscureText = true,
+    this.isSubmitting = false,
+    this.isSuccess = false,
+    this.error,
+  });
 
   LoginState copyWith({
     String? userName,
     String? password,
     bool? obscureText,
-    LoginSubmissionStatues? submissionStatues,
+    bool? isSubmitting,
+    bool? isSuccess,
+    String? error,
   }) {
     return LoginState(
-        userName: userName ?? this.userName,
-        password: password ?? this.password,
-        obscureText: obscureText ?? this.obscureText,
-        submissionStatues: submissionStatues ?? this.submissionStatues);
+      userName: userName ?? this.userName,
+      password: password ?? this.password,
+      obscureText: obscureText ?? this.obscureText,
+      isSubmitting: isSubmitting ?? this.isSubmitting,
+      isSuccess: isSuccess ?? this.isSuccess,
+      error: error ?? this.error,
+    );
   }
 }

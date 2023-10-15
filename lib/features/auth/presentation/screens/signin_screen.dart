@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/routes/app_routes.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/utils/commons.dart';
+import 'package:thalj/core/utils/toast.dart';
 import 'package:thalj/core/widgets/custom_button.dart';
 import 'package:thalj/core/widgets/logo.dart';
 import 'package:thalj/features/auth/domain/repository.dart';
@@ -13,7 +14,6 @@ import '../bloc/login_bloc/bloc_login.dart';
 
 import '../bloc/login_bloc/bloc_login_events.dart';
 import '../bloc/login_bloc/bloc_login_states.dart';
-import '../bloc/login_bloc/login_submission_state.dart';
 import '../components/text_filed.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -76,8 +76,6 @@ class SignInScreen extends StatelessWidget {
                     maxLines: 1,
                     readonly: false,
                     title: AppStrings.emailOrPhone,
-                    onSubmit: (value) => BlocProvider.of<LoginBloc>(context)
-                        .add(LoginUserName(userName: value)),
                   );
                 }),
                 SizedBox(
@@ -86,8 +84,6 @@ class SignInScreen extends StatelessWidget {
                 BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
                   return MyFormField(
                     controller: _passwordController,
-                    onSubmit: (value) => BlocProvider.of<LoginBloc>(context)
-                        .add(LoginPassword(password: value)),
                     prefixIcon: _isPassword
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
@@ -111,23 +107,31 @@ class SignInScreen extends StatelessWidget {
                         style: underLineStyle()),
                   ),
                 ]),
-                BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-                  return state.submissionStatues is LoginSubmitting
-                      ? const CircularProgressIndicator()
-                      : CustomButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              BlocProvider.of<LoginBloc>(context).add(
-                                  LoginSubmitted(
-                                      email: _userNameController.text,
-                                      password: _passwordController.text));
-                              navigate(
-                                  context: context, route: Routes.homeScreen);
-                            }
-                          },
-                          text: AppStrings.signIn,
-                        );
-                }),
+                BlocConsumer<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    return state.isSubmitting
+                        ? const CircularProgressIndicator()
+                        : CustomButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                BlocProvider.of<LoginBloc>(context)
+                                    .add(LoginSubmitted(
+                                  email: _userNameController.text,
+                                  password: _passwordController.text,
+                                ));
+                              }
+                            },
+                            text: AppStrings.signIn,
+                          );
+                  },
+                  listener: (BuildContext context, LoginState state) {
+                    if (state.isSuccess) {
+                      navigate(context: context, route: Routes.homeScreen);
+                      showToast(
+                          text: AppStrings.welcome, state: ToastStates.success);
+                    }
+                  },
+                ),
                 SizedBox(
                   height: 15.h,
                 ),
