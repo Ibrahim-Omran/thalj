@@ -6,7 +6,9 @@ import 'package:thalj/core/utils/app_text_style.dart';
 import '../../../../core/utils/app_strings.dart';
 
 class PhoneForm extends StatelessWidget {
-  const PhoneForm({
+  PhoneController controller= PhoneController(null);
+  void Function(String)? onSubmit;
+   PhoneForm({required this.controller, required this.onSubmit,
     Key? key,
   }) : super(key: key);
 
@@ -20,6 +22,8 @@ class PhoneForm extends StatelessWidget {
           style: regularStyle(color: AppColors.primary)
         ),
         PhoneFormField(
+          onSubmitted: onSubmit,
+          controller: controller,
           textAlign: TextAlign.end,
           showFlagInInput: true,
           defaultCountry: IsoCode.EG,
