@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:thalj/features/auth/presentation/login_bloc/register_bloc/register_submission_state.dart';
+import 'package:thalj/features/auth/presentation/bloc/register_bloc/register_submission_state.dart';
 
 import '../../../domain/repository.dart';
 import 'bloc_register_events.dart';

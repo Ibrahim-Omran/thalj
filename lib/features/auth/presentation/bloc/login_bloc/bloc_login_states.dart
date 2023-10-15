@@ -1,5 +1,7 @@
 
-import 'package:thalj/features/auth/presentation/login_bloc/login_submission_state.dart';
+
+
+import 'login_submission_state.dart';
 
 class LoginState {
   final String userName;

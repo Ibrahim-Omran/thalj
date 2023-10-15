@@ -9,11 +9,13 @@ import 'package:thalj/core/widgets/logo.dart';
 import 'package:thalj/features/auth/domain/repository.dart';
 
 import '../../../../core/utils/app_text_style.dart';
+import '../bloc/login_bloc/bloc_login.dart';
+
+import '../bloc/login_bloc/bloc_login_events.dart';
+import '../bloc/login_bloc/bloc_login_states.dart';
+import '../bloc/login_bloc/login_submission_state.dart';
 import '../components/text_filed.dart';
-import '../login_bloc/bloc_login.dart';
-import '../login_bloc/bloc_login_events.dart';
-import '../login_bloc/bloc_login_states.dart';
-import '../login_bloc/login_submission_state.dart';
+
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});

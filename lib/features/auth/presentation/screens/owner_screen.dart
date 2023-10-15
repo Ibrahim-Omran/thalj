@@ -10,10 +10,11 @@ import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/logo.dart';
 import '../../../../core/widgets/back_arrow.dart';
 import '../../domain/repository.dart';
+import '../bloc/owner_login_bloc/bloc__owner_login_events.dart';
+import '../bloc/owner_login_bloc/bloc__owner_login_states.dart';
+import '../bloc/owner_login_bloc/bloc_owner_login.dart';
 import '../components/text_filed.dart';
-import '../login_bloc/owner_login_bloc/bloc__owner_login_events.dart';
-import '../login_bloc/owner_login_bloc/bloc__owner_login_states.dart';
-import '../login_bloc/owner_login_bloc/bloc_owner_login.dart';
+
 
 class OwnerScreen extends StatelessWidget {
    OwnerScreen({super.key});

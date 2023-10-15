@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:thalj/features/auth/presentation/login_bloc/login_submission_state.dart';
 
-import '../../domain/repository.dart';
+import '../../../domain/repository.dart';
 import 'bloc_login_events.dart';
 import 'bloc_login_states.dart';
+import 'login_submission_state.dart';
+
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepository;

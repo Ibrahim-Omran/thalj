@@ -9,11 +9,12 @@ import '../../../../core/utils/app_text_style.dart';
 import '../../../../core/widgets/logo.dart';
 import '../../../../core/widgets/back_arrow.dart';
 import '../../domain/repository.dart';
+import '../bloc/register_bloc/bloc_register.dart';
+import '../bloc/register_bloc/bloc_register_events.dart';
+import '../bloc/register_bloc/bloc_register_states.dart';
 import '../components/phone_form_field.dart';
 import '../components/text_filed.dart';
-import '../login_bloc/register_bloc/bloc_register.dart';
-import '../login_bloc/register_bloc/bloc_register_events.dart';
-import '../login_bloc/register_bloc/bloc_register_states.dart';
+
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
