@@ -36,7 +36,7 @@ class OwnerLoginBloc extends Bloc<OwnerLoginEvent, OwnerLoginState> {
   Future<void> _onOwnerLoginSubmitted(OwnerLoginSubmitted event, Emitter<OwnerLoginState> emit) async {
     emit(state.copyWith(submissionStatues: OwnerLoginSubmitting()));
     try {
-      await authRepository.login();
+      await authRepository.ownerLogin();
       emit(state.copyWith(submissionStatues: OwnerLoginSubmitSuccess()));
     } catch (e) {
       emit(state.copyWith(submissionStatues: OwnerLoginSubmitFailed(e.toString())));

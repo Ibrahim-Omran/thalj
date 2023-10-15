@@ -37,7 +37,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> _onLoginSubmitted(LoginSubmitted event, Emitter<LoginState> emit) async {
     emit(state.copyWith(submissionStatues: LoginSubmitting()));
     try {
-      await authRepository.login();
+
+      await authRepository.login(email:event.email , password: event.password);
       emit(state.copyWith(submissionStatues: LoginSubmitSuccess()));
     } catch (e) {
       emit(state.copyWith(submissionStatues: LoginSubmitFailed(e.toString())));

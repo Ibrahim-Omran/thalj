@@ -46,7 +46,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Future<void> _onRegisterSubmitted(RegisterSubmitted event, Emitter<RegisterState> emit) async {
     emit(state.copyWith(submissionStatues: RegisterSubmitting()));
     try {
-      await authRepository.login();
+      await authRepository.register();
       emit(state.copyWith(submissionStatues: RegisterSubmitSuccess()));
     } catch (e) {
       emit(state.copyWith(submissionStatues: RegisterSubmitFailed(e.toString())));
