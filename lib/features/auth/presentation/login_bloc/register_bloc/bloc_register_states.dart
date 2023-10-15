@@ -1,5 +1,6 @@
 
-import 'package:thalj/features/auth/presentation/components/register_bloc/register_submission_state.dart';
+
+import 'package:thalj/features/auth/presentation/login_bloc/register_bloc/register_submission_state.dart';
 
 class RegisterState {
   final String userName;

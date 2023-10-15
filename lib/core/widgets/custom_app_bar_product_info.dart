@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .displayLarge!
-                    .copyWith(fontSize: 18),
+                    .copyWith(fontSize: 24),
               ),
               const Spacer(),
               const BackArrow(),

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:thalj/features/auth/presentation/screens/owner_screen.dart';
 import 'package:thalj/features/auth/presentation/screens/sign_up.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/Home_Screen.dart';
+import 'package:thalj/features/home/presentation/screens/driver_doucments.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/offers.dart';
-import 'package:thalj/features/home/presentation/screens/Home_Screen/product_details.dart';
+import 'package:thalj/features/home/presentation/screens/product_details.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/profile.dart';
 import 'package:thalj/features/home/presentation/screens/driver_data_sent_to_owner.dart';
 
@@ -25,6 +26,7 @@ class Routes {
   static const String offersScreen = '/offer';
   static const String profileScreen = '/profile';
   static const String productDetails = '/productDetails';
+  static const String driverDoc = '/driverDoc';
   static const String driverDataSentToOwner = '/driverDataSentToOwner';
 }
 
@@ -58,7 +60,8 @@ class AppRoutes {
 
       case Routes.productDetails:
         return MaterialPageRoute(builder: (_) => const ProductDetails());
-
+      case Routes.driverDoc:
+        return MaterialPageRoute(builder: (_) => const DriverDocuments());
       case Routes.driverDataSentToOwner:
         return MaterialPageRoute(builder: (_) => const DriverDataSentToOwner());
       default:

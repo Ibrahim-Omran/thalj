@@ -15,11 +15,11 @@ class DriverDataSentToOwner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
+          child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [

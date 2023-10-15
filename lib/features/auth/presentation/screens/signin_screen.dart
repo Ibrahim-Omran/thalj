@@ -124,7 +124,7 @@ class SignInScreen extends StatelessWidget {
 
                               BlocProvider.of<LoginBloc>(context)
                                   .add(LoginSubmitted());
-                              // navigate(context: context, route: Routes.homeScreen);
+                              navigate(context: context, route: Routes.homeScreen);
                             }
                           },
                           text: AppStrings.signIn,

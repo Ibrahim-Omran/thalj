@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/features/auth/presentation/components/text_filed.dart';
 
-import '../../../../../core/utils/app_assets.dart';
-import '../../../../../core/utils/app_strings.dart';
-import '../../../../../core/widgets/custom_app_bar_product_info.dart';
-import '../../../../../core/widgets/custom_button.dart';
+import '../../../../core/utils/app_assets.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/widgets/custom_app_bar_product_info.dart';
+import '../../../../core/widgets/custom_button.dart';
 
 class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key});

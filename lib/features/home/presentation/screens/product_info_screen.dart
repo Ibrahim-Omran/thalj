@@ -24,7 +24,7 @@ class ProductInformationScreen extends StatelessWidget {
             SizedBox(
               height: 62.h,
             ),
-            CustomAppBar(
+            const CustomAppBar(
               img: AppAssets.infoProductIcon,
               title: AppStrings.productInfo,
 

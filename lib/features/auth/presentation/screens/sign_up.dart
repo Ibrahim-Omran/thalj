@@ -4,9 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/widgets/custom_button.dart';
-import 'package:thalj/features/auth/presentation/components/register_bloc/bloc_register.dart';
-import 'package:thalj/features/auth/presentation/components/register_bloc/bloc_register_events.dart';
-import 'package:thalj/features/auth/presentation/components/register_bloc/bloc_register_states.dart';
 
 import '../../../../core/utils/app_text_style.dart';
 import '../../../../core/widgets/logo.dart';
@@ -14,6 +11,9 @@ import '../../../../core/widgets/back_arrow.dart';
 import '../../domain/repository.dart';
 import '../components/phone_form_field.dart';
 import '../components/text_filed.dart';
+import '../login_bloc/register_bloc/bloc_register.dart';
+import '../login_bloc/register_bloc/bloc_register_events.dart';
+import '../login_bloc/register_bloc/bloc_register_states.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
