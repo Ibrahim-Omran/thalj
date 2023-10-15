@@ -13,6 +13,7 @@ class MyFormField extends StatelessWidget {
   TextStyle? hintStyle;
   final TextInputType type;
   final VoidCallback? prefixIconPressed;
+  final void Function(String)? onSubmit;
   final IconData? prefixIcon;
   final Widget? widget;
   TextEditingController? controller;
@@ -27,6 +28,7 @@ class MyFormField extends StatelessWidget {
     required this.hint,
     required this.maxLines,
     this.prefixIcon,
+    this.onSubmit,
     this.prefixIconPressed,
     this.widget,
     this.controller,
@@ -52,19 +54,27 @@ class MyFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
           ),
           child: TextFormField(
+
             textDirection: TextDirection.rtl,
             obscureText: isPassword,
             readOnly: readonly,
             controller: controller,
             keyboardType: type,
             maxLines: maxLines,
+            onFieldSubmitted: onSubmit,
             // Allow for dynamic expansion
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: regularStyle(color: Colors.grey),
               hintTextDirection: TextDirection.rtl,
-              border: const OutlineInputBorder(
+              border:  const OutlineInputBorder(
                 borderSide: BorderSide.none,
+              ),
+              errorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+              ),
+              focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: AppColors.primary),
@@ -82,7 +92,7 @@ class MyFormField extends StatelessWidget {
                     )
                   : null,
             ),
-            //  validator: vaild,
+             validator: vaild,
           ),
         ),
       ],

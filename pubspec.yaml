@@ -36,8 +36,10 @@ dependencies:
   flutter_screenutil: ^5.9.0
   fluttertoast: ^8.2.2
   google_fonts: ^6.1.0
+  http: ^1.1.0
   internet_connection_checker: ^1.0.0+1
   phone_form_field: ^8.1.0
+
 
 dev_dependencies:
   flutter_lints: ^2.0.0

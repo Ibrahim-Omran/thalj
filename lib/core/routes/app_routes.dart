@@ -32,11 +32,11 @@ class AppRoutes {
   static Route? generateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.intitlRoute:
-        return MaterialPageRoute(builder: (_) => const SignInScreen());
+        return MaterialPageRoute(builder: (_) =>  SignInScreen());
       case Routes.signup:
-        return MaterialPageRoute(builder: (_) => const SignUpScreen());
+        return MaterialPageRoute(builder: (_) =>  SignUpScreen());
       case Routes.ownerScreen:
-        return MaterialPageRoute(builder: (_) => const OwnerScreen());
+        return MaterialPageRoute(builder: (_) =>  OwnerScreen());
 
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
