@@ -1,13 +1,13 @@
+import 'package:thalj/features/auth/data/login_remote_data_source.dart';
+
 class AuthRepository {
-  Future<void> login() async {
+  final LoginRemoteDataSource loginRemoteDataSource;
+  AuthRepository(this.loginRemoteDataSource);
 
-    print('Loading');
 
-    Future.delayed(Duration(seconds: 10));
-    print("done");
+  Future<void> login({required String email, password}) async {
 
-    throw Exception("faild login");
-
+  await loginRemoteDataSource.login(email: email,password: password);
 
   }
 

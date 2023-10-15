@@ -16,11 +16,10 @@ import '../bloc/login_bloc/bloc_login_states.dart';
 import '../bloc/login_bloc/login_submission_state.dart';
 import '../components/text_filed.dart';
 
-
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
-  late  bool _isPassword = true;
+  late bool _isPassword = true;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -34,8 +33,6 @@ class SignInScreen extends StatelessWidget {
           child: _loginView(context)),
     );
   }
-
-  String _FormField = "";
 
   Widget _loginView(BuildContext context) {
     return Padding(
@@ -95,7 +92,7 @@ class SignInScreen extends StatelessWidget {
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
                     prefixIconPressed: () {
-                      _isPassword=!_isPassword;
+                      _isPassword = !_isPassword;
                       BlocProvider.of<LoginBloc>(context)
                           .add(LoginToggleObscureText(isPassword: _isPassword));
                     },
@@ -120,13 +117,12 @@ class SignInScreen extends StatelessWidget {
                       : CustomButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              _FormField = _userNameController.text +
-                                  _passwordController.text;
-                              print(_FormField);
-
-                              BlocProvider.of<LoginBloc>(context)
-                                  .add(LoginSubmitted());
-                              navigate(context: context, route: Routes.homeScreen);
+                              BlocProvider.of<LoginBloc>(context).add(
+                                  LoginSubmitted(
+                                      email: _userNameController.text,
+                                      password: _passwordController.text));
+                              navigate(
+                                  context: context, route: Routes.homeScreen);
                             }
                           },
                           text: AppStrings.signIn,
