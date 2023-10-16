@@ -4,6 +4,7 @@ import 'package:thalj/features/auth/presentation/components/text_filed.dart';
 
 import '../../../../core/utils/app_strings.dart';
 
+// ignore: must_be_immutable
 class PhoneForm extends StatefulWidget {
   TextEditingController controller = TextEditingController();
 
