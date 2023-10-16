@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thalj/core/utils/app_colors.dart';
 
-import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_text_style.dart';
 
 // ignore: must_be_immutable
@@ -11,11 +10,11 @@ class MyFormField extends StatelessWidget {
   final String hint;
   int? maxLines;
   TextStyle? hintStyle;
+  String? Function(String?)? vaild;
   final TextInputType type;
   final VoidCallback? prefixIconPressed;
   final void Function(String)? onSubmit;
   final IconData? prefixIcon;
-  final Widget? widget;
   TextEditingController? controller;
   bool readonly = false;
   bool isPassword;
@@ -28,9 +27,9 @@ class MyFormField extends StatelessWidget {
     required this.hint,
     required this.maxLines,
     this.prefixIcon,
+    this.vaild,
     this.onSubmit,
     this.prefixIconPressed,
-    this.widget,
     this.controller,
     required this.readonly,
     this.hintStyle,
@@ -100,9 +99,4 @@ class MyFormField extends StatelessWidget {
   }
 }
 
-String? vaild(value) {
-  if (value.isEmpty) {
-    return AppStrings.vaildForm;
-  }
-  return null;
-}
+

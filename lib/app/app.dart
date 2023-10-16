@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/utils/app_strings.dart';
-import 'package:thalj/features/auth/data/login_remote_data_source.dart';
+import 'package:thalj/features/auth/data/remote_data_source.dart';
 import 'package:thalj/features/auth/domain/repository.dart';
 import 'package:thalj/features/documents/presentation/bloc/document_checking_bloc/document_checking_bloc.dart';
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => DocumentCheckingBloc()),
 
             RepositoryProvider<AuthRepository>(
-              create: (context) => AuthRepository(LoginRemoteDataSource()),
+              create: (context) => AuthRepository(AuthRemoteDataSource()),
 
 
             )
