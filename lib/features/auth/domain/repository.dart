@@ -1,33 +1,39 @@
+import 'package:thalj/features/auth/data/admin_service.dart';
 import 'package:thalj/features/auth/data/remote_data_source.dart';
 
 class AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
-  AuthRepository(this.authRemoteDataSource);
+  final AdminService adminService;
+  AuthRepository(this.authRemoteDataSource, this.adminService);
 
-
-  Future<bool> login({required String email, required String password,}) async {
+  Future<bool> login({
+    required String email,
+    required String password,
+  }) async {
     bool isAuthenticated = false;
 
-    isAuthenticated = await authRemoteDataSource.login(email: email,password: password);
+    isAuthenticated =
+        await authRemoteDataSource.login(email: email, password: password);
     return isAuthenticated;
-
   }
 
-  Future<bool> register({required String email, required String password,required String name,required String phone}) async {
+  Future<bool> register(
+      {required String email,
+      required String password,
+      required String name,
+      required String phone}) async {
     bool isRegister = false;
 
-    isRegister = await authRemoteDataSource.register(email: email,password: password,name:name,phone:phone);
+    isRegister = await authRemoteDataSource.register(
+        email: email, password: password, name: name, phone: phone);
     return isRegister;
-
   }
 
-  Future<void> ownerLogin() async {
-
-    print('Loading');
-
-    Future.delayed(Duration(seconds: 10));
-    print("done");
-    throw Exception("register faild ownerLogin");
-
+  Future<bool> ownerLogin(
+      {required String email, required String password}) async {
+    bool isAuthenticated = false;
+    isAuthenticated =
+        await adminService.isAdmin(email: email, password: password);
+    return isAuthenticated;
   }
 }

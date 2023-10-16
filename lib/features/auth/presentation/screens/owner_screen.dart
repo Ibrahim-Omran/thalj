@@ -1,29 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thalj/core/utils/commons.dart';
 
 import 'package:thalj/core/widgets/custom_button.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/toast.dart';
 import '../../../../core/widgets/logo.dart';
 import '../../../../core/widgets/back_arrow.dart';
 
+import '../../domain/repository.dart';
+import '../bloc/login_bloc/bloc_login.dart';
+import '../bloc/owner_login_bloc/bloc__owner_login_events.dart';
+import '../bloc/owner_login_bloc/bloc__owner_login_states.dart';
+import '../bloc/owner_login_bloc/bloc_owner_login.dart';
 import '../components/text_filed.dart';
 
-class OwnerScreen extends StatelessWidget {
+class OwnerScreen extends StatefulWidget {
   OwnerScreen({super.key});
 
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  @override
+  State<OwnerScreen> createState() => _OwnerScreenState();
+}
+
+class _OwnerScreenState extends State<OwnerScreen> {
   late bool _isPassword = true;
-  final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _userNameController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _userNameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _ownerScreenView(context),);
+      resizeToAvoidBottomInset: true,
+
+      body: BlocProvider(
+          create: (context) =>
+              LoginBloc(authRepository: context.read<AuthRepository>()),
+          child: _ownerScreenView(context)),
+    );
   }
 
   Widget _ownerScreenView(BuildContext context) {
@@ -32,7 +57,7 @@ class OwnerScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: SafeArea(
           child: Form(
-            key: _formKey,
+            key: OwnerScreen._formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -61,16 +86,30 @@ class OwnerScreen extends StatelessWidget {
                   title: AppStrings.passOwner,
                   hint: 'كلمه المرور',
                 ),
-                SizedBox(
-                  height: 40.h,
-                ),
-                CustomButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+                BlocConsumer<AdminLoginBloc, AdminLoginState>(
+                  builder: (context, state) {
+                    return state.isSubmitting
+                        ? const CircularProgressIndicator()
+                        : CustomButton(
+                            onPressed: () {
+                              if (OwnerScreen._formKey.currentState!.validate()) {
+                                BlocProvider.of<AdminLoginBloc>(context)
+                                    .add(AdminLoginSubmitted(
+                                  email: _userNameController.text,
+                                  password: _passwordController.text,
+                                ));
+                              }
+                            },
+                            text: AppStrings.signIn,
+                          );
+                  },
+                  listener: (BuildContext context, AdminLoginState state) {
+                    if (state.isSuccess) {
                       navigate(context: context, route: Routes.driverDoc);
+                      showToast(
+                          text: AppStrings.welcome, state: ToastStates.success);
                     }
                   },
-                  text: AppStrings.signIn,
                 ),
               ],
             ),

@@ -5,6 +5,7 @@ import '../../../../core/utils/app_text_style.dart';
 
 // ignore: must_be_immutable
 class MyFormField extends StatelessWidget {
+  Function(String)? onChange;
   final double radius;
   final String title;
   final String hint;
@@ -22,6 +23,7 @@ class MyFormField extends StatelessWidget {
   MyFormField({
     Key? key,
     this.isPassword = false,
+    this.onChange,
     this.radius = 15,
     required this.type,
     required this.hint,
@@ -53,7 +55,6 @@ class MyFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
           ),
           child: TextFormField(
-
             textDirection: TextDirection.rtl,
             obscureText: isPassword,
             readOnly: readonly,
@@ -66,7 +67,7 @@ class MyFormField extends StatelessWidget {
               hintText: hint,
               hintStyle: regularStyle(color: Colors.grey),
               hintTextDirection: TextDirection.rtl,
-              border:  const OutlineInputBorder(
+              border: const OutlineInputBorder(
                 borderSide: BorderSide.none,
               ),
               errorBorder: const OutlineInputBorder(
@@ -91,12 +92,10 @@ class MyFormField extends StatelessWidget {
                     )
                   : null,
             ),
-             validator: vaild,
+            validator: vaild,
           ),
         ),
       ],
     );
   }
 }
-
-

@@ -1,7 +1,4 @@
 
-
-
-
 class RegisterState {
   final String userName;
   final String password;
