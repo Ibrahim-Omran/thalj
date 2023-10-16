@@ -2,6 +2,7 @@ class AppStrings {
   static const String appName = 'تلج';
   static const String welcome = 'آهلا يك في ثلج';
   static const String signIn = 'تسجيل دخول';
+  static const String askSignIn = 'قم بتسجيل دخول';
   static const String signInHint = 'يرجى تسجيل الدخول إلى حسابك للمتابعة';
   static const String emailOrPhone = 'ادخل البريد الالكتروني او رقم الهاتف';
   static const String password = 'الرقم السري';
@@ -14,7 +15,7 @@ class AppStrings {
   static const String name = 'ادخل الاسم بالكامل';
   static const String email = 'ادخل بريدك الالكتروني';
   static const String ownerEmail = 'ادخل البريد الالكتروني للمالك';
-  static const String phoneNumber = 'ادخل رقم الهاتف';
+  static const String phoneNumber = 'ادخل رقم الهاتف صحيح';
   static const String createPassword = 'انشئ رقمك السري';
   static const String confirmPassword = 'تأكيد الرقم السري';
   static const String agreeTermAndConditions =
@@ -80,6 +81,10 @@ class AppStrings {
 
   //vaild
   static const String vaildForm = 'يجب ملئ الحقل';
+  static const String vaildPhoneForm = 'يجب ادخال رقم صحيح';
+  static const String vailEmailForm = 'يجب ادخال ايميل صحيح';
+  static const String vailpassForm = 'يجب ادخال كلمة اكثر من ٦';
+  static const String vailConfirmPassForm = 'كلمة المرور غير متطابقة';
 
   //productDetails
   static const String productDetails = 'تفاصيل العرض';

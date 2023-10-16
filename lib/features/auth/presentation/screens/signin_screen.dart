@@ -16,17 +16,34 @@ import '../bloc/login_bloc/bloc_login_events.dart';
 import '../bloc/login_bloc/bloc_login_states.dart';
 import '../components/text_filed.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   SignInScreen({super.key});
 
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   late bool _isPassword = true;
-  final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _userNameController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _userNameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
+
       body: BlocProvider(
           create: (context) =>
               LoginBloc(authRepository: context.read<AuthRepository>()),
@@ -40,7 +57,7 @@ class SignInScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: SafeArea(
           child: Form(
-            key: _formKey,
+            key: SignInScreen._formKey,
             child: Column(
               children: [
                 const LogoWidget(),
@@ -68,20 +85,30 @@ class SignInScreen extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-                BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-                  return MyFormField(
-                    controller: _userNameController,
-                    type: TextInputType.text,
-                    hint: "example@mail.com",
-                    maxLines: 1,
-                    readonly: false,
-                    title: AppStrings.emailOrPhone,
-                  );
-                }),
+               BlocBuilder<LoginBloc,LoginState>(builder: (context,state){
+                 return  MyFormField(
+                   controller: _userNameController,
+                   type: TextInputType.text,
+                   hint: "example@mail.com",
+                   maxLines: 1,
+                   readonly: false,
+                   title: AppStrings.emailOrPhone,
+                   vaild: (value) {
+                     if (value!.isEmpty) {
+                       return AppStrings.vaildForm;
+                     }
+                     if (!value.contains("@")) {
+                       return AppStrings.vailEmailForm;
+                     }
+                     return null;
+                   },
+
+                 );
+               }),
                 SizedBox(
                   height: 15.h,
                 ),
-                BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+                BlocBuilder<LoginBloc,LoginState>(builder: (context,state){
                   return MyFormField(
                     controller: _passwordController,
                     prefixIcon: _isPassword
@@ -98,6 +125,15 @@ class SignInScreen extends StatelessWidget {
                     readonly: false,
                     title: AppStrings.password,
                     hint: 'كلمه المرور',
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      if (value.length < 6) {
+                        return AppStrings.vailpassForm;
+                      }
+                      return null;
+                    },
                   );
                 }),
                 Row(children: [
@@ -113,7 +149,7 @@ class SignInScreen extends StatelessWidget {
                         ? const CircularProgressIndicator()
                         : CustomButton(
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
+                              if (SignInScreen._formKey.currentState!.validate()) {
                                 BlocProvider.of<LoginBloc>(context)
                                     .add(LoginSubmitted(
                                   email: _userNameController.text,

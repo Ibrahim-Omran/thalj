@@ -1,40 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:phone_form_field/phone_form_field.dart';
-import 'package:thalj/core/utils/app_colors.dart';
-import 'package:thalj/core/utils/app_text_style.dart';
+
+import 'package:thalj/features/auth/presentation/components/text_filed.dart';
 
 import '../../../../core/utils/app_strings.dart';
 
-class PhoneForm extends StatelessWidget {
-  PhoneController controller= PhoneController(null);
-  void Function(String)? onSubmit;
-   PhoneForm({required this.controller, required this.onSubmit,
+class PhoneForm extends StatefulWidget {
+  TextEditingController controller = TextEditingController();
+
+  PhoneForm({
+    required this.controller,
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-         Text(
-          AppStrings.phoneNumber,
-          style: regularStyle(color: AppColors.primary)
-        ),
-        PhoneFormField(
-          onSubmitted: onSubmit,
-          controller: controller,
-          textAlign: TextAlign.end,
-          showFlagInInput: true,
-          defaultCountry: IsoCode.EG,
-          shouldFormat: true,
-          decoration:  InputDecoration(
-            hintText: '504x xxx xxx',
+  State<PhoneForm> createState() => _PhoneFormState();
+}
 
-            hintStyle: regularStyle(color:Colors.grey),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
+String countryCode = '+20';
+String phoneNumber = '';
+
+class _PhoneFormState extends State<PhoneForm> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: DropdownButton<String>(
+              value: countryCode,
+              onChanged: (newValue) {
+                setState(() {
+                  countryCode = newValue!;
+                });
+              },
+              items: ['+20', '+91', '+44'] // example country codes
+                  .map<DropdownMenuItem<String>>(
+                (String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                },
+              ).toList(),
             ),
+          ),
+        ),
+        Expanded(
+          child: MyFormField(
+            controller: widget.controller,
+            type: TextInputType.phone,
+            hint: '000 000 000',
+            maxLines: 1,
+            readonly: false,
+            title: AppStrings.phoneNumber,
+            vaild: (value) {
+              if (value!.isEmpty) {
+                return AppStrings.vaildForm;
+              }
+              if (value.length != 10 || !RegExp(r'^[0-9]+$').hasMatch(value)) {
+                return AppStrings.phoneNumber;
+              }
+              return null;
+            },
           ),
         ),
       ],

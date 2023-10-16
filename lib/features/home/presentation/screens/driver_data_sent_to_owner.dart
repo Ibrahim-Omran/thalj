@@ -77,7 +77,7 @@ class DriverDataSentToOwner extends StatelessWidget {
                       navigate(
                           context: context, route: Routes.documentsCheckScreen);
                     },
-                    child: Container(
+                    child: SizedBox(
                       width: 351.w,
                       height: 47.h,
                       child: Center(

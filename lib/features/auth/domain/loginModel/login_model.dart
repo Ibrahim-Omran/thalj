@@ -12,6 +12,8 @@ class LoginModel {
   final String operatingCard;
   final String transferDocument;
   final String verified;
+  final String token;
+
 
   LoginModel({
     required this.id,
@@ -27,6 +29,7 @@ class LoginModel {
     required this.operatingCard,
     required this.transferDocument,
     required this.verified,
+    required this.token,
   });
 
   factory LoginModel.fromJson(Map<String, dynamic> json) {
@@ -44,6 +47,7 @@ class LoginModel {
       operatingCard: json['operatingCard'],
       transferDocument: json['transferDocument'],
       verified: json['verified'],
+      token: json['token'],
     );
   }
 }

@@ -1,7 +1,6 @@
 
 
 
-import 'package:thalj/features/auth/presentation/bloc/register_bloc/register_submission_state.dart';
 
 class RegisterState {
   final String userName;
@@ -12,20 +11,25 @@ class RegisterState {
   final bool isChecked;
   final bool obscureText;
   final bool confirmObscureText;
+  final bool isSubmitting;
+  final bool isSuccess;
+  final String? error;
 
 
-  final RegisterSubmissionStatues submissionStatues;
 
-  RegisterState(
-      {this.userName = '',
-      this.password = '',
-      this.confirmPassword = '',
-      this.email = '',
-      this.phone = '',
-      required this.isChecked ,
-      required this.obscureText ,
-      required this.confirmObscureText ,
-      this.submissionStatues = const InitialRegisterSubmissionStatue()});
+  RegisterState({this.userName = '',
+    this.password = '',
+    this.confirmPassword = '',
+    this.email = '',
+    this.phone = '',
+    required this.isChecked,
+    required this.obscureText,
+    required this.confirmObscureText,
+    this.isSubmitting = false,
+    this.isSuccess = false,
+    this.error,
+  }
+      );
 
   RegisterState copyWith({
     String? userName,
@@ -36,7 +40,9 @@ class RegisterState {
     bool? obscureText,
     bool? confirmObscureText,
     bool? isChecked,
-    RegisterSubmissionStatues? submissionStatues,
+    bool? isSubmitting,
+    bool? isSuccess,
+    String? error,
   }) {
     return RegisterState(
         userName: userName ?? this.userName,
@@ -47,6 +53,11 @@ class RegisterState {
         isChecked: isChecked ?? this.isChecked,
         obscureText: obscureText ?? this.obscureText,
         confirmObscureText: confirmObscureText ?? this.confirmObscureText,
-        submissionStatues: submissionStatues ?? this.submissionStatues);
+      isSubmitting: isSubmitting ?? this.isSubmitting,
+      isSuccess: isSuccess ?? this.isSuccess,
+      error: error ?? this.error,
+
+
+    );
   }
 }

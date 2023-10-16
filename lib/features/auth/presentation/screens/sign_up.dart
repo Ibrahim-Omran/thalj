@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phone_form_field/phone_form_field.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/widgets/custom_button.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_text_style.dart';
 import '../../../../core/utils/commons.dart';
+import '../../../../core/utils/toast.dart';
 import '../../../../core/widgets/logo.dart';
 import '../../../../core/widgets/back_arrow.dart';
 import '../../domain/repository.dart';
@@ -17,24 +17,47 @@ import '../bloc/register_bloc/bloc_register_states.dart';
 import '../components/phone_form_field.dart';
 import '../components/text_filed.dart';
 
-
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
 
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   late bool _isChecked = false;
+
   late bool _isPassword = true;
+
   late bool _isConfirmPassword = true;
-  final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _userNameController = TextEditingController();
+
   final TextEditingController _emailController = TextEditingController();
-  final PhoneController _phoneController = PhoneController(null);
+
+  final TextEditingController _phoneController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
+
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
   @override
+  void dispose() {
+    _userNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _phoneController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: true,
         body: BlocProvider(
             create: (context) =>
                 RegisterBloc(authRepository: context.read<AuthRepository>()),
@@ -47,7 +70,7 @@ class SignUpScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: SafeArea(
           child: Form(
-            key: _formKey,
+            key: SignUpScreen._formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -91,14 +114,9 @@ class SignUpScreen extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-                BlocBuilder<RegisterBloc, RegisterState>(
-                    builder: (context, state) {
-                  return PhoneForm(
-                    controller: _phoneController,
-                    onSubmit: (value) => BlocProvider.of<RegisterBloc>(context)
-                        .add(RegisterPhone(phone: value)),
-                  );
-                }),
+                PhoneForm(
+                  controller: _phoneController,
+                ),
                 SizedBox(
                   height: 15.h,
                 ),
@@ -111,8 +129,15 @@ class SignUpScreen extends StatelessWidget {
                     maxLines: 1,
                     readonly: false,
                     title: AppStrings.email,
-                    onSubmit: (value) => BlocProvider.of<RegisterBloc>(context)
-                        .add(RegisterEmail(email: value)),
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      if (!value.contains("@")) {
+                        return AppStrings.vailEmailForm;
+                      }
+                      return null;
+                    },
                   );
                 }),
                 SizedBox(
@@ -121,8 +146,6 @@ class SignUpScreen extends StatelessWidget {
                 BlocBuilder<RegisterBloc, RegisterState>(
                     builder: (context, state) {
                   return MyFormField(
-                    onSubmit: (value) => BlocProvider.of<RegisterBloc>(context)
-                        .add(RegisterPassword(password: value)),
                     controller: _passwordController,
                     prefixIcon: _isPassword
                         ? Icons.visibility_outlined
@@ -138,6 +161,15 @@ class SignUpScreen extends StatelessWidget {
                     readonly: false,
                     title: AppStrings.createPassword,
                     hint: 'كلمه المرور',
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      if (value.length < 6) {
+                        return AppStrings.vailpassForm;
+                      }
+                      return null;
+                    },
                   );
                 }),
                 SizedBox(
@@ -146,8 +178,6 @@ class SignUpScreen extends StatelessWidget {
                 BlocBuilder<RegisterBloc, RegisterState>(
                     builder: (context, state) {
                   return MyFormField(
-                    onSubmit: (value) => BlocProvider.of<RegisterBloc>(context)
-                        .add(RegisterConfirmPassword(confirmPassword: value)),
                     controller: _confirmPasswordController,
                     prefixIcon: _isConfirmPassword
                         ? Icons.visibility_outlined
@@ -164,6 +194,19 @@ class SignUpScreen extends StatelessWidget {
                     readonly: false,
                     title: AppStrings.confirmPassword,
                     hint: 'تآكيد كلمه المرور',
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      if (value.length < 6) {
+                        return AppStrings.vailpassForm;
+                      }
+                      if (value != _passwordController.text) {
+                        return AppStrings
+                            .vailConfirmPassForm; // Error message for password mismatch
+                      }
+                      return null;
+                    },
                   );
                 }),
                 Row(mainAxisAlignment: MainAxisAlignment.end, children: [
@@ -175,26 +218,49 @@ class SignUpScreen extends StatelessWidget {
                           value: _isChecked,
                           onChanged: (bool? value) {
                             _isChecked = !_isChecked;
-                            BlocProvider.of<RegisterBloc>(context).add(ToggleCheckbox(isChecked: _isChecked));
+                            BlocProvider.of<RegisterBloc>(context)
+                                .add(ToggleCheckbox(isChecked: _isChecked));
                           });
                     },
                   ),
                 ]),
-                BlocBuilder<RegisterBloc, RegisterState>(
-                    builder: (context, state) {
-                  return CustomButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        BlocProvider.of<RegisterBloc>(context)
-                            .add(RegisterSubmitted());
-                        navigate(
-                           context: context,
-                           route: Routes.uploadingSupportingDocumentsScreen);
-                      }
-                    },
-                    text: AppStrings.saveAndCompleteProject,
-                  );
-                }),
+                BlocConsumer<RegisterBloc, RegisterState>(
+                  builder: (context, state) {
+                    return state.isSubmitting
+                        ? const Center(child: CircularProgressIndicator())
+                        : CustomButton(
+                            onPressed: () {
+                              if (SignUpScreen._formKey.currentState!
+                                      .validate() &&
+                                  _isChecked == true) {
+                                BlocProvider.of<RegisterBloc>(context)
+                                    .add(RegisterSubmitted(
+                                  name: _userNameController.text,
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                  phone: _phoneController.text,
+                                ));
+                              }
+                              if (_isChecked == false) {
+                                showToast(
+                                    text: "يجب قبول الشروط و الاحكام",
+                                    state: ToastStates.warning);
+                              }
+                            },
+                            text: AppStrings.saveAndCompleteProject,
+                          );
+                  },
+                  listener: (BuildContext context, RegisterState state) {
+                    if (state.isSuccess) {
+                      navigate(
+                          context: context,
+                          route: Routes.uploadingSupportingDocumentsScreen);
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
               ],
             ),
           ),
