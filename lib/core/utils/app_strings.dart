@@ -92,6 +92,8 @@ class AppStrings {
   static const String price = 'السعر';
   static const String number = 'رقم الهاتف';
   static const String send = 'ارسال';
+  static const String sent = 'تم الارسال ';
+  static const String unsent = 'برجاء اعادة المحاولة ';
 //DriverDoc
   static const String driverDoc = 'مستندات السائقين ';
 
