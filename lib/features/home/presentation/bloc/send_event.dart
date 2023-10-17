@@ -1,6 +1,4 @@
-part of 'send_bloc.dart';
 
-@immutable
 abstract class SendEvent {}
 class SendName extends SendEvent{
   final String name;
