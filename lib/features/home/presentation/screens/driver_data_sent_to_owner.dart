@@ -50,7 +50,7 @@ class DriverDataSentToOwner extends StatelessWidget {
                 driverShowIdentityContainer(imagePath: AppAssets.identity,),
                 ElevatedButton(
                     onPressed: () {
-                      navigate(
+                      navigatePushNamed(
                           context: context, route: Routes.documentsCheckScreen);
                     },
                     child: Container(
@@ -74,7 +74,7 @@ class DriverDataSentToOwner extends StatelessWidget {
                       // You can customize other properties like textStyle, elevation, and more here
                     ),
                     onPressed: () {
-                      navigate(
+                      navigatePushNamed(
                           context: context, route: Routes.documentsCheckScreen);
                     },
                     child: SizedBox(

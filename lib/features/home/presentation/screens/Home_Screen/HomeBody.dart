@@ -48,7 +48,7 @@ class HomeBody extends StatelessWidget {
                 children: [
                   TodayProducts(
                     onTap: () {
-                      navigate(
+                      navigatePushNamed(
                           context: context,
                           route: Routes.productInformationScreen);
                     },
@@ -58,7 +58,7 @@ class HomeBody extends StatelessWidget {
                   ),
                   TodayProducts(
                     onTap: () {
-                      navigate(
+                      navigatePushNamed(
                           context: context,
                           route: Routes.productInformationScreen);
                     },

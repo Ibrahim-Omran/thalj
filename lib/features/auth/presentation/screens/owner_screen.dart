@@ -116,7 +116,7 @@ class _OwnerScreenState extends State<OwnerScreen> {
                   },
                   listener: (BuildContext context, AdminLoginState state) {
                     if (state.isSuccess) {
-                      navigate(context: context, route: Routes.driverDoc);
+                      navigatePushReplacement(context: context, route: Routes.driverDoc);
                       showToast(
                           text: AppStrings.welcome, state: ToastStates.success);
                     }

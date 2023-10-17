@@ -12,7 +12,7 @@ class DriverDocWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return  InkWell(
       onTap: (){
-        navigate(context: context, route: Routes.driverDataSentToOwner);
+        navigatePushNamed(context: context, route: Routes.driverDataSentToOwner);
       },
       child: Container(
         height: 70.h,

@@ -36,8 +36,13 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: AppStrings.appName,
             theme: getAppTheme(),
+
             initialRoute: Routes.intitlRoute,
-            onGenerateRoute: AppRoutes.generateRoute,
+            onGenerateRoute: (settings) {
+              return MaterialPageRoute(
+                builder: (context) => appRoutes(settings.name!, settings.arguments),
+              );
+            },
           ),
         );
       },

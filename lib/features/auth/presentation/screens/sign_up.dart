@@ -252,7 +252,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                   listener: (BuildContext context, RegisterState state) {
                     if (state.isSuccess) {
-                      navigate(
+                      navigatePushNamed(
                           context: context,
                           route: Routes.uploadingSupportingDocumentsScreen);
                     }

@@ -167,7 +167,7 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                  navigate(
+                  navigatePushReplacement(
                       context: context, route: Routes.documentsCheckScreen);
                 },
                 child: Container(
