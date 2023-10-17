@@ -3,11 +3,12 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../core/functions/saveDriverToken.dart';
+import '../../../core/functions/saveTokens.dart';
 import '../../../core/network/ErrorModel.dart';
 import '../../../core/utils/toast.dart';
 import '../domain/models/admin_model.dart';
 import '../domain/models/login_model.dart';
+import '../domain/models/register_model.dart';
 
 class AuthRemoteDataSource {
   Future<bool> login({required String email, required String password}) async {
@@ -42,7 +43,7 @@ class AuthRemoteDataSource {
               transferDocument: loginData['transferDocument'],
               verified: loginData['verified'],
               token: jsonResponse['token']);
-          TokenManager.saveToken(loginModel);
+          TokenManager.saveLoginToken(loginModel);
 
 
           return true;
@@ -81,17 +82,33 @@ class AuthRemoteDataSource {
         body: {
           'fullname': name,
           'email': email,
-          'password': password,
           'phone': phone,
+          'password': password,
+
         },
       );
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 201 ) {
         // Register successful
-        if (kDebugMode) {
+        final jsonResponse = jsonDecode(response.body);
+
+        if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
+          final registerData = jsonResponse['data'];
           print(response.body);
+
+
+          var registerModel = RegisterModel.fromJson({
+            'data': {
+              'id': registerData['id'],
+              'fullname': registerData['fullname'],
+              'phone': registerData['phone'],
+              'email': registerData['email'],
+            },
+            'token': jsonResponse['token'],
+          });
+          TokenManager.saveRegisterToken(registerModel);
         }
-        return true;
+          return true;
       } else {
         // register failed
         if (kDebugMode) {
