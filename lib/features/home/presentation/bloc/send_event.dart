@@ -1,24 +1,24 @@
 
-abstract class SendEvent {}
-class SendName extends SendEvent{
+abstract class SendOfferEvent {}
+class SendOfferName extends SendOfferEvent{
   final String name;
 
-  SendName(this.name);
+  SendOfferName(this.name);
 }
-class SendPrice extends SendEvent{
+class SendOfferPrice extends SendOfferEvent{
   final String price;
 
-  SendPrice(this.price);
+  SendOfferPrice(this.price);
 }
-class SendPhone extends SendEvent{
+class SendOfferPhone extends SendOfferEvent{
   final String phone;
 
-  SendPhone(this.phone);
+  SendOfferPhone(this.phone);
 }
-class SendSubmitted extends SendEvent{
+class SendOfferSubmitted extends SendOfferEvent{
   final String name;
   final String phone;
   final String price;
 
-  SendSubmitted(this.name, this.phone, this.price);
+  SendOfferSubmitted(this.name, this.phone, this.price);
 }

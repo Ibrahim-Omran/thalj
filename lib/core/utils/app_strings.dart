@@ -111,4 +111,8 @@ class AppStrings {
   static const String requestAccept = 'قبول الطلب';
   static const String requestReject = 'رفض الطلب';
 
+
+  //ToastMSg
+  static const String sendOfferSuccess = 'تم ارسال العرض بنجاح';
+
 }

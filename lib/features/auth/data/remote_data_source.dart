@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../core/functions/saveDriverToken.dart';
 import '../../../core/network/ErrorModel.dart';
 import '../../../core/utils/toast.dart';
 import '../domain/models/admin_model.dart';
@@ -26,7 +27,7 @@ class AuthRemoteDataSource {
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
           final loginData = jsonResponse['data'][0];
 
-          LoginModel(
+          var loginModel = LoginModel(
               id: loginData['id'],
               fullName: loginData['fullname'],
               phone: loginData['phone'],
@@ -41,6 +42,8 @@ class AuthRemoteDataSource {
               transferDocument: loginData['transferDocument'],
               verified: loginData['verified'],
               token: jsonResponse['token']);
+          TokenManager.saveToken(loginModel);
+
 
           return true;
         } else {
