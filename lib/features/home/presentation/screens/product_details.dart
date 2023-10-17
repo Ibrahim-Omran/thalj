@@ -42,13 +42,14 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:BlocProvider(
-        create: (context) =>
-            SendOfferBloc(sendOfferRepository: context.read<SendOfferRepository>()),
-        child: _productDetailsView(),
+        body: BlocProvider(
+      create: (context) => SendOfferBloc(
+          sendOfferRepository: context.read<SendOfferRepository>()),
+      child: _productDetailsView(),
     ));
   }
-  Widget _productDetailsView(){
+
+  Widget _productDetailsView() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: SafeArea(
@@ -131,29 +132,29 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   BlocConsumer<SendOfferBloc, SendOfferState>(
                     listener: (context, state) {
-                      if(state.isSuccess){
+                      if (state.isSuccess) {
                         navigate(context: context, route: Routes.homeScreen);
-                        showToast(text: AppStrings.sendOfferSuccess, state: ToastStates.success);
+                        showToast(
+                            text: AppStrings.sendOfferSuccess,
+                            state: ToastStates.success);
                       }
-
-
                     },
                     builder: (context, state) {
                       return state.isSubmitting
                           ? const CircularProgressIndicator()
                           : CustomButton(
-                        onPressed: () {
-                          if(ProductDetails._formKey.currentState!.validate())
-                            {
-                              BlocProvider.of<SendOfferBloc>(context).add(
-                                  SendOfferSubmitted(
-                                      _nameController.text,
-                                      _phoneController.text,
-                                      _priceController.text));
-                            }
-                        },
-                        text: AppStrings.send,
-                      );
+                              onPressed: () {
+                                if (ProductDetails._formKey.currentState!
+                                    .validate()) {
+                                  BlocProvider.of<SendOfferBloc>(context).add(
+                                      SendOfferSubmitted(
+                                          _nameController.text,
+                                          _phoneController.text,
+                                          _priceController.text));
+                                }
+                              },
+                              text: AppStrings.send,
+                            );
                     },
                   ),
                 ],

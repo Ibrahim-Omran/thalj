@@ -14,7 +14,6 @@ class LoginModel {
   final String verified;
   final String token;
 
-
   LoginModel({
     required this.id,
     required this.fullName,

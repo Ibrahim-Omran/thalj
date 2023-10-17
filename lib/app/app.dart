@@ -6,6 +6,8 @@ import 'package:thalj/features/auth/data/remote_data_source.dart';
 import 'package:thalj/features/auth/domain/repository.dart';
 import 'package:thalj/features/documents/presentation/bloc/document_checking_bloc/document_checking_bloc.dart';
 import 'package:thalj/features/home/domain/repository.dart';
+import 'package:thalj/features/home/presentation/bloc/accept_drivers_bloc/accept_drivers_bloc.dart';
+import 'package:thalj/features/home/presentation/bloc/drivers_data_bloc/get_drivers_data_bloc.dart';
 
 import '../core/routes/app_routes.dart';
 import '../core/theme/app_theme.dart';
@@ -24,13 +26,19 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => DocumentCheckingBloc()),
+            BlocProvider(
+                create: (context) =>
+                    GetDriversDataBloc(SendOfferRemoteDataSource())),
+            BlocProvider(
+                create: (context) =>
+                    AcceptDriversBloc(SendOfferRemoteDataSource())),
             RepositoryProvider<AuthRepository>(
               create: (context) => AuthRepository(AuthRemoteDataSource()),
             ),
             RepositoryProvider<SendOfferRepository>(
-              create: (context) => SendOfferRepository(SendOfferRemoteDataSource()),
+              create: (context) =>
+                  SendOfferRepository(SendOfferRemoteDataSource()),
             ),
-            
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

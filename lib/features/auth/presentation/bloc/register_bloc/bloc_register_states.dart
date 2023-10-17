@@ -1,4 +1,3 @@
-
 class RegisterState {
   final String userName;
   final String password;
@@ -12,9 +11,8 @@ class RegisterState {
   final bool isSuccess;
   final String? error;
 
-
-
-  RegisterState({this.userName = '',
+  RegisterState({
+    this.userName = '',
     this.password = '',
     this.confirmPassword = '',
     this.email = '',
@@ -25,8 +23,7 @@ class RegisterState {
     this.isSubmitting = false,
     this.isSuccess = false,
     this.error,
-  }
-      );
+  });
 
   RegisterState copyWith({
     String? userName,
@@ -42,19 +39,17 @@ class RegisterState {
     String? error,
   }) {
     return RegisterState(
-        userName: userName ?? this.userName,
-        password: password ?? this.password,
-        confirmPassword: confirmPassword ?? this.confirmPassword,
-        phone: phone ?? this.phone,
-        email: email ?? this.email,
-        isChecked: isChecked ?? this.isChecked,
-        obscureText: obscureText ?? this.obscureText,
-        confirmObscureText: confirmObscureText ?? this.confirmObscureText,
+      userName: userName ?? this.userName,
+      password: password ?? this.password,
+      confirmPassword: confirmPassword ?? this.confirmPassword,
+      phone: phone ?? this.phone,
+      email: email ?? this.email,
+      isChecked: isChecked ?? this.isChecked,
+      obscureText: obscureText ?? this.obscureText,
+      confirmObscureText: confirmObscureText ?? this.confirmObscureText,
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
       error: error ?? this.error,
-
-
     );
   }
 }

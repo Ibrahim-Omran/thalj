@@ -12,6 +12,5 @@ class AppAssets {
   static const String upload = '${baseUrl}upload.png';
   static const String moka = '${baseUrl}moka.png';
 
-
   static const String identity = '${baseUrl}identity.png';
 }

@@ -43,7 +43,6 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-
       body: BlocProvider(
           create: (context) =>
               LoginBloc(authRepository: context.read<AuthRepository>()),
@@ -85,30 +84,29 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(
                   height: 15.h,
                 ),
-               BlocBuilder<LoginBloc,LoginState>(builder: (context,state){
-                 return  MyFormField(
-                   controller: _userNameController,
-                   type: TextInputType.text,
-                   hint: "example@mail.com",
-                   maxLines: 1,
-                   readonly: false,
-                   title: AppStrings.emailOrPhone,
-                   vaild: (value) {
-                     if (value!.isEmpty) {
-                       return AppStrings.vaildForm;
-                     }
-                     if (!value.contains("@")) {
-                       return AppStrings.vailEmailForm;
-                     }
-                     return null;
-                   },
-
-                 );
-               }),
+                BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+                  return MyFormField(
+                    controller: _userNameController,
+                    type: TextInputType.text,
+                    hint: "example@mail.com",
+                    maxLines: 1,
+                    readonly: false,
+                    title: AppStrings.emailOrPhone,
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      if (!value.contains("@")) {
+                        return AppStrings.vailEmailForm;
+                      }
+                      return null;
+                    },
+                  );
+                }),
                 SizedBox(
                   height: 15.h,
                 ),
-                BlocBuilder<LoginBloc,LoginState>(builder: (context,state){
+                BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
                   return MyFormField(
                     controller: _passwordController,
                     prefixIcon: _isPassword
@@ -149,7 +147,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         ? const CircularProgressIndicator()
                         : CustomButton(
                             onPressed: () {
-                              if (SignInScreen._formKey.currentState!.validate()) {
+                              if (SignInScreen._formKey.currentState!
+                                  .validate()) {
                                 BlocProvider.of<LoginBloc>(context)
                                     .add(LoginSubmitted(
                                   email: _userNameController.text,

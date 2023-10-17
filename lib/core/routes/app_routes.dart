@@ -11,7 +11,7 @@ import 'package:thalj/features/home/presentation/screens/driver_data_sent_to_own
 import '../../features/auth/presentation/screens/signin_screen.dart';
 import 'package:thalj/features/documents/presentation/screens/documents_screen.dart';
 import 'package:thalj/features/home/presentation/screens/product_info_screen.dart';
-import 'package:thalj/features/home/presentation/screens/uploading_supporting_documents_screen.dart';
+import 'package:thalj/features/documents/presentation/screens/uploading_supporting_documents_screen.dart';
 
 class Routes {
   static const String intitlRoute = '/';
@@ -34,11 +34,11 @@ class AppRoutes {
   static Route? generateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.intitlRoute:
-        return MaterialPageRoute(builder: (_) =>  SignInScreen());
+        return MaterialPageRoute(builder: (_) => SignInScreen());
       case Routes.signup:
-        return MaterialPageRoute(builder: (_) =>  SignUpScreen());
+        return MaterialPageRoute(builder: (_) => SignUpScreen());
       case Routes.ownerScreen:
-        return MaterialPageRoute(builder: (_) =>  OwnerScreen());
+        return MaterialPageRoute(builder: (_) => OwnerScreen());
 
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());

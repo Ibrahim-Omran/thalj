@@ -16,10 +16,10 @@ class ProfileAppBar extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.19,
           decoration: const BoxDecoration(
               gradient: LinearGradient(colors: [
-                Color(0xff1F6EC3),
-                Color(0xff155293),
-                Color(0xff155293),
-              ])),
+            Color(0xff1F6EC3),
+            Color(0xff155293),
+            Color(0xff155293),
+          ])),
         ),
         Positioned(
           child: Padding(

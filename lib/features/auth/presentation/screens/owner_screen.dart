@@ -42,7 +42,6 @@ class _OwnerScreenState extends State<OwnerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: BlocProvider(
           create: (context) =>
               AdminLoginBloc(authRepository: context.read<AuthRepository>()),
@@ -62,48 +61,48 @@ class _OwnerScreenState extends State<OwnerScreen> {
               children: [
                 const BackArrow(),
                 const Center(child: LogoWidget()),
-                BlocBuilder<AdminLoginBloc,AdminLoginState>(
-                  builder: (context,state) {
-                    return MyFormField(
-                      controller: _userNameController,
-                      type: TextInputType.text,
-                      maxLines: 1,
-                      readonly: false,
-                      title: AppStrings.ownerEmail,
-                      hint: 'example@mail.com',
-                    );
-                  }
+                BlocBuilder<AdminLoginBloc, AdminLoginState>(
+                    builder: (context, state) {
+                  return MyFormField(
+                    controller: _userNameController,
+                    type: TextInputType.text,
+                    maxLines: 1,
+                    readonly: false,
+                    title: AppStrings.ownerEmail,
+                    hint: 'example@mail.com',
+                  );
+                }),
+                BlocBuilder<AdminLoginBloc, AdminLoginState>(
+                    builder: (context, state) {
+                  return MyFormField(
+                    prefixIconPressed: () {
+                      _isPassword = !_isPassword;
+                      BlocProvider.of<AdminLoginBloc>(context).add(
+                          AdminLoginToggleObscureText(isPassword: _isPassword));
+                    },
+                    controller: _passwordController,
+                    prefixIcon: _isPassword
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
+                    isPassword: _isPassword,
+                    type: TextInputType.text,
+                    maxLines: 1,
+                    readonly: false,
+                    title: AppStrings.passOwner,
+                    hint: 'كلمه المرور',
+                  );
+                }),
+                SizedBox(
+                  height: 40.h,
                 ),
-                BlocBuilder<AdminLoginBloc,AdminLoginState>(
-                  builder: (context,state) {
-                    return MyFormField(
-                      prefixIconPressed: () {
-                        _isPassword = !_isPassword;
-                        BlocProvider.of<AdminLoginBloc>(context)
-                            .add(AdminLoginToggleObscureText(isPassword: _isPassword));
-                      },
-                      controller: _passwordController,
-                      prefixIcon: _isPassword
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
-
-                      isPassword: _isPassword,
-                      type: TextInputType.text,
-                      maxLines: 1,
-                      readonly: false,
-                      title: AppStrings.passOwner,
-                      hint: 'كلمه المرور',
-                    );
-                  }
-                ),
-                SizedBox(height: 40.h,),
                 BlocConsumer<AdminLoginBloc, AdminLoginState>(
                   builder: (context, state) {
                     return state.isSubmitting
                         ? const Center(child: CircularProgressIndicator())
                         : CustomButton(
                             onPressed: () {
-                              if (OwnerScreen._formKey.currentState!.validate()) {
+                              if (OwnerScreen._formKey.currentState!
+                                  .validate()) {
                                 BlocProvider.of<AdminLoginBloc>(context)
                                     .add(AdminLoginSubmitted(
                                   email: _userNameController.text,

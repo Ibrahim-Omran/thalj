@@ -18,12 +18,13 @@ class AdminModel {
 
   factory AdminModel.fromJson(Map<String, dynamic> json) {
     return AdminModel(
-        id: json['id'],
-        name: json['name'],
-        phone: json['phone'],
-        email: json['email'],
-        image: json['image'],
+      id: json['id'],
+      name: json['name'],
+      phone: json['phone'],
+      email: json['email'],
+      image: json['image'],
       verified: json['verified'],
-      token: json['token'],);
+      token: json['token'],
+    );
   }
 }
