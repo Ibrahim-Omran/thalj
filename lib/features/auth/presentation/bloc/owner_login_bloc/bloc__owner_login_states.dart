@@ -14,24 +14,20 @@ class AdminLoginState {
       this.isSuccess = false,
       this.error});
 
-      AdminLoginState copyWith({
+  AdminLoginState copyWith({
     String? userName,
     String? password,
     bool? obscureText,
     bool? isSubmitting,
     bool? isSuccess,
     String? error,
-  }){
+  }) {
     return AdminLoginState(
-      userName: userName ?? this.userName,
-      password: password ?? this.password,
-      obscureText: obscureText ?? this.obscureText,
-      isSubmitting: isSubmitting ?? this.isSubmitting,
-      isSuccess: isSuccess ?? this.isSuccess,
-      error: error ?? this.error
-    );
+        userName: userName ?? this.userName,
+        password: password ?? this.password,
+        obscureText: obscureText ?? this.obscureText,
+        isSubmitting: isSubmitting ?? this.isSubmitting,
+        isSuccess: isSuccess ?? this.isSuccess,
+        error: error ?? this.error);
   }
 }
-
-
-

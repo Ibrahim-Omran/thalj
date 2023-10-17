@@ -45,7 +45,6 @@ class AuthRemoteDataSource {
               token: jsonResponse['token']);
           TokenManager.saveLoginToken(loginModel);
 
-
           return true;
         } else {
           // Handle missing or empty data
@@ -84,18 +83,16 @@ class AuthRemoteDataSource {
           'email': email,
           'phone': phone,
           'password': password,
-
         },
       );
 
-      if (response.statusCode == 201 ) {
+      if (response.statusCode == 201) {
         // Register successful
         final jsonResponse = jsonDecode(response.body);
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
           final registerData = jsonResponse['data'];
           print(response.body);
-
 
           var registerModel = RegisterModel.fromJson({
             'data': {
@@ -108,7 +105,7 @@ class AuthRemoteDataSource {
           });
           TokenManager.saveRegisterToken(registerModel);
         }
-          return true;
+        return true;
       } else {
         // register failed
         if (kDebugMode) {

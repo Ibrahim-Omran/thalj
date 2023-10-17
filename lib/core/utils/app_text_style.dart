@@ -5,14 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 TextStyle _textStyle({
-  required TextDecoration textDeco ,
+  required TextDecoration textDeco,
   required Color color,
   required double fontSize,
   required FontWeight fontWeight,
 }) {
   return GoogleFonts.cairo(
     color: color,
-    decoration:textDeco ,
+    decoration: textDeco,
     fontSize: fontSize.sp,
     fontWeight: fontWeight,
   );
@@ -20,7 +20,6 @@ TextStyle _textStyle({
 
 // bold style
 TextStyle boldStyle({
-
   Color color = AppColors.black,
   double fontSize = 24,
 }) =>
@@ -31,7 +30,6 @@ TextStyle boldStyle({
       fontWeight: FontWeight.w700,
     );
 
-
 // regular style
 TextStyle regularStyle({
   Color color = AppColors.black,
@@ -39,7 +37,6 @@ TextStyle regularStyle({
 }) =>
     _textStyle(
       textDeco: TextDecoration.none,
-
       color: color,
       fontSize: fontSize,
       fontWeight: FontWeight.normal,
@@ -53,11 +50,7 @@ TextStyle underLineStyle({
 }) =>
     _textStyle(
       textDeco: textDeco,
-
       color: color,
       fontSize: fontSize,
       fontWeight: FontWeight.normal,
     );
-
-
-

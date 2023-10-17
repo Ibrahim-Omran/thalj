@@ -1,6 +1,6 @@
 class AppStrings {
   static const String appName = 'تلج';
-  static const String welcome = 'آهلا يك في ثلج';
+  static const String welcome = 'آهلا بك في ثلج';
   static const String signIn = 'تسجيل دخول';
   static const String askSignIn = 'قم بتسجيل دخول';
   static const String signInHint = 'يرجى تسجيل الدخول إلى حسابك للمتابعة';
@@ -97,22 +97,19 @@ class AppStrings {
 //DriverDoc
   static const String driverDoc = 'مستندات السائقين ';
 
-
   //internet connection
   static const String noInternet = 'No Internet Connection';
 
   //driver data sent to owner
   static const String identityProof = 'اثبات شخصية (الهوية)';
   static const String residenceCard = 'بطاقة الإقامة :';
-  static const String drivingLicense  = ' : رخصة القيادة';
+  static const String drivingLicense = ' : رخصة القيادة';
   static const String vehicleRegistration = ' : استمارة المركبة';
   static const String operatingCard = ': كارت التشغيل ';
   static const String transferDocument = ': وثيقة نقل';
   static const String requestAccept = 'قبول الطلب';
   static const String requestReject = 'رفض الطلب';
 
-
   //ToastMSg
   static const String sendOfferSuccess = 'تم ارسال العرض بنجاح';
-
 }

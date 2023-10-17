@@ -22,3 +22,7 @@ final class DocumentCheckingSuccess extends DocumentCheckingState {
   final String desc;
   final String img;
 }
+
+final class DocumentUploading extends DocumentCheckingState {}
+
+final class DocumentUploadFailed extends DocumentCheckingState {}

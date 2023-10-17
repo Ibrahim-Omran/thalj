@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,7 +6,13 @@ import '../../../../../core/utils/app_strings.dart';
 
 class CustomShippingInfo extends StatelessWidget {
   const CustomShippingInfo({
-    super.key, required this.shippingDescription, required this.shippingType, required this.weight, required this.temp, required this.humidity, required this.specialMarque,
+    super.key,
+    required this.shippingDescription,
+    required this.shippingType,
+    required this.weight,
+    required this.temp,
+    required this.humidity,
+    required this.specialMarque,
   });
   final String shippingDescription;
   final String shippingType;
@@ -110,7 +115,6 @@ class CustomShippingInfo extends StatelessWidget {
                 .displayMedium!
                 .copyWith(fontSize: 14),
           ),
-
         ],
       ),
     );

@@ -13,12 +13,20 @@ class Profile extends StatelessWidget {
       body: Column(
         children: [
           const ProfileAppBar(),
-          SizedBox(height: 20.h,),
+          SizedBox(
+            height: 20.h,
+          ),
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Center(child: Text("دفع الاشتراكات الشهرية", style: boldStyle(),textAlign: TextAlign.center,)),
+            child: Center(
+                child: Text(
+              "دفع الاشتراكات الشهرية",
+              style: boldStyle(),
+              textAlign: TextAlign.center,
+            )),
           ),
-        ],),
+        ],
+      ),
     );
   }
 }

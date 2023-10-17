@@ -7,6 +7,5 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NetworkInfoImpl().checkInternet();
 
-  runApp( const MyApp());
+  runApp(const MyApp());
 }
-

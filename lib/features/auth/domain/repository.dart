@@ -2,7 +2,9 @@ import 'package:thalj/features/auth/data/remote_data_source.dart';
 
 class AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
-  AuthRepository(this.authRemoteDataSource,);
+  AuthRepository(
+    this.authRemoteDataSource,
+  );
 
   Future<bool> login({
     required String email,

@@ -13,9 +13,6 @@ driverShowIdentityContainer({
       borderRadius: BorderRadius.circular(8),
       color: AppColors.lightBlue.withOpacity(.63),
     ),
-    child: Image.asset(
-      imagePath!,
-      fit: BoxFit.cover,
-    ),
+    child: Image.network(imagePath!),
   );
 }

@@ -1,5 +1,3 @@
 abstract class LandingPageEvent {}
 
-class TabChange extends LandingPageEvent{
-
-}
+class TabChange extends LandingPageEvent {}

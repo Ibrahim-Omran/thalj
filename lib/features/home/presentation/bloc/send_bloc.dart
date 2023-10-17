@@ -7,13 +7,13 @@ import '../../domain/repository.dart';
 class SendOfferBloc extends Bloc<SendOfferEvent, SendOfferState> {
   final SendOfferRepository sendOfferRepository;
 
-  SendOfferBloc({required this.sendOfferRepository}) : super(SendOfferState(
-    name: '',
-    phone: '',
-    price: '',
-  )) {
+  SendOfferBloc({required this.sendOfferRepository})
+      : super(SendOfferState(
+          name: '',
+          phone: '',
+          price: '',
+        )) {
     on<SendOfferSubmitted>(_onSendOfferSubmitted);
-
   }
   Future<void> _onSendOfferSubmitted(
       SendOfferSubmitted event, Emitter<SendOfferState> emit) async {

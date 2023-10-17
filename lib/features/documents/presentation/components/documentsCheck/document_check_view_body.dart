@@ -32,8 +32,8 @@ class _DocumentCheckBiewBodyState extends State<DocumentCheckBiewBody> {
               ? Column(
                   children: [
                     CustomAppBar(
-                        title: AppStrings.documentCheck,
-                       ),
+                      title: AppStrings.documentCheck,
+                    ),
                     const Spacer(),
                     Image.asset(state.img),
                     Text(
@@ -57,8 +57,8 @@ class _DocumentCheckBiewBodyState extends State<DocumentCheckBiewBody> {
                   ? Column(
                       children: [
                         CustomAppBar(
-                            title: AppStrings.documentCheck,
-                           ),
+                          title: AppStrings.documentCheck,
+                        ),
                         const Spacer(),
                         Image.asset(state.img),
                         Text(

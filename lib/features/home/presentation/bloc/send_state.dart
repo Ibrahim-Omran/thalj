@@ -6,7 +6,6 @@ class SendOfferState {
   final bool isSuccess;
   final String? error;
 
-
   SendOfferState({
     this.name = '',
     this.phone = '',
@@ -14,7 +13,6 @@ class SendOfferState {
     this.isSubmitting = false,
     this.isSuccess = false,
     this.error,
-
   });
 
   SendOfferState copyWith({

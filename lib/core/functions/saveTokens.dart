@@ -16,6 +16,7 @@ class TokenManager {
   static void saveRegisterToken(RegisterModel model) {
     registerModel = model;
   }
+
   static String? getRegisterToken() {
     return registerModel?.token;
   }

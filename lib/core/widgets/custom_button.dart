@@ -27,14 +27,16 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-          backgroundColor: MaterialStateProperty.all(
-            background ?? AppColors.primary,
-          ),
-        ),
+              backgroundColor: MaterialStateProperty.all(
+                background ?? AppColors.primary,
+              ),
+            ),
         child: Text(
           text,
-          style:
-          Theme.of(context).textTheme.displayLarge!.copyWith(color: AppColors.white,fontSize: 16,),
+          style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                color: AppColors.white,
+                fontSize: 16,
+              ),
         ),
       ),
     );

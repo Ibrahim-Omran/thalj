@@ -1,10 +1,5 @@
+abstract class LandingPageState {}
 
-abstract class LandingPageState{
+class intialLandingPageState extends LandingPageState {}
 
-}
-class intialLandingPageState extends LandingPageState{
-
-}
-class changeLandingPageState extends LandingPageState{
-
-}
+class changeLandingPageState extends LandingPageState {}

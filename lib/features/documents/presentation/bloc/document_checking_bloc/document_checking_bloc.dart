@@ -1,10 +1,9 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:thalj/core/utils/app_assets.dart';
 import 'package:thalj/core/utils/app_strings.dart';
-
+import 'package:thalj/features/documents/data/remote_data.dart';
+import 'package:thalj/features/documents/domain/repository.dart';
 
 part 'document_checking_event.dart';
 part 'document_checking_state.dart';
@@ -13,11 +12,30 @@ class DocumentCheckingBloc
     extends Bloc<DocumentCheckingEvent, DocumentCheckingState> {
   DocumentCheckingBloc() : super(DocumentCheckingInitial()) {
     on<DocumentCheckingEvent>((event, emit) async {
-      if (event is DocumentChecking) {
+      final DocumentRepository documentRepository =
+          DocumentRepository(DocumentsRemoteDataSource());
+      if (event is DocumentUpload) {
+        emit(DocumentUploading());
+        var isUploaded = await documentRepository.uploadDocuments(
+          proofOfIdentityFront: event.proofOfIdentityFront,
+          proofOfIdentityBack: event.proofOfIdentityBack,
+          residenceCardFront: event.residenceCardFront,
+          residenceCardBack: event.residenceCardBack,
+          drivingLicense: event.drivingLicense,
+          vehicleLicense: event.vehicleLicense,
+          operatingCard: event.operatingCard,
+          transferDocument: event.transferDocument,
+        );
+        if (isUploaded) {
+          emit(DocumentCheckingLoading(true, AppStrings.pleaseWait,
+              AppStrings.ourTeamChecking, AppAssets.loadingChecking));
+        } else {
+          emit(DocumentUploadFailed());
+        }
+      } else if (event is DocumentChecking) {
         emit(DocumentCheckingLoading(true, AppStrings.pleaseWait,
             AppStrings.ourTeamChecking, AppAssets.loadingChecking));
-
-        await Future.delayed(Duration(seconds: 5));
+      } else {
         emit(DocumentCheckingSuccess(false, AppStrings.congratulation,
             AppStrings.doneChecking, AppAssets.doneChecking));
       }
