@@ -4,6 +4,7 @@ class AdminModel {
   final String phone;
   final String email;
   final String image;
+  final int verified;
   final String token;
 
   AdminModel(
@@ -11,16 +12,18 @@ class AdminModel {
       required this.name,
       required this.phone,
       required this.email,
+      required this.verified,
       required this.image,
       required this.token});
 
-  factory AdminModel.fromJson(jsonData, token) {
+  factory AdminModel.fromJson(Map<String, dynamic> json) {
     return AdminModel(
-        id: jsonData['id'],
-        name: jsonData['name'],
-        phone: jsonData['phone'],
-        email: jsonData['email'],
-        image: jsonData['image'],
-        token: token);
+        id: json['id'],
+        name: json['name'],
+        phone: json['phone'],
+        email: json['email'],
+        image: json['image'],
+      verified: json['verified'],
+      token: json['token'],);
   }
 }

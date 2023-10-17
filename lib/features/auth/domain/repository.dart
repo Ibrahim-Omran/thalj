@@ -1,10 +1,8 @@
-import 'package:thalj/features/auth/data/admin_service.dart';
 import 'package:thalj/features/auth/data/remote_data_source.dart';
 
 class AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
-  final AdminService adminService;
-  AuthRepository(this.authRemoteDataSource, this.adminService);
+  AuthRepository(this.authRemoteDataSource,);
 
   Future<bool> login({
     required String email,
@@ -33,7 +31,7 @@ class AuthRepository {
       {required String email, required String password}) async {
     bool isAuthenticated = false;
     isAuthenticated =
-        await adminService.isAdmin(email: email, password: password);
+        await authRemoteDataSource.adminLogin(email: email, password: password);
     return isAuthenticated;
   }
 }

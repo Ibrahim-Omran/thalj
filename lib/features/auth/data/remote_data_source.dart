@@ -6,6 +6,7 @@ import 'package:thalj/features/auth/domain/loginModel/login_model.dart';
 
 import '../../../core/network/ErrorModel.dart';
 import '../../../core/utils/toast.dart';
+import '../domain/loginModel/admin_model.dart';
 
 
 
@@ -26,6 +27,7 @@ class AuthRemoteDataSource {
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
           final loginData = jsonResponse['data'][0];
+
          LoginModel(
             id: loginData['id'],
             fullName: loginData['fullname'],
@@ -42,6 +44,7 @@ class AuthRemoteDataSource {
             verified: loginData['verified'],
             token: jsonResponse['token']
           );
+
 
           return true;
         } else {
@@ -95,6 +98,51 @@ class AuthRemoteDataSource {
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
         final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
         showToast(text: errorMessageModel.statusMessage, state: ToastStates.error);
+        return false;
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return false;
+    }
+  }
+  Future<bool> adminLogin({required String email, required String password}) async {
+    try {
+      http.Response response = await http.post(
+          Uri.parse('http://mircle50-001-site1.atempurl.com/users/login'),
+          body: {'email': email, 'password': password});
+
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+
+        if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
+          final adminLoginData = jsonResponse['data'][0];
+           AdminModel.fromJson({
+            'id': adminLoginData['id'],
+            'name': adminLoginData['name'],
+            'phone': adminLoginData['phone'],
+            'email': adminLoginData['email'],
+            'image': adminLoginData['image'],
+            'verified': adminLoginData['verified'],
+            'token': jsonResponse['token'],
+          });
+
+
+          return true;
+        } else {
+          if (kDebugMode) {
+            print('No data found in response');
+          }
+          return false;
+        }
+      } else {
+        // Login failed
+        print(response.body);
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+            text: errorMessageModel.statusMessage, state: ToastStates.error);
         return false;
       }
     } catch (e) {
