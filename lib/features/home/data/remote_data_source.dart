@@ -5,19 +5,31 @@ import 'package:http/http.dart' as http;
 
 import '../../../../core/network/ErrorModel.dart';
 import '../../../../core/utils/toast.dart';
+import '../../../core/functions/saveDriverToken.dart';
 
 
 
-class SendData {
-  Future<bool> send({required String name, required String price,required String phone}) async {
+class SendOfferRemoteDataSource {
+  Future<bool> sendOffer({required String name, required String price,required String phone,}) async {
     try {
+      String? token = TokenManager.getToken();
+
+print(token);
       final response = await http.post(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/offers/Q15sQ2I1N1'),
-        body: {
+        //Todo pass the id order from get order API
+        Uri.parse('http://mircle50-001-site1.atempurl.com/offers/cXq77QlCmJ'),
+
+        headers: {
+          "Content-Type": 'application/json',
+          'Accept': '*/*',
+          'Authorization': 'Bearer $token',
+        },
+        body:jsonEncode( {
           'fullName':name,
           'price': price,
-          'phone': phone,
-        },
+          'phoneNumber': phone,
+        },),
+
       );
 
       if (response.statusCode == 200) {
@@ -27,7 +39,6 @@ class SendData {
         }
         return true;
       } else {
-        // register failed
         if (kDebugMode) {
           print(response.body);
         }

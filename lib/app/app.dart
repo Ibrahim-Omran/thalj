@@ -5,9 +5,11 @@ import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/features/auth/data/remote_data_source.dart';
 import 'package:thalj/features/auth/domain/repository.dart';
 import 'package:thalj/features/documents/presentation/bloc/document_checking_bloc/document_checking_bloc.dart';
+import 'package:thalj/features/home/domain/repository.dart';
 
 import '../core/routes/app_routes.dart';
 import '../core/theme/app_theme.dart';
+import '../features/home/data/remote_data_source.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -24,6 +26,9 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => DocumentCheckingBloc()),
             RepositoryProvider<AuthRepository>(
               create: (context) => AuthRepository(AuthRemoteDataSource()),
+            ),
+            RepositoryProvider<SendOfferRepository>(
+              create: (context) => SendOfferRepository(SendOfferRemoteDataSource()),
             ),
             
           ],
