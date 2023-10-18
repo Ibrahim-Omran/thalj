@@ -34,7 +34,7 @@ class DriverDocWidget extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     height: 70.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -60,7 +60,7 @@ class DriverDocWidget extends StatelessWidget {
         } else if (state is GetDriversDataFailure) {
           return Center(child: Text(state.errorMessage));
         } else {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: AppColors.lightBlue,
             ),

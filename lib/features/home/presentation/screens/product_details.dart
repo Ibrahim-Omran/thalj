@@ -133,7 +133,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   BlocConsumer<SendOfferBloc, SendOfferState>(
                     listener: (context, state) {
                       if (state.isSuccess) {
-                        navigate(context: context, route: Routes.homeScreen);
+                        navigatePushReplacement(context: context, route: Routes.homeScreen);
                         showToast(
                             text: AppStrings.sendOfferSuccess,
                             state: ToastStates.success);

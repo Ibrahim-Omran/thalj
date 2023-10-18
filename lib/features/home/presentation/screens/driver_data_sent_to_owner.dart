@@ -6,10 +6,8 @@ import 'package:thalj/features/home/domain/models/drivers_model.dart';
 import 'package:thalj/features/home/presentation/bloc/accept_drivers_bloc/accept_drivers_bloc.dart';
 import 'package:thalj/features/home/presentation/bloc/drivers_data_bloc/get_drivers_data_bloc.dart';
 
-import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_style.dart';
-import '../../../../core/utils/commons.dart';
 import '../../../../core/widgets/back_arrow.dart';
 import '../components/driver_data_sent_to_owner/driver_show_identity_counainer.dart';
 
@@ -64,7 +62,7 @@ class DriverDataSentToOwner extends StatelessWidget {
         },
         builder: (context, state) {
           return state is AcceptDriversLoading
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Padding(

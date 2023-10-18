@@ -70,7 +70,7 @@ class ProductInformationScreen extends StatelessWidget {
             ),
             CustomButton(
               onPressed: () {
-                navigate(context: context, route: Routes.productDetails);
+                navigatePushNamed(context: context, route: Routes.productDetails);
               },
               text: AppStrings.sendOffer,
             ),
