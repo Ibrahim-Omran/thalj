@@ -44,7 +44,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Scaffold(
         body: BlocProvider(
       create: (context) => SendOfferBloc(
-          sendOfferRepository: context.read<SendOfferRepository>()),
+          driverRepository: context.read<DriverRepository>()),
       child: _productDetailsView(),
     ));
   }

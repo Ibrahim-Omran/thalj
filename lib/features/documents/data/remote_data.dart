@@ -4,7 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:thalj/core/functions/saveTokens.dart';
 
 class DocumentsRemoteDataSource {
-  Future<bool> upoladProofDocuments({
+
+
+  Future<bool> uploadProofDocuments({
     required String proofOfIdentityFront,
     required String proofOfIdentityBack,
     required String residenceCardFront,

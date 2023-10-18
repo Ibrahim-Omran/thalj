@@ -53,220 +53,222 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
             : Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          BackArrow(),
-                        ],
-                      ),
-                      const Center(
-                        child: LogoWidget(),
-                      ),
-                      SizedBox(
-                        height: 12.h,
-                      ),
-                      Text(AppStrings.uploadingSupportingDocuments,
-                          style: boldStyle()),
-                      SizedBox(
-                        height: 12.h,
-                      ),
-                      Text(
-                        AppStrings.uploadingId,
-                        style: regularStyle(),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          customContainer(
-                              mainText: AppStrings.frontId,
-                              textFrontOrBack: AppStrings.back,
-                              height: 160.0.h,
-                              width: 176.0.w,
-                              textFrontOrBack2: AppStrings.frontId2,
-                              onTap: () async {
-                                proofOfIdentityBack =
-                                    await pickImageFromGallery();
-                              }),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          customContainer(
-                              mainText: AppStrings.frontId,
-                              textFrontOrBack: AppStrings.front,
-                              height: 160.0.h,
-                              width: 176.0.w,
-                              textFrontOrBack2: AppStrings.frontId2,
-                              onTap: () async {
-                                proofOfIdentityFront =
-                                    await pickImageFromGallery();
-                              }),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 12.h,
-                      ),
-                      Text(
-                        AppStrings.expatriateUploadingId,
-                        style: regularStyle(),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          customContainer(
-                              mainText: AppStrings.frontId,
-                              textFrontOrBack: AppStrings.back,
-                              height: 160.0.h,
-                              width: 176.0.w,
-                              textFrontOrBack2: AppStrings.frontId2,
-                              onTap: () async {
-                                residenceCardBack =
-                                    await pickImageFromGallery();
-                              }),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          customContainer(
-                              mainText: AppStrings.frontId,
-                              textFrontOrBack: AppStrings.front,
-                              height: 160.0.h,
-                              width: 176.0.w,
-                              textFrontOrBack2: AppStrings.frontId2,
-                              onTap: () async {
-                                residenceCardFront =
-                                    await pickImageFromGallery();
-                              }),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 12.h,
-                      ),
-                      Text(
-                        AppStrings.uploadDrivingLicense,
-                        style: regularStyle(),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Center(
-                          child: customContainer(
-                              mainText:
-                                  AppStrings.chooseFileToUploadYourLicense,
-                              height: 160.h,
-                              width: 362.w,
-                              textFrontOrBack: '',
-                              textFrontOrBack2: '',
-                              onTap: () async {
-                                drivingLicense = await pickImageFromGallery();
-                              })),
-                      SizedBox(
-                        height: 12.h,
-                      ),
-                      Text(
-                        AppStrings.uploadVehicleRegistrationForm,
-                        style: regularStyle(),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Center(
-                          child: customContainer(
-                              mainText:
-                                  AppStrings.chooseFileToUploadYourLicense,
-                              height: 160.h,
-                              width: 362.w,
-                              textFrontOrBack: '',
-                              textFrontOrBack2: '',
-                              onTap: () async {
-                                vehicleLicense = await pickImageFromGallery();
-                              })),
-                      SizedBox(
-                        height: 12.h,
-                      ),
-                      Text(
-                        AppStrings.uploadDriverCard,
-                        style: regularStyle(),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Center(
-                          child: customContainer(
-                              mainText:
-                                  AppStrings.chooseFileToUploadYourLicense,
-                              height: 160.h,
-                              width: 362.w,
-                              textFrontOrBack: '',
-                              textFrontOrBack2: '',
-                              onTap: () async {
-                                operatingCard = await pickImageFromGallery();
-                              })),
-                      SizedBox(
-                        height: 12.h,
-                      ),
-                      Text(
-                        AppStrings.uploadTransferDocument,
-                        style: regularStyle(),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Center(
-                          child: customContainer(
-                              mainText:
-                                  AppStrings.chooseFileToUploadYourLicense,
-                              height: 160.h,
-                              width: 362.w,
-                              textFrontOrBack: '',
-                              textFrontOrBack2: '',
-                              onTap: () async {
-                                transferDocument = await pickImageFromGallery();
-                              })),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            BlocProvider.of<DocumentCheckingBloc>(context).add(
-                                DocumentUpload(
-                                    proofOfIdentityFront:
-                                        proofOfIdentityFront ?? '',
-                                    proofOfIdentityBack:
-                                        proofOfIdentityBack ?? '',
-                                    residenceCardFront:
-                                        residenceCardFront ?? '',
-                                    residenceCardBack: residenceCardBack ?? '',
-                                    drivingLicense: drivingLicense ?? '',
-                                    vehicleLicense: vehicleLicense ?? '',
-                                    operatingCard: operatingCard ?? '',
-                                    transferDocument: transferDocument ?? ''));
-                            if (state is DocumentUploading) {
-                              navigatePushReplacement(
-                                  context: context,
-                                  route: Routes.documentsCheckScreen);
-                            }
-                          },
-                          child: Container(
-                            width: 351.w,
-                            height: 47.h,
-                            color: AppColors.primary,
-                            child: Center(
-                              child: Text(
-                                AppStrings.saveData,
-                                style: boldStyle().copyWith(
-                                    color: Colors.white, fontSize: 16.0),
-                              ),
+                  child: SafeArea(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            BackArrow(),
+                          ],
+                        ),
+                        const Center(
+                          child: LogoWidget(),
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        Text(AppStrings.uploadingSupportingDocuments,
+                            style: boldStyle()),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        Text(
+                          AppStrings.uploadingId,
+                          style: regularStyle(),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            customContainer(
+                                mainText: AppStrings.frontId,
+                                textFrontOrBack: AppStrings.back,
+                                height: 160.0.h,
+                                width: 176.0.w,
+                                textFrontOrBack2: AppStrings.frontId2,
+                                onTap: () async {
+                                  proofOfIdentityBack =
+                                      await pickImageFromGallery();
+                                }),
+                            SizedBox(
+                              width: 10.w,
                             ),
-                          )),
-                    ],
+                            customContainer(
+                                mainText: AppStrings.frontId,
+                                textFrontOrBack: AppStrings.front,
+                                height: 160.0.h,
+                                width: 176.0.w,
+                                textFrontOrBack2: AppStrings.frontId2,
+                                onTap: () async {
+                                  proofOfIdentityFront =
+                                      await pickImageFromGallery();
+                                }),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        Text(
+                          AppStrings.expatriateUploadingId,
+                          style: regularStyle(),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            customContainer(
+                                mainText: AppStrings.frontId,
+                                textFrontOrBack: AppStrings.back,
+                                height: 160.0.h,
+                                width: 176.0.w,
+                                textFrontOrBack2: AppStrings.frontId2,
+                                onTap: () async {
+                                  residenceCardBack =
+                                      await pickImageFromGallery();
+                                }),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            customContainer(
+                                mainText: AppStrings.frontId,
+                                textFrontOrBack: AppStrings.front,
+                                height: 160.0.h,
+                                width: 176.0.w,
+                                textFrontOrBack2: AppStrings.frontId2,
+                                onTap: () async {
+                                  residenceCardFront =
+                                      await pickImageFromGallery();
+                                }),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        Text(
+                          AppStrings.uploadDrivingLicense,
+                          style: regularStyle(),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Center(
+                            child: customContainer(
+                                mainText:
+                                    AppStrings.chooseFileToUploadYourLicense,
+                                height: 160.h,
+                                width: 362.w,
+                                textFrontOrBack: '',
+                                textFrontOrBack2: '',
+                                onTap: () async {
+                                  drivingLicense = await pickImageFromGallery();
+                                })),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        Text(
+                          AppStrings.uploadVehicleRegistrationForm,
+                          style: regularStyle(),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Center(
+                            child: customContainer(
+                                mainText:
+                                    AppStrings.chooseFileToUploadYourLicense,
+                                height: 160.h,
+                                width: 362.w,
+                                textFrontOrBack: '',
+                                textFrontOrBack2: '',
+                                onTap: () async {
+                                  vehicleLicense = await pickImageFromGallery();
+                                })),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        Text(
+                          AppStrings.uploadDriverCard,
+                          style: regularStyle(),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Center(
+                            child: customContainer(
+                                mainText:
+                                    AppStrings.chooseFileToUploadYourLicense,
+                                height: 160.h,
+                                width: 362.w,
+                                textFrontOrBack: '',
+                                textFrontOrBack2: '',
+                                onTap: () async {
+                                  operatingCard = await pickImageFromGallery();
+                                })),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        Text(
+                          AppStrings.uploadTransferDocument,
+                          style: regularStyle(),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Center(
+                            child: customContainer(
+                                mainText:
+                                    AppStrings.chooseFileToUploadYourLicense,
+                                height: 160.h,
+                                width: 362.w,
+                                textFrontOrBack: '',
+                                textFrontOrBack2: '',
+                                onTap: () async {
+                                  transferDocument = await pickImageFromGallery();
+                                })),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              BlocProvider.of<DocumentCheckingBloc>(context).add(
+                                  DocumentUpload(
+                                      proofOfIdentityFront:
+                                          proofOfIdentityFront ?? '',
+                                      proofOfIdentityBack:
+                                          proofOfIdentityBack ?? '',
+                                      residenceCardFront:
+                                          residenceCardFront ?? '',
+                                      residenceCardBack: residenceCardBack ?? '',
+                                      drivingLicense: drivingLicense ?? '',
+                                      vehicleLicense: vehicleLicense ?? '',
+                                      operatingCard: operatingCard ?? '',
+                                      transferDocument: transferDocument ?? ''));
+                              if (state is DocumentUploading) {
+                                navigatePushReplacement(
+                                    context: context,
+                                    route: Routes.documentsCheckScreen);
+                              }
+                            },
+                            child: Container(
+                              width: 351.w,
+                              height: 47.h,
+                              color: AppColors.primary,
+                              child: Center(
+                                child: Text(
+                                  AppStrings.saveData,
+                                  style: boldStyle().copyWith(
+                                      color: Colors.white, fontSize: 16.0),
+                                ),
+                              ),
+                            )),
+                      ],
+                    ),
                   ),
                 ),
               );

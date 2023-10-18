@@ -14,7 +14,7 @@ class DocumentRepository {
     required String operatingCard,
     required String transferDocument,
   }) async {
-    var isUploaded = await documentDataSource.upoladProofDocuments(
+    var isUploaded = await documentDataSource.uploadProofDocuments(
       proofOfIdentityFront: proofOfIdentityFront,
       proofOfIdentityBack: proofOfIdentityBack,
       residenceCardFront: residenceCardFront,

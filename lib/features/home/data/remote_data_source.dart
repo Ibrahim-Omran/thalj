@@ -8,7 +8,7 @@ import '../../../../core/network/ErrorModel.dart';
 import '../../../../core/utils/toast.dart';
 import '../../../core/functions/saveTokens.dart';
 
-class SendOfferRemoteDataSource {
+class DriverRemoteDataSource {
   Future<bool> sendOffer({
     required String name,
     required String price,

@@ -5,9 +5,9 @@ import 'package:thalj/features/home/presentation/bloc/send_state.dart';
 import '../../domain/repository.dart';
 
 class SendOfferBloc extends Bloc<SendOfferEvent, SendOfferState> {
-  final SendOfferRepository sendOfferRepository;
+  final DriverRepository driverRepository;
 
-  SendOfferBloc({required this.sendOfferRepository})
+  SendOfferBloc({required this.driverRepository})
       : super(SendOfferState(
           name: '',
           phone: '',
@@ -19,7 +19,7 @@ class SendOfferBloc extends Bloc<SendOfferEvent, SendOfferState> {
       SendOfferSubmitted event, Emitter<SendOfferState> emit) async {
     emit(state.copyWith(isSubmitting: true));
     try {
-      final bool isSendOffer = await sendOfferRepository.sendOffer(
+      final bool isSendOffer = await driverRepository.sendOffer(
         name: event.name,
         price: event.price,
         phone: event.phone,

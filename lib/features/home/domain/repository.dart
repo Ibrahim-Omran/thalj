@@ -2,10 +2,10 @@ import 'package:thalj/features/home/domain/models/drivers_model.dart';
 
 import '../data/remote_data_source.dart';
 
-class SendOfferRepository {
-  final SendOfferRemoteDataSource sendOfferRemoteDataSource;
-  SendOfferRepository(
-    this.sendOfferRemoteDataSource,
+class DriverRepository {
+  final DriverRemoteDataSource driverRemoteDataSource;
+  DriverRepository(
+    this.driverRemoteDataSource,
   );
 
   Future<bool> sendOffer({
@@ -15,7 +15,7 @@ class SendOfferRepository {
   }) async {
     bool isSendOffer = false;
 
-    isSendOffer = await sendOfferRemoteDataSource.sendOffer(
+    isSendOffer = await driverRemoteDataSource.sendOffer(
       name: name,
       phone: phone,
       price: price,
@@ -24,13 +24,13 @@ class SendOfferRepository {
   }
 
   Future<List<DriversModel>> getDrivers() async {
-    List<DriversModel> data = await sendOfferRemoteDataSource.getDriversData();
+    List<DriversModel> data = await driverRemoteDataSource.getDriversData();
 
     return data;
   }
 
   Future<bool> acceptance(String id) async {
-    bool isAccepted = await sendOfferRemoteDataSource.acceptDrivers(id);
+    bool isAccepted = await driverRemoteDataSource.acceptDrivers(id);
     return isAccepted;
   }
 }

@@ -2,18 +2,19 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:thalj/core/utils/app_assets.dart';
 import 'package:thalj/core/utils/app_strings.dart';
-import 'package:thalj/features/documents/data/remote_data.dart';
 import 'package:thalj/features/documents/domain/repository.dart';
 
 part 'document_checking_event.dart';
+
 part 'document_checking_state.dart';
 
 class DocumentCheckingBloc
     extends Bloc<DocumentCheckingEvent, DocumentCheckingState> {
-  DocumentCheckingBloc() : super(DocumentCheckingInitial()) {
+  final DocumentRepository documentRepository;
+
+  DocumentCheckingBloc({required this.documentRepository}) : super(DocumentCheckingInitial()) {
     on<DocumentCheckingEvent>((event, emit) async {
-      final DocumentRepository documentRepository =
-          DocumentRepository(DocumentsRemoteDataSource());
+
       if (event is DocumentUpload) {
         emit(DocumentUploading());
         var isUploaded = await documentRepository.uploadDocuments(
@@ -41,6 +42,7 @@ class DocumentCheckingBloc
       }
     });
   }
+
   @override
   void onChange(Change<DocumentCheckingState> change) {
     // TODO: implement onChange
