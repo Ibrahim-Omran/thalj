@@ -31,7 +31,7 @@ class _DocumentCheckBiewBodyState extends State<DocumentCheckBiewBody> {
           child: state is DocumentCheckingLoading
               ? Column(
                   children: [
-                    CustomAppBar(
+                    const CustomAppBar(
                       title: AppStrings.documentCheck,
                     ),
                     const Spacer(),
@@ -56,7 +56,7 @@ class _DocumentCheckBiewBodyState extends State<DocumentCheckBiewBody> {
               : state is DocumentCheckingSuccess
                   ? Column(
                       children: [
-                        CustomAppBar(
+                        const CustomAppBar(
                           title: AppStrings.documentCheck,
                         ),
                         const Spacer(),

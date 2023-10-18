@@ -161,7 +161,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   },
                   listener: (BuildContext context, LoginState state) {
                     if (state.isSuccess) {
-                      navigate(context: context, route: Routes.homeScreen);
+                      navigatePushReplacement(context: context, route: Routes.homeScreen);
                       showToast(
                           text: AppStrings.welcome, state: ToastStates.success);
                     }
@@ -175,7 +175,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        navigate(context: context, route: Routes.signup);
+                        navigatePushNamed(context: context, route: Routes.signup);
                       },
                       child: Text(
                         AppStrings.subscription,
@@ -193,7 +193,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        navigate(context: context, route: Routes.ownerScreen);
+                        navigatePushNamed(context: context, route: Routes.ownerScreen);
                       },
                       child: Text(
                         AppStrings.pressHere,

@@ -33,14 +33,14 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('تحذير'),
-                content: Text("يرجى التاكد من رفع كل البانات"),
+                title: const Text('تحذير'),
+                content: const Text("يرجى التاكد من رفع كل البانات"),
                 actions: [
                   TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Text("حسنا"))
+                      child: const Text("حسنا"))
                 ],
               );
             },
@@ -49,7 +49,7 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
       },
       builder: (context, state) {
         return state is DocumentUploading
-            ? CircularProgressIndicator.adaptive()
+            ? const CircularProgressIndicator.adaptive()
             : Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SingleChildScrollView(
@@ -249,7 +249,7 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                                     operatingCard: operatingCard ?? '',
                                     transferDocument: transferDocument ?? ''));
                             if (state is DocumentUploading) {
-                              navigate(
+                              navigatePushReplacement(
                                   context: context,
                                   route: Routes.documentsCheckScreen);
                             }

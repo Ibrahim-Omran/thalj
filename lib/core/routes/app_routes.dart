@@ -30,48 +30,37 @@ class Routes {
   static const String driverDataSentToOwner = '/driverDataSentToOwner';
 }
 
-class AppRoutes {
-  static Route? generateRoute(RouteSettings routeSettings) {
-    switch (routeSettings.name) {
-      case Routes.intitlRoute:
-        return MaterialPageRoute(builder: (_) => SignInScreen());
-      case Routes.signup:
-        return MaterialPageRoute(builder: (_) => SignUpScreen());
-      case Routes.ownerScreen:
-        return MaterialPageRoute(builder: (_) => OwnerScreen());
-
-      case Routes.homeScreen:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
-
-      case Routes.productInformationScreen:
-        return MaterialPageRoute(
-            builder: (_) => const ProductInformationScreen());
-      case Routes.uploadingSupportingDocumentsScreen:
-        return MaterialPageRoute(
-            builder: (_) => const UploadingSupportingDocumentsScreen());
-      case Routes.documentsCheckScreen:
-        return MaterialPageRoute(builder: (_) => const DocumentsCheckScreen());
-
-      case Routes.offersScreen:
-        return MaterialPageRoute(builder: (_) => const Offers());
-
-      case Routes.profileScreen:
-        return MaterialPageRoute(builder: (_) => const Profile());
-
-      case Routes.productDetails:
-        return MaterialPageRoute(builder: (_) => const ProductDetails());
-      case Routes.driverDoc:
-        return MaterialPageRoute(builder: (_) => const DriverDocuments());
-      case Routes.driverDataSentToOwner:
-        return MaterialPageRoute(builder: (_) => const DriverDataSentToOwner());
-      default:
-        return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(
-              child: Text('Not Found..!'),
-            ),
-          ),
-        );
-    }
+Widget appRoutes(String route, dynamic arg) {
+  switch (route) {
+    case Routes.intitlRoute:
+      return SignInScreen();
+    case Routes.signup:
+      return SignUpScreen();
+    case Routes.ownerScreen:
+      return OwnerScreen();
+    case Routes.homeScreen:
+      return const HomeScreen();
+    case Routes.productInformationScreen:
+      return const ProductInformationScreen();
+    case Routes.uploadingSupportingDocumentsScreen:
+      return const UploadingSupportingDocumentsScreen();
+    case Routes.documentsCheckScreen:
+      return const DocumentsCheckScreen();
+    case Routes.offersScreen:
+      return const Offers();
+    case Routes.profileScreen:
+      return const Profile();
+    case Routes.productDetails:
+      return const ProductDetails();
+    case Routes.driverDoc:
+      return const DriverDocuments();
+    case Routes.driverDataSentToOwner:
+      return const DriverDataSentToOwner();
+    default:
+      return const Scaffold(
+        body: Center(
+          child: Text('Not Found..!'),
+        ),
+      );
   }
 }
