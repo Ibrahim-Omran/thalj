@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/utils/app_colors.dart';
 import 'package:thalj/core/utils/app_text_style.dart';
 
@@ -17,11 +18,13 @@ class TodayProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        child: SizedBox(
-          width: 200,
+    return InkWell(
+      onTap: onTap,
+      child: SizedBox(
+
+        width: 200.h,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
           child: Card(
             color: const Color(0xffF0F3FD),
             child: Column(

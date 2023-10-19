@@ -1,6 +1,7 @@
 import 'package:thalj/features/home/domain/models/drivers_model.dart';
 
 import '../data/remote_data_source.dart';
+import 'models/orders_model.dart';
 
 class DriverRepository {
   final DriverRemoteDataSource driverRemoteDataSource;
@@ -34,3 +35,17 @@ class DriverRepository {
     return isAccepted;
   }
 }
+class OrdersRepository {
+  final DriverRemoteDataSource driverRemoteDataSource;
+
+  OrdersRepository( this.driverRemoteDataSource);
+
+  Future<List<OrdersModel>> getOrders() async {
+    final List<OrdersModel> ordersData = await driverRemoteDataSource.getDriversOrders();
+
+    return ordersData;
+  }
+
+
+  }
+
