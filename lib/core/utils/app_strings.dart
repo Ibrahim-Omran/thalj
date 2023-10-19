@@ -48,6 +48,7 @@ class AppStrings {
   static const String temp = 'الحراره:';
   static const String humidity = 'الرطوبه:';
   static const String sendOffer = 'أرسل عرض';
+  static const String productsFaild = 'لا توجد عروض';
 
   //Uploading Supporting Documents Screen
   static const String uploadingSupportingDocuments = 'رفع المستندات الاثباتية';

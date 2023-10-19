@@ -27,8 +27,7 @@ class DriverDocuments extends StatelessWidget {
                 height: 20.h,
               ),
               BlocProvider(
-                  create: (context) =>
-                      GetDriversDataBloc(driverRepository: context.read<DriverRepository>()),child: const DriverDocWidget()),
+                  create: (context) => GetDriversDataBloc(driverRepository: context.read<DriverRepository>()),child: const DriverDocWidget()),
             ],
           ),
         ),

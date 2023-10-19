@@ -13,7 +13,7 @@ class ProfileAppBar extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: MediaQuery.of(context).size.height * 0.19,
+          height: MediaQuery.of(context).size.height * 0.14,
           decoration: const BoxDecoration(
               gradient: LinearGradient(colors: [
             Color(0xff1F6EC3),
@@ -41,11 +41,7 @@ class ProfileAppBar extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                const Image(
-                  image: AssetImage('assets/images/human.png'),
-                  height: 60,
-                  width: 70,
-                )
+
               ],
             ),
           ),
