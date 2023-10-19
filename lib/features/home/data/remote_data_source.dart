@@ -107,32 +107,47 @@ class DriverRemoteDataSource {
 
 
   Future <List<OrdersModel>> getDriversOrders() async {
-    String? token = TokenManager.getLoginToken();
+    String? token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoidFNZUnFBV1RscyJ9XSwiaWF0IjoxNjk3NjcyNTk1LCJleHAiOjE3MDAyNjQ1OTV9.GzBdh6_m_KlMUVvh4qsNn9Rzbrs6UcixtDrI6NeOj94";
 
     var response = await http.get(
       Uri.parse('http://mircle50-001-site1.atempurl.com/orders'),
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoidFNZUnFBV1RscyJ9XSwiaWF0IjoxNjk3NjcyNTk1LCJleHAiOjE3MDAyNjQ1OTV9.GzBdh6_m_KlMUVvh4qsNn9Rzbrs6UcixtDrI6NeOj94',
+        "Content-Type": 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer $token',
       },
     );
     List<OrdersModel> ordersData=[];
 
-    if (response.statusCode == 200) {
+    try{
+      if (response.statusCode == 200) {
+        print(response.body);
 
-      final data = jsonDecode(response.body);
-      for(var item in data) {
-        ordersData.add(OrdersModel.fromJson(item));
+        final data = jsonDecode(response.body);
+        for(var item in data) {
+          ordersData.add(OrdersModel.fromJson(item));
 
+        }
+        print(ordersData.first.name);
+        print(ordersData.first.id);
+
+
+
+
+      } else {
+        print(response.body);
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+            text: errorMessageModel.statusMessage, state: ToastStates.error);
+
+
+        print("erorr");
       }
-      print(ordersData.first.name);
-      print(ordersData.first.id);
-
-
-
-
-    } else {
-
-      print(response.body);
+    }catch(e){
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
     return ordersData;
 

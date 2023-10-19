@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thalj/features/home/presentation/components/customNavbar.dart';
 
 import 'package:thalj/features/home/presentation/screens/Home_Screen/HomeBody.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/offers.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/profile.dart';
+
+import '../../../domain/repository.dart';
+import '../../bloc/orders_bloc/orders_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,6 +15,7 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
@@ -26,6 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
     const Offers(),
     const Profile(),
   ];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
       //   ],
       // ),
-      body: SafeArea(child: _pages.elementAt(_selectedIndex)),
+      body:  BlocProvider(
+          create: (context) =>
+              GetOrdersDataBloc(driverRepository: context.read<DriverRepository>()),
+          child:SafeArea(child: _pages.elementAt(_selectedIndex)),
+      ),
+
+
+
+
     );
   }
 }

@@ -11,7 +11,6 @@ import 'features/documents/data/remote_data.dart';
 import 'features/documents/domain/repository.dart';
 import 'features/home/data/remote_data_source.dart';
 import 'features/home/domain/repository.dart';
-import 'features/home/presentation/screens/Home_Screen/Home_Screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,15 +41,13 @@ class MyApp extends StatelessWidget {
             RepositoryProvider<DriverRepository>(
               create: (context) => DriverRepository(DriverRemoteDataSource()),
             ),
-            RepositoryProvider<OrdersRepository>(
-              create: (context) => OrdersRepository(DriverRemoteDataSource()),
-            ),
+
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: AppStrings.appName,
             theme: getAppTheme(),
-            initialRoute: Routes.homeScreen,
+            initialRoute: Routes.intitlRoute,
             onGenerateRoute: (settings) {
               return MaterialPageRoute(
                 builder: (context) =>

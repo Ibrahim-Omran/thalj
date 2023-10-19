@@ -34,18 +34,15 @@ class DriverRepository {
     bool isAccepted = await driverRemoteDataSource.acceptDrivers(id);
     return isAccepted;
   }
-}
-class OrdersRepository {
-  final DriverRemoteDataSource driverRemoteDataSource;
 
-  OrdersRepository( this.driverRemoteDataSource);
+
+
 
   Future<List<OrdersModel>> getOrders() async {
-    final List<OrdersModel> ordersData = await driverRemoteDataSource.getDriversOrders();
+     List<OrdersModel> ordersData = await driverRemoteDataSource.getDriversOrders();
 
     return ordersData;
   }
+}
 
-
-  }
 
