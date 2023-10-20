@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thalj/core/functions/saveDataManager.dart';
 import 'package:thalj/core/routes/app_routes.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/utils/commons.dart';
@@ -160,11 +161,17 @@ class _SignInScreenState extends State<SignInScreen> {
                           );
                   },
                   listener: (BuildContext context, LoginState state) {
-                    if (state.isSuccess) {
+                    String? verifiedDriver = SaveDataManager.getVerifiedDriver();
+                    if (state.isSuccess && verifiedDriver == "1"  )  {
                       navigatePushReplacement(context: context, route: Routes.homeScreen);
                       showToast(
                           text: AppStrings.welcome, state: ToastStates.success);
                     }
+                    if(verifiedDriver == "0"){
+                      showToast(
+                          text: AppStrings.verifyMessage, state: ToastStates.warning);
+                    }
+
                   },
                 ),
                 SizedBox(

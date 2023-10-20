@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:thalj/features/home/domain/models/drivers_model.dart';
 
 import '../data/remote_data_source.dart';
@@ -49,6 +51,12 @@ class DriverRepository {
      List<OrdersModel> ordersData = await driverRemoteDataSource.getDriversOrders();
 
     return ordersData;
+  }
+
+  Future<bool> paySubscription({required File billPhoto,
+  }) async {
+    bool isPaid = await driverRemoteDataSource.paySubscription(billPhoto: billPhoto);
+    return isPaid;
   }
 }
 

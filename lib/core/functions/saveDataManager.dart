@@ -2,7 +2,7 @@ import '../../features/auth/domain/models/admin_model.dart';
 import '../../features/auth/domain/models/login_model.dart';
 import '../../features/auth/domain/models/register_model.dart';
 
-class TokenManager {
+class SaveDataManager {
   static LoginModel? loginModel;
   static RegisterModel? registerModel;
   static AdminModel? adminModel;
@@ -11,8 +11,15 @@ class TokenManager {
     loginModel = model;
   }
 
+
   static String? getLoginToken() {
     return loginModel?.token;
+  }
+  static String? getVerifiedDriver() {
+    return loginModel?.verified;
+  }
+  static String? getLoginName() {
+    return loginModel?.fullName;
   }
 
   static void saveRegisterToken(RegisterModel model) {

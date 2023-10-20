@@ -9,6 +9,7 @@ import 'package:thalj/features/home/presentation/screens/Home_Screen/profile.dar
 
 import '../../../domain/repository.dart';
 import '../../bloc/orders_bloc/orders_bloc.dart';
+import '../../bloc/paySubscription/paySubscription-bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,15 +29,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final _pages = [
-    BlocProvider(
+    BlocProvider<GetOrdersDataBloc>(
         create: (context) =>
             GetOrdersDataBloc(driverRepository: context.read<DriverRepository>()),
         child:const HomeBody()),
-    BlocProvider(
+    BlocProvider<AcceptedOrderBloc>(
         create: (context) =>
             AcceptedOrderBloc(offersRepository: context.read<DriverRepository>()),
         child: const Offers()),
-    const Profile(),
+    BlocProvider<PaySubScriptionBloc>(
+        create: (context) =>
+            PaySubScriptionBloc(driverRepository: context.read<DriverRepository>() ),
+        child: const Profile()),
   ];
 
 

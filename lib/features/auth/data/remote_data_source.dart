@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../core/functions/saveTokens.dart';
+import '../../../core/functions/saveDataManager.dart';
 import '../../../core/network/ErrorModel.dart';
 import '../../../core/utils/toast.dart';
 import '../domain/models/admin_model.dart';
@@ -42,8 +42,9 @@ class AuthRemoteDataSource {
               operatingCard: loginData['operatingCard'],
               transferDocument: loginData['transferDocument'],
               verified: loginData['verified'],
+              subscription: loginData['subscription'],
               token: jsonResponse['token']);
-          TokenManager.saveLoginToken(loginModel);
+          SaveDataManager.saveLoginToken(loginModel);
 
           return true;
         } else {
@@ -103,7 +104,7 @@ class AuthRemoteDataSource {
             },
             'token': jsonResponse['token'],
           });
-          TokenManager.saveRegisterToken(registerModel);
+          SaveDataManager.saveRegisterToken(registerModel);
         }
         return true;
       } else {
@@ -146,7 +147,7 @@ class AuthRemoteDataSource {
             'verified': adminLoginData['verified'],
             'token': jsonResponse['token'],
           });
-          TokenManager.saveAdminToken(adminModel);
+          SaveDataManager.saveAdminToken(adminModel);
 
           return true;
         } else {

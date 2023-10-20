@@ -12,6 +12,7 @@ class LoginModel {
   final String operatingCard;
   final String transferDocument;
   final String verified;
+  final int subscription;
   final String token;
 
   LoginModel({
@@ -28,6 +29,7 @@ class LoginModel {
     required this.operatingCard,
     required this.transferDocument,
     required this.verified,
+    required this.subscription,
     required this.token,
   });
 
@@ -46,6 +48,7 @@ class LoginModel {
       operatingCard: json['operatingCard'],
       transferDocument: json['transferDocument'],
       verified: json['verified'],
+      subscription: json['subscription'],
       token: json['token'],
     );
   }

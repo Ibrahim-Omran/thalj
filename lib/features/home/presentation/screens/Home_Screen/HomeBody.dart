@@ -75,13 +75,13 @@ class HomeBody extends StatelessWidget {
               }
 
               if (state is GetOrdersDataLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator.adaptive());
               }
               if (state is GetOrdersDataFailure) {
-                return const Center(child: Text("Server Error"));
+                return const Center(child: Text("قم بدفع الاشتراك الشهري لتفعيل الحساب"));
               }
               else {
-                return const Text("");
+                return const Text("SERVER ERROR");
               }
             },
           ),

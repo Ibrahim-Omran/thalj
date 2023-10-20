@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -7,7 +8,7 @@ import 'package:thalj/features/home/domain/models/orders_model.dart';
 
 import '../../../../core/network/ErrorModel.dart';
 import '../../../../core/utils/toast.dart';
-import '../../../core/functions/saveTokens.dart';
+import '../../../core/functions/saveDataManager.dart';
 import '../domain/models/accepted_OrderModel.dart';
 
 class DriverRemoteDataSource {
@@ -17,13 +18,11 @@ class DriverRemoteDataSource {
     required String phone,
   }) async {
     try {
-      String? token = TokenManager.getLoginToken();
+      String? token = SaveDataManager.getLoginToken();
 
       print(token);
       final response = await http.post(
-        //Todo pass the id order from get order API
         Uri.parse('http://mircle50-001-site1.atempurl.com/offers/gTDz1FlGJB'),
-
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
@@ -63,7 +62,7 @@ class DriverRemoteDataSource {
   }
 
   Future<List<AcceptedOrdersModel>> getAcceptedOffers() async {
-    String? token = TokenManager.getLoginToken();
+    String? token = SaveDataManager.getLoginToken();
     print(token);
     final response = await http.get(
         Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/orders'),
@@ -72,35 +71,32 @@ class DriverRemoteDataSource {
           'Accept': '*/*',
           'Authorization': 'Bearer $token',
         });
-    List<AcceptedOrdersModel> orderData=[];
+    List<AcceptedOrdersModel> orderData = [];
     try {
-      if(response.statusCode==200){
+      if (response.statusCode == 200) {
         print(response.body);
-        final data =jsonDecode(response.body);
-        for(var i in data){
+        final data = jsonDecode(response.body);
+        for (var i in data) {
           orderData.add(AcceptedOrdersModel.fromJson(i));
         }
         print(orderData.first.name);
-      }else{
+      } else {
         print(response.body);
-        final Map<String ,dynamic>jsonResponse=jsonDecode(response.body);
-        final errorMessageModel=ErrorMessageModel.fromJson(jsonResponse);
-        showToast(text: errorMessageModel.statusMessage, state: ToastStates.error);
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+            text: errorMessageModel.statusMessage, state: ToastStates.error);
       }
-
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
-
     }
     return orderData;
   }
 
-
-
   Future<List<DriversModel>> getDriversData() async {
-    String? token = TokenManager.getAdminToken();
+    String? token = SaveDataManager.getAdminToken();
     var data = await http.get(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard'),
         headers: {
@@ -122,8 +118,7 @@ class DriverRemoteDataSource {
   }
 
   Future<bool> acceptDrivers(String id) async {
-    String? token = TokenManager.getAdminToken();
-
+    String? token = SaveDataManager.getAdminToken();
 
     var data = await http.patch(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
@@ -142,9 +137,8 @@ class DriverRemoteDataSource {
     }
   }
 
-
-  Future <List<OrdersModel>> getDriversOrders() async {
-    String? token = TokenManager.getLoginToken();
+  Future<List<OrdersModel>> getDriversOrders() async {
+    String? token = SaveDataManager.getLoginToken();
 
     var response = await http.get(
       Uri.parse('http://mircle50-001-site1.atempurl.com/orders'),
@@ -154,23 +148,18 @@ class DriverRemoteDataSource {
         'Authorization': 'Bearer $token',
       },
     );
-    List<OrdersModel> ordersData=[];
+    List<OrdersModel> ordersData = [];
 
-    try{
+    try {
       if (response.statusCode == 200) {
         print(response.body);
 
         final data = jsonDecode(response.body);
-        for(var item in data) {
+        for (var item in data) {
           ordersData.add(OrdersModel.fromJson(item));
-
         }
         print(ordersData.first.name);
         print(ordersData.first.id);
-
-
-
-
       } else {
         print(response.body);
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
@@ -178,24 +167,22 @@ class DriverRemoteDataSource {
         showToast(
             text: errorMessageModel.statusMessage, state: ToastStates.error);
 
-
         print("erorr");
       }
-    }catch(e){
+    } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
     }
     return ordersData;
-
   }
-
 
   Future<dynamic> getDriversOneOrder(String orderId) async {
     final response = await http.get(
       Uri.parse('http://mircle50-001-site1.atempurl.com/orders/$orderId'),
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoiLVF6SGo5cUliTCJ9XSwiaWF0IjoxNjk2NzcyODU0LCJleHAiOjE2OTkzNjQ4NTR9.ixzP-pVy_Xx3rZxuOvXuq9EgANHT_1mAQjJxH4rKQLw',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoiLVF6SGo5cUliTCJ9XSwiaWF0IjoxNjk2NzcyODU0LCJleHAiOjE2OTkzNjQ4NTR9.ixzP-pVy_Xx3rZxuOvXuq9EgANHT_1mAQjJxH4rKQLw',
       },
     );
 
@@ -207,10 +194,41 @@ class DriverRemoteDataSource {
     }
   }
 
+  Future<bool> paySubscription({
+    required File billPhoto,
+  }) async {
+    try {
 
+      String? token = SaveDataManager.getLoginToken();
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/paySubscription'),
+      );
+      request.headers['Authorization'] = 'Bearer $token';
+      request.files.add(await http.MultipartFile.fromPath('file', billPhoto.path));
+      var response = await request.send();
+      if (response.statusCode == 200) {
+        // sent successful
+        if (kDebugMode) {
+          print(response.reasonPhrase);
+        }
+        showToast(
+            text: "تم استلام الفاتورة هيتم تفعيل الحساب بعد التحقق منها", state: ToastStates.success);
+        return true;
+      } else {
+        if (kDebugMode) {
+          print(response.reasonPhrase);
+        }
 
-
-
+        showToast(
+            text: response.reasonPhrase!, state: ToastStates.error);
+        return false;
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return false;
+    }
+  }
 }
-
-
