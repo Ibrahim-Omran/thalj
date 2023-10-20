@@ -118,7 +118,11 @@ class DriverRemoteDataSource {
   }
 
   Future<bool> acceptDrivers(String id) async {
+
     String? token = SaveDataManager.getAdminToken();
+
+    String? token = TokenManager.getAdminToken();
+ 
 
     var data = await http.patch(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
@@ -137,8 +141,32 @@ class DriverRemoteDataSource {
     }
   }
 
+
   Future<List<OrdersModel>> getDriversOrders() async {
     String? token = SaveDataManager.getLoginToken();
+
+  Future<bool> refuseDrivers(String id) async {
+    String? token = TokenManager.getAdminToken();
+
+    var data = await http.delete(
+        Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
+        headers: {
+          "Content-Type": 'application/json',
+          'Accept': '*/*',
+          'Authorization': 'Bearer $token',
+        });
+
+    if (data.statusCode == 200) {
+      print(data.body);
+      return true;
+    } else {
+      print(data.statusCode);
+      return false;
+    }
+  }
+
+  Future<List<OrdersModel>> getDriversOrders() async {
+    String? token = TokenManager.getLoginToken();
 
     var response = await http.get(
       Uri.parse('http://mircle50-001-site1.atempurl.com/orders'),
@@ -231,4 +259,5 @@ class DriverRemoteDataSource {
       return false;
     }
   }
+
 }
