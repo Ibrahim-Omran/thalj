@@ -6,14 +6,14 @@ sealed class DocumentCheckingEvent {}
 class DocumentChecking extends DocumentCheckingEvent {}
 
 class DocumentUpload extends DocumentCheckingEvent {
-  final String proofOfIdentityFront;
-  final String proofOfIdentityBack;
-  final String residenceCardFront;
-  final String residenceCardBack;
-  final String drivingLicense;
-  final String vehicleLicense;
-  final String operatingCard;
-  final String transferDocument;
+  final File proofOfIdentityFront;
+  final File proofOfIdentityBack;
+  final File residenceCardFront;
+  final File residenceCardBack;
+  final File drivingLicense;
+  final File vehicleLicense;
+  final File operatingCard;
+  final File transferDocument;
 
   DocumentUpload(
       {required this.proofOfIdentityFront,

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:thalj/core/utils/app_assets.dart';
@@ -12,9 +14,9 @@ class DocumentCheckingBloc
     extends Bloc<DocumentCheckingEvent, DocumentCheckingState> {
   final DocumentRepository documentRepository;
 
-  DocumentCheckingBloc({required this.documentRepository}) : super(DocumentCheckingInitial()) {
+  DocumentCheckingBloc({required this.documentRepository})
+      : super(DocumentCheckingInitial()) {
     on<DocumentCheckingEvent>((event, emit) async {
-
       if (event is DocumentUpload) {
         emit(DocumentUploading());
         var isUploaded = await documentRepository.uploadDocuments(
