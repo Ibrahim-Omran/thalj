@@ -8,32 +8,22 @@ import 'acceptedOffers_state.dart';
 
 class AcceptedOrderBloc extends Bloc<AcceptedOffersEvent, AcceptedOrdersState> {
   DriverRepository offersRepository;
+
   AcceptedOrderBloc({required this.offersRepository})
       : super(GetOrdersDataInitial()) {
     on<AcceptedOffersFetched>(_onAcceptedOffersFetched);
   }
+
   static AcceptedOrderBloc get(context) => BlocProvider.of(context);
-  Future<void> _onAcceptedOffersFetched(
 
-      AcceptedOffersFetched event, Emitter<AcceptedOrdersState> emit) async {
+  Future<void> _onAcceptedOffersFetched(AcceptedOffersFetched event,
+      Emitter<AcceptedOrdersState> emit) async {
     emit(GetOrdersDataLoading());
-    var result=await offersRepository.getOffer();
-    if(result.isNotEmpty){
+    var result = await offersRepository.getOffer();
+    if (result.isNotEmpty) {
       emit(GetOrdersDataSuccess(result));
-
-    }else{
+    } else {
       emit(GetOrdersDataFailure('error'));
-
-      AcceptedOffersEvent event, Emitter<AcceptedOrdersState> emit) async {
-    if (event is AcceptedOffersFetched) {
-      emit(GetOrdersDataLoading());
-      var result = await offersRepository.getOffer();
-      if (result.isNotEmpty) {
-        emit(GetOrdersDataSuccess(result));
-      } else {
-        emit(GetOrdersDataFailure('error'));
-      }
-
     }
   }
 }

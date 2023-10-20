@@ -121,8 +121,7 @@ class DriverRemoteDataSource {
 
     String? token = SaveDataManager.getAdminToken();
 
-    String? token = TokenManager.getAdminToken();
- 
+
 
     var data = await http.patch(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
@@ -142,11 +141,10 @@ class DriverRemoteDataSource {
   }
 
 
-  Future<List<OrdersModel>> getDriversOrders() async {
-    String? token = SaveDataManager.getLoginToken();
+
 
   Future<bool> refuseDrivers(String id) async {
-    String? token = TokenManager.getAdminToken();
+    String? token = SaveDataManager.getAdminToken();
 
     var data = await http.delete(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
@@ -166,7 +164,7 @@ class DriverRemoteDataSource {
   }
 
   Future<List<OrdersModel>> getDriversOrders() async {
-    String? token = TokenManager.getLoginToken();
+    String? token = SaveDataManager.getLoginToken();
 
     var response = await http.get(
       Uri.parse('http://mircle50-001-site1.atempurl.com/orders'),
