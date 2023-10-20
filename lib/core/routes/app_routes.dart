@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:thalj/features/auth/presentation/screens/owner_screen.dart';
 import 'package:thalj/features/auth/presentation/screens/sign_up.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/Home_Screen.dart';
+import 'package:thalj/features/home/presentation/screens/admin_options_screen.dart';
 import 'package:thalj/features/home/presentation/screens/driver_doucments.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/offers.dart';
 import 'package:thalj/features/home/presentation/screens/product_details.dart';
@@ -28,6 +29,7 @@ class Routes {
   static const String productDetails = '/productDetails';
   static const String driverDoc = '/driverDoc';
   static const String driverDataSentToOwner = '/driverDataSentToOwner';
+  static const String driverOptions = '/driverOptions';
 }
 
 Widget appRoutes(String route, dynamic arg) {
@@ -56,6 +58,8 @@ Widget appRoutes(String route, dynamic arg) {
       return const DriverDocuments();
     case Routes.driverDataSentToOwner:
       return const DriverDataSentToOwner();
+    case Routes.driverOptions:
+      return const AdminOptionsScreen();
     default:
       return const Scaffold(
         body: Center(

@@ -1,7 +1,10 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:thalj/core/functions/pick_images.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:thalj/core/routes/app_routes.dart';
 import 'package:thalj/core/utils/commons.dart';
 import 'package:thalj/core/widgets/logo.dart';
@@ -13,19 +16,83 @@ import '../../../../../core/utils/app_text_style.dart';
 import '../../../../../core/widgets/back_arrow.dart';
 import 'custom_container.dart';
 
-class UploadingSupportingDocumentsViewBody extends StatelessWidget {
+class UploadingSupportingDocumentsViewBody extends StatefulWidget {
   const UploadingSupportingDocumentsViewBody({super.key});
 
   @override
+  State<UploadingSupportingDocumentsViewBody> createState() =>
+      _UploadingSupportingDocumentsViewBodyState();
+}
+
+class _UploadingSupportingDocumentsViewBodyState
+    extends State<UploadingSupportingDocumentsViewBody> {
+  // File? _image;
+  final picker = ImagePicker();
+
+//Image Picker function to get image from gallery
+  // Future<String> getImageFromGallery() async {
+  //   final pickedFile = await picker.pickImage(source: ImageSource.camera);
+  //   return pickedFile!.path;
+  //   // if (pickedFile != null) {
+  //   //   return pickedFile.path;
+  //   // } else {
+  //   //   return '';
+  //   // }
+
+  // }
+  File? proofOfIdentityFront;
+  File? proofOfIdentityBack;
+  File? residenceCardFront;
+  File? residenceCardBack;
+  File? drivingLicense;
+  File? vehicleLicense;
+  File? operatingCard;
+  File? transferDocument;
+  Future<void> _getImageFromCamera(String variableName) async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    setState(() {
+      switch (variableName) {
+        case 'proofOfIdentityFront':
+          proofOfIdentityFront = File(pickedFile!.path);
+          print('data= $proofOfIdentityFront');
+          break;
+        case 'proofOfIdentityBack':
+          proofOfIdentityBack = File(pickedFile!.path);
+          print('data= $proofOfIdentityBack');
+          break;
+        case 'residenceCardFront':
+          residenceCardFront = File(pickedFile!.path);
+          print('data= $residenceCardFront');
+
+          break;
+        case 'residenceCardBack':
+          residenceCardBack = File(pickedFile!.path);
+          print('data= $residenceCardBack');
+          break;
+        case 'drivingLicense':
+          drivingLicense = File(pickedFile!.path);
+          print('data= $drivingLicense');
+          break;
+        case 'vehicleLicense':
+          vehicleLicense = File(pickedFile!.path);
+          print('data= $vehicleLicense');
+          break;
+        case 'operatingCard':
+          operatingCard = File(pickedFile!.path);
+          print('data= $operatingCard');
+          break;
+        case 'transferDocument':
+          transferDocument = File(pickedFile!.path);
+          print('data= $transferDocument');
+          break;
+        default:
+          break;
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    String? proofOfIdentityFront;
-    String? proofOfIdentityBack;
-    String? residenceCardFront;
-    String? residenceCardBack;
-    String? drivingLicense;
-    String? vehicleLicense;
-    String? operatingCard;
-    String? transferDocument;
     return BlocConsumer<DocumentCheckingBloc, DocumentCheckingState>(
       listener: (context, state) {
         if (state is DocumentUploadFailed) {
@@ -90,9 +157,12 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                                 height: 160.0.h,
                                 width: 176.0.w,
                                 textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () async {
-                                  proofOfIdentityBack =
-                                      await pickImageFromGallery();
+                                onTap: () {
+                                  // var file = await getImageFromGallery();
+                                  // setState(() {
+                                  //   proofOfIdentityBack = File(file);
+                                  // });
+                                  _getImageFromCamera('proofOfIdentityBack');
                                 }),
                             SizedBox(
                               width: 10.w,
@@ -103,9 +173,12 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                                 height: 160.0.h,
                                 width: 176.0.w,
                                 textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () async {
-                                  proofOfIdentityFront =
-                                      await pickImageFromGallery();
+                                onTap: () {
+                                  // var file = await getImageFromGallery();
+                                  // setState(() {
+                                  //   proofOfIdentityFront = File(file);
+                                  // });
+                                  _getImageFromCamera('proofOfIdentityFront');
                                 }),
                           ],
                         ),
@@ -128,9 +201,13 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                                 height: 160.0.h,
                                 width: 176.0.w,
                                 textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () async {
-                                  residenceCardBack =
-                                      await pickImageFromGallery();
+                                onTap: () {
+                                  // var file = await getImageFromGallery();
+                                  // setState(() {
+                                  //   residenceCardBack = File(file);
+                                  // });
+
+                                  _getImageFromCamera('residenceCardBack');
                                 }),
                             SizedBox(
                               width: 10.w,
@@ -141,9 +218,12 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                                 height: 160.0.h,
                                 width: 176.0.w,
                                 textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () async {
-                                  residenceCardFront =
-                                      await pickImageFromGallery();
+                                onTap: () {
+                                  // var file = await getImageFromGallery();
+                                  // setState(() {
+                                  //   residenceCardFront = File(file);
+                                  // });
+                                  _getImageFromCamera('residenceCardFront');
                                 }),
                           ],
                         ),
@@ -165,8 +245,12 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                                 width: 362.w,
                                 textFrontOrBack: '',
                                 textFrontOrBack2: '',
-                                onTap: () async {
-                                  drivingLicense = await pickImageFromGallery();
+                                onTap: () {
+                                  // var file = await getImageFromGallery();
+                                  // setState(() {
+                                  //   drivingLicense = File(file);
+                                  // });
+                                  _getImageFromCamera('drivingLicense');
                                 })),
                         SizedBox(
                           height: 12.h,
@@ -186,8 +270,12 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                                 width: 362.w,
                                 textFrontOrBack: '',
                                 textFrontOrBack2: '',
-                                onTap: () async {
-                                  vehicleLicense = await pickImageFromGallery();
+                                onTap: () {
+                                  // var file = await getImageFromGallery();
+                                  // setState(() {
+                                  //   vehicleLicense = File(file);
+                                  // });
+                                  _getImageFromCamera('vehicleLicense');
                                 })),
                         SizedBox(
                           height: 12.h,
@@ -207,8 +295,12 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                                 width: 362.w,
                                 textFrontOrBack: '',
                                 textFrontOrBack2: '',
-                                onTap: () async {
-                                  operatingCard = await pickImageFromGallery();
+                                onTap: () {
+                                  // var file = await getImageFromGallery();
+                                  // setState(() {
+                                  //   operatingCard = File(file);
+                                  // });
+                                  _getImageFromCamera('operatingCard');
                                 })),
                         SizedBox(
                           height: 12.h,
@@ -228,27 +320,29 @@ class UploadingSupportingDocumentsViewBody extends StatelessWidget {
                                 width: 362.w,
                                 textFrontOrBack: '',
                                 textFrontOrBack2: '',
-                                onTap: () async {
-                                  transferDocument = await pickImageFromGallery();
+                                onTap: () {
+                                  // var file = await getImageFromGallery();
+                                  // setState(() {
+                                  //   transferDocument = File(file);
+                                  // });
+                                  _getImageFromCamera('transferDocument');
                                 })),
                         const SizedBox(
                           height: 12,
                         ),
                         ElevatedButton(
                             onPressed: () {
-                              BlocProvider.of<DocumentCheckingBloc>(context).add(
-                                  DocumentUpload(
-                                      proofOfIdentityFront:
-                                          proofOfIdentityFront ?? '',
-                                      proofOfIdentityBack:
-                                          proofOfIdentityBack ?? '',
-                                      residenceCardFront:
-                                          residenceCardFront ?? '',
-                                      residenceCardBack: residenceCardBack ?? '',
-                                      drivingLicense: drivingLicense ?? '',
-                                      vehicleLicense: vehicleLicense ?? '',
-                                      operatingCard: operatingCard ?? '',
-                                      transferDocument: transferDocument ?? ''));
+                              BlocProvider.of<DocumentCheckingBloc>(context)
+                                  .add(DocumentUpload(
+                                proofOfIdentityFront: proofOfIdentityFront!,
+                                proofOfIdentityBack: proofOfIdentityBack!,
+                                residenceCardFront: residenceCardFront!,
+                                residenceCardBack: residenceCardBack!,
+                                drivingLicense: drivingLicense!,
+                                vehicleLicense: vehicleLicense!,
+                                operatingCard: operatingCard!,
+                                transferDocument: transferDocument!,
+                              ));
                               if (state is DocumentUploading) {
                                 navigatePushReplacement(
                                     context: context,

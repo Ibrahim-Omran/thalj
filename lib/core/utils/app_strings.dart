@@ -113,4 +113,9 @@ class AppStrings {
 
   //ToastMSg
   static const String sendOfferSuccess = 'تم ارسال العرض بنجاح';
+
+  // Owner options
+  static const String driverDocuments = 'مستندات السائقين';
+  static const String customersBills = 'وصولات الدفع للعملاء';
+  static const String driversBills = 'وصولات دفع اشتراك السائقين';
 }
