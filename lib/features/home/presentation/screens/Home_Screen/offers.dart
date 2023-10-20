@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_text_style.dart';
+
+import '../../bloc/get-accepted-offers/acceptedOffers_bloc.dart';
+import '../../bloc/get-accepted-offers/acceptedOffers_event.dart';
+import '../../bloc/get-accepted-offers/acceptedOffers_state.dart';
+import '../../components/offers/accepted_orders.dart';
 import '../../components/profileAppBar.dart';
 
 class Offers extends StatelessWidget {
@@ -10,32 +14,38 @@ class Offers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<AcceptedOrderBloc>(context).add(AcceptedOffersFetched());
     return Scaffold(
-      body: Column(
+      body:  Column(
         children: [
           const ProfileAppBar(),
           SizedBox(
             height: 20.h,
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Container(
-              height: 200.h,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: AppColors.lightBlue.withOpacity(.63),
-              ),
-              child: Center(
-                  child: Text(
-                "لقد وافق منتج الاسماك على طلبك وسيتواصل معك قريبا",
-                style: boldStyle(),
-                textAlign: TextAlign.center,
-              )),
-            ),
+          BlocConsumer<AcceptedOrderBloc, AcceptedOrdersState>(
+            listener: (context,state){
+            },
+            builder: (context, state) {
+              if (state is GetOrdersDataSuccess) {
+                return Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SizedBox(
+                      height: 150.h,
+
+                      child: ListView.builder(
+                        itemBuilder: (context, index) => buildOffersITem(
+                            name: state.ordersData[index].name??''),
+                        itemCount: state.ordersData.length,
+                      ),
+                    ));
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
           ),
         ],
       ),
     );
+
   }
 }

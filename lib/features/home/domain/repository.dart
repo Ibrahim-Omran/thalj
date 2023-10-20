@@ -1,6 +1,7 @@
 import 'package:thalj/features/home/domain/models/drivers_model.dart';
 
 import '../data/remote_data_source.dart';
+import 'models/accepted_OrderModel.dart';
 import 'models/orders_model.dart';
 
 class DriverRepository {
@@ -22,6 +23,12 @@ class DriverRepository {
       price: price,
     );
     return isSendOffer;
+  }
+
+  Future<List<AcceptedOrdersModel>> getOffer() async {
+    List<AcceptedOrdersModel> data = await driverRemoteDataSource.getAcceptedOffers();
+    return data;
+
   }
 
   Future<List<DriversModel>> getDrivers() async {

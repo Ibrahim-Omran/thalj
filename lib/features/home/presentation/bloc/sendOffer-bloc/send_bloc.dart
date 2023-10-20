@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:thalj/features/home/presentation/bloc/send_event.dart';
-import 'package:thalj/features/home/presentation/bloc/send_state.dart';
+import 'package:thalj/features/home/presentation/bloc/sendOffer-bloc/send_event.dart';
+import 'package:thalj/features/home/presentation/bloc/sendOffer-bloc/send_state.dart';
 
-import '../../domain/repository.dart';
+import '../../../domain/repository.dart';
 
 class SendOfferBloc extends Bloc<SendOfferEvent, SendOfferState> {
   final DriverRepository driverRepository;

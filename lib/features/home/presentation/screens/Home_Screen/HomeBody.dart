@@ -78,7 +78,7 @@ class HomeBody extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator());
               }
               if (state is GetOrdersDataFailure) {
-                return const Text("Server Error");
+                return const Center(child: Text("Server Error"));
               }
               else {
                 return const Text("");
