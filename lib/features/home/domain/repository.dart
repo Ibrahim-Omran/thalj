@@ -26,9 +26,9 @@ class DriverRepository {
   }
 
   Future<List<AcceptedOrdersModel>> getOffer() async {
-    List<AcceptedOrdersModel> data = await driverRemoteDataSource.getAcceptedOffers();
+    List<AcceptedOrdersModel> data =
+        await driverRemoteDataSource.getAcceptedOffers();
     return data;
-
   }
 
   Future<List<DriversModel>> getDrivers() async {
@@ -42,14 +42,15 @@ class DriverRepository {
     return isAccepted;
   }
 
-
-
+  Future<bool> refuse(String id) async {
+    bool isRefused = await driverRemoteDataSource.refuseDrivers(id);
+    return isRefused;
+  }
 
   Future<List<OrdersModel>> getOrders() async {
-     List<OrdersModel> ordersData = await driverRemoteDataSource.getDriversOrders();
+    List<OrdersModel> ordersData =
+        await driverRemoteDataSource.getDriversOrders();
 
     return ordersData;
   }
 }
-
-
