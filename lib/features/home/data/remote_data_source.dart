@@ -72,32 +72,29 @@ class DriverRemoteDataSource {
           'Accept': '*/*',
           'Authorization': 'Bearer $token',
         });
-    List<AcceptedOrdersModel> orderData=[];
+    List<AcceptedOrdersModel> orderData = [];
     try {
-      if(response.statusCode==200){
+      if (response.statusCode == 200) {
         print(response.body);
-        final data =jsonDecode(response.body);
-        for(var i in data){
+        final data = jsonDecode(response.body);
+        for (var i in data) {
           orderData.add(AcceptedOrdersModel.fromJson(i));
         }
         print(orderData.first.name);
-      }else{
+      } else {
         print(response.body);
-        final Map<String ,dynamic>jsonResponse=jsonDecode(response.body);
-        final errorMessageModel=ErrorMessageModel.fromJson(jsonResponse);
-        showToast(text: errorMessageModel.statusMessage, state: ToastStates.error);
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+            text: errorMessageModel.statusMessage, state: ToastStates.error);
       }
-
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
-
     }
     return orderData;
   }
-
-
 
   Future<List<DriversModel>> getDriversData() async {
     String? token = TokenManager.getAdminToken();
@@ -124,7 +121,6 @@ class DriverRemoteDataSource {
   Future<bool> acceptDrivers(String id) async {
     String? token = TokenManager.getAdminToken();
 
-
     var data = await http.patch(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
         headers: {
@@ -142,8 +138,27 @@ class DriverRemoteDataSource {
     }
   }
 
+  Future<bool> refuseDrivers(String id) async {
+    String? token = TokenManager.getAdminToken();
 
-  Future <List<OrdersModel>> getDriversOrders() async {
+    var data = await http.delete(
+        Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
+        headers: {
+          "Content-Type": 'application/json',
+          'Accept': '*/*',
+          'Authorization': 'Bearer $token',
+        });
+
+    if (data.statusCode == 200) {
+      print(data.body);
+      return true;
+    } else {
+      print(data.statusCode);
+      return false;
+    }
+  }
+
+  Future<List<OrdersModel>> getDriversOrders() async {
     String? token = TokenManager.getLoginToken();
 
     var response = await http.get(
@@ -154,23 +169,18 @@ class DriverRemoteDataSource {
         'Authorization': 'Bearer $token',
       },
     );
-    List<OrdersModel> ordersData=[];
+    List<OrdersModel> ordersData = [];
 
-    try{
+    try {
       if (response.statusCode == 200) {
         print(response.body);
 
         final data = jsonDecode(response.body);
-        for(var item in data) {
+        for (var item in data) {
           ordersData.add(OrdersModel.fromJson(item));
-
         }
         print(ordersData.first.name);
         print(ordersData.first.id);
-
-
-
-
       } else {
         print(response.body);
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
@@ -178,24 +188,22 @@ class DriverRemoteDataSource {
         showToast(
             text: errorMessageModel.statusMessage, state: ToastStates.error);
 
-
         print("erorr");
       }
-    }catch(e){
+    } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
     }
     return ordersData;
-
   }
-
 
   Future<dynamic> getDriversOneOrder(String orderId) async {
     final response = await http.get(
       Uri.parse('http://mircle50-001-site1.atempurl.com/orders/$orderId'),
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoiLVF6SGo5cUliTCJ9XSwiaWF0IjoxNjk2NzcyODU0LCJleHAiOjE2OTkzNjQ4NTR9.ixzP-pVy_Xx3rZxuOvXuq9EgANHT_1mAQjJxH4rKQLw',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoiLVF6SGo5cUliTCJ9XSwiaWF0IjoxNjk2NzcyODU0LCJleHAiOjE2OTkzNjQ4NTR9.ixzP-pVy_Xx3rZxuOvXuq9EgANHT_1mAQjJxH4rKQLw',
       },
     );
 
@@ -206,11 +214,4 @@ class DriverRemoteDataSource {
       throw Exception('Failed to retrieve order');
     }
   }
-
-
-
-
-
 }
-
-

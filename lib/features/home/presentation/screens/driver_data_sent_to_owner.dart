@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/features/home/domain/models/drivers_model.dart';
-import 'package:thalj/features/home/presentation/bloc/accept_drivers_bloc/accept_drivers_bloc.dart';
+import 'package:thalj/features/home/presentation/bloc/accept_refuse_drivers_bloc/accept_refuse_drivers_bloc.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_style.dart';
@@ -21,9 +21,9 @@ class DriverDataSentToOwner extends StatelessWidget {
     print(args);
     return Scaffold(
       body: BlocProvider(
-        create: (context) => AcceptDriversBloc(
+        create: (context) => AcceptRefuseDriversBloc(
             driverRepository: context.read<DriverRepository>()),
-        child: BlocConsumer<AcceptDriversBloc, AcceptDriversState>(
+        child: BlocConsumer<AcceptRefuseDriversBloc, AcceptRefuseDriversState>(
           listener: (context, state) {
             if (state is AcceptDriversSuccess) {
               showAdaptiveDialog(
@@ -62,10 +62,47 @@ class DriverDataSentToOwner extends StatelessWidget {
                   );
                 },
               );
+            } else if (state is RefuseDriversSuccess) {
+              showAdaptiveDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('احسنت'),
+                    content: Text("تم حذف السائق${args.fullname}"),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            BlocProvider.of<GetDriversDataBloc>(context)
+                                .add(GetDriversData());
+                          },
+                          child: const Text("حسنا"))
+                    ],
+                  );
+                },
+              );
+            } else if (state is RefuseDriversFailure) {
+              showAdaptiveDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('خطأ'),
+                    content: Text("لم يتم حذف السائق${args.fullname}"),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("حسنا"))
+                    ],
+                  );
+                },
+              );
             }
           },
           builder: (context, state) {
-            return state is AcceptDriversLoading
+            return state is AcceptRefuseDriversLoading
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
@@ -83,8 +120,10 @@ class DriverDataSentToOwner extends StatelessWidget {
                               ],
                             ),
                             Text(args.fullname!, style: boldStyle()),
-                            Text(AppStrings.identityProof, style: regularStyle()),
-                            Text(": ${AppStrings.front}", style: regularStyle()),
+                            Text(AppStrings.identityProof,
+                                style: regularStyle()),
+                            Text(": ${AppStrings.front}",
+                                style: regularStyle()),
                             driverShowIdentityContainer(
                               imagePath: args.proofOfIdentityFront,
                             ),
@@ -92,8 +131,10 @@ class DriverDataSentToOwner extends StatelessWidget {
                             driverShowIdentityContainer(
                               imagePath: args.proofOfIdentityBack,
                             ),
-                            Text(AppStrings.residenceCard, style: regularStyle()),
-                            Text(": ${AppStrings.front}", style: regularStyle()),
+                            Text(AppStrings.residenceCard,
+                                style: regularStyle()),
+                            Text(": ${AppStrings.front}",
+                                style: regularStyle()),
                             driverShowIdentityContainer(
                               imagePath: args.residenceCardFront,
                             ),
@@ -111,7 +152,8 @@ class DriverDataSentToOwner extends StatelessWidget {
                             driverShowIdentityContainer(
                               imagePath: args.vehicleLicense,
                             ),
-                            Text(AppStrings.operatingCard, style: regularStyle()),
+                            Text(AppStrings.operatingCard,
+                                style: regularStyle()),
                             driverShowIdentityContainer(
                               imagePath: args.operatingCard,
                             ),
@@ -122,7 +164,8 @@ class DriverDataSentToOwner extends StatelessWidget {
                             ),
                             ElevatedButton(
                                 onPressed: () {
-                                  BlocProvider.of<AcceptDriversBloc>(context)
+                                  BlocProvider.of<AcceptRefuseDriversBloc>(
+                                          context)
                                       .add(AcceptDrivers(driverId: args.id!));
                                 },
                                 child: Container(
@@ -145,9 +188,12 @@ class DriverDataSentToOwner extends StatelessWidget {
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(AppColors
                                           .darkRed), // Set the background color to blue
-                                  // You can customize other properties like textStyle, elevation, and more here
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  BlocProvider.of<AcceptRefuseDriversBloc>(
+                                          context)
+                                      .add(RefuseDrivers(driverId: args.id!));
+                                },
                                 child: SizedBox(
                                   width: 351.w,
                                   height: 47.h,
