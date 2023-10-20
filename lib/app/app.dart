@@ -24,11 +24,12 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => DocumentCheckingBloc()),
+           // RepositoryProvider(create: (context) => OffersRemoteDataSource().getOffers()),
             RepositoryProvider<AuthRepository>(
               create: (context) => AuthRepository(AuthRemoteDataSource()),
             ),
-            RepositoryProvider<SendOfferRepository>(
-              create: (context) => SendOfferRepository(SendOfferRemoteDataSource()),
+            RepositoryProvider<OffersRepository>(
+              create: (context) => OffersRepository(OffersRemoteDataSource()),
             ),
             
           ],

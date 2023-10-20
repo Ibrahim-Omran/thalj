@@ -5,16 +5,17 @@ import 'package:thalj/features/home/presentation/bloc/send_state.dart';
 import '../../domain/repository.dart';
 
 class SendOfferBloc extends Bloc<SendOfferEvent, SendOfferState> {
-  final SendOfferRepository sendOfferRepository;
+  final OffersRepository sendOfferRepository;
 
-  SendOfferBloc({required this.sendOfferRepository}) : super(SendOfferState(
-    name: '',
-    phone: '',
-    price: '',
-  )) {
+  SendOfferBloc({required this.sendOfferRepository})
+      : super(SendOfferState(
+          name: '',
+          phone: '',
+          price: '',
+        )) {
     on<SendOfferSubmitted>(_onSendOfferSubmitted);
-
   }
+
   Future<void> _onSendOfferSubmitted(
       SendOfferSubmitted event, Emitter<SendOfferState> emit) async {
     emit(state.copyWith(isSubmitting: true));
@@ -32,7 +33,7 @@ class SendOfferBloc extends Bloc<SendOfferEvent, SendOfferState> {
         emit(state.copyWith(
           isSubmitting: false,
           isSuccess: false,
-          error: 'Send Offer Faild',
+          error: 'Send Offer Failed',
         ));
       }
     } catch (e) {

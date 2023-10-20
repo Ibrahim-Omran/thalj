@@ -53,7 +53,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const DocumentsCheckScreen());
 
       case Routes.offersScreen:
-        return MaterialPageRoute(builder: (_) => const Offers());
+        return MaterialPageRoute(builder: (_) =>  Offers());
 
       case Routes.profileScreen:
         return MaterialPageRoute(builder: (_) => const Profile());

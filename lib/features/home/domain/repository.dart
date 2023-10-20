@@ -1,9 +1,14 @@
+import 'package:http/http.dart';
 
 import '../data/remote_data_source.dart';
+import 'models/AcceptedOrders.dart';
 
-class SendOfferRepository {
-  final SendOfferRemoteDataSource sendOfferRemoteDataSource;
-  SendOfferRepository(this.sendOfferRemoteDataSource,);
+class   OffersRepository {
+  final OffersRemoteDataSource offersRemoteDataSource;
+
+  OffersRepository(
+    this.offersRemoteDataSource,
+  );
 
   Future<bool> sendOffer({
     required String name,
@@ -12,11 +17,17 @@ class SendOfferRepository {
   }) async {
     bool isSendOffer = false;
 
-    isSendOffer =
-        await sendOfferRemoteDataSource.sendOffer(name: name, phone: phone,price: price, );
+    isSendOffer = await offersRemoteDataSource.sendOffer(
+      name: name,
+      phone: phone,
+      price: price,
+    );
     return isSendOffer;
   }
 
+   Future<List<AcceptedOrdersModel>> getOffer() async {
+     List<AcceptedOrdersModel> data = await offersRemoteDataSource.getOffers();
+    return data;
 
-
+  }
 }
