@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,17 +28,7 @@ class _UploadingSupportingDocumentsViewBodyState
   // File? _image;
   final picker = ImagePicker();
 
-//Image Picker function to get image from gallery
-  // Future<String> getImageFromGallery() async {
-  //   final pickedFile = await picker.pickImage(source: ImageSource.camera);
-  //   return pickedFile!.path;
-  //   // if (pickedFile != null) {
-  //   //   return pickedFile.path;
-  //   // } else {
-  //   //   return '';
-  //   // }
 
-  // }
   File? proofOfIdentityFront;
   File? proofOfIdentityBack;
   File? residenceCardFront;
@@ -116,7 +105,17 @@ class _UploadingSupportingDocumentsViewBodyState
       },
       builder: (context, state) {
         return state is DocumentUploading
-            ? const CircularProgressIndicator.adaptive()
+            ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('جاري تحميل البيانات',style: boldStyle(),),
+                  SizedBox(height: 20.h,),
+
+                  const CircularProgressIndicator.adaptive(),
+                ],
+              ),
+            )
             : Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SingleChildScrollView(

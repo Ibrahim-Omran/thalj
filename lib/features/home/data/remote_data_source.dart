@@ -8,6 +8,7 @@ import 'package:thalj/features/home/domain/models/orders_model.dart';
 import '../../../../core/network/ErrorModel.dart';
 import '../../../../core/utils/toast.dart';
 import '../../../core/functions/saveTokens.dart';
+import '../domain/models/accepted_OrderModel.dart';
 
 class DriverRemoteDataSource {
   Future<bool> sendOffer({
@@ -61,9 +62,45 @@ class DriverRemoteDataSource {
     }
   }
 
+  Future<List<AcceptedOrdersModel>> getAcceptedOffers() async {
+    String? token = TokenManager.getLoginToken();
+    print(token);
+    final response = await http.get(
+        Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/orders'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': '*/*',
+          'Authorization': 'Bearer $token',
+        });
+    List<AcceptedOrdersModel> orderData=[];
+    try {
+      if(response.statusCode==200){
+        print(response.body);
+        final data =jsonDecode(response.body);
+        for(var i in data){
+          orderData.add(AcceptedOrdersModel.fromJson(i));
+        }
+        print(orderData.first.name);
+      }else{
+        print(response.body);
+        final Map<String ,dynamic>jsonResponse=jsonDecode(response.body);
+        final errorMessageModel=ErrorMessageModel.fromJson(jsonResponse);
+        showToast(text: errorMessageModel.statusMessage, state: ToastStates.error);
+      }
+
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+
+    }
+    return orderData;
+  }
+
+
+
   Future<List<DriversModel>> getDriversData() async {
-    String? token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoiN0hXa3gtTmVtUSJ9XSwiaWF0IjoxNjk3MTIyNzE0LCJleHAiOjE2OTk3MTQ3MTR9.qK9sbEpJd0bVGgFnSG_T1Yyrmuz04tBDH_QvTNYYvck';
+    String? token = TokenManager.getAdminToken();
     var data = await http.get(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard'),
         headers: {
@@ -85,8 +122,8 @@ class DriverRemoteDataSource {
   }
 
   Future<bool> acceptDrivers(String id) async {
-    String? token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoiN0hXa3gtTmVtUSJ9XSwiaWF0IjoxNjk3MTIyNzE0LCJleHAiOjE2OTk3MTQ3MTR9.qK9sbEpJd0bVGgFnSG_T1Yyrmuz04tBDH_QvTNYYvck';
+    String? token = TokenManager.getAdminToken();
+
 
     var data = await http.patch(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
@@ -107,7 +144,7 @@ class DriverRemoteDataSource {
 
 
   Future <List<OrdersModel>> getDriversOrders() async {
-    String? token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoidFNZUnFBV1RscyJ9XSwiaWF0IjoxNjk3NjcyNTk1LCJleHAiOjE3MDAyNjQ1OTV9.GzBdh6_m_KlMUVvh4qsNn9Rzbrs6UcixtDrI6NeOj94";
+    String? token = TokenManager.getLoginToken();
 
     var response = await http.get(
       Uri.parse('http://mircle50-001-site1.atempurl.com/orders'),

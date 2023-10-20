@@ -137,7 +137,7 @@ class AuthRemoteDataSource {
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
           final adminLoginData = jsonResponse['data'][0];
-          AdminModel.fromJson({
+          var adminModel =AdminModel.fromJson({
             'id': adminLoginData['id'],
             'name': adminLoginData['name'],
             'phone': adminLoginData['phone'],
@@ -146,6 +146,7 @@ class AuthRemoteDataSource {
             'verified': adminLoginData['verified'],
             'token': jsonResponse['token'],
           });
+          TokenManager.saveAdminToken(adminModel);
 
           return true;
         } else {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:thalj/features/home/presentation/bloc/get-accepted-offers/acceptedOffers_bloc.dart';
 import 'package:thalj/features/home/presentation/components/customNavbar.dart';
 
 import 'package:thalj/features/home/presentation/screens/Home_Screen/HomeBody.dart';
@@ -27,8 +28,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final _pages = [
-    const HomeBody(),
-    const Offers(),
+    BlocProvider(
+        create: (context) =>
+            GetOrdersDataBloc(driverRepository: context.read<DriverRepository>()),
+        child:const HomeBody()),
+    BlocProvider(
+        create: (context) =>
+            AcceptedOrderBloc(offersRepository: context.read<DriverRepository>()),
+        child: const Offers()),
     const Profile(),
   ];
 
@@ -49,10 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       //   ],
       // ),
-      body:  BlocProvider(
-          create: (context) =>
-              GetOrdersDataBloc(driverRepository: context.read<DriverRepository>()),
-          child:SafeArea(child: _pages.elementAt(_selectedIndex)),
+      body:  SafeArea(child: _pages.elementAt(_selectedIndex),
       ),
 
 

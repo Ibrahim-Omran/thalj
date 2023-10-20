@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:thalj/features/home/presentation/bloc/drivers_data_bloc/get_drivers_data_bloc.dart';
 import 'package:thalj/features/home/presentation/screens/driver_data_sent_to_owner.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../bloc/drivers_data_bloc/get_drivers_data_bloc.dart';
 
 class DriverDocWidget extends StatelessWidget {
   const DriverDocWidget({super.key});
