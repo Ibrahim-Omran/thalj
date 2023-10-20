@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:thalj/core/functions/saveTokens.dart';
+import 'package:thalj/core/functions/saveDataManager.dart';
 
 class DocumentsRemoteDataSource {
   Future<bool> uploadProofDocuments({
@@ -17,7 +15,7 @@ class DocumentsRemoteDataSource {
     required File transferDocument,
   }) async {
     try {
-      String? token = TokenManager.getRegisterToken();
+      String? token = SaveDataManager.getRegisterToken();
       print(token);
       // final request = http.MultipartRequest(
       //   'PATCH',

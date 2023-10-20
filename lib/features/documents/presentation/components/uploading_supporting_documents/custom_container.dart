@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/utils/app_assets.dart';
 
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_text_style.dart';
 
 Widget customContainer(
@@ -48,11 +47,7 @@ Widget customContainer(
               ),
             ],
           ),
-          Text(AppStrings.jpgOnly,
-              style: regularStyle().copyWith(
-                fontSize: 10,
-              )),
-        ],
+                ],
       ),
     ),
   );

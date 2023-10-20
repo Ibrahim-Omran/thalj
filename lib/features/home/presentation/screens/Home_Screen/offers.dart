@@ -29,14 +29,20 @@ class Offers extends StatelessWidget {
               if (state is GetOrdersDataSuccess) {
                 return Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: SizedBox(
-                      height: 150.h,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 150.h,
 
-                      child: ListView.builder(
-                        itemBuilder: (context, index) => buildOffersITem(
-                            name: state.ordersData[index].name??''),
-                        itemCount: state.ordersData.length,
-                      ),
+                          child: ListView.separated(
+                            itemBuilder: (context, index) => buildOffersITem(
+                                name: state.ordersData[index].name??''),
+                            itemCount: state.ordersData.length, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 20.h,); },
+                          ),
+                        ),
+
+
+                      ],
                     ));
               } else {
                 return const Center(child: CircularProgressIndicator());

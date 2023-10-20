@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:thalj/core/functions/saveDataManager.dart';
 
 import '../../../../core/utils/app_text_style.dart';
-import '../../../../core/widgets/back_arrow.dart';
 
-class ProfileAppBar extends StatelessWidget {
+
+class ProfileAppBar extends StatefulWidget {
+
   const ProfileAppBar({super.key});
 
+  @override
+  State<ProfileAppBar> createState() => _ProfileAppBarState();
+}
+
+class _ProfileAppBarState extends State<ProfileAppBar> {
+String ? name = SaveDataManager.getLoginName();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -27,13 +35,12 @@ class ProfileAppBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const BackArrow(),
-                const Spacer(),
+
                 Column(children: [
                   Text('مرحبا بك',
                       style: boldStyle(color: Colors.white, fontSize: 20)),
                   Text(
-                    'احمد',
+                    name!,
                     style: boldStyle(color: Colors.white, fontSize: 20),
                     overflow: TextOverflow.clip,
                   ),
