@@ -1,18 +1,19 @@
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:thalj/core/functions/saveDataManager.dart';
 
 class DocumentsRemoteDataSource {
   Future<bool> uploadProofDocuments({
-    required File proofOfIdentityFront,
-    required File proofOfIdentityBack,
-    required File residenceCardFront,
-    required File residenceCardBack,
-    required File drivingLicense,
-    required File vehicleLicense,
-    required File operatingCard,
-    required File transferDocument,
+    required XFile proofOfIdentityFront,
+    required XFile proofOfIdentityBack,
+    required XFile residenceCardFront,
+    required XFile residenceCardBack,
+    required XFile drivingLicense,
+    required XFile vehicleLicense,
+    required XFile operatingCard,
+    required XFile transferDocument,
   }) async {
     try {
       String? token = SaveDataManager.getRegisterToken();
@@ -24,7 +25,9 @@ class DocumentsRemoteDataSource {
       Map<String, String> headers = {
         "Content-Type": "multipart/form-data",
         'Accept': '*/*',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoiU3VreXAxcnRhTiJ9XSwiaWF0IjoxNjk3OTE1MTg5LCJleHAiOjE3MDA1MDcxODl9.H8T6k_UTrCLmF3KeuONOGYrIn3NjX9jirtscM8-EETs',
       };
       List<String> formNames = [
         'proofOfIdentityFront',
@@ -36,7 +39,7 @@ class DocumentsRemoteDataSource {
         'operatingCard',
         'transferDocument',
       ];
-      List<File> images = [
+      List<XFile> images = [
         proofOfIdentityFront,
         proofOfIdentityBack,
         residenceCardFront,
@@ -59,13 +62,16 @@ class DocumentsRemoteDataSource {
   }
 }
 
-Future<bool> uploadImages(Uri apiUrl, List<File> images, List<String> formNames,
-    Map<String, String> headers) async {
+Future<bool> uploadImages(Uri apiUrl, List<XFile> images,
+    List<String> formNames, Map<String, String> headers) async {
   try {
     var request = http.MultipartRequest('PATCH', apiUrl);
     for (var i = 0; i < images.length; i++) {
-      var bytes = await images[i].readAsBytes();
-      var multipartFile = http.MultipartFile.fromBytes(formNames[i], bytes);
+      var multipartFile = await http.MultipartFile.fromPath(
+        formNames[i],
+        images[i].path,
+      );
+      print('Name ${formNames[i]} : Path ${images[i].path}');
       request.files.add(multipartFile);
     }
     request.headers.addAll(headers);
@@ -74,11 +80,12 @@ Future<bool> uploadImages(Uri apiUrl, List<File> images, List<String> formNames,
       print('All images uploaded successfully');
       return true;
     } else {
-      print('Failed to upload images');
+      print(
+          'Failed to upload images rescode: ${response.reasonPhrase}  ${response.statusCode}');
       return false;
     }
   } catch (e) {
-    print('Error in Upl;oad Images Function $e');
+    print('Error in Upload Images Function ${e}');
     return false;
   }
 }

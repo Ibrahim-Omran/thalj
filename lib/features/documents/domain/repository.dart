@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:image_picker/image_picker.dart';
 import 'package:thalj/features/documents/data/remote_data.dart';
 
 class DocumentRepository {
@@ -7,14 +8,14 @@ class DocumentRepository {
   DocumentRepository(this.documentDataSource);
 
   Future<bool> uploadDocuments({
-    required File proofOfIdentityFront,
-    required File proofOfIdentityBack,
-    required File residenceCardFront,
-    required File residenceCardBack,
-    required File drivingLicense,
-    required File vehicleLicense,
-    required File operatingCard,
-    required File transferDocument,
+    required XFile proofOfIdentityFront,
+    required XFile proofOfIdentityBack,
+    required XFile residenceCardFront,
+    required XFile residenceCardBack,
+    required XFile drivingLicense,
+    required XFile vehicleLicense,
+    required XFile operatingCard,
+    required XFile transferDocument,
   }) async {
     var isUploaded = await documentDataSource.uploadProofDocuments(
       proofOfIdentityFront: proofOfIdentityFront,

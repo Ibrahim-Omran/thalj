@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,51 +26,66 @@ class _UploadingSupportingDocumentsViewBodyState
   // File? _image;
   final picker = ImagePicker();
 
-
-  File? proofOfIdentityFront;
-  File? proofOfIdentityBack;
-  File? residenceCardFront;
-  File? residenceCardBack;
-  File? drivingLicense;
-  File? vehicleLicense;
-  File? operatingCard;
-  File? transferDocument;
+  XFile? proofOfIdentityFront;
+  XFile? proofOfIdentityBack;
+  XFile? residenceCardFront;
+  XFile? residenceCardBack;
+  XFile? drivingLicense;
+  XFile? vehicleLicense;
+  XFile? operatingCard;
+  XFile? transferDocument;
   Future<void> _getImageFromCamera(String variableName) async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.camera);
     setState(() {
       switch (variableName) {
         case 'proofOfIdentityFront':
-          proofOfIdentityFront = File(pickedFile!.path);
-          print('data= $proofOfIdentityFront');
+          if (pickedFile!.path.isNotEmpty) {
+            proofOfIdentityFront = pickedFile;
+            print('data= $proofOfIdentityFront');
+          }
           break;
         case 'proofOfIdentityBack':
-          proofOfIdentityBack = File(pickedFile!.path);
-          print('data= $proofOfIdentityBack');
+          if (pickedFile!.path.isNotEmpty) {
+            proofOfIdentityBack = pickedFile;
+            print('data= $proofOfIdentityBack');
+          }
           break;
         case 'residenceCardFront':
-          residenceCardFront = File(pickedFile!.path);
-          print('data= $residenceCardFront');
-
+          if (pickedFile!.path.isNotEmpty) {
+            residenceCardFront = pickedFile;
+            print('data= $residenceCardFront');
+          }
           break;
         case 'residenceCardBack':
-          residenceCardBack = File(pickedFile!.path);
-          print('data= $residenceCardBack');
+          if (pickedFile!.path.isNotEmpty) {
+            residenceCardBack = pickedFile;
+            print('data= $residenceCardBack');
+          }
           break;
         case 'drivingLicense':
-          drivingLicense = File(pickedFile!.path);
-          print('data= $drivingLicense');
+          if (pickedFile!.path.isNotEmpty) {
+            drivingLicense = pickedFile;
+            print('data= $drivingLicense');
+          }
           break;
         case 'vehicleLicense':
-          vehicleLicense = File(pickedFile!.path);
-          print('data= $vehicleLicense');
+          if (pickedFile!.path.isNotEmpty) {
+            vehicleLicense = pickedFile;
+            print('data= $vehicleLicense');
+          }
           break;
         case 'operatingCard':
-          operatingCard = File(pickedFile!.path);
-          print('data= $operatingCard');
+          if (pickedFile!.path.isNotEmpty) {
+            operatingCard = pickedFile;
+            print('data= $operatingCard');
+          }
           break;
         case 'transferDocument':
-          transferDocument = File(pickedFile!.path);
-          print('data= $transferDocument');
+          if (pickedFile!.path.isNotEmpty) {
+            transferDocument = pickedFile;
+            print('data= $transferDocument');
+          }
           break;
         default:
           break;
@@ -106,16 +119,20 @@ class _UploadingSupportingDocumentsViewBodyState
       builder: (context, state) {
         return state is DocumentUploading
             ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('جاري تحميل البيانات',style: boldStyle(),),
-                  SizedBox(height: 20.h,),
-
-                  const CircularProgressIndicator.adaptive(),
-                ],
-              ),
-            )
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'جاري تحميل البيانات',
+                      style: boldStyle(),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    const CircularProgressIndicator.adaptive(),
+                  ],
+                ),
+              )
             : Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SingleChildScrollView(
@@ -342,7 +359,7 @@ class _UploadingSupportingDocumentsViewBodyState
                                 operatingCard: operatingCard!,
                                 transferDocument: transferDocument!,
                               ));
-                              if (state is DocumentUploading) {
+                              if (state is DocumentCheckingLoading) {
                                 navigatePushReplacement(
                                     context: context,
                                     route: Routes.documentsCheckScreen);
