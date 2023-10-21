@@ -5,9 +5,7 @@ import 'core/errors/internetCheck.dart';
 import 'core/routes/app_routes.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/app_strings.dart';
-import 'features/adminHome/data/remote_data/subscription_invoice_remote_data_source.dart';
-import 'features/adminHome/domain/subscription_invoice_repository.dart';
-import 'features/adminHome/presenation/bloc/driver_subscription_bloc/driver_subscription_bloc.dart';
+
 import 'features/auth/data/remote_data_source.dart';
 import 'features/auth/domain/repository.dart';
 import 'features/documents/data/remote_data.dart';
@@ -44,14 +42,12 @@ class MyApp extends StatelessWidget {
             RepositoryProvider<DriverRepository>(
               create: (context) => DriverRepository(DriverRemoteDataSource()),
             ),
-            RepositoryProvider<SubscriptionInvoiceRepository>(
-              create: (context) => SubscriptionInvoiceRepository(SubscriptionsInvoiceRemoteDataSource()),
-            ),
-            BlocProvider(
-            create: (context) => DriverSubscriptionBloc(
-        repository: context.read<SubscriptionInvoiceRepository>())),
-
-
+            // RepositoryProvider<SubscriptionInvoiceRepository>(
+            //   create: (context) => SubscriptionInvoiceRepository(SubscriptionsInvoiceRemoteDataSource()),
+            // ),
+            // BlocProvider(
+            //     create: (context) => DriverSubscriptionBloc(
+            // repository: context.read<SubscriptionInvoiceRepository>())),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

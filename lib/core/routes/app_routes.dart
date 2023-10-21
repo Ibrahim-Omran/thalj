@@ -9,8 +9,8 @@ import 'package:thalj/features/home/presentation/screens/product_details.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/profile.dart';
 import 'package:thalj/features/home/presentation/screens/driver_data_sent_to_owner.dart';
 
-import '../../features/adminHome/presenation/screens/driver_subscription_screen.dart';
-import '../../features/adminHome/presenation/screens/user_subscription_screen.dart';
+// import '../../features/adminHome/presenation/screens/driver_subscription_screen.dart';
+// import '../../features/adminHome/presenation/screens/user_subscription_screen.dart';
 import '../../features/auth/presentation/screens/signin_screen.dart';
 import 'package:thalj/features/documents/presentation/screens/documents_screen.dart';
 import 'package:thalj/features/home/presentation/screens/product_info_screen.dart';
@@ -64,10 +64,10 @@ Widget appRoutes(String route, dynamic arg) {
       return const DriverDataSentToOwner();
     case Routes.driverOptions:
       return const AdminOptionsScreen();
-    case Routes.userInvoices:
-      return const UserSubscriptionScreen();
-    case Routes.driverInvoices:
-      return const DriverSubscriptionScreen();
+    // case Routes.userInvoices:
+    //   return const UserSubscriptionScreen();
+    // case Routes.driverInvoices:
+    //   return const DriverSubscriptionScreen();
     default:
       return const Scaffold(
         body: Center(
