@@ -45,7 +45,7 @@ class AdminOptionsBody extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              // navigatePushNamed(context: context, route: Routes.driverDoc);
+               navigatePushNamed(context: context, route: Routes.userInvoices);
             },
             child: Container(
               margin: const EdgeInsets.all(10),
@@ -73,7 +73,7 @@ class AdminOptionsBody extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              // navigatePushNamed(context: context, route: Routes.driverDoc);
+              navigatePushNamed(context: context, route: Routes.driverInvoices);
             },
             child: Container(
               margin: const EdgeInsets.all(10),
