@@ -22,6 +22,7 @@ class SendOfferSubmitted extends SendOfferEvent {
   final String name;
   final String phone;
   final String price;
+  final String id;
 
-  SendOfferSubmitted(this.name, this.phone, this.price);
+  SendOfferSubmitted({required this.name, required this.phone, required this.price, required this.id});
 }

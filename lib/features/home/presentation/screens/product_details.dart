@@ -15,7 +15,8 @@ import '../../../../core/widgets/custom_button.dart';
 import '../bloc/sendOffer-bloc/send_event.dart';
 import '../bloc/sendOffer-bloc/send_state.dart';
 class ProductDetails extends StatefulWidget {
-  const ProductDetails({super.key});
+  const ProductDetails({super.key, required this.id});
+  final String id;
 
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -140,16 +141,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                     },
                     builder: (context, state) {
                       return state.isSubmitting
-                          ? const CircularProgressIndicator()
+                          ? const CircularProgressIndicator.adaptive()
                           : CustomButton(
                               onPressed: () {
                                 if (ProductDetails._formKey.currentState!
                                     .validate()) {
                                   BlocProvider.of<SendOfferBloc>(context).add(
                                       SendOfferSubmitted(
-                                          _nameController.text,
-                                          _phoneController.text,
-                                          _priceController.text));
+                                         name: _nameController.text,
+                                          phone:_phoneController.text,
+                                          price:_priceController.text,
+                                        id:widget.id,
+                                      ));
                                 }
                               },
                               text: AppStrings.send,

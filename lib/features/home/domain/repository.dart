@@ -4,6 +4,7 @@ import 'package:thalj/features/home/domain/models/drivers_model.dart';
 
 import '../data/remote_data_source.dart';
 import 'models/accepted_OrderModel.dart';
+import 'models/one_order_model.dart';
 import 'models/orders_model.dart';
 
 class DriverRepository {
@@ -16,6 +17,7 @@ class DriverRepository {
     required String name,
     required String price,
     required String phone,
+    required String id,
   }) async {
     bool isSendOffer = false;
 
@@ -23,6 +25,7 @@ class DriverRepository {
       name: name,
       phone: phone,
       price: price,
+      id:id
     );
     return isSendOffer;
   }
@@ -61,4 +64,14 @@ class DriverRepository {
     bool isPaid = await driverRemoteDataSource.paySubscription(billPhoto: billPhoto);
     return isPaid;
   }
+
+  Future<OneOrderModel> getOneOrdersInfo(String id) async {
+    OneOrderModel oneOrdersData = await driverRemoteDataSource.getDriversOneOrderInfo(id);
+
+    return oneOrdersData;
+
+  }
 }
+
+
+

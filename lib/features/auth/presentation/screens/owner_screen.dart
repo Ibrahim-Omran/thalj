@@ -18,7 +18,7 @@ import '../bloc/owner_login_bloc/bloc_owner_login.dart';
 import '../components/text_filed.dart';
 
 class OwnerScreen extends StatefulWidget {
-  OwnerScreen({super.key});
+  const OwnerScreen({super.key});
 
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
@@ -98,7 +98,7 @@ class _OwnerScreenState extends State<OwnerScreen> {
                 BlocConsumer<AdminLoginBloc, AdminLoginState>(
                   builder: (context, state) {
                     return state.isSubmitting
-                        ? const Center(child: CircularProgressIndicator())
+                        ? const Center(child: CircularProgressIndicator.adaptive())
                         : CustomButton(
                             onPressed: () {
                               if (OwnerScreen._formKey.currentState!

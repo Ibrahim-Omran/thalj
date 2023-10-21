@@ -23,8 +23,8 @@ class SendOfferBloc extends Bloc<SendOfferEvent, SendOfferState> {
         name: event.name,
         price: event.price,
         phone: event.phone,
+        id:event.id,
       );
-      print(isSendOffer);
 
       if (isSendOffer) {
         emit(state.copyWith(isSubmitting: false, isSuccess: true));

@@ -56,7 +56,6 @@ class AuthRemoteDataSource {
         }
       } else {
         // Login failed
-        print(response.body);
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
         final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
         showToast(
@@ -93,7 +92,6 @@ class AuthRemoteDataSource {
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
           final registerData = jsonResponse['data'];
-          print(response.body);
 
           var registerModel = RegisterModel.fromJson({
             'data': {
@@ -158,7 +156,6 @@ class AuthRemoteDataSource {
         }
       } else {
         // Login failed
-        print(response.body);
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
         final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
         showToast(

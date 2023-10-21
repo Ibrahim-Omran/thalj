@@ -22,7 +22,6 @@ class DriverDocWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    print(state.driversData[index]);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -61,9 +60,7 @@ class DriverDocWidget extends StatelessWidget {
           return Center(child: Text(state.errorMessage));
         } else {
           return const Center(
-            child: CircularProgressIndicator(
-              color: AppColors.lightBlue,
-            ),
+            child: CircularProgressIndicator.adaptive()
           );
         }
       },

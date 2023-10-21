@@ -16,11 +16,7 @@ class DocumentsRemoteDataSource {
   }) async {
     try {
       String? token = SaveDataManager.getRegisterToken();
-      print(token);
-      // final request = http.MultipartRequest(
-      //   'PATCH',
-      //   Uri.parse('http://mircle50-001-site1.atempurl.com/proofDocuments'),
-      // );
+
       Map<String, String> headers = {
         "Content-Type": "multipart/form-data",
         'Accept': '*/*',
@@ -53,7 +49,6 @@ class DocumentsRemoteDataSource {
           formNames,
           headers);
     } catch (e) {
-      print("Error in out function $e");
       return false;
     }
   }
@@ -71,14 +66,11 @@ Future<bool> uploadImages(Uri apiUrl, List<File> images, List<String> formNames,
     request.headers.addAll(headers);
     var response = await request.send();
     if (response.statusCode == 200) {
-      print('All images uploaded successfully');
       return true;
     } else {
-      print('Failed to upload images');
       return false;
     }
   } catch (e) {
-    print('Error in Upl;oad Images Function $e');
     return false;
   }
 }

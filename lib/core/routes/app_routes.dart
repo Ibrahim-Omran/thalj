@@ -5,7 +5,6 @@ import 'package:thalj/features/home/presentation/screens/Home_Screen/Home_Screen
 import 'package:thalj/features/home/presentation/screens/admin_options_screen.dart';
 import 'package:thalj/features/home/presentation/screens/driver_doucments.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/offers.dart';
-import 'package:thalj/features/home/presentation/screens/product_details.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/profile.dart';
 import 'package:thalj/features/home/presentation/screens/driver_data_sent_to_owner.dart';
 
@@ -13,7 +12,6 @@ import '../../features/adminHome/presenation/screens/driver_subscription_screen.
 import '../../features/adminHome/presenation/screens/user_subscription_screen.dart';
 import '../../features/auth/presentation/screens/signin_screen.dart';
 import 'package:thalj/features/documents/presentation/screens/documents_screen.dart';
-import 'package:thalj/features/home/presentation/screens/product_info_screen.dart';
 import 'package:thalj/features/documents/presentation/screens/uploading_supporting_documents_screen.dart';
 
 class Routes {
@@ -39,15 +37,14 @@ class Routes {
 Widget appRoutes(String route, dynamic arg) {
   switch (route) {
     case Routes.intitlRoute:
-      return SignInScreen();
+      return const SignInScreen();
     case Routes.signup:
-      return SignUpScreen();
+      return const SignUpScreen();
     case Routes.ownerScreen:
-      return OwnerScreen();
+      return const OwnerScreen();
     case Routes.homeScreen:
       return const HomeScreen();
-    case Routes.productInformationScreen:
-      return const ProductInformationScreen();
+
     case Routes.uploadingSupportingDocumentsScreen:
       return const UploadingSupportingDocumentsScreen();
     case Routes.documentsCheckScreen:
@@ -56,8 +53,7 @@ Widget appRoutes(String route, dynamic arg) {
       return const Offers();
     case Routes.profileScreen:
       return const Profile();
-    case Routes.productDetails:
-      return const ProductDetails();
+
     case Routes.driverDoc:
       return const DriverDocuments();
     case Routes.driverDataSentToOwner:

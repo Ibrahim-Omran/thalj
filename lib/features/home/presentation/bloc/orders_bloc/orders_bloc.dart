@@ -12,16 +12,29 @@ class GetOrdersDataBloc extends Bloc<GetOrdersDataEvent, GetOrdersDataState> {
 
   GetOrdersDataBloc({required this.driverRepository})
       : super(GetOrdersDataInitial()) {
-    on<GetOrdersDataEvent>((event, emit) async {
-      if (event is GetOrdersData) {
-        emit(GetOrdersDataLoading());
-        var  result= await driverRepository.getOrders();
-        if (result.isNotEmpty) {
-          emit(GetOrdersDataSuccess(result));
-        } else {
-          emit(GetOrdersDataFailure("Error"));
-        }
+    on<GetOrdersData>((event, emit) async {
+      emit(GetOrdersDataLoading());
+      var  result= await driverRepository.getOrders();
+      if (result.isNotEmpty) {
+        emit(GetOrdersDataSuccess(result));
+      } else {
+        emit(GetOrdersDataFailure("Error"));
       }
+        });
+
+    on<GetOneOrdersData>((event, emit) async {
+      try{
+        emit(GetOneOrdersDataLoading());
+        var  result= await driverRepository.getOneOrdersInfo(event.id);
+        emit(GetOneOrdersDataSuccess(result));
+
+
+      }catch(e)
+      {
+        emit(GetOneOrdersDataFailure(e.toString()));
+      }
+
     });
+
   }
 }

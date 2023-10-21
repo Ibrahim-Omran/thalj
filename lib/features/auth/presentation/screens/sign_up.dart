@@ -18,7 +18,7 @@ import '../components/phone_form_field.dart';
 import '../components/text_filed.dart';
 
 class SignUpScreen extends StatefulWidget {
-  SignUpScreen({super.key});
+  const SignUpScreen({super.key});
 
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -227,7 +227,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 BlocConsumer<RegisterBloc, RegisterState>(
                   builder: (context, state) {
                     return state.isSubmitting
-                        ? const Center(child: CircularProgressIndicator())
+                        ? const Center(child: CircularProgressIndicator.adaptive())
                         : CustomButton(
                             onPressed: () {
                               if (SignUpScreen._formKey.currentState!

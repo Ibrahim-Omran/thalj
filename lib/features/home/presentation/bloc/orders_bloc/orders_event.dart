@@ -9,3 +9,10 @@ import 'package:flutter/cupertino.dart';
 abstract class GetOrdersDataEvent {}
 
 class GetOrdersData extends GetOrdersDataEvent {}
+
+
+class GetOneOrdersData extends GetOrdersDataEvent {
+  final String id;
+
+  GetOneOrdersData(this.id);
+}

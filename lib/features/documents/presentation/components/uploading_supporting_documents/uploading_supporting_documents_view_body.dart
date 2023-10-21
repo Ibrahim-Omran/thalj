@@ -43,36 +43,28 @@ class _UploadingSupportingDocumentsViewBodyState
       switch (variableName) {
         case 'proofOfIdentityFront':
           proofOfIdentityFront = File(pickedFile!.path);
-          print('data= $proofOfIdentityFront');
           break;
         case 'proofOfIdentityBack':
           proofOfIdentityBack = File(pickedFile!.path);
-          print('data= $proofOfIdentityBack');
           break;
         case 'residenceCardFront':
           residenceCardFront = File(pickedFile!.path);
-          print('data= $residenceCardFront');
 
           break;
         case 'residenceCardBack':
           residenceCardBack = File(pickedFile!.path);
-          print('data= $residenceCardBack');
           break;
         case 'drivingLicense':
           drivingLicense = File(pickedFile!.path);
-          print('data= $drivingLicense');
           break;
         case 'vehicleLicense':
           vehicleLicense = File(pickedFile!.path);
-          print('data= $vehicleLicense');
           break;
         case 'operatingCard':
           operatingCard = File(pickedFile!.path);
-          print('data= $operatingCard');
           break;
         case 'transferDocument':
           transferDocument = File(pickedFile!.path);
-          print('data= $transferDocument');
           break;
         default:
           break;

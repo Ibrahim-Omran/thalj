@@ -18,7 +18,6 @@ class DriverDataSentToOwner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as DriversModel;
-    print(args);
     return Scaffold(
       body: BlocProvider(
         create: (context) => AcceptRefuseDriversBloc(
@@ -34,9 +33,8 @@ class DriverDataSentToOwner extends StatelessWidget {
                     content: Text("تم قبول السائق${args.fullname}"),
                     actions: [
                       TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            Navigator.pop(context);
+                          onPressed: () async{
+
                             BlocProvider.of<GetDriversDataBloc>(context)
                                 .add(GetDriversData());
                           },
@@ -56,6 +54,8 @@ class DriverDataSentToOwner extends StatelessWidget {
                       TextButton(
                           onPressed: () {
                             Navigator.pop(context);
+                            /*BlocProvider.of<GetDriversDataBloc>(context)
+                                .add(GetDriversData());*/
                           },
                           child: const Text("حسنا"))
                     ],
@@ -73,7 +73,7 @@ class DriverDataSentToOwner extends StatelessWidget {
                       TextButton(
                           onPressed: () {
                             Navigator.pop(context);
-                            Navigator.pop(context);
+
                             BlocProvider.of<GetDriversDataBloc>(context)
                                 .add(GetDriversData());
                           },
@@ -104,7 +104,7 @@ class DriverDataSentToOwner extends StatelessWidget {
           builder: (context, state) {
             return state is AcceptRefuseDriversLoading
                 ? const Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator.adaptive(),
                   )
                 : Padding(
                     padding: const EdgeInsets.all(20.0),

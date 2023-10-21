@@ -10,19 +10,20 @@ import '../../../../core/network/ErrorModel.dart';
 import '../../../../core/utils/toast.dart';
 import '../../../core/functions/saveDataManager.dart';
 import '../domain/models/accepted_OrderModel.dart';
+import '../domain/models/one_order_model.dart';
 
 class DriverRemoteDataSource {
   Future<bool> sendOffer({
     required String name,
     required String price,
     required String phone,
+    required String id,
   }) async {
     try {
       String? token = SaveDataManager.getLoginToken();
 
-      print(token);
       final response = await http.post(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/offers/gTDz1FlGJB'),
+        Uri.parse('http://mircle50-001-site1.atempurl.com/offers/$id'),
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
@@ -63,7 +64,6 @@ class DriverRemoteDataSource {
 
   Future<List<AcceptedOrdersModel>> getAcceptedOffers() async {
     String? token = SaveDataManager.getLoginToken();
-    print(token);
     final response = await http.get(
         Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/orders'),
         headers: {
@@ -74,14 +74,11 @@ class DriverRemoteDataSource {
     List<AcceptedOrdersModel> orderData = [];
     try {
       if (response.statusCode == 200) {
-        print(response.body);
         final data = jsonDecode(response.body);
         for (var i in data) {
           orderData.add(AcceptedOrdersModel.fromJson(i));
         }
-        print(orderData.first.name);
       } else {
-        print(response.body);
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
         final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
         showToast(
@@ -110,9 +107,7 @@ class DriverRemoteDataSource {
       for (var item in jsonData) {
         drivers.add(DriversModel.fromMap(item));
       }
-      print(drivers);
     } else {
-      print(data.statusCode);
     }
     return drivers;
   }
@@ -132,10 +127,8 @@ class DriverRemoteDataSource {
         });
 
     if (data.statusCode == 200) {
-      print(data.body);
       return true;
     } else {
-      print(data.statusCode);
       return false;
     }
   }
@@ -155,10 +148,8 @@ class DriverRemoteDataSource {
         });
 
     if (data.statusCode == 200) {
-      print(data.body);
       return true;
     } else {
-      print(data.statusCode);
       return false;
     }
   }
@@ -178,22 +169,17 @@ class DriverRemoteDataSource {
 
     try {
       if (response.statusCode == 200) {
-        print(response.body);
 
         final data = jsonDecode(response.body);
         for (var item in data) {
           ordersData.add(OrdersModel.fromJson(item));
         }
-        print(ordersData.first.name);
-        print(ordersData.first.id);
       } else {
-        print(response.body);
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
         final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
         showToast(
             text: errorMessageModel.statusMessage, state: ToastStates.error);
 
-        print("erorr");
       }
     } catch (e) {
       if (kDebugMode) {
@@ -203,18 +189,20 @@ class DriverRemoteDataSource {
     return ordersData;
   }
 
-  Future<dynamic> getDriversOneOrder(String orderId) async {
+  Future<OneOrderModel> getDriversOneOrderInfo(String id) async {
+    String? token = SaveDataManager.getLoginToken();
+
     final response = await http.get(
-      Uri.parse('http://mircle50-001-site1.atempurl.com/orders/$orderId'),
+      Uri.parse('http://mircle50-001-site1.atempurl.com/orders/$id'),
       headers: {
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoiLVF6SGo5cUliTCJ9XSwiaWF0IjoxNjk2NzcyODU0LCJleHAiOjE2OTkzNjQ4NTR9.ixzP-pVy_Xx3rZxuOvXuq9EgANHT_1mAQjJxH4rKQLw',
+        'Authorization': 'Bearer $token',
       },
     );
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return data;
+      final  data = jsonDecode(response.body);
+      return OneOrderModel.fromJson(data);
+
     } else {
       throw Exception('Failed to retrieve order');
     }

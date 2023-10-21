@@ -1,11 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:thalj/core/routes/app_routes.dart';
 import 'package:thalj/core/utils/app_text_style.dart';
-import 'package:thalj/core/utils/commons.dart';
 
 import 'package:thalj/features/home/presentation/components/home_screen/today_product.dart';
+import 'package:thalj/features/home/presentation/screens/product_info_screen.dart';
 
 import '../../bloc/orders_bloc/orders_bloc.dart';
 import '../../bloc/orders_bloc/orders_event.dart';
@@ -62,13 +61,22 @@ class HomeBody extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return TodayProducts(
                       onTap: () {
-                        navigatePushNamed(
-                            context: context,
-                            route: Routes.productInformationScreen);
-                      },
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                            builder: (context) => Builder(
+                          builder: (BuildContext context) {
+                            return ProductInformationScreen(
+                              id: state.ordersData[index].id,
+                            );
+                          },
+                        ))
+                        );
+                        },
                       location: state.ordersData[index].region,
                       locationTo: state.ordersData[index].regionRecipient,
                       productType: state.ordersData[index].name,
+
                     );
                   },
                 );

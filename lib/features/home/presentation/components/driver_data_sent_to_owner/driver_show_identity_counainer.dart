@@ -15,8 +15,8 @@ driverShowIdentityContainer({
       color: AppColors.lightBlue.withOpacity(.63),
     ),
     child: Shimmer.fromColors(
-        child: Image.network(imagePath!),
         baseColor: AppColors.primary,
-        highlightColor: AppColors.lightBlue),
+        highlightColor: AppColors.lightBlue,
+        child: Image.network(imagePath!)),
   );
 }

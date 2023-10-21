@@ -15,7 +15,7 @@ Widget buildOffersITem({required String name}) {
     child: Column(
       children: [
         Text(
-          "لقد وافق منتج ${name} على طلبك وسيتواصل معك قريبا",
+          "لقد وافق منتج $name على طلبك وسيتواصل معك قريبا",
           style: boldStyle(),
           textAlign: TextAlign.center,
         ),

@@ -18,7 +18,7 @@ import '../bloc/login_bloc/bloc_login_states.dart';
 import '../components/text_filed.dart';
 
 class SignInScreen extends StatefulWidget {
-  SignInScreen({super.key});
+  const SignInScreen({super.key});
 
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -145,7 +145,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 BlocConsumer<LoginBloc, LoginState>(
                   builder: (context, state) {
                     return state.isSubmitting
-                        ? const CircularProgressIndicator()
+                        ? const CircularProgressIndicator.adaptive()
                         : CustomButton(
                             onPressed: () {
                               if (SignInScreen._formKey.currentState!

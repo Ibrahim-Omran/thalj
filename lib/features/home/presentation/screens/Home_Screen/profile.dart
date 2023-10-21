@@ -31,12 +31,10 @@ class _ProfileState extends State<Profile> {
     if(pickedFile!=null){
       setState(() {
         billPhoto = File(pickedFile.path);
-        print('data= $billPhoto');
       });
 
     }
     else{
-      print("error");
     }
   }
 
@@ -128,7 +126,6 @@ class _ProfileState extends State<Profile> {
                             onTap: () {
                               _getImageFromCamera();
 
-                              print('billPhoto: $billPhoto');
 
 
 

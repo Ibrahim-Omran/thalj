@@ -29,13 +29,11 @@ class PaySubScriptionBloc
   @override
   void onChange(Change<PaySubscriptionState> change) {
     super.onChange(change);
-    print(change);
   }
 
   @override
   void onTransition(
       Transition<PaySubscriptionEvent, PaySubscriptionState> transition) {
     super.onTransition(transition);
-    print(transition);
   }
 }
