@@ -103,6 +103,11 @@ class _UploadingSupportingDocumentsViewBodyState
             text: "يوجد مشكلة في السيرفر يرجى التاكد من رفع البيانات",
             state: ToastStates.error,
           );
+        } else if (state is DocumentCheckingLoading) {
+          // BlocProvider.of<DocumentCheckingBloc>(context)
+          //     .add(DocumentChecking());
+          navigatePushReplacement(
+              context: context, route: Routes.documentsCheckScreen);
         }
       },
       builder: (context, state) {
@@ -390,11 +395,6 @@ class _UploadingSupportingDocumentsViewBodyState
                                 operatingCard: operatingCard!,
                                 transferDocument: transferDocument!,
                               ));
-                              if (state is DocumentCheckingLoading) {
-                                navigatePushReplacement(
-                                    context: context,
-                                    route: Routes.documentsCheckScreen);
-                              }
                             },
                             child: Container(
                               width: 351.w,
