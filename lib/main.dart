@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
                   DocumentRepository(DocumentsRemoteDataSource()),
             ),
             RepositoryProvider<DriverRepository>(
-              create: (context) => DriverRepository(DriverRemoteDataSource()),
+              create: (context) => DriverRepository(DriverRemoteDataSource(),),
             ),
             RepositoryProvider<SubscriptionInvoiceRepository>(
               create: (context) => SubscriptionInvoiceRepository(SubscriptionsInvoiceRemoteDataSource()),

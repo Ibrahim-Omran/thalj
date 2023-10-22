@@ -39,6 +39,12 @@ class UserInvoiceBloc extends Bloc<UserInvoiceEvent, UserInvoiceState> {
       bool isAcc= await repository.accInvoiceUser(event.invoiceID,event.orderID);
       if(isAcc ){
         emit(AccUserInvoiceLoaded("Success"));
+        var result = await repository.getInvoicesForUsers();
+        emit(UserInvoiceLoaded(result));
+        if(result.isEmpty){
+          emit(UserInvoiceError('error'));
+
+        }
 
       }else{
         emit(AccUserInvoiceError('error'));

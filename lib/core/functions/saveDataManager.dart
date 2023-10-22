@@ -15,6 +15,10 @@ class SaveDataManager {
   static String? getLoginToken() {
     return loginModel?.token;
   }
+
+  static String? userStatues() {
+    return loginModel?.status;
+  }
   static String? getVerifiedDriver() {
     return loginModel?.verified;
   }

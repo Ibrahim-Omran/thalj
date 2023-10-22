@@ -14,6 +14,7 @@ class LoginModel {
   final String verified;
   final int subscription;
   final String token;
+   String? status;
 
   LoginModel({
     required this.id,
@@ -31,6 +32,7 @@ class LoginModel {
     required this.verified,
     required this.subscription,
     required this.token,
+    required this.status,
   });
 
   factory LoginModel.fromJson(Map<String, dynamic> json) {
@@ -49,6 +51,7 @@ class LoginModel {
       transferDocument: json['transferDocument'],
       verified: json['verified'],
       subscription: json['subscription'],
+      status: json['status'],
       token: json['token'],
     );
   }

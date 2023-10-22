@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thalj/core/utils/app_text_style.dart';
 
 import '../../../../core/widgets/custom_app_bar_product_info.dart';
-import '../bloc/driver_subscription_bloc/driver_subscription_state.dart';
 import '../bloc/user_invoice_bloc/user_invoice_bloc.dart';
 import '../bloc/user_invoice_bloc/user_invoice_event.dart';
 import '../bloc/user_invoice_bloc/user_invoice_state.dart';
@@ -41,19 +40,19 @@ class UserSubscriptionScreen extends StatelessWidget {
                     },
                   ),
                 );
-              }
-              if (state is DriverSubscriptionError) {
-                const Center(child: Text("Error...."));
-              }
-              if (state is UserInvoiceLoading) {
-                return const Center(
-                    child: CircularProgressIndicator.adaptive());
-              } else {
-                return Text(
+              }else if (state is UserInvoiceError) {
+               return Center(child: Text(
                   "لا توجد فواتير",
                   style: boldStyle(),
-                );
+                ));
               }
+
+              else if (state is UserInvoiceLoading) {
+                return const Center(
+                    child: CircularProgressIndicator.adaptive());
+              }
+
+              return Container();
             },
           ),
         ],

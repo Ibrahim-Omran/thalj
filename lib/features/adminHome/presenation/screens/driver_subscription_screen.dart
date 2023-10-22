@@ -31,30 +31,26 @@ class DriverSubscriptionScreen extends StatelessWidget {
           BlocBuilder<DriverSubscriptionBloc, DriverSubscriptionState>(
             builder: (context, state) {
               if (state is DriverSubscriptionLoaded) {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: state.driverSubscriptions.length,
-                    itemBuilder: (context, index) {
-                      return CustomDriverSubscription(
-                        driverSubscriptionModel:
-                            state.driverSubscriptions[index],
-                      );
-                    },
-                  ),
-                );
-              }
-              if (state is DriverSubscriptionError) {
-                const Center(child: Text("Error...."));
-              }
-              if (state is DriverSubscriptionLoading) {
-                return const Center(
-                    child: CircularProgressIndicator.adaptive());
-              } else {
-                return Text(
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: state.driverSubscriptions.length,
+                      itemBuilder: (context, index) {
+                        return CustomDriverSubscription(
+                          driverSubscriptionModel: state.driverSubscriptions[index],
+                        );
+                      },
+                    ),
+                  );
+
+              } else if (state is DriverSubscriptionError) {
+                return Center(child: Text(
                   "لا توجد فواتير",
                   style: boldStyle(),
-                );
+                ),);
+              } else if (state is DriverSubscriptionLoading) {
+                return const Center(child: CircularProgressIndicator.adaptive());
               }
+              return Container();
             },
           ),
         ],

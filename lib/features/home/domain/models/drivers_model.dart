@@ -16,6 +16,7 @@ class DriversModel {
   String? verified;
   int? subscription;
   String? subscriptionDate;
+  String? status;
 
   DriversModel({
     this.id,
@@ -33,6 +34,7 @@ class DriversModel {
     this.verified,
     this.subscription,
     this.subscriptionDate,
+    this.status,
   });
 
   factory DriversModel.fromMap(Map<String, dynamic> data) => DriversModel(
@@ -51,6 +53,7 @@ class DriversModel {
         verified: data['verified'] as String?,
         subscription: data['subscription'] as int?,
         subscriptionDate: data['subscription_date'] as String?,
+    status: data['status'] as String?,
       );
 
   Map<String, dynamic> toMap() => {
@@ -69,6 +72,7 @@ class DriversModel {
         'verified': verified,
         'subscription': subscription,
         'subscription_date': subscriptionDate,
+        'status': status,
       };
 
   /// `dart:convert`

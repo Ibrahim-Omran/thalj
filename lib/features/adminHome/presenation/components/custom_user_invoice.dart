@@ -43,7 +43,9 @@ class CustomUserInvoice extends StatelessWidget {
           height: 5,
         ),
        BlocBuilder<UserInvoiceBloc,UserInvoiceState>(builder: (context,state){
-         return  SizedBox(
+         return  state is AccUserInvoiceLoading
+             ? const Center(child: CircularProgressIndicator.adaptive())
+             : SizedBox(
            width: double.infinity,
            child: ElevatedButton(
                style: ButtonStyle(

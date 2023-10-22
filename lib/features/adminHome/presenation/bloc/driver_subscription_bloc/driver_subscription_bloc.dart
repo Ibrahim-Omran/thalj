@@ -14,6 +14,7 @@ class DriverSubscriptionBloc
         on<AccDriverSubscriptions>(_accDriverSubscriptions);
       }
 
+  static DriverSubscriptionBloc get(context) => BlocProvider.of(context);
 
   Future<void> _onFetchDriverSubscriptions(
       FetchDriverSubscriptions event, Emitter<DriverSubscriptionState> emit) async {
@@ -41,6 +42,14 @@ class DriverSubscriptionBloc
       bool isAcc= await repository.renewDriverSubscription(event.billID);
       if(isAcc ){
         emit(AccDriverSubscriptionLoaded("Success"));
+        var result = await repository.getSubscriptionsForDrivers();
+
+        emit(DriverSubscriptionLoaded(result));
+        if(result.isEmpty){
+          emit(DriverSubscriptionError('error'));
+
+        }
+
 
       }else{
         emit(AccDriverSubscriptionError('error'));

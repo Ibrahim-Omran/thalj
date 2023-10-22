@@ -42,49 +42,41 @@ class _UploadingSupportingDocumentsViewBodyState
         case 'proofOfIdentityFront':
           if (pickedFile!.path.isNotEmpty) {
             proofOfIdentityFront = pickedFile;
-            print('data= $proofOfIdentityFront');
           }
           break;
         case 'proofOfIdentityBack':
           if (pickedFile!.path.isNotEmpty) {
             proofOfIdentityBack = pickedFile;
-            print('data= $proofOfIdentityBack');
           }
           break;
         case 'residenceCardFront':
           if (pickedFile!.path.isNotEmpty) {
             residenceCardFront = pickedFile;
-            print('data= $residenceCardFront');
           }
           break;
         case 'residenceCardBack':
           if (pickedFile!.path.isNotEmpty) {
             residenceCardBack = pickedFile;
-            print('data= $residenceCardBack');
           }
           break;
         case 'drivingLicense':
           if (pickedFile!.path.isNotEmpty) {
             drivingLicense = pickedFile;
-            print('data= $drivingLicense');
           }
           break;
         case 'vehicleLicense':
           if (pickedFile!.path.isNotEmpty) {
             vehicleLicense = pickedFile;
-            print('data= $vehicleLicense');
           }
           break;
         case 'operatingCard':
           if (pickedFile!.path.isNotEmpty) {
             operatingCard = pickedFile;
-            print('data= $operatingCard');
           }
           break;
         case 'transferDocument':
           if (pickedFile!.path.isNotEmpty) {
             transferDocument = pickedFile;
-            print('data= $transferDocument');
           }
           break;
         default:

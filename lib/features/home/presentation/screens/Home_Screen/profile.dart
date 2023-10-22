@@ -8,6 +8,7 @@ import 'package:thalj/core/utils/toast.dart';
 import 'package:thalj/features/home/presentation/bloc/paySubscription/paySubscription-bloc.dart';
 import 'package:thalj/features/home/presentation/bloc/paySubscription/paySubscription-state.dart';
 
+import '../../../../../core/functions/saveDataManager.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_text_style.dart';
@@ -24,7 +25,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   final picker = ImagePicker();
-
+String ? status = SaveDataManager.loginModel!.status;
   File? billPhoto;
 
   Future<void> _getImageFromCamera() async {
@@ -44,7 +45,7 @@ class _ProfileState extends State<Profile> {
   }
 
   Widget _body(BuildContext context) {
-    return Column(
+    return  Column(
       children: [
         const ProfileAppBar(),
         SizedBox(
@@ -53,7 +54,21 @@ class _ProfileState extends State<Profile> {
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
-            child: Column(
+            child: status == "Accepted"
+                ? Center(
+              child: Text(
+                "الحساب مفعل",
+                style: boldStyle(),
+              ),
+            )
+                : status == "Waiting"
+                ? Center(
+              child: Text(
+                "جاري التحقق من الفاتورة",
+                style: boldStyle(),
+              ),
+            )
+                : Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -81,19 +96,20 @@ class _ProfileState extends State<Profile> {
                     color: AppColors.lightBlue.withOpacity(.63),
                   ),
                   child: Center(
-                      child: Text(
-                    '4000 1234 5678 9010',
-                    style: regularStyle(),
-                  )),
+                    child: Text(
+                      '4000 1234 5678 9010',
+                      style: regularStyle(),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 20.h,
                 ),
                 BlocBuilder<PaySubScriptionBloc, PaySubscriptionState>(
-                    builder: (context, state) {
-                  return Column(
-                    children: [
-                      customContainer(
+                  builder: (context, state) {
+                    return Column(
+                      children: [
+                        customContainer(
                           mainText: billPhoto == null
                               ? AppStrings.paidSubscribation
                               : AppStrings.donePay,
@@ -103,55 +119,63 @@ class _ProfileState extends State<Profile> {
                           textFrontOrBack2: '',
                           onTap: () {
                             _getImageFromCamera();
-                          }),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          billPhoto == null
-                              ? showToast(
-                                  text: "برجاء تحميل الفاتورة",
-                                  state: ToastStates.error)
-                              : BlocProvider.of<PaySubScriptionBloc>(context)
-                                  .add(PaySubscriptionUpload(
-                                      billPhoto: billPhoto!));
-                        },
-                        child: state is PaySubscriptionUploading
-                            ? const Center(
-                                child: CircularProgressIndicator.adaptive())
-                            : Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Container(
-                                    width: double.infinity,
-                                    height: 40.h,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 24),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: billPhoto == null
-                                          ? Colors.grey
-                                          : const Color(0xFF3CC16F),
-                                    ),
-                                    child: const Center(
-                                      child: Text(
-                                        'ارسل الوصل',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: 'Cairo',
-                                          fontWeight: FontWeight.w600,
-                                          height: 0.02,
-                                          letterSpacing: 1,
-                                        ),
-                                      ),
-                                    )),
+                          },
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            billPhoto == null
+                                ? showToast(
+                              text: "برجاء تحميل الفاتورة",
+                              state: ToastStates.error,
+                            )
+                                : BlocProvider.of<PaySubScriptionBloc>(context).add(
+                              PaySubscriptionUpload(
+                                billPhoto: billPhoto!,
                               ),
-                      ),
-                    ],
-                  );
-                }),
+                            );
+                          },
+                          child: state is PaySubscriptionUploading
+                              ? const Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          )
+                              : Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Container(
+                              width: double.infinity,
+                              height: 40.h,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 24,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: billPhoto == null
+                                    ? Colors.grey
+                                    : const Color(0xFF3CC16F),
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'ارسل الوصل',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontFamily: 'Cairo',
+                                    fontWeight: FontWeight.w600,
+                                    height: 0.02,
+                                    letterSpacing: 1,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ],
             ),
           ),

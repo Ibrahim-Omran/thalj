@@ -10,7 +10,6 @@ final class PaySubscriptionLoading extends PaySubscriptionState {
 
  class PaySubscriptionSuccess extends PaySubscriptionState {
 
-
 }
 
  class PaySubscriptionUploading extends PaySubscriptionState {}

@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../../core/functions/saveDataManager.dart';
 import '../../../core/network/ErrorModel.dart';
+import '../../../core/utils/app_strings.dart';
 import '../../../core/utils/toast.dart';
 import '../domain/models/admin_model.dart';
 import '../domain/models/login_model.dart';
@@ -12,6 +14,11 @@ import '../domain/models/register_model.dart';
 
 class AuthRemoteDataSource {
   Future<bool> login({required String email, required String password}) async {
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
     try {
       final response = await http.post(
         Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/login'),
@@ -43,6 +50,7 @@ class AuthRemoteDataSource {
               transferDocument: loginData['transferDocument'],
               verified: loginData['verified'],
               subscription: loginData['subscription'],
+              status: loginData['status'],
               token: jsonResponse['token']);
           SaveDataManager.saveLoginToken(loginModel);
 
@@ -75,6 +83,11 @@ class AuthRemoteDataSource {
       required String password,
       required String name,
       required String phone}) async {
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
     try {
       final response = await http.post(
         Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/signup'),
@@ -126,6 +139,11 @@ class AuthRemoteDataSource {
 
   Future<bool> adminLogin(
       {required String email, required String password}) async {
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
     try {
       http.Response response = await http.post(
           Uri.parse('http://mircle50-001-site1.atempurl.com/users/login'),

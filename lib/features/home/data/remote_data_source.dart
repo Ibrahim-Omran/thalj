@@ -3,12 +3,14 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:thalj/features/home/domain/models/drivers_model.dart';
 import 'package:thalj/features/home/domain/models/orders_model.dart';
 
 import '../../../../core/network/ErrorModel.dart';
 import '../../../../core/utils/toast.dart';
 import '../../../core/functions/saveDataManager.dart';
+import '../../../core/utils/app_strings.dart';
 import '../domain/models/accepted_OrderModel.dart';
 import '../domain/models/one_order_model.dart';
 
@@ -19,6 +21,13 @@ class DriverRemoteDataSource {
     required String phone,
     required String id,
   }) async {
+
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
+
     try {
       String? token = SaveDataManager.getLoginToken();
 
@@ -64,6 +73,11 @@ class DriverRemoteDataSource {
 
   Future<List<AcceptedOrdersModel>> getAcceptedOffers() async {
     String? token = SaveDataManager.getLoginToken();
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
     final response = await http.get(
         Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/orders'),
         headers: {
@@ -94,6 +108,11 @@ class DriverRemoteDataSource {
 
   Future<List<DriversModel>> getDriversData() async {
     String? token = SaveDataManager.getAdminToken();
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
     var data = await http.get(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard'),
         headers: {
@@ -116,7 +135,11 @@ class DriverRemoteDataSource {
 
     String? token = SaveDataManager.getAdminToken();
 
-
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
 
     var data = await http.patch(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
@@ -141,7 +164,11 @@ class DriverRemoteDataSource {
 
   Future<bool> refuseDrivers(String id) async {
     String? token = SaveDataManager.getAdminToken();
-
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
     var data = await http.delete(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
         headers: {
@@ -163,7 +190,11 @@ class DriverRemoteDataSource {
 
   Future<List<OrdersModel>> getDriversOrders() async {
     String? token = SaveDataManager.getLoginToken();
-
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
     var response = await http.get(
       Uri.parse('http://mircle50-001-site1.atempurl.com/orders'),
       headers: {
@@ -198,7 +229,11 @@ class DriverRemoteDataSource {
 
   Future<OneOrderModel> getDriversOneOrderInfo(String id) async {
     String? token = SaveDataManager.getLoginToken();
-
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
     final response = await http.get(
       Uri.parse('http://mircle50-001-site1.atempurl.com/orders/$id'),
       headers: {
@@ -218,6 +253,11 @@ class DriverRemoteDataSource {
   Future<bool> paySubscription({
     required File billPhoto,
   }) async {
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
     try {
 
       String? token = SaveDataManager.getLoginToken();

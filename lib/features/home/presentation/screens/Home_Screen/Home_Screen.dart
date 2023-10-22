@@ -51,15 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home,), label: 'الرئيسيه'),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.local_offer_outlined,), label: 'العروض'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.person,), label: 'حسابى')
-
-      //   ],
-      // ),
       body:  SafeArea(child: _pages.elementAt(_selectedIndex),
       ),
 

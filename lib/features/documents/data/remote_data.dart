@@ -1,8 +1,11 @@
 
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:thalj/core/functions/saveDataManager.dart';
 import 'package:thalj/core/utils/toast.dart';
+
+import '../../../core/utils/app_strings.dart';
 
 class DocumentsRemoteDataSource {
   Future<bool> uploadProofDocuments({
@@ -15,6 +18,11 @@ class DocumentsRemoteDataSource {
     required XFile operatingCard,
     required XFile transferDocument,
   }) async {
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
     try {
       String? token = SaveDataManager.getRegisterToken();
 
@@ -50,7 +58,6 @@ class DocumentsRemoteDataSource {
           formNames,
           headers);
     } catch (e) {
-      print("Error in out function $e");
       return false;
     }
   }
@@ -58,6 +65,11 @@ class DocumentsRemoteDataSource {
 
 Future<bool> uploadImages(Uri apiUrl, List<XFile> images,
     List<String> formNames, Map<String, String> headers) async {
+  bool result = await InternetConnectionChecker().hasConnection;
+  if(!result)
+  {
+    showToast(text: AppStrings.noInternet, state: ToastStates.error);
+  }
   try {
     var request = http.MultipartRequest('PATCH', apiUrl);
     for (var i = 0; i < images.length; i++) {
@@ -73,8 +85,7 @@ Future<bool> uploadImages(Uri apiUrl, List<XFile> images,
       showToast(text: "تم التحميل بنجاح", state: ToastStates.success);
       return true;
     } else {
-      print(
-          'Failed to upload images rescode: ${response.reasonPhrase}  ${response.statusCode}');
+
       showToast(text:"برجاء المحاولة لاحقا", state: ToastStates.error);
       return false;
     }
