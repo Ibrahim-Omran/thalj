@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:thalj/core/routes/app_routes.dart';
 import 'package:thalj/core/utils/commons.dart';
+import 'package:thalj/core/utils/toast.dart';
 import 'package:thalj/core/widgets/logo.dart';
 import 'package:thalj/features/documents/presentation/bloc/document_checking_bloc/document_checking_bloc.dart';
 
@@ -98,21 +99,9 @@ class _UploadingSupportingDocumentsViewBodyState
     return BlocConsumer<DocumentCheckingBloc, DocumentCheckingState>(
       listener: (context, state) {
         if (state is DocumentUploadFailed) {
-          showAdaptiveDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: const Text('تحذير'),
-                content: const Text("يرجى التاكد من رفع كل البانات"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text("حسنا"))
-                ],
-              );
-            },
+          showToast(
+            text: "يوجد مشكلة في السيرفر يرجى التاكد من رفع البيانات",
+            state: ToastStates.error,
           );
         }
       },
@@ -136,6 +125,7 @@ class _UploadingSupportingDocumentsViewBodyState
             : Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                   child: SafeArea(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -167,35 +157,47 @@ class _UploadingSupportingDocumentsViewBodyState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            customContainer(
-                                mainText: AppStrings.frontId,
-                                textFrontOrBack: AppStrings.back,
-                                height: 160.0.h,
-                                width: 176.0.w,
-                                textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   proofOfIdentityBack = File(file);
-                                  // });
-                                  _getImageFromCamera('proofOfIdentityBack');
-                                }),
+                            proofOfIdentityBack == null
+                                ? customContainer(
+                                    mainText: AppStrings.frontId,
+                                    textFrontOrBack: AppStrings.back,
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: AppStrings.frontId2,
+                                    onTap: () {
+                                      _getImageFromCamera(
+                                          'proofOfIdentityBack');
+                                    })
+                                : customContainer(
+                                    mainText: AppStrings.doneUploading,
+                                    textFrontOrBack: '',
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: '',
+                                    onTap: () {},
+                                  ),
                             SizedBox(
                               width: 10.w,
                             ),
-                            customContainer(
-                                mainText: AppStrings.frontId,
-                                textFrontOrBack: AppStrings.front,
-                                height: 160.0.h,
-                                width: 176.0.w,
-                                textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   proofOfIdentityFront = File(file);
-                                  // });
-                                  _getImageFromCamera('proofOfIdentityFront');
-                                }),
+                            proofOfIdentityFront == null
+                                ? customContainer(
+                                    mainText: AppStrings.frontId,
+                                    textFrontOrBack: AppStrings.front,
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: AppStrings.frontId2,
+                                    onTap: () {
+                                      _getImageFromCamera(
+                                          'proofOfIdentityFront');
+                                    })
+                                : customContainer(
+                                    mainText: AppStrings.doneUploading,
+                                    textFrontOrBack: '',
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: '',
+                                    onTap: () {},
+                                  ),
                           ],
                         ),
                         SizedBox(
@@ -211,36 +213,45 @@ class _UploadingSupportingDocumentsViewBodyState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            customContainer(
-                                mainText: AppStrings.frontId,
-                                textFrontOrBack: AppStrings.back,
-                                height: 160.0.h,
-                                width: 176.0.w,
-                                textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   residenceCardBack = File(file);
-                                  // });
-
-                                  _getImageFromCamera('residenceCardBack');
-                                }),
+                            residenceCardBack == null
+                                ? customContainer(
+                                    mainText: AppStrings.frontId,
+                                    textFrontOrBack: AppStrings.back,
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: AppStrings.frontId2,
+                                    onTap: () {
+                                      _getImageFromCamera('residenceCardBack');
+                                    })
+                                : customContainer(
+                                    mainText: AppStrings.doneUploading,
+                                    textFrontOrBack: '',
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: '',
+                                    onTap: () {},
+                                  ),
                             SizedBox(
                               width: 10.w,
                             ),
-                            customContainer(
-                                mainText: AppStrings.frontId,
-                                textFrontOrBack: AppStrings.front,
-                                height: 160.0.h,
-                                width: 176.0.w,
-                                textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   residenceCardFront = File(file);
-                                  // });
-                                  _getImageFromCamera('residenceCardFront');
-                                }),
+                            residenceCardFront == null
+                                ? customContainer(
+                                    mainText: AppStrings.frontId,
+                                    textFrontOrBack: AppStrings.front,
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: AppStrings.frontId2,
+                                    onTap: () {
+                                      _getImageFromCamera('residenceCardFront');
+                                    })
+                                : customContainer(
+                                    mainText: AppStrings.doneUploading,
+                                    textFrontOrBack: '',
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: '',
+                                    onTap: () {},
+                                  ),
                           ],
                         ),
                         SizedBox(
@@ -254,20 +265,25 @@ class _UploadingSupportingDocumentsViewBodyState
                           height: 12,
                         ),
                         Center(
-                            child: customContainer(
-                                mainText:
-                                    AppStrings.chooseFileToUploadYourLicense,
-                                height: 160.h,
-                                width: 362.w,
-                                textFrontOrBack: '',
-                                textFrontOrBack2: '',
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   drivingLicense = File(file);
-                                  // });
-                                  _getImageFromCamera('drivingLicense');
-                                })),
+                            child: drivingLicense == null
+                                ? customContainer(
+                                    mainText: AppStrings
+                                        .chooseFileToUploadYourLicense,
+                                    height: 160.h,
+                                    width: 362.w,
+                                    textFrontOrBack: '',
+                                    textFrontOrBack2: '',
+                                    onTap: () {
+                                      _getImageFromCamera('drivingLicense');
+                                    })
+                                : customContainer(
+                                    mainText: AppStrings.doneUploading,
+                                    textFrontOrBack: '',
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: '',
+                                    onTap: () {},
+                                  )),
                         SizedBox(
                           height: 12.h,
                         ),
@@ -279,20 +295,25 @@ class _UploadingSupportingDocumentsViewBodyState
                           height: 12,
                         ),
                         Center(
-                            child: customContainer(
-                                mainText:
-                                    AppStrings.chooseFileToUploadYourLicense,
-                                height: 160.h,
-                                width: 362.w,
-                                textFrontOrBack: '',
-                                textFrontOrBack2: '',
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   vehicleLicense = File(file);
-                                  // });
-                                  _getImageFromCamera('vehicleLicense');
-                                })),
+                            child: vehicleLicense == null
+                                ? customContainer(
+                                    mainText: AppStrings
+                                        .chooseFileToUploadYourLicense,
+                                    height: 160.h,
+                                    width: 362.w,
+                                    textFrontOrBack: '',
+                                    textFrontOrBack2: '',
+                                    onTap: () {
+                                      _getImageFromCamera('vehicleLicense');
+                                    })
+                                : customContainer(
+                                    mainText: AppStrings.doneUploading,
+                                    textFrontOrBack: '',
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: '',
+                                    onTap: () {},
+                                  )),
                         SizedBox(
                           height: 12.h,
                         ),
@@ -304,20 +325,25 @@ class _UploadingSupportingDocumentsViewBodyState
                           height: 12,
                         ),
                         Center(
-                            child: customContainer(
-                                mainText:
-                                    AppStrings.chooseFileToUploadYourLicense,
-                                height: 160.h,
-                                width: 362.w,
-                                textFrontOrBack: '',
-                                textFrontOrBack2: '',
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   operatingCard = File(file);
-                                  // });
-                                  _getImageFromCamera('operatingCard');
-                                })),
+                            child: operatingCard == null
+                                ? customContainer(
+                                    mainText: AppStrings
+                                        .chooseFileToUploadYourLicense,
+                                    height: 160.h,
+                                    width: 362.w,
+                                    textFrontOrBack: '',
+                                    textFrontOrBack2: '',
+                                    onTap: () {
+                                      _getImageFromCamera('operatingCard');
+                                    })
+                                : customContainer(
+                                    mainText: AppStrings.doneUploading,
+                                    textFrontOrBack: '',
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: '',
+                                    onTap: () {},
+                                  )),
                         SizedBox(
                           height: 12.h,
                         ),
@@ -329,20 +355,25 @@ class _UploadingSupportingDocumentsViewBodyState
                           height: 12,
                         ),
                         Center(
-                            child: customContainer(
-                                mainText:
-                                    AppStrings.chooseFileToUploadYourLicense,
-                                height: 160.h,
-                                width: 362.w,
-                                textFrontOrBack: '',
-                                textFrontOrBack2: '',
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   transferDocument = File(file);
-                                  // });
-                                  _getImageFromCamera('transferDocument');
-                                })),
+                            child: transferDocument == null
+                                ? customContainer(
+                                    mainText: AppStrings
+                                        .chooseFileToUploadYourLicense,
+                                    height: 160.h,
+                                    width: 362.w,
+                                    textFrontOrBack: '',
+                                    textFrontOrBack2: '',
+                                    onTap: () {
+                                      _getImageFromCamera('transferDocument');
+                                    })
+                                : customContainer(
+                                    mainText: AppStrings.doneUploading,
+                                    textFrontOrBack: '',
+                                    height: 160.0.h,
+                                    width: 176.0.w,
+                                    textFrontOrBack2: '',
+                                    onTap: () {},
+                                  )),
                         const SizedBox(
                           height: 12,
                         ),

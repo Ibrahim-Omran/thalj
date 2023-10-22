@@ -1,7 +1,8 @@
 class AppStrings {
   static const String appName = 'تلج';
   static const String welcome = 'آهلا بك في ثلج';
-  static const String verifyMessage = 'لا يمكنك تسجيل الدخول الا بعد الموافقة علي اوراقك';
+  static const String verifyMessage =
+      'لا يمكنك تسجيل الدخول الا بعد الموافقة علي اوراقك';
   static const String signIn = 'تسجيل دخول';
   static const String askSignIn = 'قم بتسجيل دخول';
   static const String signInHint = 'يرجى تسجيل الدخول إلى حسابك للمتابعة';
@@ -81,8 +82,8 @@ class AppStrings {
       'تم التأكد من جميع المستندات، و يمكنك البدأ مباشرتاً';
   static const String startDelivery = 'بدأ الشحن';
 
-  static const String paidSubscribation =
-      'قم برفع الوصل هنا.';
+  static const String paidSubscribation = 'قم برفع الوصل هنا.';
+  static const String doneUploading = 'تم رفع هذا المستند';
 
   //vaild
   static const String vaildForm = 'يجب ملئ الحقل';

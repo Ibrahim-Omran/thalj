@@ -1,29 +1,3 @@
-<<<<<<< HEAD:lib/features/adminHome/domain/subscription_invoice_repository.dart
-
-
-// import '../data/remote_data/subscription_invoice_remote_data_source.dart';
-// import 'models/driver_subscription_model.dart';
-// import 'models/user_invoice_model.dart';
-
-// class SubscriptionInvoiceRepository {
-//   final SubscriptionsInvoiceRemoteDataSource subscriptionsRemoteDataSource;
-//   SubscriptionInvoiceRepository(this.subscriptionsRemoteDataSource);
-
-//   Future<List<DriverSubscriptionModel>> getSubscriptionsForDrivers() async {
-//     List<DriverSubscriptionModel> subscriptions =
-//         await subscriptionsRemoteDataSource.getDriverSubscriptions();
-//     return subscriptions;
-//   }
-
-//   Future<List<UserInvoiceModel>> getInvoicesForUsers() async {
-//     List<UserInvoiceModel> invoices =
-//         await subscriptionsRemoteDataSource.getUserInvoices();
-//     return invoices;
-//   }
-// }
-=======
-
-
 import '../data/remote_data/remote_data_source.dart';
 import 'models/driver_subscription_model.dart';
 import 'models/user_invoice_model.dart';
@@ -45,15 +19,13 @@ class SubscriptionInvoiceRepository {
   }
 
   Future<bool> renewDriverSubscription(String id) async {
-    bool isAcc =
-    await subscriptionsRemoteDataSource.renewDrivers(id);
+    bool isAcc = await subscriptionsRemoteDataSource.renewDrivers(id);
     return isAcc;
   }
 
   Future<bool> accInvoiceUser(String invoiceId, String orderId) async {
-    bool isAcc =
-    await subscriptionsRemoteDataSource.renewUsersInvoices(invoiceId,orderId);
+    bool isAcc = await subscriptionsRemoteDataSource.renewUsersInvoices(
+        invoiceId, orderId);
     return isAcc;
   }
 }
->>>>>>> a2769febcd2373c40eaadaa3b4dcd57a8c4ac978:lib/features/adminHome/domain/repository.dart
