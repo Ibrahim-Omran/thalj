@@ -85,6 +85,7 @@ class AppStrings {
       'قم برفع الوصل هنا.';
   static const String donePay =
       'تم رفع الوصل برجاء اضغظ على (ارسل الوصل)';
+  static const String doneUploading = 'تم رفع هذا المستند';
 
   //vaild
   static const String vaildForm = 'يجب ملئ الحقل';

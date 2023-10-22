@@ -35,10 +35,7 @@ class DocumentCheckingBloc
           emit(DocumentUploadFailed());
         }
       }
-      // else if (event is DocumentChecking) {
-      //   emit(DocumentCheckingLoading(true, AppStrings.pleaseWait,
-      //       AppStrings.ourTeamChecking, AppAssets.loadingChecking));
-      // }
+
       else {
         emit(DocumentCheckingSuccess(false, AppStrings.congratulation,
             AppStrings.doneChecking, AppAssets.doneChecking));
