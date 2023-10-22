@@ -1,18 +1,19 @@
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:thalj/core/functions/saveDataManager.dart';
+import 'package:thalj/core/utils/toast.dart';
 
 class DocumentsRemoteDataSource {
   Future<bool> uploadProofDocuments({
-    required File proofOfIdentityFront,
-    required File proofOfIdentityBack,
-    required File residenceCardFront,
-    required File residenceCardBack,
-    required File drivingLicense,
-    required File vehicleLicense,
-    required File operatingCard,
-    required File transferDocument,
+    required XFile proofOfIdentityFront,
+    required XFile proofOfIdentityBack,
+    required XFile residenceCardFront,
+    required XFile residenceCardBack,
+    required XFile drivingLicense,
+    required XFile vehicleLicense,
+    required XFile operatingCard,
+    required XFile transferDocument,
   }) async {
     try {
       String? token = SaveDataManager.getRegisterToken();
@@ -32,7 +33,7 @@ class DocumentsRemoteDataSource {
         'operatingCard',
         'transferDocument',
       ];
-      List<File> images = [
+      List<XFile> images = [
         proofOfIdentityFront,
         proofOfIdentityBack,
         residenceCardFront,
@@ -49,28 +50,36 @@ class DocumentsRemoteDataSource {
           formNames,
           headers);
     } catch (e) {
+      print("Error in out function $e");
       return false;
     }
   }
 }
 
-Future<bool> uploadImages(Uri apiUrl, List<File> images, List<String> formNames,
-    Map<String, String> headers) async {
+Future<bool> uploadImages(Uri apiUrl, List<XFile> images,
+    List<String> formNames, Map<String, String> headers) async {
   try {
     var request = http.MultipartRequest('PATCH', apiUrl);
     for (var i = 0; i < images.length; i++) {
-      var bytes = await images[i].readAsBytes();
-      var multipartFile = http.MultipartFile.fromBytes(formNames[i], bytes);
+      var multipartFile = await http.MultipartFile.fromPath(
+        formNames[i],
+        images[i].path,
+      );
       request.files.add(multipartFile);
     }
     request.headers.addAll(headers);
     var response = await request.send();
     if (response.statusCode == 200) {
+      showToast(text: "تم التحميل بنجاح", state: ToastStates.success);
       return true;
     } else {
+      print(
+          'Failed to upload images rescode: ${response.reasonPhrase}  ${response.statusCode}');
+      showToast(text:"برجاء المحاولة لاحقا", state: ToastStates.error);
       return false;
     }
   } catch (e) {
+    showToast(text:"برجاء المحاولة لاحقا", state: ToastStates.error);
     return false;
   }
 }

@@ -31,6 +31,7 @@ class SubscriptionsInvoiceRemoteDataSource {
           driverSubscriptions = data
               .map((item) => DriverSubscriptionModel.fromJson(item))
               .toList();
+          print(response.body);
 
         } else {
           final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
@@ -61,6 +62,7 @@ class SubscriptionsInvoiceRemoteDataSource {
           userSubscriptions = data
               .map((item) => UserInvoiceModel.fromJson(item))
               .toList();
+
         } else {
           final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
           final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
@@ -68,6 +70,7 @@ class SubscriptionsInvoiceRemoteDataSource {
               text: errorMessageModel.statusMessage, state: ToastStates.error);        }
       }
     } catch (e) {
+      print(e.toString());
       throw Exception(e);
     }
     return userSubscriptions;
@@ -113,9 +116,13 @@ class SubscriptionsInvoiceRemoteDataSource {
         });
 
     if (data.statusCode == 200) {
+
       showToast(text: "تم قبول الفاترة", state: ToastStates.success);
       return true;
     } else {
+      print(data.body);
+      print(invoiceId+ orderId);
+
       showToast(text:"برجاء المحاولة لاحقا", state: ToastStates.error);
 
       return false;

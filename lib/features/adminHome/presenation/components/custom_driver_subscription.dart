@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -23,21 +24,30 @@ class CustomDriverSubscription extends StatelessWidget {
         Container(
           height: 273,
           color: const Color.fromRGBO(224, 232, 255, 0.63),
-          child: Shimmer.fromColors(
-              baseColor: AppColors.primary,
-              highlightColor: AppColors.lightBlue,
-              child: Image.network(driverSubscriptionModel.invoice)),
+          child: CachedNetworkImage(
+            imageUrl: driverSubscriptionModel.invoice,
+            placeholder: (context, url) {
+              return Shimmer.fromColors(
+                  baseColor: AppColors.primary,
+                  highlightColor: AppColors.lightBlue,
+                  child: const SizedBox(
+                    height: double.maxFinite,
+                    width: double.maxFinite,
+                  ));
+            },
+            errorWidget: (context, url, error) {
+              return const Icon(Icons.error);
+            },
+          ),
         ),
         const SizedBox(
           height: 5,
         ),
         BlocBuilder<DriverSubscriptionBloc, DriverSubscriptionState>(
           builder: (BuildContext context, DriverSubscriptionState state) {
-            return state is AccSubscriptionLoading
-                ? const Center(child: CircularProgressIndicator.adaptive())
-                : SizedBox(
+            return SizedBox(
                     width: double.infinity,
-                    child: ElevatedButton(
+                    child:  ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 const Color(0xFF3CC26F))),

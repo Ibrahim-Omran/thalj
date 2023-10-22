@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,43 +26,66 @@ class _UploadingSupportingDocumentsViewBodyState
   // File? _image;
   final picker = ImagePicker();
 
-
-  File? proofOfIdentityFront;
-  File? proofOfIdentityBack;
-  File? residenceCardFront;
-  File? residenceCardBack;
-  File? drivingLicense;
-  File? vehicleLicense;
-  File? operatingCard;
-  File? transferDocument;
+  XFile? proofOfIdentityFront;
+  XFile? proofOfIdentityBack;
+  XFile? residenceCardFront;
+  XFile? residenceCardBack;
+  XFile? drivingLicense;
+  XFile? vehicleLicense;
+  XFile? operatingCard;
+  XFile? transferDocument;
   Future<void> _getImageFromCamera(String variableName) async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    final XFile? pickedFile =
+    await picker.pickImage(source: ImageSource.camera);
     setState(() {
       switch (variableName) {
         case 'proofOfIdentityFront':
-          proofOfIdentityFront = File(pickedFile!.path);
+          if (pickedFile!.path.isNotEmpty) {
+            proofOfIdentityFront = pickedFile;
+            print('data= $proofOfIdentityFront');
+          }
           break;
         case 'proofOfIdentityBack':
-          proofOfIdentityBack = File(pickedFile!.path);
+          if (pickedFile!.path.isNotEmpty) {
+            proofOfIdentityBack = pickedFile;
+            print('data= $proofOfIdentityBack');
+          }
           break;
         case 'residenceCardFront':
-          residenceCardFront = File(pickedFile!.path);
-
+          if (pickedFile!.path.isNotEmpty) {
+            residenceCardFront = pickedFile;
+            print('data= $residenceCardFront');
+          }
           break;
         case 'residenceCardBack':
-          residenceCardBack = File(pickedFile!.path);
+          if (pickedFile!.path.isNotEmpty) {
+            residenceCardBack = pickedFile;
+            print('data= $residenceCardBack');
+          }
           break;
         case 'drivingLicense':
-          drivingLicense = File(pickedFile!.path);
+          if (pickedFile!.path.isNotEmpty) {
+            drivingLicense = pickedFile;
+            print('data= $drivingLicense');
+          }
           break;
         case 'vehicleLicense':
-          vehicleLicense = File(pickedFile!.path);
+          if (pickedFile!.path.isNotEmpty) {
+            vehicleLicense = pickedFile;
+            print('data= $vehicleLicense');
+          }
           break;
         case 'operatingCard':
-          operatingCard = File(pickedFile!.path);
+          if (pickedFile!.path.isNotEmpty) {
+            operatingCard = pickedFile;
+            print('data= $operatingCard');
+          }
           break;
         case 'transferDocument':
-          transferDocument = File(pickedFile!.path);
+          if (pickedFile!.path.isNotEmpty) {
+            transferDocument = pickedFile;
+            print('data= $transferDocument');
+          }
           break;
         default:
           break;
@@ -98,265 +119,245 @@ class _UploadingSupportingDocumentsViewBodyState
       builder: (context, state) {
         return state is DocumentUploading
             ? Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'جاري تحميل البيانات',
+                style: boldStyle(),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              const CircularProgressIndicator.adaptive(),
+            ],
+          ),
+        )
+            : Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: SingleChildScrollView(
+            child: SafeArea(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('جاري تحميل البيانات',style: boldStyle(),),
-                  SizedBox(height: 20.h,),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      BackArrow(),
+                    ],
+                  ),
+                  const Center(
+                    child: LogoWidget(),
+                  ),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  Text(AppStrings.uploadingSupportingDocuments,
+                      style: boldStyle()),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  Text(
+                    AppStrings.uploadingId,
+                    style: regularStyle(),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      customContainer(
+                          mainText: AppStrings.frontId,
+                          textFrontOrBack: AppStrings.back,
+                          height: 160.0.h,
+                          width: 176.0.w,
+                          textFrontOrBack2: AppStrings.frontId2,
+                          onTap: () {
 
-                  const CircularProgressIndicator.adaptive(),
+                            _getImageFromCamera('proofOfIdentityBack');
+                          }),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      customContainer(
+                          mainText: AppStrings.frontId,
+                          textFrontOrBack: AppStrings.front,
+                          height: 160.0.h,
+                          width: 176.0.w,
+                          textFrontOrBack2: AppStrings.frontId2,
+                          onTap: () {
+
+                            _getImageFromCamera('proofOfIdentityFront');
+                          }),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  Text(
+                    AppStrings.expatriateUploadingId,
+                    style: regularStyle(),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      customContainer(
+                          mainText: AppStrings.frontId,
+                          textFrontOrBack: AppStrings.back,
+                          height: 160.0.h,
+                          width: 176.0.w,
+                          textFrontOrBack2: AppStrings.frontId2,
+                          onTap: () {
+
+
+                            _getImageFromCamera('residenceCardBack');
+                          }),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      customContainer(
+                          mainText: AppStrings.frontId,
+                          textFrontOrBack: AppStrings.front,
+                          height: 160.0.h,
+                          width: 176.0.w,
+                          textFrontOrBack2: AppStrings.frontId2,
+                          onTap: () {
+
+                            _getImageFromCamera('residenceCardFront');
+                          }),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  Text(
+                    AppStrings.uploadDrivingLicense,
+                    style: regularStyle(),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Center(
+                      child: customContainer(
+                          mainText:
+                          AppStrings.chooseFileToUploadYourLicense,
+                          height: 160.h,
+                          width: 362.w,
+                          textFrontOrBack: '',
+                          textFrontOrBack2: '',
+                          onTap: () {
+
+                            _getImageFromCamera('drivingLicense');
+                          })),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  Text(
+                    AppStrings.uploadVehicleRegistrationForm,
+                    style: regularStyle(),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Center(
+                      child: customContainer(
+                          mainText:
+                          AppStrings.chooseFileToUploadYourLicense,
+                          height: 160.h,
+                          width: 362.w,
+                          textFrontOrBack: '',
+                          textFrontOrBack2: '',
+                          onTap: () {
+
+                            _getImageFromCamera('vehicleLicense');
+                          })),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  Text(
+                    AppStrings.uploadDriverCard,
+                    style: regularStyle(),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Center(
+                      child: customContainer(
+                          mainText:
+                          AppStrings.chooseFileToUploadYourLicense,
+                          height: 160.h,
+                          width: 362.w,
+                          textFrontOrBack: '',
+                          textFrontOrBack2: '',
+                          onTap: () {
+
+                            _getImageFromCamera('operatingCard');
+                          })),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  Text(
+                    AppStrings.uploadTransferDocument,
+                    style: regularStyle(),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Center(
+                      child: customContainer(
+                          mainText:
+                          AppStrings.chooseFileToUploadYourLicense,
+                          height: 160.h,
+                          width: 362.w,
+                          textFrontOrBack: '',
+                          textFrontOrBack2: '',
+                          onTap: () {
+
+                            _getImageFromCamera('transferDocument');
+                          })),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        BlocProvider.of<DocumentCheckingBloc>(context)
+                            .add(DocumentUpload(
+                          proofOfIdentityFront: proofOfIdentityFront!,
+                          proofOfIdentityBack: proofOfIdentityBack!,
+                          residenceCardFront: residenceCardFront!,
+                          residenceCardBack: residenceCardBack!,
+                          drivingLicense: drivingLicense!,
+                          vehicleLicense: vehicleLicense!,
+                          operatingCard: operatingCard!,
+                          transferDocument: transferDocument!,
+                        ));
+                        if (state is DocumentCheckingLoading) {
+                          navigatePushReplacement(
+                              context: context,
+                              route: Routes.documentsCheckScreen);
+                        }
+                      },
+                      child: Container(
+                        width: 351.w,
+                        height: 47.h,
+                        color: AppColors.primary,
+                        child: Center(
+                          child: Text(
+                            AppStrings.saveData,
+                            style: boldStyle().copyWith(
+                                color: Colors.white, fontSize: 16.0),
+                          ),
+                        ),
+                      )),
                 ],
               ),
-            )
-            : Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: SingleChildScrollView(
-                  child: SafeArea(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            BackArrow(),
-                          ],
-                        ),
-                        const Center(
-                          child: LogoWidget(),
-                        ),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Text(AppStrings.uploadingSupportingDocuments,
-                            style: boldStyle()),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Text(
-                          AppStrings.uploadingId,
-                          style: regularStyle(),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            customContainer(
-                                mainText: AppStrings.frontId,
-                                textFrontOrBack: AppStrings.back,
-                                height: 160.0.h,
-                                width: 176.0.w,
-                                textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   proofOfIdentityBack = File(file);
-                                  // });
-                                  _getImageFromCamera('proofOfIdentityBack');
-                                }),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            customContainer(
-                                mainText: AppStrings.frontId,
-                                textFrontOrBack: AppStrings.front,
-                                height: 160.0.h,
-                                width: 176.0.w,
-                                textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   proofOfIdentityFront = File(file);
-                                  // });
-                                  _getImageFromCamera('proofOfIdentityFront');
-                                }),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Text(
-                          AppStrings.expatriateUploadingId,
-                          style: regularStyle(),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            customContainer(
-                                mainText: AppStrings.frontId,
-                                textFrontOrBack: AppStrings.back,
-                                height: 160.0.h,
-                                width: 176.0.w,
-                                textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   residenceCardBack = File(file);
-                                  // });
-
-                                  _getImageFromCamera('residenceCardBack');
-                                }),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            customContainer(
-                                mainText: AppStrings.frontId,
-                                textFrontOrBack: AppStrings.front,
-                                height: 160.0.h,
-                                width: 176.0.w,
-                                textFrontOrBack2: AppStrings.frontId2,
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   residenceCardFront = File(file);
-                                  // });
-                                  _getImageFromCamera('residenceCardFront');
-                                }),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Text(
-                          AppStrings.uploadDrivingLicense,
-                          style: regularStyle(),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Center(
-                            child: customContainer(
-                                mainText:
-                                    AppStrings.chooseFileToUploadYourLicense,
-                                height: 160.h,
-                                width: 362.w,
-                                textFrontOrBack: '',
-                                textFrontOrBack2: '',
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   drivingLicense = File(file);
-                                  // });
-                                  _getImageFromCamera('drivingLicense');
-                                })),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Text(
-                          AppStrings.uploadVehicleRegistrationForm,
-                          style: regularStyle(),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Center(
-                            child: customContainer(
-                                mainText:
-                                    AppStrings.chooseFileToUploadYourLicense,
-                                height: 160.h,
-                                width: 362.w,
-                                textFrontOrBack: '',
-                                textFrontOrBack2: '',
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   vehicleLicense = File(file);
-                                  // });
-                                  _getImageFromCamera('vehicleLicense');
-                                })),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Text(
-                          AppStrings.uploadDriverCard,
-                          style: regularStyle(),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Center(
-                            child: customContainer(
-                                mainText:
-                                    AppStrings.chooseFileToUploadYourLicense,
-                                height: 160.h,
-                                width: 362.w,
-                                textFrontOrBack: '',
-                                textFrontOrBack2: '',
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   operatingCard = File(file);
-                                  // });
-                                  _getImageFromCamera('operatingCard');
-                                })),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Text(
-                          AppStrings.uploadTransferDocument,
-                          style: regularStyle(),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Center(
-                            child: customContainer(
-                                mainText:
-                                    AppStrings.chooseFileToUploadYourLicense,
-                                height: 160.h,
-                                width: 362.w,
-                                textFrontOrBack: '',
-                                textFrontOrBack2: '',
-                                onTap: () {
-                                  // var file = await getImageFromGallery();
-                                  // setState(() {
-                                  //   transferDocument = File(file);
-                                  // });
-                                  _getImageFromCamera('transferDocument');
-                                })),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        ElevatedButton(
-                            onPressed: () {
-                              BlocProvider.of<DocumentCheckingBloc>(context)
-                                  .add(DocumentUpload(
-                                proofOfIdentityFront: proofOfIdentityFront!,
-                                proofOfIdentityBack: proofOfIdentityBack!,
-                                residenceCardFront: residenceCardFront!,
-                                residenceCardBack: residenceCardBack!,
-                                drivingLicense: drivingLicense!,
-                                vehicleLicense: vehicleLicense!,
-                                operatingCard: operatingCard!,
-                                transferDocument: transferDocument!,
-                              ));
-                              if (state is DocumentUploading) {
-                                navigatePushReplacement(
-                                    context: context,
-                                    route: Routes.documentsCheckScreen);
-                              }
-                            },
-                            child: Container(
-                              width: 351.w,
-                              height: 47.h,
-                              color: AppColors.primary,
-                              child: Center(
-                                child: Text(
-                                  AppStrings.saveData,
-                                  style: boldStyle().copyWith(
-                                      color: Colors.white, fontSize: 16.0),
-                                ),
-                              ),
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-              );
+            ),
+          ),
+        );
       },
     );
   }

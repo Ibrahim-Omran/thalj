@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -21,19 +22,28 @@ class CustomUserInvoice extends StatelessWidget {
         Container(
       height: 273,
       color: const Color.fromRGBO(224, 232, 255, 0.63),
-      child: Shimmer.fromColors(
-          baseColor: AppColors.primary,
-          highlightColor: AppColors.lightBlue,
-          child: Image.network(userInvoiceModel.image)),
+      child: CachedNetworkImage(
+        imageUrl: userInvoiceModel.image,
+        placeholder: (context, url) {
+          return Shimmer.fromColors(
+              baseColor: AppColors.primary,
+              highlightColor: AppColors.lightBlue,
+              child: const SizedBox(
+                height: double.maxFinite,
+                width: double.maxFinite,
+              ));
+        },
+        errorWidget: (context, url, error) {
+          return const Icon(Icons.error);
+        },
+      ),
 
         ),
         const SizedBox(
           height: 5,
         ),
        BlocBuilder<UserInvoiceBloc,UserInvoiceState>(builder: (context,state){
-         return  state is AccUserInvoiceLoading
-             ? const Center(child: CircularProgressIndicator.adaptive())
-             : SizedBox(
+         return  SizedBox(
            width: double.infinity,
            child: ElevatedButton(
                style: ButtonStyle(
@@ -41,10 +51,10 @@ class CustomUserInvoice extends StatelessWidget {
                        const Color(0xFF3CC26F))),
                onPressed: () {
                  BlocProvider.of<UserInvoiceBloc>(context).add(
-                     AccUserInvoice(
-                        userInvoiceModel.orderId,userInvoiceModel.id));
+                     AccUserInvoice(invoiceID: userInvoiceModel.id, orderID: userInvoiceModel.orderId ,
+                        ));
                  navigatePushReplacement(
-                     context: context, route: Routes.driverInvoices);
+                     context: context, route: Routes.userInvoices);
 
                },
                child: const Text(

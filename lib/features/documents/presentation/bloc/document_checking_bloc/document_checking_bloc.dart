@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:thalj/core/utils/app_assets.dart';
 import 'package:thalj/core/utils/app_strings.dart';
@@ -35,10 +34,12 @@ class DocumentCheckingBloc
         } else {
           emit(DocumentUploadFailed());
         }
-      } else if (event is DocumentChecking) {
-        emit(DocumentCheckingLoading(true, AppStrings.pleaseWait,
-            AppStrings.ourTeamChecking, AppAssets.loadingChecking));
-      } else {
+      }
+      // else if (event is DocumentChecking) {
+      //   emit(DocumentCheckingLoading(true, AppStrings.pleaseWait,
+      //       AppStrings.ourTeamChecking, AppAssets.loadingChecking));
+      // }
+      else {
         emit(DocumentCheckingSuccess(false, AppStrings.congratulation,
             AppStrings.doneChecking, AppAssets.doneChecking));
       }
@@ -49,6 +50,7 @@ class DocumentCheckingBloc
   void onChange(Change<DocumentCheckingState> change) {
     // TODO: implement onChange
     super.onChange(change);
+    print(change);
   }
 
   @override
@@ -56,5 +58,6 @@ class DocumentCheckingBloc
       Transition<DocumentCheckingEvent, DocumentCheckingState> transition) {
     // TODO: implement onTransition
     super.onTransition(transition);
+    print(transition);
   }
 }

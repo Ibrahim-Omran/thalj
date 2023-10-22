@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:thalj/core/utils/toast.dart';
 import 'package:thalj/features/home/presentation/bloc/paySubscription/paySubscription-bloc.dart';
 import 'package:thalj/features/home/presentation/bloc/paySubscription/paySubscription-state.dart';
 
@@ -28,13 +29,10 @@ class _ProfileState extends State<Profile> {
 
   Future<void> _getImageFromCamera() async {
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
-    if(pickedFile!=null){
+    if (pickedFile != null) {
       setState(() {
         billPhoto = File(pickedFile.path);
       });
-
-    }
-    else{
     }
   }
 
@@ -91,85 +89,69 @@ class _ProfileState extends State<Profile> {
                 SizedBox(
                   height: 20.h,
                 ),
-                BlocConsumer<PaySubScriptionBloc, PaySubscriptionState>(
-                  listener:
-                      (BuildContext context, PaySubscriptionState state) {
-                        if (state is PaySubscriptionUploadFailed) {
-                          showAdaptiveDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text('تحذير'),
-                                content: const Text("يرجى التاكد من رفع كل البانات"),
-                                actions: [
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text("حسنا"))
-                                ],
-                              );
-                            },
-                          );
-                        }
-                      }, builder: (BuildContext context, PaySubscriptionState state) {
-
-
-                    return state is PaySubscriptionLoading ? const CircularProgressIndicator.adaptive():Center(
-                        child: customContainer(
-                            mainText:
-                            AppStrings.paidSubscribation,
-                            height: 160.h,
-                            width: 362.w,
-                            textFrontOrBack: '',
-                            textFrontOrBack2: '',
-                            onTap: () {
-                              _getImageFromCamera();
-
-
-
-
-
-
-                            }));
-                },
-
-
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                InkWell(
-                  onTap: (){
-                    BlocProvider.of<PaySubScriptionBloc>(context).add(PaySubscriptionUpload(billPhoto: billPhoto!));
-
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Container(
-                        width: double.infinity,
-                        height: 40.h,
-                        padding: const EdgeInsets.symmetric(vertical: 24),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: const Color(0xFF3CC16F),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'ارسل الوصل',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: 'Cairo',
-                              fontWeight: FontWeight.w600,
-                              height: 0.02,
-                              letterSpacing: 1,
-                            ),
-                          ),
-                        )),
-                  ),
-                ),
+                BlocBuilder<PaySubScriptionBloc, PaySubscriptionState>(
+                    builder: (context, state) {
+                  return Column(
+                    children: [
+                      customContainer(
+                          mainText: billPhoto == null
+                              ? AppStrings.paidSubscribation
+                              : AppStrings.donePay,
+                          height: 160.h,
+                          width: 362.w,
+                          textFrontOrBack: '',
+                          textFrontOrBack2: '',
+                          onTap: () {
+                            _getImageFromCamera();
+                          }),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          billPhoto == null
+                              ? showToast(
+                                  text: "برجاء تحميل الفاتورة",
+                                  state: ToastStates.error)
+                              : BlocProvider.of<PaySubScriptionBloc>(context)
+                                  .add(PaySubscriptionUpload(
+                                      billPhoto: billPhoto!));
+                        },
+                        child: state is PaySubscriptionUploading
+                            ? const Center(
+                                child: CircularProgressIndicator.adaptive())
+                            : Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Container(
+                                    width: double.infinity,
+                                    height: 40.h,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 24),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: billPhoto == null
+                                          ? Colors.grey
+                                          : const Color(0xFF3CC16F),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        'ارسل الوصل',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontFamily: 'Cairo',
+                                          fontWeight: FontWeight.w600,
+                                          height: 0.02,
+                                          letterSpacing: 1,
+                                        ),
+                                      ),
+                                    )),
+                              ),
+                      ),
+                    ],
+                  );
+                }),
               ],
             ),
           ),

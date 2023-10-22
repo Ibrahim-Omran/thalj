@@ -5,11 +5,12 @@ import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/features/home/domain/models/drivers_model.dart';
 import 'package:thalj/features/home/presentation/bloc/accept_refuse_drivers_bloc/accept_refuse_drivers_bloc.dart';
 
+import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_style.dart';
+import '../../../../core/utils/commons.dart';
 import '../../../../core/widgets/back_arrow.dart';
 import '../../domain/repository.dart';
-import '../bloc/drivers_data_bloc/get_drivers_data_bloc.dart';
 import '../components/driver_data_sent_to_owner/driver_show_identity_counainer.dart';
 
 class DriverDataSentToOwner extends StatelessWidget {
@@ -22,85 +23,7 @@ class DriverDataSentToOwner extends StatelessWidget {
       body: BlocProvider(
         create: (context) => AcceptRefuseDriversBloc(
             driverRepository: context.read<DriverRepository>()),
-        child: BlocConsumer<AcceptRefuseDriversBloc, AcceptRefuseDriversState>(
-          listener: (context, state) {
-            if (state is AcceptDriversSuccess) {
-              showAdaptiveDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('احسنت'),
-                    content: Text("تم قبول السائق${args.fullname}"),
-                    actions: [
-                      TextButton(
-                          onPressed: () async{
-
-                            BlocProvider.of<GetDriversDataBloc>(context)
-                                .add(GetDriversData());
-                          },
-                          child: const Text("حسنا"))
-                    ],
-                  );
-                },
-              );
-            } else if (state is AcceptDriversFailure) {
-              showAdaptiveDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('خطأ'),
-                    content: Text("لم يتم قبول السائق${args.fullname}"),
-                    actions: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            /*BlocProvider.of<GetDriversDataBloc>(context)
-                                .add(GetDriversData());*/
-                          },
-                          child: const Text("حسنا"))
-                    ],
-                  );
-                },
-              );
-            } else if (state is RefuseDriversSuccess) {
-              showAdaptiveDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('احسنت'),
-                    content: Text("تم حذف السائق${args.fullname}"),
-                    actions: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-
-                            BlocProvider.of<GetDriversDataBloc>(context)
-                                .add(GetDriversData());
-                          },
-                          child: const Text("حسنا"))
-                    ],
-                  );
-                },
-              );
-            } else if (state is RefuseDriversFailure) {
-              showAdaptiveDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('خطأ'),
-                    content: Text("لم يتم حذف السائق${args.fullname}"),
-                    actions: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text("حسنا"))
-                    ],
-                  );
-                },
-              );
-            }
-          },
+        child: BlocBuilder<AcceptRefuseDriversBloc, AcceptRefuseDriversState>(
           builder: (context, state) {
             return state is AcceptRefuseDriversLoading
                 ? const Center(
@@ -167,6 +90,8 @@ class DriverDataSentToOwner extends StatelessWidget {
                                   BlocProvider.of<AcceptRefuseDriversBloc>(
                                           context)
                                       .add(AcceptDrivers(driverId: args.id!));
+                                  navigatePushReplacement(
+                                      context: context, route: Routes.driverDoc);
                                 },
                                 child: Container(
                                   width: 351.w,
@@ -193,6 +118,8 @@ class DriverDataSentToOwner extends StatelessWidget {
                                   BlocProvider.of<AcceptRefuseDriversBloc>(
                                           context)
                                       .add(RefuseDrivers(driverId: args.id!));
+                                  navigatePushReplacement(
+                                      context: context, route: Routes.driverDoc);
                                 },
                                 child: SizedBox(
                                   width: 351.w,

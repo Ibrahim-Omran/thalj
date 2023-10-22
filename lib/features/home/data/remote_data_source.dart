@@ -127,8 +127,11 @@ class DriverRemoteDataSource {
         });
 
     if (data.statusCode == 200) {
+      showToast(text: "تم قبول السائق", state: ToastStates.success);
       return true;
     } else {
+      showToast(text: "برجاء المحاولة لاحقا", state: ToastStates.error);
+
       return false;
     }
   }
@@ -148,8 +151,12 @@ class DriverRemoteDataSource {
         });
 
     if (data.statusCode == 200) {
+      showToast(text: "تم رفض السائق", state: ToastStates.success);
+
       return true;
     } else {
+      showToast(text: "برجاء المحاولة لاحقا", state: ToastStates.error);
+
       return false;
     }
   }

@@ -18,14 +18,17 @@ class CustomAppBar extends StatelessWidget {
         ? Row(
             textDirection: TextDirection.rtl,
             children: [
-              Text(
-                title,
-                style: Theme.of(context)
-                    .textTheme
-                    .displayLarge!
-                    .copyWith(fontSize: 24),
+              Expanded(
+                child: Text(
+                  title,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayLarge!
+                      .copyWith(fontSize: 24),
+                  maxLines: 1,
+                  textAlign: TextAlign.end,
+                ),
               ),
-              const Spacer(),
               const BackArrow(),
             ],
           )

@@ -22,7 +22,7 @@ class DriverDocWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const DriverDataSentToOwner(),
