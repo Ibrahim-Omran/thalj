@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:thalj/core/functions/saveDataManager.dart';
@@ -25,9 +23,9 @@ class DocumentsRemoteDataSource {
       Map<String, String> headers = {
         "Content-Type": "multipart/form-data",
         'Accept': '*/*',
-        // 'Authorization': 'Bearer $token',
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoiU3VreXAxcnRhTiJ9XSwiaWF0IjoxNjk3OTE1MTg5LCJleHAiOjE3MDA1MDcxODl9.H8T6k_UTrCLmF3KeuONOGYrIn3NjX9jirtscM8-EETs',
+        'Authorization': 'Bearer $token',
+        // 'Authorization':
+        // 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoiU3VreXAxcnRhTiJ9XSwiaWF0IjoxNjk3OTE1MTg5LCJleHAiOjE3MDA1MDcxODl9.H8T6k_UTrCLmF3KeuONOGYrIn3NjX9jirtscM8-EETs',
       };
       List<String> formNames = [
         'proofOfIdentityFront',
