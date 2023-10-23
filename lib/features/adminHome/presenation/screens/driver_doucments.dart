@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thalj/features/adminHome/domain/repository.dart';
 
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_app_bar_product_info.dart';
-import '../../domain/repository.dart';
 import '../bloc/drivers_data_bloc/get_drivers_data_bloc.dart';
 import '../components/driver_doc_widget.dart';
 
@@ -27,7 +27,7 @@ class DriverDocuments extends StatelessWidget {
                 height: 20.h,
               ),
               BlocProvider(
-                  create: (context) => GetDriversDataBloc(driverRepository: context.read<DriverRepository>()),child: const DriverDocWidget()),
+                  create: (context) => GetDriversDataBloc(adminRepository: context.read<AdminRepository>()),child: const DriverDocWidget()),
             ],
           ),
         ),

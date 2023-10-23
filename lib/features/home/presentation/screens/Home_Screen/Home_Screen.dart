@@ -29,17 +29,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final _pages = [
+
+
+
     BlocProvider<GetOrdersDataBloc>(
         create: (context) =>
-            GetOrdersDataBloc(driverRepository: context.read<DriverRepository>()),
+            GetOrdersDataBloc(homeRepository: context.read<HomeRepository>()),
         child:const HomeBody()),
     BlocProvider<AcceptedOrderBloc>(
         create: (context) =>
-            AcceptedOrderBloc(offersRepository: context.read<DriverRepository>()),
+            AcceptedOrderBloc(homeRepository: context.read<HomeRepository>()),
         child: const Offers()),
     BlocProvider<PaySubScriptionBloc>(
         create: (context) =>
-            PaySubScriptionBloc(driverRepository: context.read<DriverRepository>() ),
+            PaySubScriptionBloc(homeRepository: context.read<HomeRepository>() ),
         child: const Profile()),
   ];
 

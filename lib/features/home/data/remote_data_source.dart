@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:thalj/features/home/domain/models/drivers_model.dart';
 import 'package:thalj/features/home/domain/models/orders_model.dart';
 
 import '../../../../core/network/ErrorModel.dart';
@@ -14,7 +13,7 @@ import '../../../core/utils/app_strings.dart';
 import '../domain/models/accepted_OrderModel.dart';
 import '../domain/models/one_order_model.dart';
 
-class DriverRemoteDataSource {
+class HomeRemoteDataSource {
   Future<bool> sendOffer({
     required String name,
     required String price,
@@ -106,87 +105,7 @@ class DriverRemoteDataSource {
     return orderData;
   }
 
-  Future<List<DriversModel>> getDriversData() async {
-    String? token = SaveDataManager.getAdminToken();
-    bool result = await InternetConnectionChecker().hasConnection;
-    if(!result)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
-    var data = await http.get(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard'),
-        headers: {
-          "Content-Type": 'application/json',
-          'Accept': '*/*',
-          'Authorization': 'Bearer $token',
-        });
-    List<DriversModel> drivers = [];
-    if (data.statusCode == 200) {
-      var jsonData = jsonDecode(data.body);
-      for (var item in jsonData) {
-        drivers.add(DriversModel.fromMap(item));
-      }
-    } else {
-    }
-    return drivers;
-  }
 
-  Future<bool> acceptDrivers(String id) async {
-
-    String? token = SaveDataManager.getAdminToken();
-
-    bool result = await InternetConnectionChecker().hasConnection;
-    if(!result)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
-
-    var data = await http.patch(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
-        headers: {
-          "Content-Type": 'application/json',
-          'Accept': '*/*',
-          'Authorization': 'Bearer $token',
-        });
-
-    if (data.statusCode == 200) {
-      showToast(text: "تم قبول السائق", state: ToastStates.success);
-      return true;
-    } else {
-      showToast(text: "برجاء المحاولة لاحقا", state: ToastStates.error);
-
-      return false;
-    }
-  }
-
-
-
-
-  Future<bool> refuseDrivers(String id) async {
-    String? token = SaveDataManager.getAdminToken();
-    bool result = await InternetConnectionChecker().hasConnection;
-    if(!result)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
-    var data = await http.delete(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
-        headers: {
-          "Content-Type": 'application/json',
-          'Accept': '*/*',
-          'Authorization': 'Bearer $token',
-        });
-
-    if (data.statusCode == 200) {
-      showToast(text: "تم رفض السائق", state: ToastStates.success);
-
-      return true;
-    } else {
-      showToast(text: "برجاء المحاولة لاحقا", state: ToastStates.error);
-
-      return false;
-    }
-  }
 
   Future<List<OrdersModel>> getDriversOrders() async {
     String? token = SaveDataManager.getLoginToken();

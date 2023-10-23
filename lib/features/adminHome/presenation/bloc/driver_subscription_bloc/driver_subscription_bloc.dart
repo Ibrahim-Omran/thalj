@@ -6,9 +6,9 @@ import 'driver_subscription_state.dart';
 
 class DriverSubscriptionBloc
     extends Bloc<DriverSubscriptionEvent, DriverSubscriptionState> {
-  final SubscriptionInvoiceRepository repository;
+  final AdminRepository adminRepository;
 
-  DriverSubscriptionBloc({required this.repository})
+  DriverSubscriptionBloc({required this.adminRepository})
       : super(DriverSubscriptionInitial()){
         on<FetchDriverSubscriptions>(_onFetchDriverSubscriptions);
         on<AccDriverSubscriptions>(_accDriverSubscriptions);
@@ -21,7 +21,7 @@ class DriverSubscriptionBloc
     // ignore: unnecessary_type_check
     if(event is FetchDriverSubscriptions){
       emit(DriverSubscriptionLoading());
-      var result = await repository.getSubscriptionsForDrivers();
+      var result = await adminRepository.getSubscriptionsForDrivers();
       if(result.isNotEmpty){
         emit(DriverSubscriptionLoaded(result));
 
@@ -39,10 +39,10 @@ class DriverSubscriptionBloc
     // ignore: unnecessary_type_check
     if(event is AccDriverSubscriptions){
       emit(AccSubscriptionLoading());
-      bool isAcc= await repository.renewDriverSubscription(event.billID);
+      bool isAcc= await adminRepository.renewDriverSubscription(event.billID);
       if(isAcc ){
         emit(AccDriverSubscriptionLoaded("Success"));
-        var result = await repository.getSubscriptionsForDrivers();
+        var result = await adminRepository.getSubscriptionsForDrivers();
 
         emit(DriverSubscriptionLoaded(result));
         if(result.isEmpty){

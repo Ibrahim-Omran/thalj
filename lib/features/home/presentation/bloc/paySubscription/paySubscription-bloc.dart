@@ -9,14 +9,14 @@ import 'package:thalj/features/home/presentation/bloc/paySubscription/paySubscri
 
 class PaySubScriptionBloc
     extends Bloc<PaySubscriptionEvent, PaySubscriptionState> {
-  final DriverRepository driverRepository;
+  final HomeRepository homeRepository;
 
-  PaySubScriptionBloc({required this.driverRepository})
+  PaySubScriptionBloc({required this.homeRepository})
       : super(PaySubscriptionInitial()) {
     on<PaySubscriptionEvent>((event, emit) async {
       if (event is PaySubscriptionUpload) {
         emit(PaySubscriptionUploading());
-        var isUploaded = await driverRepository.paySubscription(billPhoto:event.billPhoto);
+        var isUploaded = await homeRepository.paySubscription(billPhoto:event.billPhoto);
         if (isUploaded) {
           emit(PaySubscriptionSuccess());
         } else {

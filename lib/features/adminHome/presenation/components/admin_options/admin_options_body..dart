@@ -1,9 +1,17 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/routes/app_routes.dart';
 import 'package:thalj/core/utils/app_colors.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/utils/commons.dart';
+
+import '../../../domain/repository.dart';
+import '../../bloc/driver_subscription_bloc/driver_subscription_bloc.dart';
+import '../../bloc/user_invoice_bloc/user_invoice_bloc.dart';
+import '../../screens/driver_subscription_screen.dart';
+import '../../screens/user_subscription_screen.dart';
 
 class AdminOptionsBody extends StatelessWidget {
   const AdminOptionsBody({super.key});
@@ -46,8 +54,18 @@ class AdminOptionsBody extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-               navigatePushNamed(context: context, route: Routes.userInvoices);
-            },
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                  create: (context) => UserInvoiceBloc(
+                      adminRepository: context.read<AdminRepository>()),child: const UserSubscriptionScreen()),
+              ),
+              );
+
+
+
+                  },
             child: Container(
               margin: const EdgeInsets.all(10),
               height: 70.h,
@@ -74,7 +92,17 @@ class AdminOptionsBody extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              navigatePushNamed(context: context, route: Routes.driverInvoices);
+
+
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                      create: (context) => DriverSubscriptionBloc(
+                          adminRepository: context.read<AdminRepository>()),child: const DriverSubscriptionScreen()),
+                ),
+              );
             },
             child: Container(
               margin: const EdgeInsets.all(10),

@@ -6,6 +6,7 @@ import 'package:thalj/core/utils/app_text_style.dart';
 import 'package:thalj/features/home/presentation/components/home_screen/today_product.dart';
 import 'package:thalj/features/home/presentation/screens/product_info_screen.dart';
 
+import '../../../domain/repository.dart';
 import '../../bloc/orders_bloc/orders_bloc.dart';
 import '../../bloc/orders_bloc/orders_event.dart';
 import '../../bloc/orders_bloc/orders_state.dart';
@@ -66,8 +67,13 @@ class HomeBody extends StatelessWidget {
                             MaterialPageRoute(
                             builder: (context) => Builder(
                           builder: (BuildContext context) {
-                            return ProductInformationScreen(
-                              id: state.ordersData[index].id,
+
+                            return BlocProvider<GetOrdersDataBloc>(
+                              create: (context) =>
+                                  GetOrdersDataBloc(homeRepository: context.read<HomeRepository>()),
+                              child: ProductInformationScreen(
+                                id: state.ordersData[index].id,
+                              ),
                             );
                           },
                         ))

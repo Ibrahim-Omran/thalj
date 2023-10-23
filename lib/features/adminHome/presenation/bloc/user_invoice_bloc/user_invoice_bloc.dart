@@ -6,9 +6,9 @@ import '../../../domain/repository.dart';
 
 
 class UserInvoiceBloc extends Bloc<UserInvoiceEvent, UserInvoiceState> {
-  final SubscriptionInvoiceRepository repository;
+  final AdminRepository adminRepository;
 
-  UserInvoiceBloc({required this.repository}) : super(UserInvoiceInitial()) {
+  UserInvoiceBloc({required this.adminRepository}) : super(UserInvoiceInitial()) {
     on<FetchUserInvoices>(_onFetchUserInvoices);
     on<AccUserInvoice>(_accUserInvoice);
   }
@@ -20,7 +20,7 @@ class UserInvoiceBloc extends Bloc<UserInvoiceEvent, UserInvoiceState> {
     // ignore: unnecessary_type_check
     if (event is FetchUserInvoices) {
       emit(UserInvoiceLoading());
-      var result = await repository.getInvoicesForUsers();
+      var result = await adminRepository.getInvoicesForUsers();
       if (result.isNotEmpty) {
         emit(UserInvoiceLoaded(result));
       } else {
@@ -36,10 +36,10 @@ class UserInvoiceBloc extends Bloc<UserInvoiceEvent, UserInvoiceState> {
     // ignore: unnecessary_type_check
     if(event is AccUserInvoice){
       emit(AccUserInvoiceLoading());
-      bool isAcc= await repository.accInvoiceUser(event.invoiceID,event.orderID);
+      bool isAcc= await adminRepository.accInvoiceUser(event.invoiceID,event.orderID);
       if(isAcc ){
         emit(AccUserInvoiceLoaded("Success"));
-        var result = await repository.getInvoicesForUsers();
+        var result = await adminRepository.getInvoicesForUsers();
         emit(UserInvoiceLoaded(result));
         if(result.isEmpty){
           emit(UserInvoiceError('error'));

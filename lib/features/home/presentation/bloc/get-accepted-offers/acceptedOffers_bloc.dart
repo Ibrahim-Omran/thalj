@@ -6,9 +6,9 @@ import 'acceptedOffers_event.dart';
 import 'acceptedOffers_state.dart';
 
 class AcceptedOrderBloc extends Bloc<AcceptedOffersEvent, AcceptedOrdersState> {
-  DriverRepository offersRepository;
+  HomeRepository homeRepository;
 
-  AcceptedOrderBloc({required this.offersRepository})
+  AcceptedOrderBloc({required this.homeRepository})
       : super(GetOrdersDataInitial()) {
     on<AcceptedOffersFetched>(_onAcceptedOffersFetched);
   }
@@ -18,7 +18,7 @@ class AcceptedOrderBloc extends Bloc<AcceptedOffersEvent, AcceptedOrdersState> {
   Future<void> _onAcceptedOffersFetched(AcceptedOffersFetched event,
       Emitter<AcceptedOrdersState> emit) async {
     emit(GetOrdersDataLoading());
-    var result = await offersRepository.getOffer();
+    var result = await homeRepository.getOffer();
     if (result.isNotEmpty) {
       emit(GetOrdersDataSuccess(result));
     } else {

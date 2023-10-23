@@ -7,14 +7,14 @@ import 'orders_state.dart';
 
 
 class GetOrdersDataBloc extends Bloc<GetOrdersDataEvent, GetOrdersDataState> {
-  final DriverRepository driverRepository;
+  final HomeRepository homeRepository;
 
 
-  GetOrdersDataBloc({required this.driverRepository})
+  GetOrdersDataBloc({required this.homeRepository})
       : super(GetOrdersDataInitial()) {
     on<GetOrdersData>((event, emit) async {
       emit(GetOrdersDataLoading());
-      var  result= await driverRepository.getOrders();
+      var  result= await homeRepository.getOrders();
       if (result.isNotEmpty) {
         emit(GetOrdersDataSuccess(result));
       } else {
@@ -25,7 +25,7 @@ class GetOrdersDataBloc extends Bloc<GetOrdersDataEvent, GetOrdersDataState> {
     on<GetOneOrdersData>((event, emit) async {
       try{
         emit(GetOneOrdersDataLoading());
-        var  result= await driverRepository.getOneOrdersInfo(event.id);
+        var  result= await homeRepository.getOneOrdersInfo(event.id);
         emit(GetOneOrdersDataSuccess(result));
 
 

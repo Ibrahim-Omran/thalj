@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/utils/app_strings.dart';
-import 'package:thalj/features/home/domain/models/drivers_model.dart';
-import 'package:thalj/features/home/presentation/bloc/accept_refuse_drivers_bloc/accept_refuse_drivers_bloc.dart';
+import 'package:thalj/features/adminHome/domain/models/drivers_model.dart';
+import 'package:thalj/features/adminHome/domain/repository.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_style.dart';
 import '../../../../core/utils/commons.dart';
 import '../../../../core/widgets/back_arrow.dart';
-import '../../domain/repository.dart';
+import '../bloc/accept_refuse_drivers_bloc/accept_refuse_drivers_bloc.dart';
 import '../components/driver_data_sent_to_owner/driver_show_identity_counainer.dart';
 
 class DriverDataSentToOwner extends StatelessWidget {
@@ -22,7 +22,7 @@ class DriverDataSentToOwner extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         create: (context) => AcceptRefuseDriversBloc(
-            driverRepository: context.read<DriverRepository>()),
+            adminRepository: context.read<AdminRepository>(),),
         child: BlocBuilder<AcceptRefuseDriversBloc, AcceptRefuseDriversState>(
           builder: (context, state) {
             return state is AcceptRefuseDriversLoading

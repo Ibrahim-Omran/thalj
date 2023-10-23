@@ -13,6 +13,7 @@ class DriverSubscriptionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     BlocProvider.of<DriverSubscriptionBloc>(context)
         .add(FetchDriverSubscriptions());
 

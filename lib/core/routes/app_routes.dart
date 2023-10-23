@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:thalj/features/auth/presentation/screens/owner_screen.dart';
 import 'package:thalj/features/auth/presentation/screens/sign_up.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/Home_Screen.dart';
-import 'package:thalj/features/home/presentation/screens/admin_options_screen.dart';
-import 'package:thalj/features/home/presentation/screens/driver_doucments.dart';
+import 'package:thalj/features/adminHome/presenation/screens/admin_options_screen.dart';
+import 'package:thalj/features/adminHome/presenation/screens/driver_doucments.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/offers.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen/profile.dart';
-import 'package:thalj/features/home/presentation/screens/driver_data_sent_to_owner.dart';
+import 'package:thalj/features/adminHome/presenation/screens/driver_data_sent_to_owner.dart';
 
 import '../../features/adminHome/presenation/screens/driver_subscription_screen.dart';
 import '../../features/adminHome/presenation/screens/user_subscription_screen.dart';

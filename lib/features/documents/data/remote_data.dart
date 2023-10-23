@@ -82,7 +82,8 @@ Future<bool> uploadImages(Uri apiUrl, List<XFile> images,
     request.headers.addAll(headers);
     var response = await request.send();
     if (response.statusCode == 200) {
-      showToast(text: "تم التحميل بنجاح", state: ToastStates.success);
+      showToast(text: "تم ارسال معلوماتك سيتم التحقق منها يمكن بعدها تسجيل الدخول", state: ToastStates.success);
+
       return true;
     } else {
 
