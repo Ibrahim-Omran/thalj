@@ -7,6 +7,8 @@ import 'core/theme/app_theme.dart';
 import 'core/utils/app_strings.dart';
 import 'features/adminHome/data/remote_data/remote_data_source.dart';
 import 'features/adminHome/domain/repository.dart';
+import 'features/adminHome/presenation/bloc/driver_subscription_bloc/driver_subscription_bloc.dart';
+import 'features/adminHome/presenation/bloc/user_invoice_bloc/user_invoice_bloc.dart';
 import 'features/auth/data/remote_data_source.dart';
 import 'features/auth/domain/repository.dart';
 import 'features/documents/data/remote_data.dart';
@@ -46,6 +48,12 @@ class MyApp extends StatelessWidget {
             RepositoryProvider<AdminRepository>(
               create: (context) => AdminRepository(AdminRemoteDataSource()),
             ),
+
+        BlocProvider(
+        create: (context) => DriverSubscriptionBloc(adminRepository: context.read<AdminRepository>())),
+
+            BlocProvider(
+                create: (context) => UserInvoiceBloc(adminRepository: context.read<AdminRepository>())),
 
 
 
