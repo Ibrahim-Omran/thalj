@@ -1,4 +1,8 @@
 class AppStrings {
+  //API LInk
+  static const String apiLink = 'https://mircle50-001-site1.atempurl.com/';
+
+
   static const String appName = 'تلج';
   static const String welcome = 'آهلا بك في ثلج';
   static const String verifyMessage = 'لا يمكنك تسجيل الدخول الا بعد الموافقة علي اوراقك';

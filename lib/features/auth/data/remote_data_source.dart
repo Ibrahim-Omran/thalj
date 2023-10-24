@@ -146,7 +146,7 @@ class AuthRemoteDataSource {
     }
     try {
       http.Response response = await http.post(
-          Uri.parse('http://mircle50-001-site1.atempurl.com/users/login'),
+          Uri.parse('${AppStrings.apiLink}users/login'),
           body: {'email': email, 'password': password});
 
       if (response.statusCode == 200) {

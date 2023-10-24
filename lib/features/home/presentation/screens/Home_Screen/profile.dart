@@ -14,7 +14,6 @@ import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_text_style.dart';
 import '../../../../documents/presentation/components/uploading_supporting_documents/custom_container.dart';
 import '../../bloc/paySubscription/paySubscription-event.dart';
-import '../../components/profileAppBar.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -47,27 +46,34 @@ String ? status = SaveDataManager.loginModel!.status;
   Widget _body(BuildContext context) {
     return  Column(
       children: [
-        const ProfileAppBar(),
-        SizedBox(
-          height: 20.h,
-        ),
+
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
             child: status == "Accepted"
-                ? Center(
+                ? Column(
+                  children: [
+                    SizedBox(height: 250.h,),
+                    Center(
               child: Text(
-                "الحساب مفعل",
-                style: boldStyle(),
+                    "الحساب مفعل",
+                    style: regularStyle(fontSize: 24.h),
               ),
-            )
+            ),
+                  ],
+                )
                 : status == "Waiting"
-                ? Center(
+                ? Column(
+                  children: [
+                    SizedBox(height: 250.h,),
+                    Center(
               child: Text(
-                "جاري التحقق من الفاتورة",
-                style: boldStyle(),
+                    "جاري التحقق من الفاتورة",
+                    style: boldStyle(fontSize: 24.h),
               ),
-            )
+            ),
+                  ],
+                )
                 : Column(
               children: [
                 Row(

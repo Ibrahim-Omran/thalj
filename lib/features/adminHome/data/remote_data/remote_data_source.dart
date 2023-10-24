@@ -24,7 +24,7 @@ class AdminRemoteDataSource {
     try {
       http.Response response = await http.get(
           Uri.parse(
-              'http://mircle50-001-site1.atempurl.com/dashboard/invoices'),
+              '${AppStrings.apiLink}dashboard/invoices'),
           headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*',
@@ -136,7 +136,6 @@ class AdminRemoteDataSource {
   }
 
   Future<List<DriversModel>> getDriversData() async {
-    String? token = SaveDataManager.getAdminToken();
     bool result = await InternetConnectionChecker().hasConnection;
     if(!result)
     {
@@ -162,7 +161,6 @@ class AdminRemoteDataSource {
 
   Future<bool> acceptDrivers(String id) async {
 
-    String? token = SaveDataManager.getAdminToken();
 
     bool result = await InternetConnectionChecker().hasConnection;
     if(!result)
@@ -192,14 +190,13 @@ class AdminRemoteDataSource {
 
 
   Future<bool> refuseDrivers(String id) async {
-    String? token = SaveDataManager.getAdminToken();
     bool result = await InternetConnectionChecker().hasConnection;
     if(!result)
     {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
     }
     var data = await http.delete(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
+        Uri.parse('${AppStrings.apiLink}dashboard/$id'),
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',

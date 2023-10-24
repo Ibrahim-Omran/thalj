@@ -6,7 +6,7 @@ import '../../../../../core/utils/app_text_style.dart';
 
 Widget buildOffersITem({required String name}) {
   return Container(
-    height: 200.h,
+    height: 150.h,
     width: double.infinity,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8),

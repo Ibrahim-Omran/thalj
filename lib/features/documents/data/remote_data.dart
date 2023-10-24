@@ -8,6 +8,9 @@ import 'package:thalj/core/utils/toast.dart';
 import '../../../core/utils/app_strings.dart';
 
 class DocumentsRemoteDataSource {
+
+  String? token = SaveDataManager.getRegisterToken();
+
   Future<bool> uploadProofDocuments({
     required XFile proofOfIdentityFront,
     required XFile proofOfIdentityBack,
@@ -24,7 +27,6 @@ class DocumentsRemoteDataSource {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
     }
     try {
-      String? token = SaveDataManager.getRegisterToken();
 
       Map<String, String> headers = {
         "Content-Type": "multipart/form-data",
@@ -53,7 +55,7 @@ class DocumentsRemoteDataSource {
       ];
 
       return uploadImages(
-          Uri.parse('http://mircle50-001-site1.atempurl.com/proofDocuments'),
+          Uri.parse('${AppStrings.apiLink}proofDocuments'),
           images,
           formNames,
           headers);

@@ -14,6 +14,8 @@ import '../domain/models/accepted_OrderModel.dart';
 import '../domain/models/one_order_model.dart';
 
 class HomeRemoteDataSource {
+  String? token = SaveDataManager.getLoginToken();
+
   Future<bool> sendOffer({
     required String name,
     required String price,
@@ -28,10 +30,9 @@ class HomeRemoteDataSource {
     }
 
     try {
-      String? token = SaveDataManager.getLoginToken();
 
       final response = await http.post(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/offers/$id'),
+        Uri.parse('${AppStrings.apiLink}offers/$id'),
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
@@ -71,14 +72,13 @@ class HomeRemoteDataSource {
   }
 
   Future<List<AcceptedOrdersModel>> getAcceptedOffers() async {
-    String? token = SaveDataManager.getLoginToken();
     bool result = await InternetConnectionChecker().hasConnection;
     if(!result)
     {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
     }
     final response = await http.get(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/orders'),
+        Uri.parse('${AppStrings.apiLink}drivers/orders'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*',
@@ -108,14 +108,13 @@ class HomeRemoteDataSource {
 
 
   Future<List<OrdersModel>> getDriversOrders() async {
-    String? token = SaveDataManager.getLoginToken();
     bool result = await InternetConnectionChecker().hasConnection;
     if(!result)
     {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
     }
     var response = await http.get(
-      Uri.parse('http://mircle50-001-site1.atempurl.com/orders'),
+      Uri.parse('${AppStrings.apiLink}orders'),
       headers: {
         "Content-Type": 'application/json',
         'Accept': '*/*',
@@ -147,14 +146,13 @@ class HomeRemoteDataSource {
   }
 
   Future<OneOrderModel> getDriversOneOrderInfo(String id) async {
-    String? token = SaveDataManager.getLoginToken();
     bool result = await InternetConnectionChecker().hasConnection;
     if(!result)
     {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
     }
     final response = await http.get(
-      Uri.parse('http://mircle50-001-site1.atempurl.com/orders/$id'),
+      Uri.parse('${AppStrings.apiLink}orders/$id'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -179,10 +177,9 @@ class HomeRemoteDataSource {
     }
     try {
 
-      String? token = SaveDataManager.getLoginToken();
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/paySubscription'),
+        Uri.parse('${AppStrings.apiLink}drivers/paySubscription'),
       );
       request.headers['Authorization'] = 'Bearer $token';
       request.files.add(await http.MultipartFile.fromPath('file', billPhoto.path));

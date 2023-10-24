@@ -10,6 +10,7 @@ import 'package:thalj/features/home/presentation/screens/Home_Screen/profile.dar
 import '../../../domain/repository.dart';
 import '../../bloc/orders_bloc/orders_bloc.dart';
 import '../../bloc/paySubscription/paySubscription-bloc.dart';
+import '../../components/profileAppBar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -54,7 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
       ),
-      body:  SafeArea(child: _pages.elementAt(_selectedIndex),
+      body:  SafeArea(child: Column(
+        children: [
+          const ProfileAppBar(),
+          Expanded(child: _pages.elementAt(_selectedIndex)),
+        ],
+      ),
       ),
 
 
