@@ -21,7 +21,7 @@ class AuthRemoteDataSource {
     }
     try {
       final response = await http.post(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/login'),
+        Uri.parse('${AppStrings.apiLink}drivers/login'),
         body: {
           'email': email,
           'password': password,
@@ -90,7 +90,7 @@ class AuthRemoteDataSource {
     }
     try {
       final response = await http.post(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/drivers/signup'),
+        Uri.parse('${AppStrings.apiLink}drivers/signup'),
         body: {
           'fullname': name,
           'email': email,
