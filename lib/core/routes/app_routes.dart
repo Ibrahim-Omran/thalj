@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:thalj/features/auth/presentation/screens/owner_screen.dart';
 import 'package:thalj/features/auth/presentation/screens/sign_up.dart';
-import 'package:thalj/features/home/presentation/screens/Home_Screen/Home_Screen.dart';
+import 'package:thalj/features/home/presentation/screens/Home_Screen.dart';
 import 'package:thalj/features/adminHome/presenation/screens/admin_options_screen.dart';
 import 'package:thalj/features/adminHome/presenation/screens/driver_doucments.dart';
-import 'package:thalj/features/home/presentation/screens/Home_Screen/offers.dart';
-import 'package:thalj/features/home/presentation/screens/Home_Screen/profile.dart';
+import 'package:thalj/features/home/presentation/screens/offer_screen/offers.dart';
+import 'package:thalj/features/home/presentation/screens/profile_screen/profile.dart';
 import 'package:thalj/features/adminHome/presenation/screens/driver_data_sent_to_owner.dart';
+import 'package:thalj/features/home/presentation/screens/profile_screen/subscription.dart';
+import 'package:thalj/features/splash/presentation/views/splash_screen.dart';
 
 import '../../features/adminHome/presenation/screens/driver_subscription_screen.dart';
 import '../../features/adminHome/presenation/screens/user_subscription_screen.dart';
@@ -15,8 +17,9 @@ import 'package:thalj/features/documents/presentation/screens/documents_screen.d
 import 'package:thalj/features/documents/presentation/screens/uploading_supporting_documents_screen.dart';
 
 class Routes {
-  static const String intitlRoute = '/';
-  static const String signup = '/signup';
+  static const String initialRoute = '/';
+  static const String signIN = 'signIn';
+  static const String signUp = '/signUp';
   static const String ownerScreen = '/owner';
   static const String homeScreen = '/home';
 
@@ -26,6 +29,7 @@ class Routes {
   static const String documentsCheckScreen = '/documentsCheckScreen';
   static const String offersScreen = '/offer';
   static const String profileScreen = '/profile';
+  static const String subscription = '/Subscription';
   static const String productDetails = '/productDetails';
   static const String driverDoc = '/driverDoc';
   static const String userInvoices = '/userInvoices';
@@ -36,9 +40,11 @@ class Routes {
 
 Widget appRoutes(String route, dynamic arg) {
   switch (route) {
-    case Routes.intitlRoute:
+    case Routes.initialRoute:
+      return const SplashScreen(animateBottom: true);
+    case Routes.signIN:
       return const SignInScreen();
-    case Routes.signup:
+    case Routes.signUp:
       return const SignUpScreen();
     case Routes.ownerScreen:
       return const OwnerScreen();
@@ -53,6 +59,8 @@ Widget appRoutes(String route, dynamic arg) {
       return const Offers();
     case Routes.profileScreen:
       return const Profile();
+    case Routes.subscription:
+      return const Subscription();
 
     case Routes.driverDoc:
       return const DriverDocuments();

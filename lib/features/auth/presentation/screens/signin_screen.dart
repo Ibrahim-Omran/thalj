@@ -167,9 +167,13 @@ class _SignInScreenState extends State<SignInScreen> {
                       showToast(
                           text: AppStrings.welcome, state: ToastStates.success);
                     }
-                    if(verifiedDriver == "0"){
+                    else if(verifiedDriver == "0"){
                       showToast(
                           text: AppStrings.verifyMessage, state: ToastStates.warning);
+                    }
+                    else if(!state.isSuccess){
+                      showToast(text: ("Server Error"), state: ToastStates.error);
+
                     }
 
                   },
@@ -182,7 +186,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        navigatePushNamed(context: context, route: Routes.signup);
+                        navigatePushNamed(context: context, route: Routes.signUp);
                       },
                       child: Text(
                         AppStrings.subscription,

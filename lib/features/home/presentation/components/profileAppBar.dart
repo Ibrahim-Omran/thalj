@@ -40,7 +40,7 @@ String ? name = SaveDataManager.getLoginName();
                   Text('مرحبا بك',
                       style: boldStyle(color: Colors.white, fontSize: 20)),
                   Text(
-                    name!,
+                    "name!",
                     style: boldStyle(color: Colors.white, fontSize: 20),
                     overflow: TextOverflow.clip,
                   ),

@@ -6,14 +6,14 @@ import 'package:thalj/features/auth/presentation/components/text_filed.dart';
 import 'package:thalj/features/home/domain/repository.dart';
 import 'package:thalj/features/home/presentation/bloc/sendOffer-bloc/send_bloc.dart';
 
-import '../../../../core/routes/app_routes.dart';
-import '../../../../core/utils/app_assets.dart';
-import '../../../../core/utils/app_strings.dart';
-import '../../../../core/utils/toast.dart';
-import '../../../../core/widgets/custom_app_bar_product_info.dart';
-import '../../../../core/widgets/custom_button.dart';
-import '../bloc/sendOffer-bloc/send_event.dart';
-import '../bloc/sendOffer-bloc/send_state.dart';
+import '../../../../../core/routes/app_routes.dart';
+import '../../../../../core/utils/app_assets.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/utils/toast.dart';
+import '../../../../../core/widgets/custom_app_bar_product_info.dart';
+import '../../../../../core/widgets/custom_button.dart';
+import '../../bloc/sendOffer-bloc/send_event.dart';
+import '../../bloc/sendOffer-bloc/send_state.dart';
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.id});
   final String id;

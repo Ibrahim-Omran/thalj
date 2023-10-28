@@ -15,6 +15,7 @@ import 'features/documents/data/remote_data.dart';
 import 'features/documents/domain/repository.dart';
 import 'features/home/data/remote_data_source.dart';
 import 'features/home/domain/repository.dart';
+import 'features/splash/presentation/views/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,7 +65,9 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: AppStrings.appName,
             theme: getAppTheme(),
-            initialRoute: Routes.intitlRoute,
+            initialRoute: Routes.initialRoute,
+            home: const SplashScreen(animateBottom: true),
+
             onGenerateRoute: (settings) {
               return MaterialPageRoute(
                 builder: (context) =>

@@ -18,7 +18,9 @@ class AppStrings {
   static const String signUp = 'إنشاء حساب';
   static const String signUpHint = 'يرجى ملء النموذج التالي لإنشاء حسابك';
   static const String name = 'ادخل الاسم بالكامل';
+  static const String userName = 'الاسم';
   static const String email = 'ادخل بريدك الالكتروني';
+  static const String editEmail = 'بريدك الالكتروني';
   static const String ownerEmail = 'ادخل البريد الالكتروني للمالك';
   static const String phoneNumber = 'ادخل رقم الهاتف صحيح';
   static const String createPassword = 'انشئ رقمك السري';
@@ -57,20 +59,21 @@ class AppStrings {
 
   //Uploading Supporting Documents Screen
   static const String uploadingSupportingDocuments = 'رفع المستندات الاثباتية';
-  static const String uploadingId = '١. قم برفع أي أثبات شخصية (الهوية)';
+  static const String uploadingId = '١. قم برفع أثبات شخصية ';
   static const String frontId = 'اختر ملفًا لتحميل الجهة';
-  static const String frontId2 = ' من إقامتك';
+  static const String frontId2 = ' من أثبات الشخصية';
   static const String backId = ' من إقامتك.';
   static const String jpgOnly = '(يتم دعم ملف ‎.jpg فقط)';
   static const String expatriateUploadingId =
-      '٢. ان كنت وافد، برجاء رفع بطاقة الإقامة';
-  static const String uploadDrivingLicense = '٣. قم برفع رخصة القيادة (سارية)';
-  static const String chooseFileToUploadYourLicense =
-      'اختر ملفًا لتحميل رخصتك.';
+      '(ان كنت وافد، برجاء رفع بطاقة الإقامة)';
+  static const String uploadDrivingLicense = '٢. قم برفع رخصة القيادة (سارية)';
+  static const String chooseFileToUpload =
+      'اختر ملفًا للتحميل.';
   static const String uploadVehicleRegistrationForm =
-      '٤. قم برفع استمارة المركبة (سارية)';
-  static const String uploadDriverCard = '٥. قم برفع كارت التشغيل';
-  static const String uploadTransferDocument = '٦. قم برفع وثيقة نقل';
+      '٣. قم برفع استمارة المركبة (سارية)';
+  static const String uploadDriverCard = '٤. قم برفع كارت التشغيل';
+  static const String uploadTransferDocument = '٥. قم برفع وثيقة نقل';
+  static const String taxRegister = '٦. قم برفع السجل الضريبي (اختياري)';
   static const String saveData = 'حفظ البيانات';
   static const String front = 'الأمامية';
   static const String back = 'الخلفية';

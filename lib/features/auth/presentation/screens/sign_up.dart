@@ -109,6 +109,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     maxLines: 1,
                     readonly: false,
                     title: AppStrings.signUpHint,
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      return null;
+                    },
                   );
                 }),
                 SizedBox(
@@ -255,6 +261,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       navigatePushReplacement(
                           context: context,
                           route: Routes.uploadingSupportingDocumentsScreen);
+                    }
+                    else if (!state.isSuccess) {
+                      showToast(text: ("Server Error"), state: ToastStates.error);
                     }
                   },
                 ),

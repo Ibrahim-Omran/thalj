@@ -6,13 +6,13 @@ import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/widgets/custom_button.dart';
 
 import 'package:thalj/features/home/presentation/bloc/orders_bloc/orders_bloc.dart';
-import 'package:thalj/features/home/presentation/screens/product_details.dart';
-import '../../../../core/widgets/custom_app_bar_product_info.dart';
+import 'package:thalj/features/home/presentation/screens/Home_body/product_details.dart';
+import '../../../../../core/widgets/custom_app_bar_product_info.dart';
 
-import '../bloc/orders_bloc/orders_event.dart';
-import '../bloc/orders_bloc/orders_state.dart';
-import '../components/product_info/custom_sender_and_recipient_info.dart';
-import '../components/product_info/custom_shipping_info.dart';
+import '../../bloc/orders_bloc/orders_event.dart';
+import '../../bloc/orders_bloc/orders_state.dart';
+import '../../components/product_info/custom_sender_and_recipient_info.dart';
+import '../../components/product_info/custom_shipping_info.dart';
 
 class ProductInformationScreen extends StatelessWidget {
   const ProductInformationScreen({super.key, required this.id});
@@ -104,16 +104,14 @@ class ProductInformationScreen extends StatelessWidget {
               ),
             );
           }
-          if (state is GetOneOrdersDataFailure) {
+          else if (state is GetOneOrdersDataFailure) {
             return const Center(child: Text("Server Error"));
           }
-          if (state is GetOneOrdersDataLoading) {
+         else   {
             return const Center(child: CircularProgressIndicator.adaptive());
           }
 
-          else {
-            return const Text("");
-          }
+
         }
 
         ),

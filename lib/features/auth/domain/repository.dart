@@ -10,6 +10,7 @@ class AuthRepository {
     required String email,
     required String password,
   }) async {
+
     bool isAuthenticated = false;
 
     isAuthenticated =

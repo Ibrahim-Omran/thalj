@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../../core/functions/saveDataManager.dart';
+import '../../../core/local/cash_helper.dart';
 import '../../../core/network/ErrorModel.dart';
 import '../../../core/utils/app_strings.dart';
 import '../../../core/utils/toast.dart';
@@ -33,8 +34,10 @@ class AuthRemoteDataSource {
         final jsonResponse = jsonDecode(response.body);
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
-          final loginData = jsonResponse['data'][0];
 
+          final loginData = jsonResponse['data'][0];
+          CacheHelper.saveData(
+              key: 'loginToken', value: jsonResponse['token']);
           var loginModel = LoginModel(
               id: loginData['id'],
               fullName: loginData['fullname'],
@@ -105,6 +108,9 @@ class AuthRemoteDataSource {
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
           final registerData = jsonResponse['data'];
+          CacheHelper.saveData(
+              key: 'registerToken', value: jsonResponse['token']);
+
 
           var registerModel = RegisterModel.fromJson({
             'data': {
@@ -154,6 +160,8 @@ class AuthRemoteDataSource {
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
           final adminLoginData = jsonResponse['data'][0];
+          CacheHelper.saveData(
+              key: 'adminToken', value: jsonResponse['token']);
           var adminModel =AdminModel.fromJson({
             'id': adminLoginData['id'],
             'name': adminLoginData['name'],

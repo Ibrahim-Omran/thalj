@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/utils/app_text_style.dart';
 
 import 'package:thalj/features/home/presentation/components/home_screen/today_product.dart';
-import 'package:thalj/features/home/presentation/screens/product_info_screen.dart';
+import 'package:thalj/features/home/presentation/screens/Home_body/product_info_screen.dart';
 
 import '../../../domain/repository.dart';
 import '../../bloc/orders_bloc/orders_bloc.dart';
@@ -95,7 +95,7 @@ class HomeBody extends StatelessWidget {
                     children: [
                       SizedBox(height: 250.h,),
 
-                       Center(child: Expanded(child: Text("قم بدفع الاشتراك الشهري لتفعيل الحساب",style: regularStyle(fontSize: 20.h),))),
+                       Center(child: Text("قم بدفع الاشتراك الشهري لتفعيل الحساب",style: regularStyle(fontSize: 20.h),)),
                     ],
                   );
                 }

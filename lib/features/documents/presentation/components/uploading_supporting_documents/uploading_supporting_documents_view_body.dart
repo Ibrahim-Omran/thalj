@@ -27,12 +27,11 @@ class _UploadingSupportingDocumentsViewBodyState
 
   XFile? proofOfIdentityFront;
   XFile? proofOfIdentityBack;
-  XFile? residenceCardFront;
-  XFile? residenceCardBack;
   XFile? drivingLicense;
   XFile? vehicleLicense;
   XFile? operatingCard;
   XFile? transferDocument;
+  XFile? taxDocument;
   Future<void> _getImageFromCamera(String variableName) async {
     final XFile? pickedFile =
     await picker.pickImage(source: ImageSource.camera);
@@ -48,16 +47,7 @@ class _UploadingSupportingDocumentsViewBodyState
             proofOfIdentityBack = pickedFile;
           }
           break;
-        case 'residenceCardFront':
-          if (pickedFile!.path.isNotEmpty) {
-            residenceCardFront = pickedFile;
-          }
-          break;
-        case 'residenceCardBack':
-          if (pickedFile!.path.isNotEmpty) {
-            residenceCardBack = pickedFile;
-          }
-          break;
+
         case 'drivingLicense':
           if (pickedFile!.path.isNotEmpty) {
             drivingLicense = pickedFile;
@@ -78,6 +68,11 @@ class _UploadingSupportingDocumentsViewBodyState
             transferDocument = pickedFile;
           }
           break;
+        case 'taxDocument':
+          if (pickedFile!.path.isNotEmpty) {
+            taxDocument = pickedFile;
+          }
+          break;
         default:
           break;
       }
@@ -90,7 +85,7 @@ class _UploadingSupportingDocumentsViewBodyState
       listener: (context, state) {
         if (state is DocumentUploadFailed) {
           showToast(
-            text: "يوجد مشكلة في السيرفر يرجى التاكد من رفع البيانات",
+            text: "برجاء التاكد من تحميل جميع المستندات الالزامية",
             state: ToastStates.error,
           );
         }
@@ -139,6 +134,10 @@ class _UploadingSupportingDocumentsViewBodyState
                   ),
                   Text(
                     AppStrings.uploadingId,
+                    style: regularStyle(),
+                  ),
+                  Text(
+                    AppStrings.expatriateUploadingId,
                     style: regularStyle(),
                   ),
                   const SizedBox(
@@ -193,60 +192,7 @@ class _UploadingSupportingDocumentsViewBodyState
                   SizedBox(
                     height: 12.h,
                   ),
-                  Text(
-                    AppStrings.expatriateUploadingId,
-                    style: regularStyle(),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      residenceCardBack == null
-                          ? customContainer(
-                          mainText: AppStrings.frontId,
-                          textFrontOrBack: AppStrings.back,
-                          height: 160.0.h,
-                          width: 176.0.w,
-                          textFrontOrBack2: AppStrings.frontId2,
-                          onTap: () {
-                            _getImageFromCamera('residenceCardBack');
-                          })
-                          : customContainer(
-                        mainText: AppStrings.doneUploading,
-                        textFrontOrBack: '',
-                        height: 160.0.h,
-                        width: 176.0.w,
-                        textFrontOrBack2: '',
-                        onTap: () {},
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      residenceCardFront == null
-                          ? customContainer(
-                          mainText: AppStrings.frontId,
-                          textFrontOrBack: AppStrings.front,
-                          height: 160.0.h,
-                          width: 176.0.w,
-                          textFrontOrBack2: AppStrings.frontId2,
-                          onTap: () {
-                            _getImageFromCamera('residenceCardFront');
-                          })
-                          : customContainer(
-                        mainText: AppStrings.doneUploading,
-                        textFrontOrBack: '',
-                        height: 160.0.h,
-                        width: 176.0.w,
-                        textFrontOrBack2: '',
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12.h,
-                  ),
+
                   Text(
                     AppStrings.uploadDrivingLicense,
                     style: regularStyle(),
@@ -258,7 +204,7 @@ class _UploadingSupportingDocumentsViewBodyState
                       child: drivingLicense == null
                           ? customContainer(
                           mainText: AppStrings
-                              .chooseFileToUploadYourLicense,
+                              .chooseFileToUpload,
                           height: 160.h,
                           width: 362.w,
                           textFrontOrBack: '',
@@ -288,7 +234,7 @@ class _UploadingSupportingDocumentsViewBodyState
                       child: vehicleLicense == null
                           ? customContainer(
                           mainText: AppStrings
-                              .chooseFileToUploadYourLicense,
+                              .chooseFileToUpload,
                           height: 160.h,
                           width: 362.w,
                           textFrontOrBack: '',
@@ -318,7 +264,7 @@ class _UploadingSupportingDocumentsViewBodyState
                       child: operatingCard == null
                           ? customContainer(
                           mainText: AppStrings
-                              .chooseFileToUploadYourLicense,
+                              .chooseFileToUpload,
                           height: 160.h,
                           width: 362.w,
                           textFrontOrBack: '',
@@ -348,7 +294,7 @@ class _UploadingSupportingDocumentsViewBodyState
                       child: transferDocument == null
                           ? customContainer(
                           mainText: AppStrings
-                              .chooseFileToUploadYourLicense,
+                              .chooseFileToUpload,
                           height: 160.h,
                           width: 362.w,
                           textFrontOrBack: '',
@@ -367,9 +313,39 @@ class _UploadingSupportingDocumentsViewBodyState
                   const SizedBox(
                     height: 12,
                   ),
+                  Text(
+                    AppStrings.taxRegister,
+                    style: regularStyle(),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Center(
+                      child: taxDocument == null
+                          ? customContainer(
+                          mainText: AppStrings
+                              .chooseFileToUpload,
+                          height: 160.h,
+                          width: 362.w,
+                          textFrontOrBack: '',
+                          textFrontOrBack2: '',
+                          onTap: () {
+                            _getImageFromCamera('taxDocument');
+                          })
+                          : customContainer(
+                        mainText: AppStrings.doneUploading,
+                        textFrontOrBack: '',
+                        height: 160.0.h,
+                        width: 176.0.w,
+                        textFrontOrBack2: '',
+                        onTap: () {},
+                      )),
+                  const SizedBox(
+                    height: 12,
+                  ),
                   ElevatedButton(
                       onPressed: () {
-                        BlocProvider.of<DocumentCheckingBloc>(context)
+                       /* BlocProvider.of<DocumentCheckingBloc>(context)
                             .add(DocumentUpload(
                           proofOfIdentityFront: proofOfIdentityFront!,
                           proofOfIdentityBack: proofOfIdentityBack!,
@@ -379,7 +355,7 @@ class _UploadingSupportingDocumentsViewBodyState
                           vehicleLicense: vehicleLicense!,
                           operatingCard: operatingCard!,
                           transferDocument: transferDocument!,
-                        ));
+                        ));*/
                       },
                       child: Container(
                         width: 351.w,

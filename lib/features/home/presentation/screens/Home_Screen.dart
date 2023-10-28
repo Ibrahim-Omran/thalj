@@ -3,14 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thalj/features/home/presentation/bloc/get-accepted-offers/acceptedOffers_bloc.dart';
 import 'package:thalj/features/home/presentation/components/customNavbar.dart';
 
-import 'package:thalj/features/home/presentation/screens/Home_Screen/HomeBody.dart';
-import 'package:thalj/features/home/presentation/screens/Home_Screen/offers.dart';
-import 'package:thalj/features/home/presentation/screens/Home_Screen/profile.dart';
+import 'package:thalj/features/home/presentation/screens/offer_screen/offers.dart';
+import 'package:thalj/features/home/presentation/screens/profile_screen/profile.dart';
 
-import '../../../domain/repository.dart';
-import '../../bloc/orders_bloc/orders_bloc.dart';
-import '../../bloc/paySubscription/paySubscription-bloc.dart';
-import '../../components/profileAppBar.dart';
+import '../../domain/repository.dart';
+import '../bloc/orders_bloc/orders_bloc.dart';
+import '../components/profileAppBar.dart';
+import 'Home_body/HomeBody.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,10 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         create: (context) =>
             AcceptedOrderBloc(homeRepository: context.read<HomeRepository>()),
         child: const Offers()),
-    BlocProvider<PaySubScriptionBloc>(
-        create: (context) =>
-            PaySubScriptionBloc(homeRepository: context.read<HomeRepository>() ),
-        child: const Profile()),
+     const Profile()
   ];
 
 
