@@ -41,6 +41,7 @@ class DocumentCheckingBloc
   @override
   void onChange(Change<DocumentCheckingState> change) {
     // TODO: implement onChange
+    print(change);
     super.onChange(change);
   }
 
@@ -48,6 +49,7 @@ class DocumentCheckingBloc
   void onTransition(
       Transition<DocumentCheckingEvent, DocumentCheckingState> transition) {
     // TODO: implement onTransition
+    print(transition);
     super.onTransition(transition);
   }
 }
