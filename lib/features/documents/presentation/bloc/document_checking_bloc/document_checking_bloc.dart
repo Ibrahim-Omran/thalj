@@ -22,7 +22,6 @@ class DocumentCheckingBloc
         var isUploaded = await documentRepository.uploadDocuments(
           proofOfIdentityFront: event.proofOfIdentityFront,
           proofOfIdentityBack: event.proofOfIdentityBack,
-
           drivingLicense: event.drivingLicense,
           vehicleLicense: event.vehicleLicense,
           operatingCard: event.operatingCard,

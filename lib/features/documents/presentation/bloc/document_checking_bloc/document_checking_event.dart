@@ -13,15 +13,14 @@ class DocumentUpload extends DocumentCheckingEvent {
   final XFile vehicleLicense;
   final XFile operatingCard;
   final XFile transferDocument;
-  final XFile ?commercialRegister;
+  final XFile? commercialRegister;
 
   DocumentUpload(
       {required this.proofOfIdentityFront,
-        required this.proofOfIdentityBack,
-
-        required this.drivingLicense,
-        required this.vehicleLicense,
-        required this.commercialRegister,
-        required this.operatingCard,
-        required this.transferDocument});
+      required this.proofOfIdentityBack,
+      required this.drivingLicense,
+      required this.vehicleLicense,
+      this.commercialRegister,
+      required this.operatingCard,
+      required this.transferDocument});
 }
