@@ -71,8 +71,7 @@ class _UploadingSupportingDocumentsViewBodyState
         case 'commercialRegister':
           if (pickedFile!.path.isNotEmpty) {
             commercialRegister = pickedFile;
-          }
-          else {
+          } else {
             commercialRegister = null;
           }
           break;
@@ -195,7 +194,6 @@ class _UploadingSupportingDocumentsViewBodyState
                   SizedBox(
                     height: 12.h,
                   ),
-
                   Text(
                     AppStrings.uploadDrivingLicense,
                     style: regularStyle(),
@@ -206,8 +204,7 @@ class _UploadingSupportingDocumentsViewBodyState
                   Center(
                       child: drivingLicense == null
                           ? customContainer(
-                          mainText: AppStrings
-                              .chooseFileToUpload,
+                          mainText: AppStrings.chooseFileToUpload,
                           height: 160.h,
                           width: 362.w,
                           textFrontOrBack: '',
@@ -236,8 +233,7 @@ class _UploadingSupportingDocumentsViewBodyState
                   Center(
                       child: vehicleLicense == null
                           ? customContainer(
-                          mainText: AppStrings
-                              .chooseFileToUpload,
+                          mainText: AppStrings.chooseFileToUpload,
                           height: 160.h,
                           width: 362.w,
                           textFrontOrBack: '',
@@ -266,8 +262,7 @@ class _UploadingSupportingDocumentsViewBodyState
                   Center(
                       child: operatingCard == null
                           ? customContainer(
-                          mainText: AppStrings
-                              .chooseFileToUpload,
+                          mainText: AppStrings.chooseFileToUpload,
                           height: 160.h,
                           width: 362.w,
                           textFrontOrBack: '',
@@ -296,8 +291,7 @@ class _UploadingSupportingDocumentsViewBodyState
                   Center(
                       child: transferDocument == null
                           ? customContainer(
-                          mainText: AppStrings
-                              .chooseFileToUpload,
+                          mainText: AppStrings.chooseFileToUpload,
                           height: 160.h,
                           width: 362.w,
                           textFrontOrBack: '',
@@ -326,8 +320,7 @@ class _UploadingSupportingDocumentsViewBodyState
                   Center(
                       child: commercialRegister == null
                           ? customContainer(
-                          mainText: AppStrings
-                              .chooseFileToUpload,
+                          mainText: AppStrings.chooseFileToUpload,
                           height: 160.h,
                           width: 362.w,
                           textFrontOrBack: '',
@@ -348,16 +341,15 @@ class _UploadingSupportingDocumentsViewBodyState
                   ),
                   ElevatedButton(
                       onPressed: () {
-                       BlocProvider.of<DocumentCheckingBloc>(context)
+                        BlocProvider.of<DocumentCheckingBloc>(context)
                             .add(DocumentUpload(
                           proofOfIdentityFront: proofOfIdentityFront!,
                           proofOfIdentityBack: proofOfIdentityBack!,
-
                           drivingLicense: drivingLicense!,
                           vehicleLicense: vehicleLicense!,
                           operatingCard: operatingCard!,
                           transferDocument: transferDocument!,
-                         commercialRegister: commercialRegister!,
+                          commercialRegister: commercialRegister ?? XFile(" "),
                         ));
                       },
                       child: Container(
