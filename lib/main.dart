@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: AppStrings.appName,
             theme: getAppTheme(),
-            initialRoute: Routes.initialRoute,
+
             home: const SplashScreen(animateBottom: true),
 
             onGenerateRoute: (settings) {

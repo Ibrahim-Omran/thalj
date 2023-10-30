@@ -122,6 +122,7 @@ class AppStrings {
   static const String vehicleRegistration = ' : استمارة المركبة';
   static const String operatingCard = ': كارت التشغيل ';
   static const String transferDocument = ': وثيقة نقل';
+  static const String taxDocument = ': السجل التجاري';
   static const String requestAccept = 'قبول الطلب';
   static const String requestReject = 'رفض الطلب';
 
@@ -132,4 +133,5 @@ class AppStrings {
   static const String driverDocuments = 'مستندات السائقين';
   static const String customersBills = 'وصولات الدفع للعملاء';
   static const String driversBills = 'وصولات دفع اشتراك السائقين';
+  static const String adminSignOut = 'تسجيل الخروج';
 }

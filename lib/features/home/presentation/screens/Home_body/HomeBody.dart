@@ -14,7 +14,6 @@ import '../../bloc/orders_bloc/orders_state.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
-  final int itemsPerPage = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +94,7 @@ class HomeBody extends StatelessWidget {
                     children: [
                       SizedBox(height: 250.h,),
 
-                       Center(child: Text("قم بدفع الاشتراك الشهري لتفعيل الحساب",style: regularStyle(fontSize: 20.h),)),
+                       Center(child: Text(state.errorMessage.toString(),style: regularStyle(fontSize: 20.h),)),
                     ],
                   );
                 }

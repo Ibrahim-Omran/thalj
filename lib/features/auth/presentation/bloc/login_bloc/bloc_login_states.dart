@@ -4,7 +4,7 @@ class LoginState {
   final bool obscureText;
   final bool isSubmitting;
   final bool isSuccess;
-  final String? error;
+  final bool error;
 
   LoginState({
     this.userName = '',
@@ -12,7 +12,7 @@ class LoginState {
     this.obscureText = true,
     this.isSubmitting = false,
     this.isSuccess = false,
-    this.error,
+    this.error = false,
   });
 
   LoginState copyWith({
@@ -21,7 +21,7 @@ class LoginState {
     bool? obscureText,
     bool? isSubmitting,
     bool? isSuccess,
-    String? error,
+    bool ? error,
   }) {
     return LoginState(
       userName: userName ?? this.userName,

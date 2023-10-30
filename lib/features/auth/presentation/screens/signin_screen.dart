@@ -171,8 +171,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       showToast(
                           text: AppStrings.verifyMessage, state: ToastStates.warning);
                     }
-                    else if(!state.isSuccess){
-                      showToast(text: ("Server Error"), state: ToastStates.error);
+                    else if(state.error){
+                      showToast(text: ("Server Error or No Internet connection"), state: ToastStates.error);
 
                     }
 

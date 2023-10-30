@@ -31,7 +31,7 @@ class _UploadingSupportingDocumentsViewBodyState
   XFile? vehicleLicense;
   XFile? operatingCard;
   XFile? transferDocument;
-  XFile? taxDocument;
+  XFile? commercialRegister;
   Future<void> _getImageFromCamera(String variableName) async {
     final XFile? pickedFile =
     await picker.pickImage(source: ImageSource.camera);
@@ -68,9 +68,12 @@ class _UploadingSupportingDocumentsViewBodyState
             transferDocument = pickedFile;
           }
           break;
-        case 'taxDocument':
+        case 'commercialRegister':
           if (pickedFile!.path.isNotEmpty) {
-            taxDocument = pickedFile;
+            commercialRegister = pickedFile;
+          }
+          else {
+            commercialRegister = null;
           }
           break;
         default:
@@ -321,7 +324,7 @@ class _UploadingSupportingDocumentsViewBodyState
                     height: 12,
                   ),
                   Center(
-                      child: taxDocument == null
+                      child: commercialRegister == null
                           ? customContainer(
                           mainText: AppStrings
                               .chooseFileToUpload,
@@ -330,7 +333,7 @@ class _UploadingSupportingDocumentsViewBodyState
                           textFrontOrBack: '',
                           textFrontOrBack2: '',
                           onTap: () {
-                            _getImageFromCamera('taxDocument');
+                            _getImageFromCamera('commercialRegister');
                           })
                           : customContainer(
                         mainText: AppStrings.doneUploading,
@@ -345,17 +348,17 @@ class _UploadingSupportingDocumentsViewBodyState
                   ),
                   ElevatedButton(
                       onPressed: () {
-                       /* BlocProvider.of<DocumentCheckingBloc>(context)
+                       BlocProvider.of<DocumentCheckingBloc>(context)
                             .add(DocumentUpload(
                           proofOfIdentityFront: proofOfIdentityFront!,
                           proofOfIdentityBack: proofOfIdentityBack!,
-                          residenceCardFront: residenceCardFront!,
-                          residenceCardBack: residenceCardBack!,
+
                           drivingLicense: drivingLicense!,
                           vehicleLicense: vehicleLicense!,
                           operatingCard: operatingCard!,
                           transferDocument: transferDocument!,
-                        ));*/
+                         commercialRegister: commercialRegister!,
+                        ));
                       },
                       child: Container(
                         width: 351.w,

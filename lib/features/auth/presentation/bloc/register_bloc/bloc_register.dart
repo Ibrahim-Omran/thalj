@@ -50,14 +50,14 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         emit(state.copyWith(
           isSubmitting: false,
           isSuccess: false,
-          error: 'Authentication failed.',
+          error: false,
         ));
       }
     } catch (e) {
       emit(state.copyWith(
         isSubmitting: false,
         isSuccess: false,
-        error: e.toString(),
+        error: false,
       ));
     }
   }

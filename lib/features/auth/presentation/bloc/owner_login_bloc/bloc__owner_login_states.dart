@@ -4,7 +4,7 @@ class AdminLoginState {
   final bool obscureText;
   final bool isSubmitting;
   final bool isSuccess;
-  final String? error;
+  final bool  error;
 
   AdminLoginState(
       {this.userName = '',
@@ -12,7 +12,7 @@ class AdminLoginState {
       this.obscureText = true,
       this.isSubmitting = false,
       this.isSuccess = false,
-      this.error});
+      this.error = false});
 
   AdminLoginState copyWith({
     String? userName,
@@ -20,7 +20,7 @@ class AdminLoginState {
     bool? obscureText,
     bool? isSubmitting,
     bool? isSuccess,
-    String? error,
+    bool? error,
   }) {
     return AdminLoginState(
         userName: userName ?? this.userName,

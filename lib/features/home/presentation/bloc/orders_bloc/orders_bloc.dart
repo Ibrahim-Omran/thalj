@@ -1,10 +1,15 @@
 import 'package:bloc/bloc.dart';
 
+import '../../../../../core/network/ErrorModel.dart';
 import '../../../domain/repository.dart';
 import 'orders_event.dart';
 import 'orders_state.dart';
 
+class OrdersApiException implements Exception {
+  final String message;
 
+  OrdersApiException(this.message);
+}
 
 class GetOrdersDataBloc extends Bloc<GetOrdersDataEvent, GetOrdersDataState> {
   final HomeRepository homeRepository;
@@ -15,10 +20,13 @@ class GetOrdersDataBloc extends Bloc<GetOrdersDataEvent, GetOrdersDataState> {
     on<GetOrdersData>((event, emit) async {
       emit(GetOrdersDataLoading());
       var  result= await homeRepository.getOrders();
+
       if (result.isNotEmpty) {
         emit(GetOrdersDataSuccess(result));
-      } else {
-        emit(GetOrdersDataFailure("Error"));
+      }
+      else {
+        emit(GetOrdersDataFailure("Error Not Found Go "));
+
       }
         });
 

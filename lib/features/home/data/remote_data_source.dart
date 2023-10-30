@@ -23,11 +23,7 @@ class HomeRemoteDataSource {
     required String id,
   }) async {
 
-    bool result = await InternetConnectionChecker().hasConnection;
-    if(!result)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+
 
     try {
 
@@ -72,11 +68,7 @@ class HomeRemoteDataSource {
   }
 
   Future<List<AcceptedOrdersModel>> getAcceptedOffers() async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if(!result)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+
     final response = await http.get(
         Uri.parse('${AppStrings.apiLink}drivers/orders'),
         headers: {
@@ -108,11 +100,6 @@ class HomeRemoteDataSource {
 
 
   Future<List<OrdersModel>> getDriversOrders() async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if(!result)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
     var response = await http.get(
       Uri.parse('${AppStrings.apiLink}orders'),
       headers: {
@@ -125,17 +112,22 @@ class HomeRemoteDataSource {
 
     try {
       if (response.statusCode == 200) {
-
         final data = jsonDecode(response.body);
-        for (var item in data) {
-          ordersData.add(OrdersModel.fromJson(item));
+        print(data);
+
+        if (data is List) {
+          for (var item in data) {
+            ordersData.add(OrdersModel.fromJson(item));
+          }
+        } else if (data is Map && data.containsKey("msg")) {
+          final errorMessage = data["msg"];
+          showToast(text: errorMessage, state: ToastStates.error);
         }
       } else {
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
         final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
         showToast(
             text: errorMessageModel.statusMessage, state: ToastStates.error);
-
       }
     } catch (e) {
       if (kDebugMode) {
@@ -144,13 +136,8 @@ class HomeRemoteDataSource {
     }
     return ordersData;
   }
-
   Future<OneOrderModel> getDriversOneOrderInfo(String id) async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if(!result)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+
     final response = await http.get(
       Uri.parse('${AppStrings.apiLink}orders/$id'),
       headers: {
@@ -170,11 +157,7 @@ class HomeRemoteDataSource {
   Future<bool> paySubscription({
     required File billPhoto,
   }) async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if(!result)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+
     try {
 
       var request = http.MultipartRequest(

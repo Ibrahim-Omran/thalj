@@ -44,6 +44,10 @@ class _ProfileState extends State<Profile> {
                 child: const Subscription())));
           }, child: Text("الاشتراكات",style: boldStyle(color: AppColors.primary),)),
           TextButton(onPressed: ()async{
+            Navigator.pushReplacementNamed(
+              context,
+              Routes.signIN,
+            );
             await CacheHelper.clearData('loginToken').then((value) {
               value = true;
               if (value) {

@@ -7,12 +7,12 @@ class DriversModel {
   String? email;
   String? proofOfIdentityFront;
   String? proofOfIdentityBack;
-  String? residenceCardFront;
-  String? residenceCardBack;
+
   String? drivingLicense;
   String? vehicleLicense;
   String? operatingCard;
   String? transferDocument;
+  String? commercialRegister;
   String? verified;
   int? subscription;
   String? subscriptionDate;
@@ -25,9 +25,9 @@ class DriversModel {
     this.email,
     this.proofOfIdentityFront,
     this.proofOfIdentityBack,
-    this.residenceCardFront,
-    this.residenceCardBack,
+
     this.drivingLicense,
+    this.commercialRegister,
     this.vehicleLicense,
     this.operatingCard,
     this.transferDocument,
@@ -44,8 +44,8 @@ class DriversModel {
         email: data['email'] as String?,
         proofOfIdentityFront: data['proofOfIdentityFront'] as String?,
         proofOfIdentityBack: data['proofOfIdentityBack'] as String?,
-        residenceCardFront: data['residenceCardFront'] as String?,
-        residenceCardBack: data['residenceCardBack'] as String?,
+    commercialRegister: data['commercialRegister'] as String?,
+
         drivingLicense: data['drivingLicense'] as String?,
         vehicleLicense: data['vehicleLicense'] as String?,
         operatingCard: data['operatingCard'] as String?,
@@ -63,8 +63,8 @@ class DriversModel {
         'email': email,
         'proofOfIdentityFront': proofOfIdentityFront,
         'proofOfIdentityBack': proofOfIdentityBack,
-        'residenceCardFront': residenceCardFront,
-        'residenceCardBack': residenceCardBack,
+        'commercialRegister': commercialRegister,
+
         'drivingLicense': drivingLicense,
         'vehicleLicense': vehicleLicense,
         'operatingCard': operatingCard,

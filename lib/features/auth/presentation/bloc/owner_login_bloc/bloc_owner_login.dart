@@ -36,14 +36,14 @@ class AdminLoginBloc extends Bloc<AdminLoginEvent, AdminLoginState> {
         emit(state.copyWith(
           isSubmitting: false,
           isSuccess: false,
-          error: 'Authentication failed.',
+          error: false,
         ));
       }
     } catch (e) {
       emit(state.copyWith(
         isSubmitting: false,
         isSuccess: false,
-        error: e.toString(),
+        error: false,
       ));
     }
   }

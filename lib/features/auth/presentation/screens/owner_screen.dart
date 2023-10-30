@@ -120,6 +120,10 @@ class _OwnerScreenState extends State<OwnerScreen> {
                       showToast(
                           text: AppStrings.welcome, state: ToastStates.success);
                     }
+                    else if(state.error){
+                      showToast(text: ("Server Error or No Internet connection"), state: ToastStates.error);
+
+                    }
                   },
                 ),
               ],

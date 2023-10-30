@@ -9,7 +9,7 @@ class RegisterState {
   final bool confirmObscureText;
   final bool isSubmitting;
   final bool isSuccess;
-  final String? error;
+  final bool error;
 
   RegisterState({
     this.userName = '',
@@ -22,7 +22,7 @@ class RegisterState {
     required this.confirmObscureText,
     this.isSubmitting = false,
     this.isSuccess = false,
-    this.error,
+    this.error = false,
   });
 
   RegisterState copyWith({
@@ -36,7 +36,7 @@ class RegisterState {
     bool? isChecked,
     bool? isSubmitting,
     bool? isSuccess,
-    String? error,
+    bool? error,
   }) {
     return RegisterState(
       userName: userName ?? this.userName,

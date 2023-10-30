@@ -18,15 +18,16 @@ class DocumentCheckingBloc
     on<DocumentCheckingEvent>((event, emit) async {
       if (event is DocumentUpload) {
         emit(DocumentUploading());
+
         var isUploaded = await documentRepository.uploadDocuments(
           proofOfIdentityFront: event.proofOfIdentityFront,
           proofOfIdentityBack: event.proofOfIdentityBack,
-          residenceCardFront: event.residenceCardFront,
-          residenceCardBack: event.residenceCardBack,
+
           drivingLicense: event.drivingLicense,
           vehicleLicense: event.vehicleLicense,
           operatingCard: event.operatingCard,
           transferDocument: event.transferDocument,
+          commercialRegister: event.commercialRegister,
         );
         if (!isUploaded) {
           emit(DocumentUploadFailed());

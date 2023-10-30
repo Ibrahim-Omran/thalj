@@ -54,17 +54,8 @@ class DriverDataSentToOwner extends StatelessWidget {
                             driverShowIdentityContainer(
                               imagePath: args.proofOfIdentityBack,
                             ),
-                            Text(AppStrings.residenceCard,
-                                style: regularStyle()),
-                            Text(": ${AppStrings.front}",
-                                style: regularStyle()),
-                            driverShowIdentityContainer(
-                              imagePath: args.residenceCardFront,
-                            ),
-                            Text(": ${AppStrings.back}", style: regularStyle()),
-                            driverShowIdentityContainer(
-                              imagePath: args.residenceCardBack,
-                            ),
+
+
                             Text(AppStrings.drivingLicense,
                                 style: regularStyle()),
                             driverShowIdentityContainer(
@@ -84,6 +75,11 @@ class DriverDataSentToOwner extends StatelessWidget {
                                 style: regularStyle()),
                             driverShowIdentityContainer(
                               imagePath: args.transferDocument,
+                            ),
+                            Text(AppStrings.taxDocument,
+                                style: regularStyle()),
+                            driverShowIdentityContainer(
+                              imagePath: args.commercialRegister,
                             ),
                             ElevatedButton(
                                 onPressed: () {
