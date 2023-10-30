@@ -3,13 +3,11 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../core/functions/saveDataManager.dart';
 import '../../../core/local/cash_helper.dart';
 import '../../../core/network/ErrorModel.dart';
 import '../../../core/utils/app_strings.dart';
 import '../../../core/utils/toast.dart';
 import '../domain/models/admin_model.dart';
-import '../domain/models/login_model.dart';
 import '../domain/models/register_model.dart';
 
 class AuthRemoteDataSource {
@@ -34,18 +32,18 @@ class AuthRemoteDataSource {
           final token = jsonResponse['token'];
           CacheHelper.saveData(
               key: 'loginToken', value:token );
+          CacheHelper.saveData(
+              key: 'name', value:loginData['fullname'] );
+          CacheHelper.saveData(
+              key: 'verified', value:loginData['verified'] );
+          CacheHelper.saveData(
+              key: 'status', value:loginData['status'] );
+          CacheHelper.saveData(
+              key: 'email', value:loginData['email'] );
 
-          var loginModel = LoginModel(
-              id: loginData['id'],
-              fullName: loginData['fullname'],
-              phone: loginData['phone'],
-              email: loginData['email'],
+          CacheHelper.saveData(
+              key: 'phone', value:loginData['phone'] );
 
-              verified: loginData['verified'],
-              subscription: loginData['subscription'],
-              status: loginData['status'],
-              token: jsonResponse['token']);
-          SaveDataManager.saveLoginToken(loginModel);
 
           return true;
         } else {
@@ -98,7 +96,7 @@ class AuthRemoteDataSource {
               key: 'registerToken', value: jsonResponse['token']);
 
 
-          var registerModel = RegisterModel.fromJson({
+         RegisterModel.fromJson({
             'data': {
               'id': registerData['id'],
               'fullname': registerData['fullname'],
@@ -107,7 +105,6 @@ class AuthRemoteDataSource {
             },
             'token': jsonResponse['token'],
           });
-          SaveDataManager.saveRegisterToken(registerModel);
         }
         return true;
       } else {
@@ -144,7 +141,7 @@ class AuthRemoteDataSource {
           final adminLoginData = jsonResponse['data'][0];
           CacheHelper.saveData(
               key: 'adminToken', value: jsonResponse['token']);
-          var adminModel =AdminModel.fromJson({
+          AdminModel.fromJson({
             'id': adminLoginData['id'],
             'name': adminLoginData['name'],
             'phone': adminLoginData['phone'],
@@ -153,7 +150,6 @@ class AuthRemoteDataSource {
             'verified': adminLoginData['verified'],
             'token': jsonResponse['token'],
           });
-          SaveDataManager.saveAdminToken(adminModel);
 
           return true;
         } else {

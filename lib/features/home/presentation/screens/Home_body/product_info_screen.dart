@@ -6,7 +6,7 @@ import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/widgets/custom_button.dart';
 
 import 'package:thalj/features/home/presentation/bloc/orders_bloc/orders_bloc.dart';
-import 'package:thalj/features/home/presentation/screens/Home_body/product_details.dart';
+import 'package:thalj/features/home/presentation/screens/Home_body/send_offers.dart';
 import '../../../../../core/widgets/custom_app_bar_product_info.dart';
 
 import '../../bloc/orders_bloc/orders_event.dart';
@@ -86,7 +86,7 @@ class ProductInformationScreen extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => Builder(
                                   builder: (BuildContext context) {
-                                    return ProductDetails(
+                                    return SendOffer(
                                       id: id,
                                     );
                                   },

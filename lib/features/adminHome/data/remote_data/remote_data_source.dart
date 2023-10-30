@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-import '../../../../core/functions/saveDataManager.dart';
+import '../../../../core/local/cash_helper.dart';
 import '../../../../core/network/ErrorModel.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/toast.dart';
@@ -11,9 +11,10 @@ import '../../domain/models/drivers_model.dart';
 import '../../domain/models/driver_subscription_model.dart';
 import '../../domain/models/user_invoice_model.dart';
 
-String? token = SaveDataManager.getAdminToken();
 
 class AdminRemoteDataSource {
+  String? adminToken = CacheHelper.getData(key: 'adminToken');
+
 
   Future<List<DriverSubscriptionModel>> getDriverSubscriptions() async {
     bool result = await InternetConnectionChecker().hasConnection;
@@ -28,7 +29,7 @@ class AdminRemoteDataSource {
           headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*',
-            'Authorization': 'Bearer $token',
+            'Authorization': 'Bearer $adminToken',
           });
 
       if (response.statusCode == 200) {
@@ -63,7 +64,7 @@ class AdminRemoteDataSource {
           headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*',
-            'Authorization': 'Bearer $token',
+            'Authorization': 'Bearer $adminToken',
           });
       if (response.statusCode == 200) {
         var jsonBody = jsonDecode(response.body);
@@ -96,7 +97,7 @@ class AdminRemoteDataSource {
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $adminToken',
         });
 
     if (data.statusCode == 200) {
@@ -121,7 +122,7 @@ class AdminRemoteDataSource {
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $adminToken',
         });
 
     if (data.statusCode == 200) {
@@ -146,7 +147,7 @@ class AdminRemoteDataSource {
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $adminToken',
         });
     List<DriversModel> drivers = [];
     if (data.statusCode == 200) {
@@ -173,7 +174,7 @@ class AdminRemoteDataSource {
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $adminToken',
         });
 
     if (data.statusCode == 200) {
@@ -200,7 +201,7 @@ class AdminRemoteDataSource {
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $adminToken',
         });
 
     if (data.statusCode == 200) {

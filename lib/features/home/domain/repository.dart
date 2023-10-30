@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+import '../../../core/functions/result.dart';
 import '../../../core/utils/app_strings.dart';
 import '../../../core/utils/toast.dart';
 import '../data/remote_data_source.dart';
@@ -50,15 +51,20 @@ class HomeRepository {
 
 
 
-  Future<List<OrdersModel>> getOrders() async {
+  Future<Result<List<OrdersModel>>> getOrders() async {
     if(await result ==false)
     {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
     }
-    List<OrdersModel> ordersData =
-        await homeRemoteDataSource.getDriversOrders();
+   try{
+     Result<List<OrdersModel>> ordersResult =
+     await homeRemoteDataSource.getDriversOrders();
+     return ordersResult;
+   } catch(e){
+     return Result.failure("An error occurred");
+   }
 
-    return ordersData;
+
   }
 
   Future<bool> paySubscription({required File billPhoto,
@@ -80,6 +86,27 @@ class HomeRepository {
 
     return oneOrdersData;
 
+  }
+
+
+  Future<bool> editInfo({
+    required String name,
+    required String email,
+    required String phone,
+  }) async {
+    if(await result ==false)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
+    bool isSEditInfo = false;
+
+    isSEditInfo = await homeRemoteDataSource.editInfo(
+        name: name,
+        phone: phone,
+        email: email,
+
+    );
+    return isSEditInfo;
   }
 }
 

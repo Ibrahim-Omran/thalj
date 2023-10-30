@@ -55,6 +55,7 @@ class MyFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
           ),
           child: TextFormField(
+
             textDirection: TextDirection.rtl,
             obscureText: isPassword,
             readOnly: readonly,
@@ -64,6 +65,7 @@ class MyFormField extends StatelessWidget {
             onFieldSubmitted: onSubmit,
             // Allow for dynamic expansion
             decoration: InputDecoration(
+
               hintText: hint,
               hintStyle: regularStyle(color: Colors.grey),
               hintTextDirection: TextDirection.rtl,

@@ -35,7 +35,7 @@ class Routes {
   static const String userInvoices = '/userInvoices';
   static const String driverInvoices = '/driverInvoices';
   static const String driverDataSentToOwner = '/driverDataSentToOwner';
-  static const String driverOptions = '/driverOptions';
+  static const String adminOptionsScreen = '/adminOptionsScreen';
 }
 
 Widget appRoutes(String route, dynamic arg) {
@@ -66,7 +66,7 @@ Widget appRoutes(String route, dynamic arg) {
       return const DriverDocuments();
     case Routes.driverDataSentToOwner:
       return const DriverDataSentToOwner();
-    case Routes.driverOptions:
+    case Routes.adminOptionsScreen:
       return const AdminOptionsScreen();
     case Routes.userInvoices:
       return const UserSubscriptionScreen();

@@ -9,7 +9,7 @@ import 'package:thalj/core/widgets/back_arrow.dart';
 import 'package:thalj/features/home/presentation/bloc/paySubscription/paySubscription-bloc.dart';
 import 'package:thalj/features/home/presentation/bloc/paySubscription/paySubscription-state.dart';
 
-import '../../../../../core/functions/saveDataManager.dart';
+import '../../../../../core/local/cash_helper.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_text_style.dart';
@@ -25,7 +25,8 @@ class Subscription extends StatefulWidget {
 
 class _SubscriptionState extends State<Subscription> {
   final picker = ImagePicker();
-  String ? status = SaveDataManager.loginModel!.status;
+  String? status = CacheHelper.getData(key: 'status');
+
   File? billPhoto;
 
   Future<void> _getImageFromCamera() async {
@@ -45,22 +46,22 @@ class _SubscriptionState extends State<Subscription> {
   }
 
   Widget _body(BuildContext context) {
-    return  Column(
-      children: [
-
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
+    return  Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              BackArrow(),
+            ],
+          ),
+          SingleChildScrollView(
             child: status == "Accepted"
                 ? Column(
               children: [
 
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    BackArrow(),
-                  ],
-                ),
+
                 SizedBox(height: 250.h,),
                 Center(
                   child: Text(
@@ -70,7 +71,7 @@ class _SubscriptionState extends State<Subscription> {
                 ),
               ],
             )
-                : status == "Waiting"
+                : status  == "Waiting"
                 ? Column(
               children: [
                 SizedBox(height: 250.h,),
@@ -84,6 +85,8 @@ class _SubscriptionState extends State<Subscription> {
             )
                 : Column(
               children: [
+                SizedBox(height: 150.h,),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -193,8 +196,8 @@ class _SubscriptionState extends State<Subscription> {
               ],
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

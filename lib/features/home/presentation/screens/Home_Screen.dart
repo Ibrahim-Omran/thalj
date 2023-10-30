@@ -6,6 +6,7 @@ import 'package:thalj/features/home/presentation/components/customNavbar.dart';
 import 'package:thalj/features/home/presentation/screens/offer_screen/offers.dart';
 import 'package:thalj/features/home/presentation/screens/profile_screen/profile.dart';
 
+import '../../../../core/local/cash_helper.dart';
 import '../../domain/repository.dart';
 import '../bloc/orders_bloc/orders_bloc.dart';
 import '../components/profileAppBar.dart';
@@ -21,6 +22,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+
+  String? fullName = CacheHelper.getData(key: 'name');
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -53,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body:  SafeArea(child: Column(
         children: [
-          const ProfileAppBar(),
+           ProfileAppBar(name:fullName!,),
           Expanded(child: _pages.elementAt(_selectedIndex)),
         ],
       ),

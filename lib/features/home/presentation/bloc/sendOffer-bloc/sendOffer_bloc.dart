@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:thalj/features/home/presentation/bloc/sendOffer-bloc/send_event.dart';
-import 'package:thalj/features/home/presentation/bloc/sendOffer-bloc/send_state.dart';
+import 'package:thalj/features/home/presentation/bloc/sendOffer-bloc/sendOffer_event.dart';
+import 'package:thalj/features/home/presentation/bloc/sendOffer-bloc/sendOffer_state.dart';
+
 
 import '../../../domain/repository.dart';
 
@@ -9,10 +10,10 @@ class SendOfferBloc extends Bloc<SendOfferEvent, SendOfferState> {
 
   SendOfferBloc({required this.homeRepository})
       : super(SendOfferState(
-          name: '',
-          phone: '',
-          price: '',
-        )) {
+    name: '',
+    phone: '',
+    price: '',
+  )) {
     on<SendOfferSubmitted>(_onSendOfferSubmitted);
   }
   Future<void> _onSendOfferSubmitted(

@@ -262,10 +262,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           context: context,
                           route: Routes.uploadingSupportingDocumentsScreen);
                     }
-                    else if(state.error){
-                      showToast(text: ("Server Error or No Internet connection"), state: ToastStates.error);
 
-                    }
                   },
                 ),
                 SizedBox(

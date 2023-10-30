@@ -23,6 +23,7 @@ class AppStrings {
   static const String editEmail = 'بريدك الالكتروني';
   static const String ownerEmail = 'ادخل البريد الالكتروني للمالك';
   static const String phoneNumber = 'ادخل رقم الهاتف صحيح';
+  static const String phone = ' رقم الهاتف ';
   static const String createPassword = 'انشئ رقمك السري';
   static const String confirmPassword = 'تأكيد الرقم السري';
   static const String agreeTermAndConditions =
@@ -128,6 +129,7 @@ class AppStrings {
 
   //ToastMSg
   static const String sendOfferSuccess = 'تم ارسال العرض بنجاح';
+  static const String editInfoSuccess = 'تم تغير المعلومات بنجاح  ';
 
   // Owner options
   static const String driverDocuments = 'مستندات السائقين';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:thalj/core/functions/saveDataManager.dart';
 import 'package:thalj/core/routes/app_routes.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/utils/commons.dart';
@@ -10,6 +9,7 @@ import 'package:thalj/core/widgets/custom_button.dart';
 import 'package:thalj/core/widgets/logo.dart';
 import 'package:thalj/features/auth/domain/repository.dart';
 
+import '../../../../core/local/cash_helper.dart';
 import '../../../../core/utils/app_text_style.dart';
 import '../bloc/login_bloc/bloc_login.dart';
 
@@ -22,12 +22,16 @@ class SignInScreen extends StatefulWidget {
 
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+
   late bool _isPassword = true;
+
+
 
   final TextEditingController _userNameController = TextEditingController();
 
@@ -161,20 +165,20 @@ class _SignInScreenState extends State<SignInScreen> {
                           );
                   },
                   listener: (BuildContext context, LoginState state) {
-                    String? verifiedDriver = SaveDataManager.getVerifiedDriver();
-                    if (state.isSuccess && verifiedDriver == "1"  )  {
+                    String? verified = CacheHelper.getData(key: 'verified');
+
+
+                    if (state.isSuccess && verified == "1" )  {
+
                       navigatePushReplacement(context: context, route: Routes.homeScreen);
                       showToast(
                           text: AppStrings.welcome, state: ToastStates.success);
                     }
-                    else if(verifiedDriver == "0"){
+                    else if(verified == "0"){
                       showToast(
                           text: AppStrings.verifyMessage, state: ToastStates.warning);
                     }
-                    else if(state.error){
-                      showToast(text: ("Server Error or No Internet connection"), state: ToastStates.error);
 
-                    }
 
                   },
                 ),

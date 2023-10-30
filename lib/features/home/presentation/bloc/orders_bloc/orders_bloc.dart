@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:thalj/core/functions/result.dart';
 
-import '../../../../../core/network/ErrorModel.dart';
 import '../../../domain/repository.dart';
 import 'orders_event.dart';
 import 'orders_state.dart';
@@ -21,13 +21,12 @@ class GetOrdersDataBloc extends Bloc<GetOrdersDataEvent, GetOrdersDataState> {
       emit(GetOrdersDataLoading());
       var  result= await homeRepository.getOrders();
 
-      if (result.isNotEmpty) {
-        emit(GetOrdersDataSuccess(result));
-      }
-      else {
-        emit(GetOrdersDataFailure("Error Not Found Go "));
-
-      }
+      result.handle(success: (ordersData) {
+      emit(GetOrdersDataSuccess(ordersData));
+      },
+      failure: (errorMessage) {
+      emit(GetOrdersDataFailure(errorMessage));
+      }, );
         });
 
     on<GetOneOrdersData>((event, emit) async {
@@ -45,4 +44,6 @@ class GetOrdersDataBloc extends Bloc<GetOrdersDataEvent, GetOrdersDataState> {
     });
 
   }
+
 }
+

@@ -116,14 +116,11 @@ class _OwnerScreenState extends State<OwnerScreen> {
                   listener: (BuildContext context, AdminLoginState state) {
                     if (state.isSuccess) {
                       navigatePushReplacement(
-                          context: context, route: Routes.driverOptions);
+                          context: context, route: Routes.adminOptionsScreen);
                       showToast(
                           text: AppStrings.welcome, state: ToastStates.success);
                     }
-                    else if(state.error){
-                      showToast(text: ("Server Error or No Internet connection"), state: ToastStates.error);
 
-                    }
                   },
                 ),
               ],

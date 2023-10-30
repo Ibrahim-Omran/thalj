@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:thalj/core/functions/saveDataManager.dart';
 
 import '../../../../core/utils/app_text_style.dart';
 
 
 class ProfileAppBar extends StatefulWidget {
+  final String name;
 
-  const ProfileAppBar({super.key});
+  const ProfileAppBar({super.key, required this.name});
 
   @override
   State<ProfileAppBar> createState() => _ProfileAppBarState();
 }
 
 class _ProfileAppBarState extends State<ProfileAppBar> {
-String ? name = SaveDataManager.getLoginName();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -40,7 +39,7 @@ String ? name = SaveDataManager.getLoginName();
                   Text('مرحبا بك',
                       style: boldStyle(color: Colors.white, fontSize: 20)),
                   Text(
-                    name!,
+                    widget.name,
                     style: boldStyle(color: Colors.white, fontSize: 20),
                     overflow: TextOverflow.clip,
                   ),

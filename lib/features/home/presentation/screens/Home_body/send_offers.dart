@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/utils/commons.dart';
 import 'package:thalj/features/auth/presentation/components/text_filed.dart';
 import 'package:thalj/features/home/domain/repository.dart';
-import 'package:thalj/features/home/presentation/bloc/sendOffer-bloc/send_bloc.dart';
 
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_assets.dart';
@@ -12,19 +11,21 @@ import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/toast.dart';
 import '../../../../../core/widgets/custom_app_bar_product_info.dart';
 import '../../../../../core/widgets/custom_button.dart';
-import '../../bloc/sendOffer-bloc/send_event.dart';
-import '../../bloc/sendOffer-bloc/send_state.dart';
-class ProductDetails extends StatefulWidget {
-  const ProductDetails({super.key, required this.id});
+import '../../bloc/sendOffer-bloc/sendOffer_bloc.dart';
+import '../../bloc/sendOffer-bloc/sendOffer_event.dart';
+import '../../bloc/sendOffer-bloc/sendOffer_state.dart';
+
+class SendOffer extends StatefulWidget {
+  const SendOffer({super.key, required this.id});
   final String id;
 
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  State<ProductDetails> createState() => _ProductDetailsState();
+  State<SendOffer> createState() => _SendOfferState();
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
+class _SendOfferState extends State<SendOffer> {
   final TextEditingController _nameController = TextEditingController();
 
   final TextEditingController _priceController = TextEditingController();
@@ -57,7 +58,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           child: SizedBox(
             height: 860.h,
             child: Form(
-              key: ProductDetails._formKey,
+              key: SendOffer._formKey,
               child: Column(
                 children: [
                   const CustomAppBar(
@@ -144,7 +145,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ? const CircularProgressIndicator.adaptive()
                           : CustomButton(
                               onPressed: () {
-                                if (ProductDetails._formKey.currentState!
+                                if (SendOffer._formKey.currentState!
                                     .validate()) {
                                   BlocProvider.of<SendOfferBloc>(context).add(
                                       SendOfferSubmitted(

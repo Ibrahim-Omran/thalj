@@ -5,6 +5,8 @@ import 'package:thalj/core/utils/app_colors.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/utils/commons.dart';
 
+import '../../../../../core/local/cash_helper.dart';
+
 class AdminOptionsBody extends StatelessWidget {
   const AdminOptionsBody({super.key});
 
@@ -100,9 +102,18 @@ class AdminOptionsBody extends StatelessWidget {
             height: 30,
           ),
           InkWell(
-            onTap: () {
-              navigatePushReplacement(
-                  context: context, route: Routes.initialRoute);
+            onTap: () async{
+
+              await CacheHelper.clearData('adminToken').then((value) {
+                value = true;
+                if (value) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    Routes.signIN,
+                        (route) => false,
+                  );
+                }
+              });
             },
             child: Container(
               margin: const EdgeInsets.all(10),

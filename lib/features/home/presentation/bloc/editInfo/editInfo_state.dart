@@ -1,31 +1,31 @@
-class SendOfferState {
+class EditInfoState {
   final String name;
   final String phone;
-  final String price;
+  final String email;
   final bool isSubmitting;
   final bool isSuccess;
   final String? error;
 
-  SendOfferState({
+  EditInfoState({
     this.name = '',
     this.phone = '',
-    this.price = '',
+    this.email = '',
     this.isSubmitting = false,
     this.isSuccess = false,
     this.error,
   });
 
-  SendOfferState copyWith({
+  EditInfoState copyWith({
     String? name,
-    String? price,
+    String? email,
     String? phone,
     bool? isSubmitting,
     bool? isSuccess,
     String? error,
   }) {
-    return SendOfferState(
+    return EditInfoState(
       name: name ?? this.name,
-      price: price ?? this.price,
+      email: email ?? this.email,
       phone: phone ?? this.phone,
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,

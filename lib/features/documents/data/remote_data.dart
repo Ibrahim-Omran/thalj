@@ -1,14 +1,14 @@
 
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:thalj/core/functions/saveDataManager.dart';
 import 'package:thalj/core/utils/toast.dart';
 
+import '../../../core/local/cash_helper.dart';
 import '../../../core/utils/app_strings.dart';
 
 class DocumentsRemoteDataSource {
 
-  String? token = SaveDataManager.getRegisterToken();
+  String? registerToken = CacheHelper.getData(key: 'registerToken');
 
   Future<bool> uploadProofDocuments({
     required XFile proofOfIdentityFront,
@@ -26,7 +26,7 @@ class DocumentsRemoteDataSource {
       Map<String, String> headers = {
         "Content-Type": "multipart/form-data",
         'Accept': '*/*',
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer $registerToken',
       };
       List<String> formNames = [
         'proofOfIdentityFront',
