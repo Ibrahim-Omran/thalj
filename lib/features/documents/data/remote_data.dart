@@ -22,7 +22,7 @@ class DocumentsRemoteDataSource {
       Map<String, String> headers = {
         "Content-Type": "multipart/form-data",
         'Accept': '*/*',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOlt7ImlkIjoiY2JTRTVDV3l6QSJ9XSwiaWF0IjoxNjk4NjkyOTYzLCJleHAiOjE3MDEyODQ5NjN9.qLpSv-frLjVKm3p_poiZZzEMXwBxDhYtkRONc1U1lWQ',
+        'Authorization': 'Bearer $registerToken',
       };
       List<String> formNames = [
         'proofOfIdentityFront',
@@ -40,9 +40,8 @@ class DocumentsRemoteDataSource {
         vehicleLicense,
         operatingCard,
         transferDocument,
-        commercialRegister !,
+        commercialRegister!,
       ];
-
 
       return uploadImages(Uri.parse('${AppStrings.apiLink}proofDocuments'),
           images, formNames, headers);
@@ -60,14 +59,28 @@ Future<bool> uploadImages(Uri apiUrl, List<XFile> images,
   try {
     var request = http.MultipartRequest('PATCH', apiUrl);
     for (var i = 0; i < images.length; i++) {
-      if (images[images.length - 1].path.isEmpty) {
-        break;
+      if (formNames[i] == 'commercialRegister') {
+        if (images[i].path == ' ') {
+          print(formNames[i]);
+          print(images[i].path);
+          break;
+        } else {
+          print(formNames[i]);
+          print(images[i].path);
+          var multipartFile = await http.MultipartFile.fromPath(
+            formNames[i],
+            images[i].path,
+          );
+          request.files.add(multipartFile);
+        }
+      } else {
+        print('testtttt ${formNames[i]}');
+        var multipartFile = await http.MultipartFile.fromPath(
+          formNames[i],
+          images[i].path,
+        );
+        request.files.add(multipartFile);
       }
-      var multipartFile = await http.MultipartFile.fromPath(
-        formNames[i],
-        images[i].path,
-      );
-      request.files.add(multipartFile);
     }
     request.headers.addAll(headers);
     var response = await request.send();
