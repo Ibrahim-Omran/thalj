@@ -43,7 +43,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           email: event.email,
           password: event.password,
           phone: event.phone);
-
       if (isRegister) {
         emit(state.copyWith(isSubmitting: false, isSuccess: true));
       } else {

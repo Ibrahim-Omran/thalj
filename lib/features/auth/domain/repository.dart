@@ -19,9 +19,7 @@ class AuthRepository {
     {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
     }
-    bool isAuthenticated = false;
-
-    isAuthenticated =
+    bool isAuthenticated =
         await authRemoteDataSource.login(email: email, password: password);
     return isAuthenticated;
   }
@@ -36,9 +34,7 @@ class AuthRepository {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
     }
 
-    bool isRegister = false;
-
-    isRegister = await authRemoteDataSource.register(
+    bool isRegister  = await authRemoteDataSource.register(
         email: email, password: password, name: name, phone: phone);
     return isRegister;
   }

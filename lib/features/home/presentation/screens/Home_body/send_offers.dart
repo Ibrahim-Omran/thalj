@@ -73,7 +73,7 @@ class _SendOfferState extends State<SendOffer> {
                       return MyFormField(
                         controller: _nameController,
                         type: TextInputType.text,
-                        hint: "",
+                        hint: "الاسم ثلالثي",
                         maxLines: 1,
                         readonly: false,
                         title: AppStrings.productName,
@@ -93,8 +93,8 @@ class _SendOfferState extends State<SendOffer> {
                     builder: (context, state) {
                       return MyFormField(
                         controller: _priceController,
-                        type: TextInputType.text,
-                        hint: "",
+                        type: TextInputType.number,
+                        hint: "100",
                         maxLines: 1,
                         readonly: false,
                         title: AppStrings.price,
@@ -114,8 +114,8 @@ class _SendOfferState extends State<SendOffer> {
                     builder: (context, state) {
                       return MyFormField(
                         controller: _phoneController,
-                        type: TextInputType.text,
-                        hint: "",
+                        type: TextInputType.phone,
+                        hint: "xxx xxx xxxx",
                         maxLines: 1,
                         readonly: false,
                         title: AppStrings.number,

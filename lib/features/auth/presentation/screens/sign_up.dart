@@ -120,8 +120,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(
                   height: 15.h,
                 ),
-                PhoneForm(
-                  controller: _phoneController,
+                BlocBuilder<RegisterBloc, RegisterState>(
+                builder: (context, state) {
+                  return PhoneForm(
+                    controller: _phoneController,
+                  );
+                }
                 ),
                 SizedBox(
                   height: 15.h,

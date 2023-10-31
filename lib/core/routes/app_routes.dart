@@ -13,7 +13,6 @@ import 'package:thalj/features/splash/presentation/views/splash_screen.dart';
 import '../../features/adminHome/presenation/screens/driver_subscription_screen.dart';
 import '../../features/adminHome/presenation/screens/user_subscription_screen.dart';
 import '../../features/auth/presentation/screens/signin_screen.dart';
-import 'package:thalj/features/documents/presentation/screens/documents_screen.dart';
 import 'package:thalj/features/documents/presentation/screens/uploading_supporting_documents_screen.dart';
 
 class Routes {
@@ -53,8 +52,8 @@ Widget appRoutes(String route, dynamic arg) {
 
     case Routes.uploadingSupportingDocumentsScreen:
       return const UploadingSupportingDocumentsScreen();
-    case Routes.documentsCheckScreen:
-      return const DocumentsCheckScreen();
+  /*  case Routes.documentsCheckScreen:
+      return const DocumentsCheckScreen();*/
     case Routes.offersScreen:
       return const Offers();
     case Routes.profileScreen:

@@ -81,6 +81,7 @@ class DriverDataSentToOwner extends StatelessWidget {
                             driverShowIdentityContainer(
                               imagePath: args.commercialRegister,
                             ),
+                            SizedBox(height: 15.h,),
                             ElevatedButton(
                                 onPressed: () {
                                   BlocProvider.of<AcceptRefuseDriversBloc>(

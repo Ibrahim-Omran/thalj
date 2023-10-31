@@ -42,7 +42,7 @@ class _ProfileState extends State<Profile> {
                 create: (context) =>
                     PaySubScriptionBloc(homeRepository: context.read<HomeRepository>() ),
                 child: const Subscription())));
-          }, child: Text("الاشتراكات",style: boldStyle(color: AppColors.primary),)),
+          }, child: Text("دفع الاشتراكات",style: boldStyle(color: AppColors.primary),)),
           TextButton(onPressed: ()async{
             await CacheHelper.clearData('fullname');
             await CacheHelper.clearData('verified');

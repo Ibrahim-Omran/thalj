@@ -36,7 +36,7 @@ class _UploadingSupportingDocumentsViewBodyState
   XFile? commercialRegister;
   Future<void> _getImageFromCamera(String variableName) async {
     final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.camera);
+        await picker.pickImage(source: ImageSource.gallery);
     setState(() {
       switch (variableName) {
         case 'proofOfIdentityFront':
@@ -47,34 +47,41 @@ class _UploadingSupportingDocumentsViewBodyState
         case 'proofOfIdentityBack':
           if (pickedFile!.path.isNotEmpty) {
             proofOfIdentityBack = pickedFile;
+
           }
           break;
 
         case 'drivingLicense':
           if (pickedFile!.path.isNotEmpty) {
             drivingLicense = pickedFile;
+
           }
           break;
         case 'vehicleLicense':
           if (pickedFile!.path.isNotEmpty) {
             vehicleLicense = pickedFile;
+
           }
           break;
         case 'operatingCard':
           if (pickedFile!.path.isNotEmpty) {
             operatingCard = pickedFile;
+
           }
           break;
         case 'transferDocument':
           if (pickedFile!.path.isNotEmpty) {
             transferDocument = pickedFile;
+
           }
           break;
         case 'commercialRegister':
           if (pickedFile!.path.isNotEmpty) {
             commercialRegister = pickedFile;
+
           } else {
             commercialRegister = null;
+
           }
           break;
         default:
@@ -88,12 +95,11 @@ class _UploadingSupportingDocumentsViewBodyState
     return BlocConsumer<DocumentCheckingBloc, DocumentCheckingState>(
       listener: (context, state) {
         if (state is DocumentUploadFailed) {
-          showToast(
-            text: "برجاء التاكد من تحميل جميع المستندات الالزامية",
-            state: ToastStates.error,
-          );
-        } else if (state is DocumentCheckingLoading) {}
-        navigatePushReplacement(context: context, route: Routes.signIN);
+
+        } else if (state is DocumentCheckingSuccess) {
+          navigatePushReplacement(context: context, route: Routes.signIN);
+
+        }
       },
       builder: (context, state) {
         return state is DocumentUploading
@@ -153,6 +159,7 @@ class _UploadingSupportingDocumentsViewBodyState
                           children: [
                             proofOfIdentityBack == null
                                 ? customContainer(
+
                                     mainText: AppStrings.frontId,
                                     textFrontOrBack: AppStrings.back,
                                     height: 160.0.h,
@@ -344,17 +351,34 @@ class _UploadingSupportingDocumentsViewBodyState
                         ),
                         ElevatedButton(
                             onPressed: () {
-                              BlocProvider.of<DocumentCheckingBloc>(context)
-                                  .add(DocumentUpload(
-                                proofOfIdentityFront: proofOfIdentityFront!,
-                                proofOfIdentityBack: proofOfIdentityBack!,
-                                drivingLicense: drivingLicense!,
-                                vehicleLicense: vehicleLicense!,
-                                operatingCard: operatingCard!,
-                                transferDocument: transferDocument!,
-                                commercialRegister:
-                                    commercialRegister ?? XFile(" "),
-                              ));
+                             if(proofOfIdentityFront == null ||
+                                 proofOfIdentityBack == null ||
+                                 drivingLicense == null ||
+                                 vehicleLicense == null ||
+                                 operatingCard == null ||
+                                 transferDocument == null
+                                ){showToast(
+                               text: "برجاء التاكد من تحميل جميع المستندات الالزامية",
+                               state: ToastStates.error,
+                             );
+
+                             }
+                             else {
+                               BlocProvider.of<DocumentCheckingBloc>(context)
+                                   .add(DocumentUpload(
+                                 proofOfIdentityFront: proofOfIdentityFront!,
+                                 proofOfIdentityBack: proofOfIdentityBack!,
+                                 drivingLicense: drivingLicense!,
+                                 vehicleLicense: vehicleLicense!,
+                                 operatingCard: operatingCard!,
+                                 transferDocument: transferDocument!,
+                                 commercialRegister:
+                                 commercialRegister ?? XFile(" "),
+                               ));
+
+
+
+                             }
                             },
                             child: Container(
                               width: 351.w,

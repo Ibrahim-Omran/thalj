@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:thalj/core/utils/app_text_style.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 
@@ -21,13 +22,16 @@ driverShowIdentityContainer({
         return Shimmer.fromColors(
             baseColor: AppColors.primary,
             highlightColor: AppColors.lightBlue,
-            child: const SizedBox(
-              height: double.maxFinite,
-              width: double.maxFinite,
-            ));
+            child: Container(
+              color: Colors.white,
+              width: double.infinity,
+              height: double.infinity,
+            ),
+
+        );
       },
       errorWidget: (context, url, error) {
-        return const Icon(Icons.error);
+        return  Center(child: Text("لا يوجد ملف",style: boldStyle(fontSize: 20),));
       },
     ),
   );

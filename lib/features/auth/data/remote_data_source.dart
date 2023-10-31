@@ -81,12 +81,13 @@ class AuthRemoteDataSource {
         body: {
           'fullname': name,
           'email': email,
-          'phone': phone,
           'password': password,
+          'phone': phone,
+
         },
       );
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 201||response.statusCode == 200) {
         // Register successful
         final jsonResponse = jsonDecode(response.body);
 
@@ -110,6 +111,7 @@ class AuthRemoteDataSource {
       } else {
         // register failed
         if (kDebugMode) {
+          print(response.statusCode);
           print(response.body);
         }
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);

@@ -21,20 +21,22 @@ class TodayProducts extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Card(
+        padding: const EdgeInsets.all(20.0),
+        child: Container(
+
           color: const Color(0xffF0F3FD),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
 
                   children: [
-                    Text(
-                      location,
-                      style: boldStyle(fontSize: 15),
+                    Flexible(
+                      child: Text(
+                        location,
+                        style: boldStyle(fontSize: 15),
+                      ),
                     ),
 
                     const Icon(
@@ -45,15 +47,16 @@ class TodayProducts extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
 
                   children: [
-                    Text(
-                      locationTo,
-                      style: boldStyle(fontSize: 15),
+                    Flexible(
+                      child: Text(
+                        locationTo,
+                        style: boldStyle(fontSize: 15),
+                      ),
                     ),
                     const Image(
                       image: AssetImage('assets/images/loc.png'),
@@ -63,15 +66,16 @@ class TodayProducts extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
 
                   children: [
-                    Text(
-                      productType,
-                      style: boldStyle(fontSize: 15),
+                    Flexible(
+                      child: Text(
+                        productType,
+                        style: boldStyle(fontSize: 15),
+                      ),
                     ),
 
                     const Image(

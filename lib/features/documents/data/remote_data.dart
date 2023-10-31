@@ -43,8 +43,10 @@ class DocumentsRemoteDataSource {
         commercialRegister!,
       ];
 
-      return uploadImages(Uri.parse('${AppStrings.apiLink}proofDocuments'),
+      bool isUploaded = await   uploadImages(Uri.parse('${AppStrings.apiLink}proofDocuments'),
           images, formNames, headers);
+
+      return isUploaded;
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
@@ -61,12 +63,10 @@ Future<bool> uploadImages(Uri apiUrl, List<XFile> images,
     for (var i = 0; i < images.length; i++) {
       if (formNames[i] == 'commercialRegister') {
         if (images[i].path == ' ') {
-          print(formNames[i]);
-          print(images[i].path);
+
           break;
         } else {
-          print(formNames[i]);
-          print(images[i].path);
+
           var multipartFile = await http.MultipartFile.fromPath(
             formNames[i],
             images[i].path,
@@ -74,7 +74,6 @@ Future<bool> uploadImages(Uri apiUrl, List<XFile> images,
           request.files.add(multipartFile);
         }
       } else {
-        print('testtttt ${formNames[i]}');
         var multipartFile = await http.MultipartFile.fromPath(
           formNames[i],
           images[i].path,
@@ -90,8 +89,12 @@ Future<bool> uploadImages(Uri apiUrl, List<XFile> images,
           state: ToastStates.success);
       return true;
     } else {
-      print(response.statusCode);
-      print(response.reasonPhrase);
+      if (kDebugMode) {
+        print(response.statusCode);
+      }
+      if (kDebugMode) {
+        print(response.reasonPhrase);
+      }
 
       showToast(text: "برجاء المحاولة لاحقا", state: ToastStates.error);
       return false;

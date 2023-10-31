@@ -7,6 +7,7 @@ import 'package:thalj/features/adminHome/presenation/bloc/driver_subscription_bl
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_text_style.dart';
 import '../../domain/models/driver_subscription_model.dart';
 import '../bloc/driver_subscription_bloc/driver_subscription_event.dart';
 import '../bloc/driver_subscription_bloc/driver_subscription_state.dart';
@@ -30,13 +31,15 @@ class CustomDriverSubscription extends StatelessWidget {
               return Shimmer.fromColors(
                   baseColor: AppColors.primary,
                   highlightColor: AppColors.lightBlue,
-                  child: const SizedBox(
-                    height: double.maxFinite,
-                    width: double.maxFinite,
-                  ));
+                  child: Container(
+                    color: Colors.white,
+                    width: double.infinity,
+                    height: double.infinity,
+                  ),
+              );
             },
             errorWidget: (context, url, error) {
-              return const Icon(Icons.error);
+              return Center(child: Text("لا يوجد ملف",style: boldStyle(fontSize: 20),));
             },
           ),
         ),

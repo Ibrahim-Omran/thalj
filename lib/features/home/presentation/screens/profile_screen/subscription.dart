@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:thalj/core/utils/commons.dart';
 import 'package:thalj/core/utils/toast.dart';
 import 'package:thalj/core/widgets/back_arrow.dart';
 import 'package:thalj/features/home/presentation/bloc/paySubscription/paySubscription-bloc.dart';
 import 'package:thalj/features/home/presentation/bloc/paySubscription/paySubscription-state.dart';
 
 import '../../../../../core/local/cash_helper.dart';
+import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_text_style.dart';
@@ -28,9 +30,11 @@ class _SubscriptionState extends State<Subscription> {
   String? status = CacheHelper.getData(key: 'status');
 
   File? billPhoto;
-
+  void updateStatusToWaiting() {
+    CacheHelper.saveData(key: 'status', value: 'Waiting');
+  }
   Future<void> _getImageFromCamera() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       setState(() {
         billPhoto = File(pickedFile.path);
@@ -122,7 +126,7 @@ class _SubscriptionState extends State<Subscription> {
                 SizedBox(
                   height: 20.h,
                 ),
-                BlocBuilder<PaySubScriptionBloc, PaySubscriptionState>(
+                BlocConsumer<PaySubScriptionBloc, PaySubscriptionState>(
                   builder: (context, state) {
                     return Column(
                       children: [
@@ -143,16 +147,20 @@ class _SubscriptionState extends State<Subscription> {
                         ),
                         InkWell(
                           onTap: () {
-                            billPhoto == null
-                                ? showToast(
+                            if(billPhoto == null) {
+                              showToast(
                               text: "برجاء تحميل الفاتورة",
                               state: ToastStates.error,
-                            )
-                                : BlocProvider.of<PaySubScriptionBloc>(context).add(
-                              PaySubscriptionUpload(
-                                billPhoto: billPhoto!,
-                              ),
                             );
+                            } else {
+                              BlocProvider.of<PaySubScriptionBloc>(context).add(
+                                PaySubscriptionUpload(
+                                  billPhoto: billPhoto!,
+
+                                ),
+                              );
+                              updateStatusToWaiting();
+                            }
                           },
                           child: state is PaySubscriptionUploading
                               ? const Center(
@@ -163,9 +171,7 @@ class _SubscriptionState extends State<Subscription> {
                             child: Container(
                               width: double.infinity,
                               height: 40.h,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 24,
-                              ),
+
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: billPhoto == null
@@ -178,11 +184,10 @@ class _SubscriptionState extends State<Subscription> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     fontFamily: 'Cairo',
                                     fontWeight: FontWeight.w600,
-                                    height: 0.02,
-                                    letterSpacing: 1,
+
                                   ),
                                 ),
                               ),
@@ -191,7 +196,13 @@ class _SubscriptionState extends State<Subscription> {
                         ),
                       ],
                     );
-                  },
+                  }, listener: (BuildContext context, PaySubscriptionState state) {
+                    if(state is PaySubscriptionSuccess)
+                      {
+                        navigatePushReplacement(context: context, route: Routes.homeScreen);
+
+                      }
+                },
                 ),
               ],
             ),

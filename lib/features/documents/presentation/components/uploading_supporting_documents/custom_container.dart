@@ -31,19 +31,23 @@ Widget customContainer(
               width: 28.w,
             ),
           ),
-          Text(mainText, style: regularStyle()),
+          Flexible(child: Text(mainText, style: regularStyle(fontSize: 14))),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             textDirection: TextDirection.rtl,
             children: [
-              Text(textFrontOrBack,
-                  style: boldStyle().copyWith(
-                    decoration: TextDecoration.underline,
-                    fontSize: 12,
-                  )),
-              Text(
-                textFrontOrBack2,
-                style: regularStyle(),
+              Flexible(
+                child: Text(textFrontOrBack,
+                    style: boldStyle().copyWith(
+                      decoration: TextDecoration.underline,
+                      fontSize: 8,
+                    )),
+              ),
+              Flexible(
+                child: Text(
+                  textFrontOrBack2,
+                  style: regularStyle(fontSize: 8),
+                ),
               ),
             ],
           ),

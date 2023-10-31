@@ -19,6 +19,7 @@ class DocumentCheckingBloc
       if (event is DocumentUpload) {
         emit(DocumentUploading());
 
+
         var isUploaded = await documentRepository.uploadDocuments(
           proofOfIdentityFront: event.proofOfIdentityFront,
           proofOfIdentityBack: event.proofOfIdentityBack,
@@ -28,6 +29,12 @@ class DocumentCheckingBloc
           transferDocument: event.transferDocument,
           commercialRegister: event.commercialRegister,
         );
+
+        if (isUploaded) {
+          emit(DocumentCheckingSuccess());
+        }
+
+
         if (!isUploaded) {
           emit(DocumentUploadFailed());
         } else {
@@ -41,7 +48,6 @@ class DocumentCheckingBloc
   @override
   void onChange(Change<DocumentCheckingState> change) {
     // TODO: implement onChange
-    print(change);
     super.onChange(change);
   }
 
@@ -49,7 +55,6 @@ class DocumentCheckingBloc
   void onTransition(
       Transition<DocumentCheckingEvent, DocumentCheckingState> transition) {
     // TODO: implement onTransition
-    print(transition);
     super.onTransition(transition);
   }
 }

@@ -15,7 +15,7 @@ extension ResultExtensions<T> on Result<T> {
     required void Function(String) failure,
   }) {
     if (isSuccess) {
-      success(data!);
+      success(data as T);
     } else if (isFailure) {
       failure(error!);
     }

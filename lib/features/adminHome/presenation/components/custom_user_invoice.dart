@@ -5,6 +5,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_text_style.dart';
 import '../../../../core/utils/commons.dart';
 import '../../domain/models/user_invoice_model.dart';
 import '../bloc/user_invoice_bloc/user_invoice_bloc.dart';
@@ -28,13 +29,15 @@ class CustomUserInvoice extends StatelessWidget {
           return Shimmer.fromColors(
               baseColor: AppColors.primary,
               highlightColor: AppColors.lightBlue,
-              child: const SizedBox(
-                height: double.maxFinite,
-                width: double.maxFinite,
-              ));
+              child: Container(
+                color: Colors.white,
+                width: double.infinity,
+                height: double.infinity,
+              ),
+          );
         },
         errorWidget: (context, url, error) {
-          return const Icon(Icons.error);
+          return Center(child: Text("لا يوجد ملف",style: boldStyle(fontSize: 20),));
         },
       ),
 

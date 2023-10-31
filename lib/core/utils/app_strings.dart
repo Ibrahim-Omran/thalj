@@ -61,7 +61,7 @@ class AppStrings {
   //Uploading Supporting Documents Screen
   static const String uploadingSupportingDocuments = 'رفع المستندات الاثباتية';
   static const String uploadingId = '١. قم برفع أثبات شخصية ';
-  static const String frontId = 'اختر ملفًا لتحميل الجهة';
+  static const String frontId = 'ملفًا لتحميل الجهة';
   static const String frontId2 = ' من أثبات الشخصية';
   static const String backId = ' من إقامتك.';
   static const String jpgOnly = '(يتم دعم ملف ‎.jpg فقط)';
@@ -129,7 +129,7 @@ class AppStrings {
 
   //ToastMSg
   static const String sendOfferSuccess = 'تم ارسال العرض بنجاح';
-  static const String editInfoSuccess = 'تم تغير المعلومات بنجاح  ';
+  static const String editInfoSuccess = 'تم تغير المعلومات بنجاح - آعد تسجيل الدخول  ';
 
   // Owner options
   static const String driverDocuments = 'مستندات السائقين';

@@ -85,6 +85,12 @@ class _EditInfoState extends State<EditInfo> {
                   maxLines: 1,
                   readonly: false,
                   title: AppStrings.userName,
+                  vaild: (value) {
+                    if (value!.isEmpty) {
+                      return AppStrings.vaildForm;
+                    }
+                    return null;
+                  },
 
                 );
               }),
@@ -101,6 +107,15 @@ class _EditInfoState extends State<EditInfo> {
                     maxLines: 1,
                     readonly: false,
                     title: AppStrings.editEmail,
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      if (!value.contains("@")) {
+                        return AppStrings.vailEmailForm;
+                      }
+                      return null;
+                    },
 
                   );
                 },
@@ -117,6 +132,15 @@ class _EditInfoState extends State<EditInfo> {
                     maxLines: 1,
                     readonly: false,
                     title: AppStrings.editEmail,
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      if (value.length != 10 || !RegExp(r'^[0-9]+$').hasMatch(value)) {
+                        return AppStrings.phoneNumber;
+                      }
+                      return null;
+                    },
 
                   );
                 },
@@ -130,18 +154,12 @@ class _EditInfoState extends State<EditInfo> {
                     ? const CircularProgressIndicator.adaptive()
                     : CustomButton(
                         onPressed: () {
-                          if(_userNameController.text.isEmpty &&
-                              _emailController.text.isEmpty &&
-                              _phoneController.text.isEmpty)
-                        {
-                          showToast(text: "يجب تغير حقل على الاقل", state: ToastStates.error);
-                        }
-                          else {
+                          if(EditInfo._formKey.currentState!.validate()){
                             BlocProvider.of<EditInfoBloc>(context)
                                 .add(EditInfoSubmitted(
-                              name: _userNameController.text == "" ? name : _userNameController.text,
-                              phone: _phoneController.text== "" ? phone.toString() : _phoneController.text,
-                              email: _emailController.text== "" ? email : _emailController.text,
+                              name: _userNameController.text ,
+                              phone: _phoneController.text,
+                              email: _emailController.text,
                             ));
                           }
                         },
