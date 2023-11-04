@@ -2,6 +2,11 @@ class EditInfoState {
   final String name;
   final String phone;
   final String email;
+  final String password;
+
+  final bool obscureText;
+  final bool confirmedObscureText;
+
   final bool isSubmitting;
   final bool isSuccess;
   final String? error;
@@ -13,6 +18,9 @@ class EditInfoState {
     this.isSubmitting = false,
     this.isSuccess = false,
     this.error,
+    this.password='',
+    this.obscureText=false,
+    this.confirmedObscureText=false,
   });
 
   EditInfoState copyWith({
@@ -21,6 +29,9 @@ class EditInfoState {
     String? phone,
     bool? isSubmitting,
     bool? isSuccess,
+    bool? obscureText,
+    bool? confirmedObscureText,
+    String? password,
     String? error,
   }) {
     return EditInfoState(
@@ -30,6 +41,9 @@ class EditInfoState {
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
       error: error ?? this.error,
+      obscureText: obscureText??this.obscureText,
+      password: password??this.password,
+      confirmedObscureText: confirmedObscureText ?? this.confirmedObscureText
     );
   }
 }

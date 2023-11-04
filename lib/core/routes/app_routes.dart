@@ -57,9 +57,9 @@ Widget appRoutes(String route, dynamic arg) {
     case Routes.offersScreen:
       return const Offers();
     case Routes.profileScreen:
-      return const Profile();
+      return  Profile();
     case Routes.subscription:
-      return const Subscription();
+      return  Subscription();
 
     case Routes.driverDoc:
       return const DriverDocuments();

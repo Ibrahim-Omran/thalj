@@ -14,16 +14,21 @@ class EditInfoBloc extends Bloc<EditInfoEvent, EditInfoState> {
           email: '',
           phone: '',
         )) {
-    on<EditInfoSubmitted>(_onEditInfoSubmitted);
+    on<EditNameSubmitted>(_onEditNameSubmitted);
+    on<EditEmailSubmitted>(_onEditEmailSubmitted);
+    on<EditPhoneSubmitted>(_onEditPhoneSubmitted);
+    on<EditPasswordSubmitted>(_onEditPasswordSubmitted);
+    on<EditToggleObscureText>(_onToggleObscureText);
+    on<EditToggleConfirmedObscureText>(_onToggleConfirmedObscureText);
+
   }
-  Future<void> _onEditInfoSubmitted(
-      EditInfoSubmitted event, Emitter<EditInfoState> emit) async {
+  Future<void> _onEditNameSubmitted(
+      EditNameSubmitted event, Emitter<EditInfoState> emit) async {
     emit(state.copyWith(isSubmitting: true));
     try {
-      final bool isEditInfo = await homeRepository.editInfo(
+      final bool isEditInfo = await homeRepository.editName(
         name: event.name,
-        email: event.email,
-        phone: event.phone,
+
       );
 
       if (isEditInfo) {
@@ -42,5 +47,94 @@ class EditInfoBloc extends Bloc<EditInfoEvent, EditInfoState> {
         error: e.toString(),
       ));
     }
+  }
+
+  Future<void> _onEditEmailSubmitted(
+      EditEmailSubmitted event, Emitter<EditInfoState> emit) async {
+    emit(state.copyWith(isSubmitting: true));
+    try {
+      final bool isEditInfo = await homeRepository.editEmail(
+        email: event.email,
+
+      );
+
+      if (isEditInfo) {
+        emit(state.copyWith(isSubmitting: false, isSuccess: true));
+      } else {
+        emit(state.copyWith(
+          isSubmitting: false,
+          isSuccess: false,
+          error: 'edit Info faild',
+        ));
+      }
+    } catch (e) {
+      emit(state.copyWith(
+        isSubmitting: false,
+        isSuccess: false,
+        error: e.toString(),
+      ));
+    }
+  }
+  Future<void> _onEditPhoneSubmitted(
+      EditPhoneSubmitted event, Emitter<EditInfoState> emit) async {
+    emit(state.copyWith(isSubmitting: true));
+    try {
+      final bool isEditInfo = await homeRepository.editPhone(
+        phone: event.phone,
+
+      );
+
+      if (isEditInfo) {
+        emit(state.copyWith(isSubmitting: false, isSuccess: true));
+      } else {
+        emit(state.copyWith(
+          isSubmitting: false,
+          isSuccess: false,
+          error: 'edit Info faild',
+        ));
+      }
+    } catch (e) {
+      emit(state.copyWith(
+        isSubmitting: false,
+        isSuccess: false,
+        error: e.toString(),
+      ));
+    }
+  }
+  Future<void> _onEditPasswordSubmitted(
+      EditPasswordSubmitted event, Emitter<EditInfoState> emit) async {
+    emit(state.copyWith(isSubmitting: true));
+    try {
+      final bool isEditInfo = await homeRepository.editPass(
+        password: event.password,
+
+      );
+
+      if (isEditInfo) {
+        emit(state.copyWith(isSubmitting: false, isSuccess: true));
+      } else {
+        emit(state.copyWith(
+          isSubmitting: false,
+          isSuccess: false,
+          error: 'edit Info faild',
+        ));
+      }
+    } catch (e) {
+      emit(state.copyWith(
+        isSubmitting: false,
+        isSuccess: false,
+        error: e.toString(),
+      ));
+    }
+  }
+
+  void _onToggleObscureText(
+      EditToggleObscureText event, Emitter<EditInfoState> emit) {
+    emit(state.copyWith(obscureText: !state.obscureText));
+  }
+
+  void _onToggleConfirmedObscureText(
+      EditToggleConfirmedObscureText event, Emitter<EditInfoState> emit) {
+    emit(state.copyWith(obscureText: !state.confirmedObscureText));
   }
 }

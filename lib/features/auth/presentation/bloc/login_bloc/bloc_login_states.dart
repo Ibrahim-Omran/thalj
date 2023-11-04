@@ -1,3 +1,5 @@
+import '../../../domain/models/login_model.dart';
+
 class LoginState {
   final String userName;
   final String password;
@@ -5,6 +7,7 @@ class LoginState {
   final bool isSubmitting;
   final bool isSuccess;
   final bool error;
+  final LoginModel? loginData;
 
   LoginState({
     this.userName = '',
@@ -13,6 +16,7 @@ class LoginState {
     this.isSubmitting = false,
     this.isSuccess = false,
     this.error = false,
+    this.loginData,
   });
 
   LoginState copyWith({
@@ -22,6 +26,7 @@ class LoginState {
     bool? isSubmitting,
     bool? isSuccess,
     bool ? error,
+    LoginModel? loginData,
   }) {
     return LoginState(
       userName: userName ?? this.userName,
@@ -30,6 +35,8 @@ class LoginState {
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
       error: error ?? this.error,
+      loginData: loginData ?? this.loginData,
+
     );
   }
 }

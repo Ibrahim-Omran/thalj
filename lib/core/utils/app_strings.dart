@@ -11,6 +11,7 @@ class AppStrings {
   static const String signInHint = 'يرجى تسجيل الدخول إلى حسابك للمتابعة';
   static const String emailOrPhone = 'ادخل البريد الالكتروني او رقم الهاتف';
   static const String password = 'الرقم السري';
+  static const String editPassword = 'تغير الرقم السري';
   static const String remember = 'تذكرنى';
   static const String forgetPassword = 'هل نسيت كلمة المرور؟';
   static const String donAccount = 'ليس لديك حساب؟';
@@ -30,6 +31,7 @@ class AppStrings {
       'أوافق على تطبيق الشروط والأحكام';
 
   static const String saveAndCompleteProject = 'احفظ و اكمل انشاء حسابك';
+  static const String changeInfo = 'تغير معلومات الحساب';
   static const String register = 'اذا كنت مالك';
   static const String pressHere = 'اضغط هنا';
   static const String passOwner = 'ادخل الرقم السري للمالك';
@@ -74,7 +76,7 @@ class AppStrings {
       '٣. قم برفع استمارة المركبة (سارية)';
   static const String uploadDriverCard = '٤. قم برفع كارت التشغيل';
   static const String uploadTransferDocument = '٥. قم برفع وثيقة نقل';
-  static const String taxRegister = '٦. قم برفع السجل الضريبي (اختياري)';
+  static const String taxRegister = '٦. قم برفع السجل التجاري (اختياري)';
   static const String saveData = 'حفظ البيانات';
   static const String front = 'الأمامية';
   static const String back = 'الخلفية';

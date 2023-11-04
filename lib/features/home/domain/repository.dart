@@ -89,26 +89,83 @@ class HomeRepository {
   }
 
 
-  Future<bool> editInfo({
+  Future<bool> editName({
     required String name,
-    required String email,
-    required String phone,
+
   }) async {
     if(await result ==false)
     {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
     }
-    bool isSEditInfo = false;
+    bool isEdit = false;
 
-    isSEditInfo = await homeRemoteDataSource.editInfo(
+    isEdit = await homeRemoteDataSource.editName(
         name: name,
-        phone: phone,
-        email: email,
+
 
     );
-    return isSEditInfo;
+    return isEdit;
+  }
+
+
+Future<bool> editEmail({
+  required String email,
+
+}) async {
+  if(await result ==false)
+  {
+    showToast(text: AppStrings.noInternet, state: ToastStates.error);
+  }
+  bool isSEdit = false;
+
+  isSEdit= await homeRemoteDataSource.editEmail(
+    email: email,
+
+
+  );
+  return isSEdit;
+}
+
+
+
+  Future<bool> editPhone({
+    required String phone,
+
+  }) async {
+    if(await result ==false)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
+    bool isSEdit = false;
+
+    isSEdit = await homeRemoteDataSource.editPhone(
+    phone: phone,
+
+
+    );
+    return isSEdit;
+  }
+
+  Future<bool> editPass({
+    required String password,
+
+  }) async {
+    if(await result ==false)
+    {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+    }
+    bool isSEdit = false;
+
+    isSEdit = await homeRemoteDataSource.editPassword(
+      password: password,
+
+
+    );
+    return isSEdit;
   }
 }
+
+
 
 
 

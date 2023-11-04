@@ -179,10 +179,9 @@ class HomeRemoteDataSource {
     }
   }
 
-  Future<bool> editInfo({
+  Future<bool> editName({
     required String name,
-    required String email,
-    required String phone,
+
   }) async {
     try {
       final response = await http.patch(
@@ -195,8 +194,7 @@ class HomeRemoteDataSource {
         body: jsonEncode(
           {
             "fullname": name,
-            "email": email,
-            "phone": phone,
+
           },
         ),
       );
@@ -224,4 +222,138 @@ class HomeRemoteDataSource {
       return false;
     }
   }
+  Future<bool> editEmail({
+    required String email,
+
+  }) async {
+    try {
+      final response = await http.patch(
+        Uri.parse('${AppStrings.apiLink}editProfile/driver'),
+        headers: {
+          "Content-Type": 'application/json',
+          'Accept': '*/*',
+          'Authorization': 'Bearer $loginToken',
+        },
+        body: jsonEncode(
+          {
+            "email": email,
+
+
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        // sent successful
+        if (kDebugMode) {
+          print(response.body);
+        }
+        return true;
+      } else {
+        if (kDebugMode) {
+
+        }
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+            text: errorMessageModel.statusMessage, state: ToastStates.error);
+        return false;
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return false;
+    }
+  }
+
+  Future<bool> editPhone({
+    required String phone,
+
+  }) async {
+    try {
+      final response = await http.patch(
+        Uri.parse('${AppStrings.apiLink}editProfile/driver'),
+        headers: {
+          "Content-Type": 'application/json',
+          'Accept': '*/*',
+          'Authorization': 'Bearer $loginToken',
+        },
+        body: jsonEncode(
+          {
+            "phone": phone,
+
+
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        // sent successful
+        if (kDebugMode) {
+          print(response.body);
+        }
+        return true;
+      } else {
+        if (kDebugMode) {
+
+        }
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+            text: errorMessageModel.statusMessage, state: ToastStates.error);
+        return false;
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return false;
+    }
+  }
+  Future<bool> editPassword({
+    required String password,
+
+  }) async {
+    try {
+      final response = await http.patch(
+        Uri.parse('${AppStrings.apiLink}editProfile/driver'),
+        headers: {
+          "Content-Type": 'application/json',
+          'Accept': '*/*',
+          'Authorization': 'Bearer $loginToken',
+        },
+        body: jsonEncode(
+          {
+            "password": password,
+
+
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        // sent successful
+        if (kDebugMode) {
+          print(response.body);
+        }
+        return true;
+      } else {
+        if (kDebugMode) {
+
+        }
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+            text: errorMessageModel.statusMessage, state: ToastStates.error);
+        return false;
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return false;
+    }
+  }
+
 }

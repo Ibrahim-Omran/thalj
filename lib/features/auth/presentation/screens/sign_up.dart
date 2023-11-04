@@ -175,11 +175,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (value!.isEmpty) {
                         return AppStrings.vaildForm;
                       }
-                      if (value.length < 6) {
+                      if (value.length < 8) {
                         return AppStrings.vailpassForm;
+                      }
+                      if (!value.contains(RegExp(r'[A-Z]'))) {
+                        return 'Password must contain at least one capital letter';
                       }
                       return null;
                     },
+
                   );
                 }),
                 SizedBox(
@@ -208,8 +212,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (value!.isEmpty) {
                         return AppStrings.vaildForm;
                       }
-                      if (value.length < 6) {
+                      if (value.length < 8) {
                         return AppStrings.vailpassForm;
+                      }
+                      if (!value.contains(RegExp(r'[A-Z]'))) {
+                        return 'Password must contain at least one capital letter';
                       }
                       if (value != _passwordController.text) {
                         return AppStrings

@@ -19,7 +19,8 @@ import '../../../../documents/presentation/components/uploading_supporting_docum
 import '../../bloc/paySubscription/paySubscription-event.dart';
 
 class Subscription extends StatefulWidget {
-  const Subscription({super.key});
+
+  const Subscription({super.key, });
 
   @override
   State<Subscription> createState() => _SubscriptionState();
@@ -27,7 +28,10 @@ class Subscription extends StatefulWidget {
 
 class _SubscriptionState extends State<Subscription> {
   final picker = ImagePicker();
-  String? status = CacheHelper.getData(key: 'status');
+String? status = CacheHelper.getData(key: 'status');
+String? subscriptionDate = CacheHelper.getData(key: 'subscriptionDate');
+int? daysUntilExpiry = CacheHelper.getData(key: 'daysUntilExpiry');
+
 
   File? billPhoto;
   void updateStatusToWaiting() {
@@ -44,12 +48,16 @@ class _SubscriptionState extends State<Subscription> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> parts = subscriptionDate!.split('T');
+    String datePart = parts[0];
+
+
     return Scaffold(
-      body: SafeArea(child: _body(context)),
+      body: SafeArea(child: _body(context,datePart)),
     );
   }
 
-  Widget _body(BuildContext context) {
+  Widget _body(BuildContext context,String datePart) {
     return  Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -68,9 +76,22 @@ class _SubscriptionState extends State<Subscription> {
 
                 SizedBox(height: 250.h,),
                 Center(
-                  child: Text(
-                    "الحساب مفعل",
-                    style: boldStyle(fontSize: 30.h),
+                  child: Column(
+
+                    children: [
+                      Text(
+                        "الحساب مفعل",
+                        style: boldStyle(fontSize: 30.h),
+                      ),
+                      Text(
+                        "متبقي لك $daysUntilExpiry يوم",
+                        style: boldStyle(fontSize: 30.h),
+                      ),
+                      Text(
+                        "تارخ الانتهاء  ${datePart}",
+                        style: boldStyle(fontSize: 30.h),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -159,7 +180,7 @@ class _SubscriptionState extends State<Subscription> {
 
                                 ),
                               );
-                              updateStatusToWaiting();
+                             // updateStatusToWaiting();
                             }
                           },
                           child: state is PaySubscriptionUploading

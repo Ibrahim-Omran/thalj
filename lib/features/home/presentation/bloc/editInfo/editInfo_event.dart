@@ -18,11 +18,46 @@ class EditInfoPhone extends EditInfoEvent {
   EditInfoPhone(this.phone);
 }
 
-class EditInfoSubmitted extends EditInfoEvent {
+class EditToggleObscureText extends EditInfoEvent {
+  final bool isPassword;
+
+  EditToggleObscureText({required this.isPassword});
+}
+
+class EditToggleConfirmedObscureText extends EditInfoEvent {
+  final bool isConfirmedPassword;
+
+  EditToggleConfirmedObscureText({required this.isConfirmedPassword});
+}
+
+class EditNameSubmitted extends EditInfoEvent {
   final String name;
-  final String phone;
+
+
+
+  EditNameSubmitted({required this.name });
+}
+
+class EditEmailSubmitted extends EditInfoEvent {
   final String email;
 
 
-  EditInfoSubmitted({required this.name, required this.phone, required this.email, });
+
+  EditEmailSubmitted({required this.email });
+}
+
+class EditPhoneSubmitted extends EditInfoEvent {
+  final String phone;
+
+
+
+  EditPhoneSubmitted({required this.phone });
+}
+
+class EditPasswordSubmitted extends EditInfoEvent {
+  final String password;
+
+
+
+  EditPasswordSubmitted({required this.password });
 }

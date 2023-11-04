@@ -1,3 +1,5 @@
+import '../../../domain/models/register_model.dart';
+
 class RegisterState {
   final String userName;
   final String password;
@@ -10,6 +12,7 @@ class RegisterState {
   final bool isSubmitting;
   final bool isSuccess;
   final bool error;
+  final RegisterModel? registerData;
 
   RegisterState({
     this.userName = '',
@@ -23,6 +26,7 @@ class RegisterState {
     this.isSubmitting = false,
     this.isSuccess = false,
     this.error = false,
+    this.registerData,
   });
 
   RegisterState copyWith({
@@ -37,6 +41,7 @@ class RegisterState {
     bool? isSubmitting,
     bool? isSuccess,
     bool? error,
+    RegisterModel ? registerData,
   }) {
     return RegisterState(
       userName: userName ?? this.userName,
@@ -50,6 +55,7 @@ class RegisterState {
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
       error: error ?? this.error,
+      registerData: registerData??this.registerData
     );
   }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:thalj/features/auth/domain/models/login_model.dart';
 
 import '../../../core/local/cash_helper.dart';
 import '../../../core/network/ErrorModel.dart';
@@ -11,8 +12,8 @@ import '../domain/models/admin_model.dart';
 import '../domain/models/register_model.dart';
 
 class AuthRemoteDataSource {
-  Future<bool> login({required String email, required String password}) async {
-
+  Future<LoginModel?> login(
+      {required String email, required String password}) async {
     try {
       final response = await http.post(
         Uri.parse('${AppStrings.apiLink}drivers/login'),
@@ -23,58 +24,49 @@ class AuthRemoteDataSource {
       );
 
       if (response.statusCode == 200) {
-        // Login successful
         final jsonResponse = jsonDecode(response.body);
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
-
-          final loginData = jsonResponse['data'][0];
-          final token = jsonResponse['token'];
-          CacheHelper.saveData(
-              key: 'loginToken', value:token );
-          CacheHelper.saveData(
-              key: 'name', value:loginData['fullname'] );
-          CacheHelper.saveData(
-              key: 'verified', value:loginData['verified'] );
-          CacheHelper.saveData(
-              key: 'status', value:loginData['status'] );
-          CacheHelper.saveData(
-              key: 'email', value:loginData['email'] );
-
-          CacheHelper.saveData(
-              key: 'phone', value:loginData['phone'] );
+          final loginModel = LoginModel.fromJson(jsonResponse);
+          CacheHelper.saveData(key: 'loginToken', value: loginModel.token);
+          CacheHelper.saveData(key: 'fullname', value: loginModel.data[0].fullname);
+          CacheHelper.saveData(key: 'email', value: loginModel.data[0].email);
+          CacheHelper.saveData(key: 'phone', value: loginModel.data[0].phone);
+          CacheHelper.saveData(key: 'subscriptionDate', value: loginModel.data[0].subscriptionDate);
+          CacheHelper.saveData(key: 'status', value: loginModel.data[0].status);
+          CacheHelper.saveData(key: 'daysUntilExpiry', value: loginModel.daysUntilExpiry);
 
 
-          return true;
+          return loginModel;
         } else {
-          // Handle missing or empty data
           if (kDebugMode) {
             print('No data found in response');
           }
-          return false;
+          return null;
         }
       } else {
-        // Login failed
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
         final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
         showToast(
-            text: errorMessageModel.statusMessage, state: ToastStates.error);
-        return false;
+          text: errorMessageModel.statusMessage,
+          state: ToastStates.error,
+        );
+        return null;
       }
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
-      return false;
+      return null;
     }
   }
 
-  Future<bool> register(
-      {required String email,
-      required String password,
-      required String name,
-      required String phone}) async {
-
+  Future<RegisterModel?> register({
+    required String email,
+    required String password,
+    required String name,
+    required String phone,
+  }) async {
     try {
       final response = await http.post(
         Uri.parse('${AppStrings.apiLink}drivers/signup'),
@@ -83,21 +75,17 @@ class AuthRemoteDataSource {
           'email': email,
           'password': password,
           'phone': phone,
-
         },
       );
 
-      if (response.statusCode == 201||response.statusCode == 200) {
+      if (response.statusCode == 201 || response.statusCode == 200) {
         // Register successful
         final jsonResponse = jsonDecode(response.body);
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
           final registerData = jsonResponse['data'];
-          CacheHelper.saveData(
-              key: 'registerToken', value: jsonResponse['token']);
 
-
-         RegisterModel.fromJson({
+          final registerModel = RegisterModel.fromJson({
             'data': {
               'id': registerData['id'],
               'fullname': registerData['fullname'],
@@ -106,10 +94,14 @@ class AuthRemoteDataSource {
             },
             'token': jsonResponse['token'],
           });
+
+          CacheHelper.saveData(
+              key: 'registerToken', value: jsonResponse['token']);
+
+          return registerModel;
         }
-        return true;
       } else {
-        // register failed
+        // Register failed
         if (kDebugMode) {
           print(response.statusCode);
           print(response.body);
@@ -118,32 +110,36 @@ class AuthRemoteDataSource {
         final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
         showToast(
             text: errorMessageModel.statusMessage, state: ToastStates.error);
-        return false;
       }
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
-      return false;
     }
+
+    // Return null in case of failure or error
+    return null;
   }
 
-  Future<bool> adminLogin(
-      {required String email, required String password}) async {
 
+  Future<AdminModel?> adminLogin({
+    required String email,
+    required String password,
+  }) async {
     try {
-      http.Response response = await http.post(
-          Uri.parse('${AppStrings.apiLink}users/login'),
-          body: {'email': email, 'password': password});
+      final response = await http.post(
+        Uri.parse('${AppStrings.apiLink}users/login'),
+        body: {'email': email, 'password': password},
+      );
 
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
           final adminLoginData = jsonResponse['data'][0];
-          CacheHelper.saveData(
-              key: 'adminToken', value: jsonResponse['token']);
-          AdminModel.fromJson({
+          CacheHelper.saveData(key: 'adminToken', value: jsonResponse['token']);
+
+          final adminModel = AdminModel.fromJson({
             'id': adminLoginData['id'],
             'name': adminLoginData['name'],
             'phone': adminLoginData['phone'],
@@ -153,26 +149,28 @@ class AuthRemoteDataSource {
             'token': jsonResponse['token'],
           });
 
-          return true;
+          return adminModel;
         } else {
           if (kDebugMode) {
             print('No data found in response');
           }
-          return false;
         }
       } else {
         // Login failed
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
         final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
         showToast(
-            text: errorMessageModel.statusMessage, state: ToastStates.error);
-        return false;
+          text: errorMessageModel.statusMessage,
+          state: ToastStates.error,
+        );
       }
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
-      return false;
     }
+
+    return null;
   }
+
 }

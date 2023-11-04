@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import '../../../domain/models/login_model.dart';
 import '../../../domain/repository.dart';
 import 'bloc_login_events.dart';
 import 'bloc_login_states.dart';
@@ -21,17 +22,21 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(obscureText: !state.obscureText));
   }
 
-  Future<void> _onLoginSubmitted(
-      LoginSubmitted event, Emitter<LoginState> emit) async {
+  Future<void> _onLoginSubmitted(LoginSubmitted event, Emitter<LoginState> emit) async {
     emit(state.copyWith(isSubmitting: true));
+
     try {
-      final bool isAuthenticated = await authRepository.login(
+      final LoginModel? loginData = await authRepository.login(
         email: event.email,
         password: event.password,
       );
 
-      if (isAuthenticated) {
-        emit(state.copyWith(isSubmitting: false, isSuccess: true));
+      if (loginData != null) {
+        emit(state.copyWith(
+          isSubmitting: false,
+          isSuccess: true,
+          loginData: loginData, // Save the data in the state
+        ));
       } else {
         emit(state.copyWith(
           isSubmitting: false,
@@ -47,4 +52,5 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       ));
     }
   }
+
 }

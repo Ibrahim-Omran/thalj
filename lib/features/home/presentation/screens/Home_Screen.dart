@@ -23,7 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  String? fullName = CacheHelper.getData(key: 'name');
+  String? fullName = CacheHelper.getData(key: 'fullname');
 
 
   void _onItemTapped(int index) {

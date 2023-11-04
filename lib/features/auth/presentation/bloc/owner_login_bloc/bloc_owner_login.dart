@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:thalj/features/auth/domain/models/admin_model.dart';
 import '../../../domain/repository.dart';
 import 'bloc__owner_login_events.dart';
 import 'bloc__owner_login_states.dart';
@@ -25,18 +26,22 @@ class AdminLoginBloc extends Bloc<AdminLoginEvent, AdminLoginState> {
       AdminLoginSubmitted event, Emitter<AdminLoginState> emit) async {
     emit(state.copyWith(isSubmitting: true));
     try {
-      final bool isAuthenticated = await authRepository.ownerLogin(
+      final AdminModel? adminData = await authRepository.ownerLogin(
         email: event.email,
         password: event.password,
       );
 
-      if (isAuthenticated) {
-        emit(state.copyWith(isSubmitting: false, isSuccess: true));
+      if (adminData != null) {
+        emit(state.copyWith(
+          isSubmitting: false,
+          isSuccess: true,
+          adminData: adminData,
+        ));
       } else {
         emit(state.copyWith(
           isSubmitting: false,
           isSuccess: false,
-          error: false,
+          error: true,
         ));
       }
     } catch (e) {

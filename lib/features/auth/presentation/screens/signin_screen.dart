@@ -9,7 +9,6 @@ import 'package:thalj/core/widgets/custom_button.dart';
 import 'package:thalj/core/widgets/logo.dart';
 import 'package:thalj/features/auth/domain/repository.dart';
 
-import '../../../../core/local/cash_helper.dart';
 import '../../../../core/utils/app_text_style.dart';
 import '../bloc/login_bloc/bloc_login.dart';
 
@@ -132,11 +131,15 @@ class _SignInScreenState extends State<SignInScreen> {
                       if (value!.isEmpty) {
                         return AppStrings.vaildForm;
                       }
-                      if (value.length < 6) {
+                      if (value.length < 8) {
                         return AppStrings.vailpassForm;
+                      }
+                      if (!value.contains(RegExp(r'[A-Z]'))) {
+                        return 'Password must contain at least one capital letter';
                       }
                       return null;
                     },
+
                   );
                 }),
                 Row(children: [
@@ -164,23 +167,20 @@ class _SignInScreenState extends State<SignInScreen> {
                             text: AppStrings.signIn,
                           );
                   },
-                  listener: (BuildContext context, LoginState state) {
-                    String? verified = CacheHelper.getData(key: 'verified');
+                    listener: (BuildContext context, LoginState state) {
+                      final loginData = state.loginData;
 
-
-                    if (state.isSuccess && verified == "1" )  {
-
-                      navigatePushReplacement(context: context, route: Routes.homeScreen);
-                      showToast(
-                          text: AppStrings.welcome, state: ToastStates.success);
+                      if (state.isSuccess && loginData != null && loginData.data.isNotEmpty) {
+                        final isVerified = loginData.data.first.verified;
+                        if (isVerified == "1") {
+                          navigatePushReplacement(context: context, route: Routes.homeScreen,arg: state.loginData);
+                          showToast(text: AppStrings.welcome, state: ToastStates.success);
+                        } else if (isVerified == "0") {
+                          showToast(text: AppStrings.verifyMessage, state: ToastStates.warning);
+                        }
+                      }
                     }
-                    else if(verified == "0"){
-                      showToast(
-                          text: AppStrings.verifyMessage, state: ToastStates.warning);
-                    }
 
-
-                  },
                 ),
                 SizedBox(
                   height: 15.h,

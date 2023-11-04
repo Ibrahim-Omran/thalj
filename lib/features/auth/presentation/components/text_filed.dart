@@ -56,6 +56,7 @@ class MyFormField extends StatelessWidget {
           ),
           child: TextFormField(
 
+
             textDirection: TextDirection.rtl,
             obscureText: isPassword,
             readOnly: readonly,
@@ -93,6 +94,7 @@ class MyFormField extends StatelessWidget {
                       ),
                     )
                   : null,
+
             ),
             validator: vaild,
           ),
