@@ -13,4 +13,6 @@ class AppAssets {
   static const String moka = '${baseUrl}moka.png';
 
   static const String identity = '${baseUrl}identity.png';
+
+  static const String verification = '${baseUrl}Two-factor-authentication.png';
 }

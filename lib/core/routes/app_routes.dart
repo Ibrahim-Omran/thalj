@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:thalj/features/auth/presentation/screens/otp-screen.dart';
 import 'package:thalj/features/auth/presentation/screens/owner_screen.dart';
+import 'package:thalj/features/auth/presentation/screens/reset_pass_screen.dart';
 import 'package:thalj/features/auth/presentation/screens/sign_up.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen.dart';
 import 'package:thalj/features/adminHome/presenation/screens/admin_options_screen.dart';
@@ -35,12 +37,15 @@ class Routes {
   static const String driverInvoices = '/driverInvoices';
   static const String driverDataSentToOwner = '/driverDataSentToOwner';
   static const String adminOptionsScreen = '/adminOptionsScreen';
+  static const String otpScreen = '/otpScreen';
+  static const String resetPass = '/resetPass';
 }
 
 Widget appRoutes(String route, dynamic arg) {
   switch (route) {
     case Routes.initialRoute:
       return const SplashScreen(animateBottom: true);
+    // return const OTPScreen();
     case Routes.signIN:
       return const SignInScreen();
     case Routes.signUp:
@@ -52,14 +57,14 @@ Widget appRoutes(String route, dynamic arg) {
 
     case Routes.uploadingSupportingDocumentsScreen:
       return const UploadingSupportingDocumentsScreen();
-  /*  case Routes.documentsCheckScreen:
+    /*  case Routes.documentsCheckScreen:
       return const DocumentsCheckScreen();*/
     case Routes.offersScreen:
       return const Offers();
     case Routes.profileScreen:
-      return  Profile();
+      return Profile();
     case Routes.subscription:
-      return  Subscription();
+      return Subscription();
 
     case Routes.driverDoc:
       return const DriverDocuments();
@@ -71,6 +76,10 @@ Widget appRoutes(String route, dynamic arg) {
       return const UserSubscriptionScreen();
     case Routes.driverInvoices:
       return const DriverSubscriptionScreen();
+    case Routes.otpScreen:
+      return OTPScreen();
+    case Routes.resetPass:
+      return const ResetPassScreen();
     default:
       return const Scaffold(
         body: Center(

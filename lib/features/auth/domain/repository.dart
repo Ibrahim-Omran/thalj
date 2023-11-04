@@ -10,9 +10,11 @@ import 'models/register_model.dart';
 class AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
 
-  AuthRepository(this.authRemoteDataSource,);
+  AuthRepository(
+    this.authRemoteDataSource,
+  );
 
-  Future <bool> result = InternetConnectionChecker().hasConnection;
+  Future<bool> result = InternetConnectionChecker().hasConnection;
 
   Future<LoginModel?> login({
     required String email,
@@ -24,7 +26,7 @@ class AuthRepository {
     }
 
     final LoginModel? loginModel =
-    await authRemoteDataSource.login(email: email, password: password);
+        await authRemoteDataSource.login(email: email, password: password);
     return loginModel;
   }
 
@@ -48,7 +50,6 @@ class AuthRepository {
     return registerModel;
   }
 
-
   Future<AdminModel?> ownerLogin({
     required String email,
     required String password,
@@ -59,8 +60,39 @@ class AuthRepository {
     }
 
     final AdminModel? adminModel =
-    await authRemoteDataSource.adminLogin(email: email, password: password);
+        await authRemoteDataSource.adminLogin(email: email, password: password);
     return adminModel;
   }
 
+  Future<bool> sendOTPToEmail(String email) async {
+    if (result == false) {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+      return Future.value(false);
+    }
+    return await authRemoteDataSource.sendOTPToEmail(email);
+  }
+
+  Future<bool> sendOTPWithEmail(String email, String otp) async {
+    if (result == false) {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+      return Future.value(false);
+    }
+    return await authRemoteDataSource.sendOTPWithEmail(email, otp);
+  }
+
+  Future<bool> sendOTPToEmailReset(String email) async {
+    if (result == false) {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+      return Future.value(false);
+    }
+    return await authRemoteDataSource.sendOTPToEmailReset(email);
+  }
+
+  Future<bool> sendOTPResetPass(String email, String otp, String pass) async {
+    if (result == false) {
+      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+      return Future.value(false);
+    }
+    return await authRemoteDataSource.sendOTPResetPass(email, otp, pass);
+  }
 }

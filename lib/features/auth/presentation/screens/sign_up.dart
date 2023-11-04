@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/widgets/custom_button.dart';
+import 'package:thalj/features/auth/presentation/bloc/otp_bloc/otp_bloc.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_text_style.dart';
@@ -58,10 +59,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        body: BlocProvider(
-            create: (context) =>
-                RegisterBloc(authRepository: context.read<AuthRepository>()),
-            child: _registerView(context)));
+        body: MultiBlocProvider(
+          child: _registerView(context),
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  RegisterBloc(authRepository: context.read<AuthRepository>()),
+            ),
+            BlocProvider(
+              create: (context) => OtpBloc(context.read<AuthRepository>()),
+            )
+          ],
+        ));
   }
 
   Widget _registerView(BuildContext context) {
@@ -121,12 +130,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 15.h,
                 ),
                 BlocBuilder<RegisterBloc, RegisterState>(
-                builder: (context, state) {
+                    builder: (context, state) {
                   return PhoneForm(
                     controller: _phoneController,
                   );
-                }
-                ),
+                }),
                 SizedBox(
                   height: 15.h,
                 ),
@@ -183,7 +191,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
                       return null;
                     },
-
                   );
                 }),
                 SizedBox(
@@ -244,7 +251,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 BlocConsumer<RegisterBloc, RegisterState>(
                   builder: (context, state) {
                     return state.isSubmitting
-                        ? const Center(child: CircularProgressIndicator.adaptive())
+                        ? const Center(
+                            child: CircularProgressIndicator.adaptive())
                         : CustomButton(
                             onPressed: () {
                               if (SignUpScreen._formKey.currentState!
@@ -269,11 +277,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                   listener: (BuildContext context, RegisterState state) {
                     if (state.isSuccess) {
-                      navigatePushReplacement(
+                      navigatePushNamed(
                           context: context,
-                          route: Routes.uploadingSupportingDocumentsScreen);
+                          route: Routes.otpScreen,
+                          arg: {'email': _emailController.text});
+                      BlocProvider.of<OtpBloc>(context)
+                          .add(ResendOTP(email: _emailController.text));
                     }
-
                   },
                 ),
                 SizedBox(

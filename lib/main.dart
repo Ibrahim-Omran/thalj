@@ -29,32 +29,22 @@ void main() async {
   String? loginToken = CacheHelper.getData(key: 'loginToken');
   String? adminToken = CacheHelper.getData(key: 'adminToken');
 
-  if(loginToken != null)
-    {
-      widget =  const HomeScreen();
-
-
-    }
-  else if(adminToken!=null)
-    {
-      widget = const AdminOptionsScreen();
-
-
-    }
-  else if (adminToken==null&&loginToken == null ){
+  if (loginToken != null) {
+    widget = const HomeScreen();
+  } else if (adminToken != null) {
+    widget = const AdminOptionsScreen();
+  } else if (adminToken == null && loginToken == null) {
     widget = const SplashScreen(animateBottom: true);
-  }
-  else {
+  } else {
     widget = const SplashScreen(animateBottom: true);
   }
 
-  runApp( MyApp(widget));
+  runApp(MyApp(widget));
 }
 
 class MyApp extends StatelessWidget {
   late final Widget startWidget;
-  MyApp( this.startWidget,  {Key? key})
-      : super(key: key);
+  MyApp(this.startWidget, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,30 +61,25 @@ class MyApp extends StatelessWidget {
                   DocumentRepository(DocumentsRemoteDataSource()),
             ),
             RepositoryProvider<HomeRepository>(
-              create: (context) => HomeRepository(HomeRemoteDataSource(),),
+              create: (context) => HomeRepository(
+                HomeRemoteDataSource(),
+              ),
             ),
             RepositoryProvider<AdminRepository>(
               create: (context) => AdminRepository(AdminRemoteDataSource()),
             ),
-
-        BlocProvider(
-        create: (context) => DriverSubscriptionBloc(adminRepository: context.read<AdminRepository>())),
-
             BlocProvider(
-                create: (context) => UserInvoiceBloc(adminRepository: context.read<AdminRepository>())),
-
-
-
-
-
+                create: (context) => DriverSubscriptionBloc(
+                    adminRepository: context.read<AdminRepository>())),
+            BlocProvider(
+                create: (context) => UserInvoiceBloc(
+                    adminRepository: context.read<AdminRepository>())),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: AppStrings.appName,
             theme: getAppTheme(),
-
             home: startWidget,
-
             onGenerateRoute: (settings) {
               return MaterialPageRoute(
                 builder: (context) =>

@@ -19,12 +19,10 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   String? fullName = CacheHelper.getData(key: 'fullname');
-
 
   void _onItemTapped(int index) {
     setState(() {
@@ -33,20 +31,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final _pages = [
-
-
-
     BlocProvider<GetOrdersDataBloc>(
         create: (context) =>
             GetOrdersDataBloc(homeRepository: context.read<HomeRepository>()),
-        child:const HomeBody()),
+        child: const HomeBody()),
     BlocProvider<AcceptedOrderBloc>(
         create: (context) =>
             AcceptedOrderBloc(homeRepository: context.read<HomeRepository>()),
         child: const Offers()),
-     const Profile()
+    const Profile()
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +49,16 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
       ),
-      body:  SafeArea(child: Column(
-        children: [
-           ProfileAppBar(name:fullName!,),
-          Expanded(child: _pages.elementAt(_selectedIndex)),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            ProfileAppBar(
+              name: fullName!,
+            ),
+            Expanded(child: _pages.elementAt(_selectedIndex)),
+          ],
+        ),
       ),
-      ),
-
-
-
-
     );
   }
 }

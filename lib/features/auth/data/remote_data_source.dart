@@ -29,13 +29,16 @@ class AuthRemoteDataSource {
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
           final loginModel = LoginModel.fromJson(jsonResponse);
           CacheHelper.saveData(key: 'loginToken', value: loginModel.token);
-          CacheHelper.saveData(key: 'fullname', value: loginModel.data[0].fullname);
+          CacheHelper.saveData(
+              key: 'fullname', value: loginModel.data[0].fullname);
           CacheHelper.saveData(key: 'email', value: loginModel.data[0].email);
           CacheHelper.saveData(key: 'phone', value: loginModel.data[0].phone);
-          CacheHelper.saveData(key: 'subscriptionDate', value: loginModel.data[0].subscriptionDate);
+          CacheHelper.saveData(
+              key: 'subscriptionDate',
+              value: loginModel.data[0].subscriptionDate);
           CacheHelper.saveData(key: 'status', value: loginModel.data[0].status);
-          CacheHelper.saveData(key: 'daysUntilExpiry', value: loginModel.daysUntilExpiry);
-
+          CacheHelper.saveData(
+              key: 'daysUntilExpiry', value: loginModel.daysUntilExpiry);
 
           return loginModel;
         } else {
@@ -121,7 +124,6 @@ class AuthRemoteDataSource {
     return null;
   }
 
-
   Future<AdminModel?> adminLogin({
     required String email,
     required String password,
@@ -173,4 +175,106 @@ class AuthRemoteDataSource {
     return null;
   }
 
+  Future<bool> sendOTPToEmail(String email) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${AppStrings.apiLink}drivers/resend-otp'),
+        body: {'email': email},
+      );
+      if (response.statusCode == 200) {
+        print('Done Successfully 1');
+        return true;
+      } else {
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+          text: errorMessageModel.statusMessage,
+          state: ToastStates.error,
+        );
+        return false;
+      }
+    } catch (e) {
+      print(
+          "otpppp To Mail failed code: ${e.hashCode} runtime${e.runtimeType}");
+      return false;
+    }
+  }
+
+  Future<bool> sendOTPWithEmail(String email, String otp) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${AppStrings.apiLink}drivers/verify'),
+        body: {
+          'email': email,
+          "otp": otp,
+        },
+      );
+      if (response.statusCode == 200) {
+        print('Done Successfully 2');
+        return true;
+      } else {
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+          text: errorMessageModel.statusMessage,
+          state: ToastStates.error,
+        );
+        return false;
+      }
+    } catch (e) {
+      print(
+          "otpppp With Mail failed code: ${e.hashCode} runtime${e.runtimeType}");
+      return false;
+    }
+  }
+
+  Future<bool> sendOTPToEmailReset(String email) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${AppStrings.apiLink}drivers/resetPassOTPp'),
+        body: {'email': email},
+      );
+      if (response.statusCode == 200) {
+        print('Done Successfully 3');
+        return true;
+      } else {
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+          text: errorMessageModel.statusMessage,
+          state: ToastStates.error,
+        );
+        return false;
+      }
+    } catch (e) {
+      print(
+          "otpppp To Mail Reset failed code: ${e.hashCode} runtime${e.runtimeType}");
+      return false;
+    }
+  }
+
+  Future<bool> sendOTPResetPass(String email, String otp, String pass) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${AppStrings.apiLink}drivers/resetPassVerify'),
+        body: {'email': email, "otp": otp, "newPass": pass},
+      );
+      if (response.statusCode == 200) {
+        print('Done Successfully 4');
+        return true;
+      } else {
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+          text: errorMessageModel.statusMessage,
+          state: ToastStates.error,
+        );
+        return false;
+      }
+    } catch (e) {
+      print(
+          "otpppp Reset Pass failed code: ${e.hashCode} runtime${e.runtimeType}");
+      return false;
+    }
+  }
 }

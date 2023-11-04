@@ -2,10 +2,10 @@ class AppStrings {
   //API LInk
   static const String apiLink = 'https://mircle50-001-site1.atempurl.com/';
 
-
   static const String appName = 'تلج';
   static const String welcome = 'آهلا بك في ثلج';
-  static const String verifyMessage = 'لا يمكنك تسجيل الدخول الا بعد الموافقة علي اوراقك';
+  static const String verifyMessage =
+      'لا يمكنك تسجيل الدخول الا بعد الموافقة علي اوراقك';
   static const String signIn = 'تسجيل دخول';
   static const String askSignIn = 'قم بتسجيل دخول';
   static const String signInHint = 'يرجى تسجيل الدخول إلى حسابك للمتابعة';
@@ -40,6 +40,9 @@ class AppStrings {
   static const String offers = 'العروض';
   static const String myProfile = 'حسابي';
 
+  static const String verification = 'التحقق';
+  static const String dontReceive = 'لم تستلم الرمز؟';
+
   // product information
   static const String productInfo = 'معلومات المنتج';
   static const String senderInfo = 'معلومات المرسل';
@@ -70,8 +73,7 @@ class AppStrings {
   static const String expatriateUploadingId =
       '(ان كنت وافد، برجاء رفع بطاقة الإقامة)';
   static const String uploadDrivingLicense = '٢. قم برفع رخصة القيادة (سارية)';
-  static const String chooseFileToUpload =
-      'اختر ملفًا للتحميل.';
+  static const String chooseFileToUpload = 'اختر ملفًا للتحميل.';
   static const String uploadVehicleRegistrationForm =
       '٣. قم برفع استمارة المركبة (سارية)';
   static const String uploadDriverCard = '٤. قم برفع كارت التشغيل';
@@ -91,10 +93,8 @@ class AppStrings {
       'تم التأكد من جميع المستندات، و يمكنك البدأ مباشرتاً';
   static const String startDelivery = 'بدأ الشحن';
 
-  static const String paidSubscribation =
-      'قم برفع الوصل هنا.';
-  static const String donePay =
-      'تم رفع الوصل برجاء اضغظ على (ارسل الوصل)';
+  static const String paidSubscribation = 'قم برفع الوصل هنا.';
+  static const String donePay = 'تم رفع الوصل برجاء اضغظ على (ارسل الوصل)';
   static const String doneUploading = 'تم رفع هذا المستند';
 
   //vaild
@@ -131,7 +131,8 @@ class AppStrings {
 
   //ToastMSg
   static const String sendOfferSuccess = 'تم ارسال العرض بنجاح';
-  static const String editInfoSuccess = 'تم تغير المعلومات بنجاح - آعد تسجيل الدخول  ';
+  static const String editInfoSuccess =
+      'تم تغير المعلومات بنجاح - آعد تسجيل الدخول  ';
 
   // Owner options
   static const String driverDocuments = 'مستندات السائقين';
