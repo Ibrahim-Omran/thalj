@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thalj/features/auth/presentation/bloc/otp_bloc/otp_bloc.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen.dart';
 import 'core/errors/internetCheck.dart';
 import 'core/local/cash_helper.dart';
@@ -29,32 +30,22 @@ void main() async {
   String? loginToken = CacheHelper.getData(key: 'loginToken');
   String? adminToken = CacheHelper.getData(key: 'adminToken');
 
-  if(loginToken != null)
-    {
-      widget =  const HomeScreen();
-
-
-    }
-  else if(adminToken!=null)
-    {
-      widget = const AdminOptionsScreen();
-
-
-    }
-  else if (adminToken==null&&loginToken == null ){
+  if (loginToken != null) {
+    widget = const HomeScreen();
+  } else if (adminToken != null) {
+    widget = const AdminOptionsScreen();
+  } else if (adminToken == null && loginToken == null) {
     widget = const SplashScreen(animateBottom: true);
-  }
-  else {
+  } else {
     widget = const SplashScreen(animateBottom: true);
   }
 
-  runApp( MyApp(widget));
+  runApp(MyApp(widget));
 }
 
 class MyApp extends StatelessWidget {
   late final Widget startWidget;
-  MyApp( this.startWidget,  {Key? key})
-      : super(key: key);
+  MyApp(this.startWidget, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,30 +62,27 @@ class MyApp extends StatelessWidget {
                   DocumentRepository(DocumentsRemoteDataSource()),
             ),
             RepositoryProvider<HomeRepository>(
-              create: (context) => HomeRepository(HomeRemoteDataSource(),),
+              create: (context) => HomeRepository(
+                HomeRemoteDataSource(),
+              ),
             ),
             RepositoryProvider<AdminRepository>(
               create: (context) => AdminRepository(AdminRemoteDataSource()),
             ),
-
-        BlocProvider(
-        create: (context) => DriverSubscriptionBloc(adminRepository: context.read<AdminRepository>())),
-
             BlocProvider(
-                create: (context) => UserInvoiceBloc(adminRepository: context.read<AdminRepository>())),
-
-
-
-
-
+                create: (context) => DriverSubscriptionBloc(
+                    adminRepository: context.read<AdminRepository>())),
+            BlocProvider(
+                create: (context) => UserInvoiceBloc(
+                    adminRepository: context.read<AdminRepository>())),
+            BlocProvider(
+                create: (context) => OtpBloc(context.read<AuthRepository>()))
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: AppStrings.appName,
             theme: getAppTheme(),
-
             home: startWidget,
-
             onGenerateRoute: (settings) {
               return MaterialPageRoute(
                 builder: (context) =>
