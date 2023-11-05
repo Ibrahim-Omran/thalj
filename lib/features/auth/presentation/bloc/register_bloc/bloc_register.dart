@@ -39,11 +39,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       RegisterSubmitted event, Emitter<RegisterState> emit) async {
     emit(state.copyWith(isSubmitting: true));
     try {
-      final RegisterModel ? registerData = await authRepository.register(
-          name: event.name,
-          email: event.email,
-          password: event.password,
-          phone: event.phone);
+      final RegisterModel? registerData = await authRepository.register(
+        name: event.name,
+        email: event.email,
+        password: event.password,
+        phone: event.phone,
+        bankName: event.bankName,
+        interAccNum: event.internatAccNum,
+        accNum: event.accNum,
+      );
       if (registerData != null) {
         emit(state.copyWith(
           isSubmitting: false,

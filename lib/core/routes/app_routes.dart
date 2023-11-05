@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thalj/features/auth/presentation/screens/forget_pass.dart';
 import 'package:thalj/features/auth/presentation/screens/otp-screen.dart';
 import 'package:thalj/features/auth/presentation/screens/owner_screen.dart';
 import 'package:thalj/features/auth/presentation/screens/reset_pass_screen.dart';
@@ -38,6 +39,7 @@ class Routes {
   static const String driverDataSentToOwner = '/driverDataSentToOwner';
   static const String adminOptionsScreen = '/adminOptionsScreen';
   static const String otpScreen = '/otpScreen';
+  static const String forgetPass = '/forgetPass';
   static const String resetPass = '/resetPass';
 }
 
@@ -80,6 +82,8 @@ Widget appRoutes(String route, dynamic arg) {
       return OTPScreen();
     case Routes.resetPass:
       return const ResetPassScreen();
+    case Routes.forgetPass:
+      return const ForgetPasswordScreen();
     default:
       return const Scaffold(
         body: Center(

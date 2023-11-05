@@ -69,6 +69,9 @@ class AuthRemoteDataSource {
     required String password,
     required String name,
     required String phone,
+    required String bankName,
+    required String interAccNum,
+    required String accNum,
   }) async {
     try {
       final response = await http.post(
@@ -78,6 +81,9 @@ class AuthRemoteDataSource {
           'email': email,
           'password': password,
           'phone': phone,
+          "bankName": bankName,
+          "internationalAccountNum": interAccNum,
+          "accountNumber": accNum
         },
       );
 
@@ -178,8 +184,10 @@ class AuthRemoteDataSource {
   Future<bool> sendOTPToEmail(String email) async {
     try {
       final response = await http.post(
-        Uri.parse('${AppStrings.apiLink}drivers/resend-otp'),
-        body: {'email': email},
+        Uri.parse(
+          '${AppStrings.apiLink}drivers/resend-otp',
+        ),
+        body: jsonEncode({'email': email}),
       );
       if (response.statusCode == 200) {
         print('Done Successfully 1');
@@ -202,13 +210,20 @@ class AuthRemoteDataSource {
 
   Future<bool> sendOTPWithEmail(String email, String otp) async {
     try {
-      final response = await http.post(
-        Uri.parse('${AppStrings.apiLink}drivers/verify'),
-        body: {
-          'email': email,
-          "otp": otp,
-        },
-      );
+      var registerToken = CacheHelper.getData(key: 'registerToken');
+      print('register Token $registerToken');
+      final response =
+          await http.post(Uri.parse('${AppStrings.apiLink}drivers/verify'),
+              body: jsonEncode({
+                "email": email,
+                "otp": otp,
+              }),
+              headers: {
+            "Content-Type": "application/json",
+            'Accept': '*/*',
+            'Authorization': 'Bearer $registerToken',
+          });
+      print("Helllooooooooooo Hereeeeeee");
       if (response.statusCode == 200) {
         print('Done Successfully 2');
         return true;
@@ -223,7 +238,7 @@ class AuthRemoteDataSource {
       }
     } catch (e) {
       print(
-          "otpppp With Mail failed code: ${e.hashCode} runtime${e.runtimeType}");
+          "otpppp With Mail failed code: ${e.hashCode} runtime${e.runtimeType} ");
       return false;
     }
   }
@@ -231,13 +246,14 @@ class AuthRemoteDataSource {
   Future<bool> sendOTPToEmailReset(String email) async {
     try {
       final response = await http.post(
-        Uri.parse('${AppStrings.apiLink}drivers/resetPassOTPp'),
-        body: {'email': email},
+        Uri.parse('${AppStrings.apiLink}drivers/resetPassOTP'),
+        body: {"email": email},
       );
       if (response.statusCode == 200) {
         print('Done Successfully 3');
         return true;
       } else {
+        print("Holaaaaa");
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
         final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
         showToast(
@@ -257,7 +273,11 @@ class AuthRemoteDataSource {
     try {
       final response = await http.post(
         Uri.parse('${AppStrings.apiLink}drivers/resetPassVerify'),
-        body: {'email': email, "otp": otp, "newPass": pass},
+        body: {
+          'email': email,
+          "otp": otp,
+          "newPass": pass,
+        },
       );
       if (response.statusCode == 200) {
         print('Done Successfully 4');

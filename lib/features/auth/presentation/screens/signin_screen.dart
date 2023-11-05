@@ -21,16 +21,12 @@ class SignInScreen extends StatefulWidget {
 
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-
   late bool _isPassword = true;
-
-
 
   final TextEditingController _userNameController = TextEditingController();
 
@@ -139,49 +135,55 @@ class _SignInScreenState extends State<SignInScreen> {
                       }
                       return null;
                     },
-
                   );
                 }),
                 Row(children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      navigatePushNamed(
+                          context: context, route: Routes.forgetPass);
+                    },
                     child: Text(AppStrings.forgetPassword,
                         style: underLineStyle()),
                   ),
                 ]),
-                BlocConsumer<LoginBloc, LoginState>(
-                  builder: (context, state) {
-                    return state.isSubmitting
-                        ? const CircularProgressIndicator.adaptive()
-                        : CustomButton(
-                            onPressed: () {
-                              if (SignInScreen._formKey.currentState!
-                                  .validate()) {
-                                BlocProvider.of<LoginBloc>(context)
-                                    .add(LoginSubmitted(
-                                  email: _userNameController.text,
-                                  password: _passwordController.text,
-                                ));
-                              }
-                            },
-                            text: AppStrings.signIn,
-                          );
-                  },
-                    listener: (BuildContext context, LoginState state) {
-                      final loginData = state.loginData;
+                BlocConsumer<LoginBloc, LoginState>(builder: (context, state) {
+                  return state.isSubmitting
+                      ? const CircularProgressIndicator.adaptive()
+                      : CustomButton(
+                          onPressed: () {
+                            if (SignInScreen._formKey.currentState!
+                                .validate()) {
+                              BlocProvider.of<LoginBloc>(context)
+                                  .add(LoginSubmitted(
+                                email: _userNameController.text,
+                                password: _passwordController.text,
+                              ));
+                            }
+                          },
+                          text: AppStrings.signIn,
+                        );
+                }, listener: (BuildContext context, LoginState state) {
+                  final loginData = state.loginData;
 
-                      if (state.isSuccess && loginData != null && loginData.data.isNotEmpty) {
-                        final isVerified = loginData.data.first.verified;
-                        if (isVerified == "1") {
-                          navigatePushReplacement(context: context, route: Routes.homeScreen,arg: state.loginData);
-                          showToast(text: AppStrings.welcome, state: ToastStates.success);
-                        } else if (isVerified == "0") {
-                          showToast(text: AppStrings.verifyMessage, state: ToastStates.warning);
-                        }
-                      }
+                  if (state.isSuccess &&
+                      loginData != null &&
+                      loginData.data.isNotEmpty) {
+                    final isVerified = loginData.data.first.verified;
+                    if (isVerified == "1") {
+                      navigatePushReplacement(
+                          context: context,
+                          route: Routes.homeScreen,
+                          arg: state.loginData);
+                      showToast(
+                          text: AppStrings.welcome, state: ToastStates.success);
+                    } else if (isVerified == "0") {
+                      showToast(
+                          text: AppStrings.verifyMessage,
+                          state: ToastStates.warning);
                     }
-
-                ),
+                  }
+                }),
                 SizedBox(
                   height: 15.h,
                 ),
@@ -190,7 +192,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        navigatePushNamed(context: context, route: Routes.signUp);
+                        navigatePushNamed(
+                            context: context, route: Routes.signUp);
                       },
                       child: Text(
                         AppStrings.subscription,
@@ -208,7 +211,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        navigatePushNamed(context: context, route: Routes.ownerScreen);
+                        navigatePushNamed(
+                            context: context, route: Routes.ownerScreen);
                       },
                       child: Text(
                         AppStrings.pressHere,

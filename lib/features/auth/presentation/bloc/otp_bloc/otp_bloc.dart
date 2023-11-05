@@ -31,10 +31,14 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         emit(OtpLoading(time: 2));
         var isSended = await _authRepository.sendOTPToEmailReset(event.email);
         if (isSended) {
-          emit(OtpSuccessResetPass(message: 'OTP is sended'));
+          emit(OtpSendEmailSuccess(message: 'OTP is sended'));
         } else {
           emit(OtpError(message: 'OTP is not sended Please Check your Email'));
         }
+      } else if (event is SubmitOtpResetPass) {
+        emit(OtpLoading());
+
+        emit(OtpSendEmailSuccess(message: 'OTP is sended'));
       } else if (event is ResetPassOtp) {
         emit(OtpLoading());
         var isSended = await _authRepository.sendOTPResetPass(

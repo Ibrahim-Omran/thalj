@@ -53,9 +53,15 @@ class RegisterSubmitted extends RegisterEvent {
   final String email;
   final String password;
   final String phone;
+  final String bankName;
+  final String internatAccNum;
+  final String accNum;
   RegisterSubmitted(
       {required this.name,
       required this.email,
       required this.password,
-      required this.phone});
+      required this.phone,
+      required this.bankName,
+      required this.internatAccNum,
+      required this.accNum});
 }

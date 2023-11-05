@@ -35,6 +35,9 @@ class AuthRepository {
     required String password,
     required String name,
     required String phone,
+    required String bankName,
+    required String interAccNum,
+    required String accNum,
   }) async {
     if (await result == false) {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
@@ -42,11 +45,13 @@ class AuthRepository {
     }
 
     final RegisterModel? registerModel = await authRemoteDataSource.register(
-      email: email,
-      password: password,
-      name: name,
-      phone: phone,
-    );
+        email: email,
+        password: password,
+        name: name,
+        phone: phone,
+        bankName: bankName,
+        interAccNum: interAccNum,
+        accNum: accNum);
     return registerModel;
   }
 

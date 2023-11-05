@@ -14,6 +14,7 @@ class AppStrings {
   static const String editPassword = 'تغير الرقم السري';
   static const String remember = 'تذكرنى';
   static const String forgetPassword = 'هل نسيت كلمة المرور؟';
+  static const String forgotPass = 'نسيت كلمة المرور';
   static const String donAccount = 'ليس لديك حساب؟';
   static const String subscription = 'اشتراك';
   static const String signUp = 'إنشاء حساب';
@@ -27,8 +28,12 @@ class AppStrings {
   static const String phone = ' رقم الهاتف ';
   static const String createPassword = 'انشئ رقمك السري';
   static const String confirmPassword = 'تأكيد الرقم السري';
+  static const String bankName = 'اسم البنك';
+  static const String internatAccNum = 'IBAN رقم الحساب المصرفي الدولي ';
+  static const String accNum = 'رقم الحساب';
   static const String agreeTermAndConditions =
       'أوافق على تطبيق الشروط والأحكام';
+  static const String newPass = 'رقم سري جديد';
 
   static const String saveAndCompleteProject = 'احفظ و اكمل انشاء حسابك';
   static const String changeInfo = 'تغير معلومات الحساب';

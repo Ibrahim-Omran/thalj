@@ -15,4 +15,6 @@ class AppAssets {
   static const String identity = '${baseUrl}identity.png';
 
   static const String verification = '${baseUrl}Two-factor-authentication.png';
+  static const String forgotPass = '${baseUrl}Forgot-password.png';
+  static const String resetPass = '${baseUrl}change-pass.png';
 }

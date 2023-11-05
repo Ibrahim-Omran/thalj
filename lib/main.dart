@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thalj/features/auth/presentation/bloc/otp_bloc/otp_bloc.dart';
 import 'package:thalj/features/home/presentation/screens/Home_Screen.dart';
 import 'core/errors/internetCheck.dart';
 import 'core/local/cash_helper.dart';
@@ -74,6 +75,8 @@ class MyApp extends StatelessWidget {
             BlocProvider(
                 create: (context) => UserInvoiceBloc(
                     adminRepository: context.read<AdminRepository>())),
+            BlocProvider(
+                create: (context) => OtpBloc(context.read<AuthRepository>()))
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

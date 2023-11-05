@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thalj/core/local/cash_helper.dart';
 import 'package:thalj/core/utils/app_strings.dart';
 import 'package:thalj/core/widgets/custom_button.dart';
-import 'package:thalj/features/auth/presentation/bloc/otp_bloc/otp_bloc.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_text_style.dart';
@@ -44,6 +44,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final TextEditingController _bankNameController = TextEditingController();
+  final TextEditingController _internationalAccountNumController =
+      TextEditingController();
+  final TextEditingController _accountNumberController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -58,19 +63,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: MultiBlocProvider(
-          child: _registerView(context),
-          providers: [
-            BlocProvider(
-              create: (context) =>
-                  RegisterBloc(authRepository: context.read<AuthRepository>()),
-            ),
-            BlocProvider(
-              create: (context) => OtpBloc(context.read<AuthRepository>()),
-            )
-          ],
-        ));
+      resizeToAvoidBottomInset: true,
+      body: BlocProvider(
+        create: (context) =>
+            RegisterBloc(authRepository: context.read<AuthRepository>()),
+        child: _registerView(context),
+      ),
+    );
   }
 
   Widget _registerView(BuildContext context) {
@@ -233,6 +232,78 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   );
                 }),
+                SizedBox(
+                  height: 15.h,
+                ),
+                BlocBuilder<RegisterBloc, RegisterState>(
+                    builder: (context, state) {
+                  return MyFormField(
+                    controller: _bankNameController,
+                    type: TextInputType.text,
+                    hint: "الأهلي",
+                    maxLines: 1,
+                    readonly: false,
+                    title: AppStrings.bankName,
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      return null;
+                    },
+                  );
+                }),
+                SizedBox(
+                  height: 15.h,
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                BlocBuilder<RegisterBloc, RegisterState>(
+                    builder: (context, state) {
+                  return MyFormField(
+                    controller: _internationalAccountNumController,
+                    type: TextInputType.text,
+                    hint: "SAxxxxxx",
+                    maxLines: 1,
+                    readonly: false,
+                    title: AppStrings.internatAccNum,
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      if (!value.startsWith('SA')) {
+                        return 'it should start with SA';
+                      }
+                      return null;
+                    },
+                  );
+                }),
+                SizedBox(
+                  height: 15.h,
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                BlocBuilder<RegisterBloc, RegisterState>(
+                    builder: (context, state) {
+                  return MyFormField(
+                    controller: _accountNumberController,
+                    type: TextInputType.number,
+                    hint: "xxxxxxxxx",
+                    maxLines: 1,
+                    readonly: false,
+                    title: AppStrings.accNum,
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      return null;
+                    },
+                  );
+                }),
+                SizedBox(
+                  height: 15.h,
+                ),
                 Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                   Text(AppStrings.agreeTermAndConditions,
                       style: regularStyle()),
@@ -264,6 +335,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   email: _emailController.text,
                                   password: _passwordController.text,
                                   phone: _phoneController.text,
+                                  bankName: _bankNameController.text,
+                                  internatAccNum:
+                                      _internationalAccountNumController.text,
+                                  accNum: _accountNumberController.text,
                                 ));
                               }
                               if (_isChecked == false) {
@@ -278,11 +353,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   listener: (BuildContext context, RegisterState state) {
                     if (state.isSuccess) {
                       navigatePushNamed(
-                          context: context,
-                          route: Routes.otpScreen,
-                          arg: {'email': _emailController.text});
-                      BlocProvider.of<OtpBloc>(context)
-                          .add(ResendOTP(email: _emailController.text));
+                        context: context,
+                        route: Routes.otpScreen,
+                      );
+                      CacheHelper.saveData(
+                          key: 'email', value: _emailController.text);
+                      CacheHelper.saveData(key: 'screen', value: 'register');
                     }
                   },
                 ),

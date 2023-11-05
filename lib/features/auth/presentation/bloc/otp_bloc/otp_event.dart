@@ -25,3 +25,7 @@ class ResetPassOtp extends OtpEvent {
   final String pass;
   ResetPassOtp({required this.email, required this.otp, required this.pass});
 }
+
+class SubmitOtpResetPass extends OtpEvent {
+  SubmitOtpResetPass();
+}
