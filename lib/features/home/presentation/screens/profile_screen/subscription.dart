@@ -93,7 +93,7 @@ int? daysUntilExpiry = CacheHelper.getData(key: 'daysUntilExpiry');
                         style: boldStyle(fontSize: 30.h),
                       ),
                       Text(
-                        "تارخ الانتهاء  $datePart",
+                        "تاريخ الانتهاء  $datePart",
                         style: boldStyle(fontSize: 30.h),
                       ),
                     ],
