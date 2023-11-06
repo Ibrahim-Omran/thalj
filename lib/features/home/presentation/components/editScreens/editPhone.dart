@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -67,7 +66,9 @@ class _EditPhoneProState extends State<EditPhonePro> {
                           if (value!.isEmpty) {
                             return AppStrings.vaildForm;
                           }
-
+                          if (value.length != 11 || !RegExp(r'^[0-9]+$').hasMatch(value)) {
+                            return AppStrings.phoneNumber;
+                          }
                           return null;
                         },
                       );

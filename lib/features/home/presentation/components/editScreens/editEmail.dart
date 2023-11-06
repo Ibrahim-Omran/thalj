@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -64,12 +63,13 @@ class _EditEmailProState extends State<EditEmailPro> {
                         title: AppStrings.editEmail,
                         hint: AppStrings.email,
                         vaild: (value) {
-                          if (value!.isEmpty) {
-                            return AppStrings.vaildForm;
-                          }
-
-                          return null;
-                        },
+    if (value!.isEmpty) {
+    return AppStrings.vaildForm;
+    }
+    if (!value.contains("@")) {
+    return AppStrings.vailEmailForm;
+    }
+    return null;}
                       );
                     }),
                 SizedBox(height: 20.h,),

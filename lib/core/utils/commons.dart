@@ -26,3 +26,13 @@ void navigatePushReplacement({
     ),
   );
 }
+
+void navigateAndKill({
+  required BuildContext context,
+  required String route,
+  dynamic arg,
+}) {
+  Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(
+    builder: (context) => appRoutes(route, arg),
+  ), (route) => false);
+}

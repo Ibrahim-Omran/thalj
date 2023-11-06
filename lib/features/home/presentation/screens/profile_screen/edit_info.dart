@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/core/utils/app_text_style.dart';
 import 'package:thalj/core/widgets/back_arrow.dart';
+import 'package:thalj/core/widgets/logo.dart';
 import 'package:thalj/features/home/presentation/bloc/editInfo/editInfo_state.dart';
 import 'package:thalj/features/home/presentation/components/editScreens/editEmail.dart';
 
@@ -42,6 +43,7 @@ class EditInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+
           const Padding(
             padding: EdgeInsets.only(top: 10.0),
             child: Row(
@@ -51,6 +53,7 @@ class EditInfo extends StatelessWidget {
               ],
             ),
           ),
+          const Center(child: LogoWidget()),
           SizedBox(
             height: 40.h,
           ),

@@ -6,13 +6,16 @@ sealed class OtpState {}
 final class OtpInitial extends OtpState {}
 
 final class OtpLoading extends OtpState {
-  final int? time;
-  OtpLoading({this.time});
+  OtpLoading();
 }
 
 class OtpSuccessRegister extends OtpState {
   final String message;
   OtpSuccessRegister({required this.message});
+}
+
+class OtpRessendSuccessRegister extends OtpState {
+  OtpRessendSuccessRegister();
 }
 
 class OtpSendEmailSuccess extends OtpState {

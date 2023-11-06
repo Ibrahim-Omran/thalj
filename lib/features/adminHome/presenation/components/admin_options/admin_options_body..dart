@@ -102,18 +102,11 @@ class AdminOptionsBody extends StatelessWidget {
             height: 30,
           ),
           InkWell(
-            onTap: () async{
+            onTap: () {
 
-              await CacheHelper.clearData('adminToken').then((value) {
-                value = true;
-                if (value) {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    Routes.signIN,
-                        (route) => false,
-                  );
-                }
-              });
+               CacheHelper.clearData('adminToken');
+              navigateAndKill(context: context, route: Routes.signIN);
+
             },
             child: Container(
               margin: const EdgeInsets.all(10),
@@ -140,4 +133,5 @@ class AdminOptionsBody extends StatelessWidget {
       ),
     );
   }
+
 }

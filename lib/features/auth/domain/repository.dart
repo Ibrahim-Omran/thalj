@@ -70,15 +70,17 @@ class AuthRepository {
   }
 
   Future<bool> sendOTPToEmail(String email) async {
-    if (result == false) {
+    if (await result == false) {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
       return Future.value(false);
     }
-    return await authRemoteDataSource.sendOTPToEmail(email);
+    var isSended =authRemoteDataSource.sendOTPToEmail(email);
+
+    return await isSended;
   }
 
   Future<bool> sendOTPWithEmail(String email, String otp) async {
-    if (result == false) {
+    if (await result == false) {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
       return Future.value(false);
     }
@@ -86,15 +88,16 @@ class AuthRepository {
   }
 
   Future<bool> sendOTPToEmailReset(String email) async {
-    if (result == false) {
+    if (await result == false) {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
       return Future.value(false);
     }
-    return await authRemoteDataSource.sendOTPToEmailReset(email);
+    var sened= authRemoteDataSource.sendOTPToEmailReset(email);
+    return sened ;
   }
 
   Future<bool> sendOTPResetPass(String email, String otp, String pass) async {
-    if (result == false) {
+    if (await result == false) {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
       return Future.value(false);
     }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,7 +53,7 @@ class _EditPasswordProState extends State<EditPasswordPro> {
                     BackArrow(),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 BlocBuilder<EditInfoBloc, EditInfoState>(
                     builder: (context, state) {
                   return MyFormField(
@@ -80,9 +79,14 @@ class _EditPasswordProState extends State<EditPasswordPro> {
                         return AppStrings.vailpassForm;
                       }
                       if (!value.contains(RegExp(r'[A-Z]'))) {
-                        return 'Password must contain at least one capital letter';
+                        return AppStrings.vailpassForm1;
                       }
-
+                      if (!value.contains(RegExp(r'[A-Z]'))) {
+                        return 'يجب وجود على الاقل حرف كبير';
+                      }
+                      if (value.replaceAll(RegExp(r'[^0-9]'), '').length < 2) {
+                        return 'يجب وجود على الأقل رقمين';
+                      }
                       return null;
                     },
                   );
@@ -110,15 +114,7 @@ class _EditPasswordProState extends State<EditPasswordPro> {
                     title: AppStrings.confirmPassword,
                     hint: 'تآكيد كلمه المرور',
                     vaild: (value) {
-                      if (value!.isEmpty) {
-                        return AppStrings.vaildForm;
-                      }
-                      if (value.length < 8) {
-                        return AppStrings.vailpassForm;
-                      }
-                      if (!value.contains(RegExp(r'[A-Z]'))) {
-                        return 'Password must contain at least one capital letter';
-                      }
+
                       if (value != _passwordController.text) {
                         return AppStrings
                             .vailConfirmPassForm; // Error message for password mismatch
@@ -130,7 +126,7 @@ class _EditPasswordProState extends State<EditPasswordPro> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Spacer(),
+                const Spacer(),
                 BlocConsumer<EditInfoBloc, EditInfoState>(
                     builder: (context, state) {
                   return state.isSubmitting

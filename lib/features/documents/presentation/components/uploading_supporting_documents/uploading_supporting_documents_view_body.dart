@@ -11,7 +11,6 @@ import 'package:thalj/features/documents/presentation/bloc/document_checking_blo
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_text_style.dart';
-import '../../../../../core/widgets/back_arrow.dart';
 import 'custom_container.dart';
 
 class UploadingSupportingDocumentsViewBody extends StatefulWidget {
@@ -97,7 +96,7 @@ class _UploadingSupportingDocumentsViewBodyState
         if (state is DocumentUploadFailed) {
 
         } else if (state is DocumentCheckingSuccess) {
-          navigatePushReplacement(context: context, route: Routes.signIN);
+          navigateAndKill(context: context, route: Routes.signIN);
 
         }
       },
@@ -126,12 +125,7 @@ class _UploadingSupportingDocumentsViewBodyState
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            BackArrow(),
-                          ],
-                        ),
+
                         const Center(
                           child: LogoWidget(),
                         ),

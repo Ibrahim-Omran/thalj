@@ -15,6 +15,7 @@ import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_text_style.dart';
+import '../../../../../core/widgets/logo.dart';
 import '../../../../documents/presentation/components/uploading_supporting_documents/custom_container.dart';
 import '../../bloc/paySubscription/paySubscription-event.dart';
 
@@ -68,17 +69,21 @@ int? daysUntilExpiry = CacheHelper.getData(key: 'daysUntilExpiry');
               BackArrow(),
             ],
           ),
+          const Center(child: LogoWidget()),
+
           SingleChildScrollView(
             child: status == "Accepted"
                 ? Column(
               children: [
 
 
-                SizedBox(height: 250.h,),
+
                 Center(
                   child: Column(
 
+
                     children: [
+
                       Text(
                         "الحساب مفعل",
                         style: boldStyle(fontSize: 30.h),
@@ -88,7 +93,7 @@ int? daysUntilExpiry = CacheHelper.getData(key: 'daysUntilExpiry');
                         style: boldStyle(fontSize: 30.h),
                       ),
                       Text(
-                        "تارخ الانتهاء  ${datePart}",
+                        "تارخ الانتهاء  $datePart",
                         style: boldStyle(fontSize: 30.h),
                       ),
                     ],
@@ -99,7 +104,7 @@ int? daysUntilExpiry = CacheHelper.getData(key: 'daysUntilExpiry');
                 : status  == "Waiting"
                 ? Column(
               children: [
-                SizedBox(height: 250.h,),
+
                 Center(
                   child: Text(
                     "جاري التحقق من الفاتورة",
@@ -110,7 +115,7 @@ int? daysUntilExpiry = CacheHelper.getData(key: 'daysUntilExpiry');
             )
                 : Column(
               children: [
-                SizedBox(height: 150.h,),
+
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

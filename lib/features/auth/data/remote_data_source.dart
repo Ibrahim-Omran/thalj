@@ -165,12 +165,10 @@ class AuthRemoteDataSource {
         }
       } else {
         // Login failed
-        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
-        showToast(
-          text: errorMessageModel.statusMessage,
-          state: ToastStates.error,
-        );
+        if (kDebugMode) {
+          print(response.body);
+        }
+
       }
     } catch (e) {
       if (kDebugMode) {
@@ -187,23 +185,30 @@ class AuthRemoteDataSource {
         Uri.parse(
           '${AppStrings.apiLink}drivers/resend-otp',
         ),
-        body: jsonEncode({'email': email}),
+        body: ({'email': email}),
       );
-      if (response.statusCode == 200) {
-        print('Done Successfully 1');
+      if (kDebugMode) {
+        print(email  );
+      }
+      if (response.statusCode == 201) {
+        if (kDebugMode) {
+          print(response.body);
+        }
+
         return true;
       } else {
-        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
-        showToast(
-          text: errorMessageModel.statusMessage,
-          state: ToastStates.error,
-        );
+        if (kDebugMode) {
+          print(response.body);
+        }
+
+
         return false;
       }
     } catch (e) {
-      print(
+      if (kDebugMode) {
+        print(
           "otpppp To Mail failed code: ${e.hashCode} runtime${e.runtimeType}");
+      }
       return false;
     }
   }
@@ -211,7 +216,9 @@ class AuthRemoteDataSource {
   Future<bool> sendOTPWithEmail(String email, String otp) async {
     try {
       var registerToken = CacheHelper.getData(key: 'registerToken');
-      print('register Token $registerToken');
+      if (kDebugMode) {
+        print('register Token $registerToken');
+      }
       final response =
           await http.post(Uri.parse('${AppStrings.apiLink}drivers/verify'),
               body: jsonEncode({
@@ -223,22 +230,23 @@ class AuthRemoteDataSource {
             'Accept': '*/*',
             'Authorization': 'Bearer $registerToken',
           });
-      print("Helllooooooooooo Hereeeeeee");
       if (response.statusCode == 200) {
-        print('Done Successfully 2');
+        if (kDebugMode) {
+          print(response.body);
+        }
         return true;
       } else {
-        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
-        showToast(
-          text: errorMessageModel.statusMessage,
-          state: ToastStates.error,
-        );
+        if (kDebugMode) {
+          print(response.body);
+        }
+
         return false;
       }
     } catch (e) {
-      print(
+      if (kDebugMode) {
+        print(
           "otpppp With Mail failed code: ${e.hashCode} runtime${e.runtimeType} ");
+      }
       return false;
     }
   }
@@ -250,21 +258,22 @@ class AuthRemoteDataSource {
         body: {"email": email},
       );
       if (response.statusCode == 200) {
-        print('Done Successfully 3');
+        if (kDebugMode) {
+          print(response.body);
+        }
         return true;
       } else {
-        print("Holaaaaa");
-        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
-        showToast(
-          text: errorMessageModel.statusMessage,
-          state: ToastStates.error,
-        );
+        if (kDebugMode) {
+          print(response.body);
+        }
+
         return false;
       }
     } catch (e) {
-      print(
+      if (kDebugMode) {
+        print(
           "otpppp To Mail Reset failed code: ${e.hashCode} runtime${e.runtimeType}");
+      }
       return false;
     }
   }
@@ -280,20 +289,22 @@ class AuthRemoteDataSource {
         },
       );
       if (response.statusCode == 200) {
-        print('Done Successfully 4');
+        if (kDebugMode) {
+          print(response.body);
+        }
         return true;
       } else {
-        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
-        showToast(
-          text: errorMessageModel.statusMessage,
-          state: ToastStates.error,
-        );
+        if (kDebugMode) {
+          print(response.body);
+        }
+
         return false;
       }
     } catch (e) {
-      print(
+      if (kDebugMode) {
+        print(
           "otpppp Reset Pass failed code: ${e.hashCode} runtime${e.runtimeType}");
+      }
       return false;
     }
   }

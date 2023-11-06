@@ -20,7 +20,7 @@ import '../components/text_filed.dart';
 class OwnerScreen extends StatefulWidget {
   const OwnerScreen({super.key});
 
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
   @override
   State<OwnerScreen> createState() => _OwnerScreenState();
 }
@@ -115,7 +115,7 @@ class _OwnerScreenState extends State<OwnerScreen> {
                   },
                   listener: (BuildContext context, AdminLoginState state) {
                     if (state.isSuccess) {
-                      navigatePushReplacement(
+                      navigateAndKill(
                           context: context, route: Routes.adminOptionsScreen);
                       showToast(
                           text: AppStrings.welcome, state: ToastStates.success);

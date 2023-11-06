@@ -15,13 +15,12 @@ import '../../domain/repository.dart';
 import '../bloc/register_bloc/bloc_register.dart';
 import '../bloc/register_bloc/bloc_register_events.dart';
 import '../bloc/register_bloc/bloc_register_states.dart';
-import '../components/phone_form_field.dart';
 import '../components/text_filed.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -130,8 +129,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 BlocBuilder<RegisterBloc, RegisterState>(
                     builder: (context, state) {
-                  return PhoneForm(
+                  return MyFormField(
                     controller: _phoneController,
+                    type: TextInputType.phone,
+                    hint: '000 000 000',
+                    maxLines: 1,
+                    readonly: false,
+                    title: AppStrings.phoneNumber,
+                    vaild: (value) {
+                      if (value!.isEmpty) {
+                        return AppStrings.vaildForm;
+                      }
+                      if (value.length != 11 || !RegExp(r'^[0-9]+$').hasMatch(value)) {
+                        return AppStrings.phoneNumber;
+                      }
+                      return null;
+                    },
                   );
                 }),
                 SizedBox(
@@ -186,7 +199,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         return AppStrings.vailpassForm;
                       }
                       if (!value.contains(RegExp(r'[A-Z]'))) {
-                        return 'Password must contain at least one capital letter';
+                        return AppStrings.vailpassForm1;
+                      }
+                      if (!value.contains(RegExp(r'[A-Z]'))) {
+                        return 'يجب وجود على الاقل حرف كبير';
+                      }
+                      if (value.replaceAll(RegExp(r'[^0-9]'), '').length < 2) {
+                        return 'يجب وجود على الأقل رقمين';
                       }
                       return null;
                     },
@@ -218,16 +237,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (value!.isEmpty) {
                         return AppStrings.vaildForm;
                       }
-                      if (value.length < 8) {
-                        return AppStrings.vailpassForm;
-                      }
-                      if (!value.contains(RegExp(r'[A-Z]'))) {
-                        return 'Password must contain at least one capital letter';
-                      }
                       if (value != _passwordController.text) {
                         return AppStrings
                             .vailConfirmPassForm; // Error message for password mismatch
                       }
+
                       return null;
                     },
                   );
@@ -272,7 +286,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         return AppStrings.vaildForm;
                       }
                       if (!value.startsWith('SA')) {
-                        return 'it should start with SA';
+                        return 'يجب ان يبدا ب SA';
                       }
                       return null;
                     },

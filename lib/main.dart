@@ -34,9 +34,7 @@ void main() async {
     widget = const HomeScreen();
   } else if (adminToken != null) {
     widget = const AdminOptionsScreen();
-  } else if (adminToken == null && loginToken == null) {
-    widget = const SplashScreen(animateBottom: true);
-  } else {
+  }  else {
     widget = const SplashScreen(animateBottom: true);
   }
 
@@ -44,8 +42,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  late final Widget startWidget;
-  MyApp(this.startWidget, {Key? key}) : super(key: key);
+   final Widget startWidget;
+  const MyApp(this.startWidget, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

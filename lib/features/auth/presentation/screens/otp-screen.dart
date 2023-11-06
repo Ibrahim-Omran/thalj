@@ -12,6 +12,8 @@ import 'package:thalj/core/utils/commons.dart';
 import 'package:thalj/core/utils/toast.dart';
 import 'package:thalj/features/auth/presentation/bloc/otp_bloc/otp_bloc.dart';
 
+import '../../../../core/widgets/back_arrow.dart';
+
 // ignore: must_be_immutable
 class OTPScreen extends StatelessWidget {
   OTPScreen({super.key});
@@ -28,11 +30,10 @@ class OTPScreen extends StatelessWidget {
         child: BlocConsumer<OtpBloc, OtpState>(
           listener: (context, state) {
             if (state is OtpSuccessRegister) {
-              navigatePushReplacement(
+              navigateAndKill(
                   context: context,
                   route: Routes.uploadingSupportingDocumentsScreen);
             } else if (state is OtpError) {
-              print('Error in otp screen when otp Error');
               showToast(
                 text: state.message,
                 state: ToastStates.error,
@@ -40,69 +41,73 @@ class OTPScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  child: Image.asset(AppAssets.verification),
-                ),
-                Text(
-                  AppStrings.verification,
-                  style: boldStyle(),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                OtpTextField(
-                  borderColor: AppColors.primary,
-                  borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                  borderWidth: 1,
-                  disabledBorderColor: AppColors.primary,
-                  enabledBorderColor: AppColors.primary,
-                  focusedBorderColor: AppColors.darkRed,
-                  showFieldAsBox: true,
-                  fieldWidth: 50,
-                  onSubmit: (value) {
-                    print('vallll$value');
-                    otp = value;
-                    if (screen == 'register') {
-                      BlocProvider.of<OtpBloc>(context)
-                          .add(SubmitOTP(email: email, otp: value));
-                    } else {
-                      BlocProvider.of<OtpBloc>(context)
-                          .add(SubmitOtpResetPass());
-                      navigatePushReplacement(
-                        context: context,
-                        route: Routes.resetPass,
-                      );
-                    }
-                    CacheHelper.saveData(key: 'otp', value: value);
-                  },
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          BlocProvider.of<OtpBloc>(context)
-                              .add(SendOTP(email: email));
-                        },
-                        child: Text(
-                          "اعد ارسال الرمز",
-                          style:
-                              regularStyle().copyWith(color: AppColors.primary),
-                        )),
-                    Text(
-                      AppStrings.dontReceive,
-                      style: regularStyle(),
-                    )
-                  ],
-                )
-              ],
+            return Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                   const Row(mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      BackArrow(),
+                    ],
+                  ),
+
+                  Image.asset(AppAssets.verification),
+                  Text(
+                    AppStrings.verification,
+                    style: boldStyle(),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  OtpTextField(
+                    borderColor: AppColors.primary,
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                    borderWidth: 1,
+                    disabledBorderColor: AppColors.primary,
+                    enabledBorderColor: AppColors.primary,
+                    focusedBorderColor: AppColors.darkRed,
+                    showFieldAsBox: true,
+                    fieldWidth: 50,
+                    onSubmit: (value) {
+                      otp = value;
+                      if (screen == 'register') {
+                        BlocProvider.of<OtpBloc>(context)
+                            .add(SubmitOTP(email: email, otp: value));
+                      } else {
+
+                        navigateAndKill(
+                            context: context,
+                            route: Routes.resetPass,);
+                      }
+                      CacheHelper.saveData(key: 'otp', value: value);
+                    },
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  state is OtpLoading? const Center(child: CircularProgressIndicator.adaptive()):  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                       TextButton(
+                          onPressed: () {
+                            BlocProvider.of<OtpBloc>(context)
+                                .add(SendOTP(email: email));
+                          },
+                          child: Text(
+                            "اعد ارسال الرمز",
+                            style:
+                                regularStyle().copyWith(color: AppColors.primary),
+                          )),
+                      Text(
+                        AppStrings.dontReceive,
+                        style: regularStyle(),
+                      )
+                    ],
+                  )
+                ],
+              ),
             );
           },
         ),

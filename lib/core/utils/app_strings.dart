@@ -106,7 +106,8 @@ class AppStrings {
   static const String vaildForm = 'يجب ملئ الحقل';
   static const String vaildPhoneForm = 'يجب ادخال رقم صحيح';
   static const String vailEmailForm = 'يجب ادخال ايميل صحيح';
-  static const String vailpassForm = 'يجب ادخال كلمة اكثر من ٦';
+  static const String vailpassForm = 'يجب ادخال كلمة اكثر من ٨';
+  static const String vailpassForm1 = 'يجب ادخال على الاقل حرف كبير';
   static const String vailConfirmPassForm = 'كلمة المرور غير متطابقة';
 
   //productDetails

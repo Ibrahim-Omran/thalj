@@ -19,7 +19,8 @@ import '../components/text_filed.dart';
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final  _formKey = GlobalKey<FormState>();
+
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -131,7 +132,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         return AppStrings.vailpassForm;
                       }
                       if (!value.contains(RegExp(r'[A-Z]'))) {
-                        return 'Password must contain at least one capital letter';
+                        return 'يجب وجود على الاقل حرف كبير';
+                      }
+                      if (value.replaceAll(RegExp(r'[^0-9]'), '').length < 2) {
+                        return 'يجب وجود على الأقل رقمين';
                       }
                       return null;
                     },

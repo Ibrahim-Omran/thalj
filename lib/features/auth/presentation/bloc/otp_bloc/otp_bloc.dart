@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:thalj/core/utils/toast.dart';
 import 'package:thalj/features/auth/domain/repository.dart';
 
 part 'otp_event.dart';
@@ -14,42 +15,44 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         var isSended =
             await _authRepository.sendOTPWithEmail(event.email, event.otp);
         if (isSended) {
-          emit(OtpSuccessRegister(message: 'OTP is correct'));
+          emit(OtpSuccessRegister(message: 'الرمز صحيح'));
         } else {
-          emit(OtpError(message: 'OTP is not correct'));
+          emit(OtpError(message: 'الرمز خطا'));
         }
       } else if (event is SendOTP) {
         emit(OtpLoading());
         var isSended = await _authRepository.sendOTPToEmail(event.email);
 
+
         if (isSended) {
-          emit(OtpSuccessRegister(message: 'OTP is sended'));
+          showToast(text: "تم ارسال الرمز", state: ToastStates.success);
+          emit(OtpRessendSuccessRegister());
         } else {
-          emit(OtpError(message: 'OTP is not sended Please Check your Email'));
+          emit(OtpError(message: 'لم يتم ارسال الرمز تحقق من الايميل'));
         }
       } else if (event is ResendOTP) {
-        emit(OtpLoading(time: 2));
+        emit(OtpLoading());
         var isSended = await _authRepository.sendOTPToEmailReset(event.email);
+
         if (isSended) {
-          emit(OtpSendEmailSuccess(message: 'OTP is sended'));
+          emit(OtpSendEmailSuccess(message: 'تم ارسال الرمز'));
         } else {
-          emit(OtpError(message: 'OTP is not sended Please Check your Email'));
+          emit(OtpError(message: 'لم يتم ارسال الرمز تحقق من الايميل'));
         }
       } else if (event is SubmitOtpResetPass) {
-        emit(OtpLoading());
 
-        emit(OtpSendEmailSuccess(message: 'OTP is sended'));
+        emit(OtpSendEmailSuccess(message: 'تم ارسال الرمز'));
       } else if (event is ResetPassOtp) {
         emit(OtpLoading());
         var isSended = await _authRepository.sendOTPResetPass(
             event.email, event.otp, event.pass);
         if (isSended) {
           emit(OtpSuccessResetPass(
-              message: 'Your Password has Changed Successfully'));
+              message: 'تم تغير كلمة المرور بنجاح'));
         } else {
           emit(OtpError(
               message:
-                  'OTP or Email is not Correct Please Check your OTP or Email'));
+                  'الرمز غير صحيح برجاء المحاولة مرة اخرى'));
         }
       }
     });
