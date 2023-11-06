@@ -1,14 +1,12 @@
 import 'package:image_picker/image_picker.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:thalj/features/documents/data/remote_data.dart';
 
-import '../../../core/utils/app_strings.dart';
-import '../../../core/utils/toast.dart';
+import '../../../core/errors/internetCheck.dart';
+
 
 class DocumentRepository {
   final DocumentsRemoteDataSource documentDataSource;
   DocumentRepository(this.documentDataSource);
-  Future<bool> result = InternetConnectionChecker().hasConnection;
 
   Future<bool> uploadDocuments({
     required XFile proofOfIdentityFront,
@@ -19,9 +17,8 @@ class DocumentRepository {
     required XFile transferDocument,
     required XFile? commercialRegister,
   }) async {
-    if (await result == false) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+    await NetworkInfoImpl().checkInternet();
+
     var isUploaded = await documentDataSource.uploadProofDocuments(
       proofOfIdentityFront: proofOfIdentityFront,
       proofOfIdentityBack: proofOfIdentityBack,

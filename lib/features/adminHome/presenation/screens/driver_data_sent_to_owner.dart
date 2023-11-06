@@ -23,7 +23,7 @@ class DriverDataSentToOwner extends StatelessWidget {
       body: BlocProvider(
         create: (context) => AcceptRefuseDriversBloc(
             adminRepository: context.read<AdminRepository>(),),
-        child: BlocBuilder<AcceptRefuseDriversBloc, AcceptRefuseDriversState>(
+        child: BlocConsumer<AcceptRefuseDriversBloc, AcceptRefuseDriversState>(
           builder: (context, state) {
             return state is AcceptRefuseDriversLoading
                 ? const Center(
@@ -87,8 +87,7 @@ class DriverDataSentToOwner extends StatelessWidget {
                                   BlocProvider.of<AcceptRefuseDriversBloc>(
                                           context)
                                       .add(AcceptDrivers(driverId: args.id!));
-                                  navigatePushReplacement(
-                                      context: context, route: Routes.driverDoc);
+
                                 },
                                 child: Container(
                                   width: 351.w,
@@ -111,12 +110,12 @@ class DriverDataSentToOwner extends StatelessWidget {
                                       MaterialStateProperty.all<Color>(AppColors
                                           .darkRed), // Set the background color to blue
                                 ),
-                                onPressed: () {
+                                onPressed: () async{
                                   BlocProvider.of<AcceptRefuseDriversBloc>(
                                           context)
                                       .add(RefuseDrivers(driverId: args.id!));
-                                  navigatePushReplacement(
-                                      context: context, route: Routes.driverDoc);
+
+
                                 },
                                 child: SizedBox(
                                   width: 351.w,
@@ -134,7 +133,13 @@ class DriverDataSentToOwner extends StatelessWidget {
                       ),
                     ),
                   );
-          },
+          }, listener: (BuildContext context, AcceptRefuseDriversState state) {
+          if(state is AcceptDriversSuccess || state is RefuseDriversSuccess){
+            navigatePushReplacement(
+                context: context, route: Routes.adminOptionsScreen);
+          }
+
+        },
         ),
       ),
     );

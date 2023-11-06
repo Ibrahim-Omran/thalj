@@ -1,11 +1,10 @@
 import 'dart:io';
 
 
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+import '../../../core/errors/internetCheck.dart';
 import '../../../core/functions/result.dart';
-import '../../../core/utils/app_strings.dart';
-import '../../../core/utils/toast.dart';
+
 import '../data/remote_data_source.dart';
 import 'models/accepted_OrderModel.dart';
 import 'models/one_order_model.dart';
@@ -16,7 +15,6 @@ class HomeRepository {
   HomeRepository(
     this.homeRemoteDataSource,
   );
-  Future <bool> result =  InternetConnectionChecker().hasConnection;
 
   Future<bool> sendOffer({
     required String name,
@@ -24,10 +22,8 @@ class HomeRepository {
     required String phone,
     required String id,
   }) async {
-    if(await result ==false)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+    await NetworkInfoImpl().checkInternet();
+
     bool isSendOffer = false;
 
     isSendOffer = await homeRemoteDataSource.sendOffer(
@@ -39,24 +35,24 @@ class HomeRepository {
     return isSendOffer;
   }
 
-  Future<List<AcceptedOrdersModel>> getOffer() async {
-    if(await result ==false)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
+  Future<Result<List<AcceptedOrdersModel>>> getOffer() async {
+    await NetworkInfoImpl().checkInternet();
+
+    try{
+      Result<List<AcceptedOrdersModel>> ordersResult =
+      await homeRemoteDataSource.getAcceptedOffers();
+      return ordersResult;
+    } catch(e){
+      return Result.failure("An error occurred");
     }
-    List<AcceptedOrdersModel> data =
-        await homeRemoteDataSource.getAcceptedOffers();
-    return data;
   }
 
 
 
   Future<Result<List<OrdersModel>>> getOrders() async {
-    if(await result ==false)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
-   try{
+    await NetworkInfoImpl().checkInternet();
+
+    try{
      Result<List<OrdersModel>> ordersResult =
      await homeRemoteDataSource.getDriversOrders();
      return ordersResult;
@@ -69,19 +65,15 @@ class HomeRepository {
 
   Future<bool> paySubscription({required File billPhoto,
   }) async {
-    if(await result ==false)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+    await NetworkInfoImpl().checkInternet();
+
     bool isPaid = await homeRemoteDataSource.paySubscription(billPhoto: billPhoto);
     return isPaid;
   }
 
   Future<OneOrderModel> getOneOrdersInfo(String id) async {
-    if(await result ==false)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+    await NetworkInfoImpl().checkInternet();
+
     OneOrderModel oneOrdersData = await homeRemoteDataSource.getDriversOneOrderInfo(id);
 
     return oneOrdersData;
@@ -93,10 +85,8 @@ class HomeRepository {
     required String name,
 
   }) async {
-    if(await result ==false)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+    await NetworkInfoImpl().checkInternet();
+
     bool isEdit = false;
 
     isEdit = await homeRemoteDataSource.editName(
@@ -112,10 +102,8 @@ Future<bool> editEmail({
   required String email,
 
 }) async {
-  if(await result ==false)
-  {
-    showToast(text: AppStrings.noInternet, state: ToastStates.error);
-  }
+  await NetworkInfoImpl().checkInternet();
+
   bool isSEdit = false;
 
   isSEdit= await homeRemoteDataSource.editEmail(
@@ -132,10 +120,8 @@ Future<bool> editEmail({
     required String phone,
 
   }) async {
-    if(await result ==false)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+    await NetworkInfoImpl().checkInternet();
+
     bool isSEdit = false;
 
     isSEdit = await homeRemoteDataSource.editPhone(
@@ -150,10 +136,8 @@ Future<bool> editEmail({
     required String password,
 
   }) async {
-    if(await result ==false)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+    await NetworkInfoImpl().checkInternet();
+
     bool isSEdit = false;
 
     isSEdit = await homeRemoteDataSource.editPassword(

@@ -24,7 +24,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         var isSended = await _authRepository.sendOTPToEmail(event.email);
 
 
-        if (isSended) {
+        if (isSended!) {
           showToast(text: "تم ارسال الرمز", state: ToastStates.success);
           emit(OtpRessendSuccessRegister());
         } else {
@@ -34,7 +34,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         emit(OtpLoading());
         var isSended = await _authRepository.sendOTPToEmailReset(event.email);
 
-        if (isSended) {
+        if (isSended!) {
           emit(OtpSendEmailSuccess(message: 'تم ارسال الرمز'));
         } else {
           emit(OtpError(message: 'لم يتم ارسال الرمز تحقق من الايميل'));
@@ -46,7 +46,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         emit(OtpLoading());
         var isSended = await _authRepository.sendOTPResetPass(
             event.email, event.otp, event.pass);
-        if (isSended) {
+        if (isSended!) {
           emit(OtpSuccessResetPass(
               message: 'تم تغير كلمة المرور بنجاح'));
         } else {

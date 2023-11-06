@@ -63,7 +63,7 @@ class HomeRemoteDataSource {
     }
   }
 
-  Future<List<AcceptedOrdersModel>> getAcceptedOffers() async {
+  Future<Result<List<AcceptedOrdersModel>>> getAcceptedOffers() async {
     final response = await http
         .get(Uri.parse('${AppStrings.apiLink}drivers/orders'), headers: {
       'Content-Type': 'application/json',
@@ -74,19 +74,27 @@ class HomeRemoteDataSource {
     try {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        for (var i in data) {
-          orderData.add(AcceptedOrdersModel.fromJson(i));
+
+        if (data is List) {
+          for (var item in data) {
+            orderData.add(AcceptedOrdersModel.fromJson(item));
+          }
+          return Result.success(orderData);
+        } else if (data is Map && data.containsKey("msg")) {
+          final errorMessage = data["msg"];
+          return Result.failure(errorMessage);
         }
       } else {
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-        ErrorMessageModel.fromJson(jsonResponse);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        return Result.failure(errorMessageModel.statusMessage);
       }
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
     }
-    return orderData;
+    return Result.failure("An error occurred");
   }
 
   Future<Result<List<OrdersModel>>> getDriversOrders() async {

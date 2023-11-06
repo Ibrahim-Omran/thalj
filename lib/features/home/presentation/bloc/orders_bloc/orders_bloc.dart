@@ -26,8 +26,10 @@ class GetOrdersDataBloc extends Bloc<GetOrdersDataEvent, GetOrdersDataState> {
       },
       failure: (errorMessage) {
       emit(GetOrdersDataFailure(errorMessage));
-      }, );
-        });
+      },
+      );
+        }
+        );
 
     on<GetOneOrdersData>((event, emit) async {
       try{

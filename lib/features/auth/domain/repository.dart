@@ -1,9 +1,7 @@
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:thalj/core/errors/internetCheck.dart';
 import 'package:thalj/features/auth/data/remote_data_source.dart';
 import 'package:thalj/features/auth/domain/models/login_model.dart';
 
-import '../../../core/utils/app_strings.dart';
-import '../../../core/utils/toast.dart';
 import 'models/admin_model.dart';
 import 'models/register_model.dart';
 
@@ -14,19 +12,16 @@ class AuthRepository {
     this.authRemoteDataSource,
   );
 
-  Future<bool> result = InternetConnectionChecker().hasConnection;
 
   Future<LoginModel?> login({
     required String email,
     required String password,
   }) async {
-    if (await result == false) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-      return null;
-    }
+    await NetworkInfoImpl().checkInternet();
+
 
     final LoginModel? loginModel =
-        await authRemoteDataSource.login(email: email, password: password);
+    await authRemoteDataSource.login(email: email, password: password);
     return loginModel;
   }
 
@@ -39,10 +34,7 @@ class AuthRepository {
     required String interAccNum,
     required String accNum,
   }) async {
-    if (await result == false) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-      return null;
-    }
+    await NetworkInfoImpl().checkInternet();
 
     final RegisterModel? registerModel = await authRemoteDataSource.register(
         email: email,
@@ -53,54 +45,48 @@ class AuthRepository {
         interAccNum: interAccNum,
         accNum: accNum);
     return registerModel;
+
   }
 
   Future<AdminModel?> ownerLogin({
     required String email,
     required String password,
   }) async {
-    if (await result == false) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-      return null;
-    }
+    await NetworkInfoImpl().checkInternet();
 
     final AdminModel? adminModel =
-        await authRemoteDataSource.adminLogin(email: email, password: password);
+    await authRemoteDataSource.adminLogin(email: email, password: password);
     return adminModel;
   }
 
-  Future<bool> sendOTPToEmail(String email) async {
-    if (await result == false) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-      return Future.value(false);
-    }
-    var isSended =authRemoteDataSource.sendOTPToEmail(email);
+  Future<bool?> sendOTPToEmail(String email) async {
+    await NetworkInfoImpl().checkInternet();
+
+
+    var isSended = authRemoteDataSource.sendOTPToEmail(email);
 
     return await isSended;
   }
 
   Future<bool> sendOTPWithEmail(String email, String otp) async {
-    if (await result == false) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-      return Future.value(false);
-    }
+    await NetworkInfoImpl().checkInternet();
+
+
     return await authRemoteDataSource.sendOTPWithEmail(email, otp);
   }
 
-  Future<bool> sendOTPToEmailReset(String email) async {
-    if (await result == false) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-      return Future.value(false);
-    }
+  Future<bool?> sendOTPToEmailReset(String email) async {
+    await NetworkInfoImpl().checkInternet();
+
     var sened= authRemoteDataSource.sendOTPToEmailReset(email);
     return sened ;
+
   }
 
-  Future<bool> sendOTPResetPass(String email, String otp, String pass) async {
-    if (await result == false) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-      return Future.value(false);
-    }
+  Future<bool?> sendOTPResetPass(String email, String otp, String pass) async {
+    await NetworkInfoImpl().checkInternet();
+
     return await authRemoteDataSource.sendOTPResetPass(email, otp, pass);
+
   }
 }

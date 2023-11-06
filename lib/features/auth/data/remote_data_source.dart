@@ -158,16 +158,16 @@ class AuthRemoteDataSource {
           });
 
           return adminModel;
-        } else {
-          if (kDebugMode) {
-            print('No data found in response');
-          }
         }
       } else {
         // Login failed
         if (kDebugMode) {
           print(response.body);
         }
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+            text: errorMessageModel.statusMessage, state: ToastStates.error);
 
       }
     } catch (e) {

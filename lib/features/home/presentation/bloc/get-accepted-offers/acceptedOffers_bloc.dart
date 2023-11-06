@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:thalj/core/functions/result.dart';
 
 import '../../../domain/repository.dart';
 
@@ -19,10 +20,12 @@ class AcceptedOrderBloc extends Bloc<AcceptedOffersEvent, AcceptedOrdersState> {
       Emitter<AcceptedOrdersState> emit) async {
     emit(GetOrdersDataLoading());
     var result = await homeRepository.getOffer();
-    if (result.isNotEmpty) {
-      emit(GetOrdersDataSuccess(result));
-    } else {
-      emit(GetOrdersDataFailure('error'));
-    }
+    result.handle(success: (ordersData) {
+      emit(GetOrdersDataSuccess(ordersData));
+    },
+      failure: (errorMessage) {
+        emit(GetOrdersDataFailure(errorMessage));
+      },
+    );
   }
 }

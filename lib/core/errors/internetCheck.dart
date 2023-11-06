@@ -22,5 +22,6 @@ class NetworkInfoImpl implements NetworkInfo {
     if (result == false) {
       showToast(text: AppStrings.noInternet, state: ToastStates.error);
     }
+
   }
 }

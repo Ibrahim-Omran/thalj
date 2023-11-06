@@ -95,7 +95,7 @@ class HomeBody extends StatelessWidget {
                     children: [
                       SizedBox(height: 250.h,),
 
-                       Center(child: Text("يجب تفعيل حسابك",style: regularStyle(fontSize: 20.h),)),
+                       Center(child: Text(state.errorMessage,style: regularStyle(fontSize: 20.h),)),
                     ],
                   );
                 }

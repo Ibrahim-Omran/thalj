@@ -54,7 +54,7 @@ class Offers extends StatelessWidget {
                     children: [
                       SizedBox(height: 300.h,),
 
-                      Center(child: Text( "لا يوجد عروض",style: regularStyle(fontSize: 24.h),)),
+                      Center(child: Text( state.errorMessage,style: regularStyle(fontSize: 24.h),)),
                     ],
                   );
                 }

@@ -74,30 +74,26 @@ int? daysUntilExpiry = CacheHelper.getData(key: 'daysUntilExpiry');
           SingleChildScrollView(
             child: status == "Accepted"
                 ? Column(
+
               children: [
 
 
 
-                Center(
-                  child: Column(
-
-
-                    children: [
-
-                      Text(
-                        "الحساب مفعل",
-                        style: boldStyle(fontSize: 30.h),
-                      ),
-                      Text(
-                        "متبقي لك $daysUntilExpiry يوم",
-                        style: boldStyle(fontSize: 30.h),
-                      ),
-                      Text(
-                        "تاريخ الانتهاء  $datePart",
-                        style: boldStyle(fontSize: 30.h),
-                      ),
-                    ],
-                  ),
+                Text(
+                  "الحساب مفعل",
+                  style: boldStyle(fontSize: 30.h),
+                ),
+                Text(
+                  "متبقي لك $daysUntilExpiry يوم",
+                  style: boldStyle(fontSize: 30.h),
+                ),
+                Text(
+                  "تاريخ الانتهاء  ",
+                  style: boldStyle(fontSize: 30.h),
+                ),
+                Text(
+                  datePart,
+                  style: boldStyle(fontSize: 30.h),
                 ),
               ],
             )

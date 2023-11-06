@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../../../core/local/cash_helper.dart';
 import '../../../../core/network/ErrorModel.dart';
@@ -17,10 +16,7 @@ class AdminRemoteDataSource {
 
 
   Future<List<DriverSubscriptionModel>> getDriverSubscriptions() async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if (!result) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+
     List<DriverSubscriptionModel> driverSubscriptions = [];
     try {
       http.Response response = await http.get(
@@ -53,10 +49,7 @@ class AdminRemoteDataSource {
   }
 
   Future<List<UserInvoiceModel>> getUserInvoices() async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if (!result) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+
     List<UserInvoiceModel> userSubscriptions = [];
     try {
       http.Response response = await http.get(
@@ -86,10 +79,7 @@ class AdminRemoteDataSource {
   }
 
   Future<bool> renewDrivers(String id) async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if (!result) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+
 
     var data = await http.post(
         Uri.parse(
@@ -111,10 +101,7 @@ class AdminRemoteDataSource {
   }
 
   Future<bool> renewUsersInvoices(String invoiceId, String orderId) async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if (!result) {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+
 
     var data = await http.post(
         Uri.parse(
@@ -137,11 +124,7 @@ class AdminRemoteDataSource {
   }
 
   Future<List<DriversModel>> getDriversData() async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if(!result)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+
     var data = await http.get(
         Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard'),
         headers: {
@@ -163,14 +146,10 @@ class AdminRemoteDataSource {
   Future<bool> acceptDrivers(String id) async {
 
 
-    bool result = await InternetConnectionChecker().hasConnection;
-    if(!result)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+
 
     var data = await http.patch(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard/$id'),
+        Uri.parse('${AppStrings.apiLink}dashboard/$id'),
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
@@ -191,11 +170,7 @@ class AdminRemoteDataSource {
 
 
   Future<bool> refuseDrivers(String id) async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if(!result)
-    {
-      showToast(text: AppStrings.noInternet, state: ToastStates.error);
-    }
+
     var data = await http.delete(
         Uri.parse('${AppStrings.apiLink}dashboard/$id'),
         headers: {
