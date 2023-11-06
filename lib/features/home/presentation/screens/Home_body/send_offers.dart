@@ -123,6 +123,9 @@ class _SendOfferState extends State<SendOffer> {
                           if (value!.isEmpty) {
                             return AppStrings.vaildForm;
                           }
+                          if (value.length != 11 || !RegExp(r'^[0-9]+$').hasMatch(value)) {
+                            return AppStrings.phoneNumber;
+                          }
                           return null;
                         },
                       );
