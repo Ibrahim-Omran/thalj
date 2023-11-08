@@ -53,7 +53,7 @@ class AdminRemoteDataSource {
     List<UserInvoiceModel> userSubscriptions = [];
     try {
       http.Response response = await http.get(
-          Uri.parse('http://mircle50-001-site1.atempurl.com/payment/invoices'),
+          Uri.parse('${AppStrings.apiLink}payment/invoices'),
           headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*',
@@ -83,7 +83,7 @@ class AdminRemoteDataSource {
 
     var data = await http.post(
         Uri.parse(
-            'http://mircle50-001-site1.atempurl.com/dashboard/renewDriver/$id'),
+            '${AppStrings.apiLink}dashboard/renewDriver/$id'),
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
@@ -105,7 +105,7 @@ class AdminRemoteDataSource {
 
     var data = await http.post(
         Uri.parse(
-            'http://mircle50-001-site1.atempurl.com/payment/accept/$invoiceId/$orderId'),
+            '${AppStrings.apiLink}payment/accept/$invoiceId/$orderId'),
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
@@ -126,7 +126,7 @@ class AdminRemoteDataSource {
   Future<List<DriversModel>> getDriversData() async {
 
     var data = await http.get(
-        Uri.parse('http://mircle50-001-site1.atempurl.com/dashboard'),
+        Uri.parse('${AppStrings.apiLink}dashboard'),
         headers: {
           "Content-Type": 'application/json',
           'Accept': '*/*',
