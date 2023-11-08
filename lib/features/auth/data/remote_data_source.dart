@@ -27,8 +27,10 @@ class AuthRemoteDataSource {
         final jsonResponse = jsonDecode(response.body);
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
+
           final loginModel = LoginModel.fromJson(jsonResponse);
-          CacheHelper.saveData(key: 'loginToken', value: loginModel.token);
+
+                  CacheHelper.saveData(key: 'loginToken', value: loginModel.token);
           CacheHelper.saveData(
               key: 'fullname', value: loginModel.data[0].fullname);
           CacheHelper.saveData(key: 'email', value: loginModel.data[0].email);

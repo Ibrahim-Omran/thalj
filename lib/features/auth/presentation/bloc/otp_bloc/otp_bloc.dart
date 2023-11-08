@@ -25,7 +25,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
 
 
         if (isSended!) {
-          showToast(text: "تم ارسال الرمز", state: ToastStates.success);
+          showToast(text: "The email has been sent! Сheck your Inbox or Spam ( Junk ) folder. If you do not see the email select Resend button.", state: ToastStates.success);
           emit(OtpRessendSuccessRegister());
         } else {
           emit(OtpError(message: 'لم يتم ارسال الرمز تحقق من الايميل'));
@@ -35,11 +35,14 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         var isSended = await _authRepository.sendOTPToEmailReset(event.email);
 
         if (isSended!) {
+          showToast(text: "The email has been sent! Сheck your Inbox or Spam ( Junk ) folder. If you do not see the email select Resend button.", state: ToastStates.success);
+
           emit(OtpSendEmailSuccess(message: 'تم ارسال الرمز'));
         } else {
           emit(OtpError(message: 'لم يتم ارسال الرمز تحقق من الايميل'));
         }
       } else if (event is SubmitOtpResetPass) {
+        showToast(text: "The email has been sent! Сheck your Inbox or Spam ( Junk ) folder. If you do not see the email select Resend button.", state: ToastStates.success);
 
         emit(OtpSendEmailSuccess(message: 'تم ارسال الرمز'));
       } else if (event is ResetPassOtp) {

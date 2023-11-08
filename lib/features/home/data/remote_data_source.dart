@@ -168,7 +168,7 @@ class HomeRemoteDataSource {
           print(response.reasonPhrase);
         }
         showToast(
-            text: "تم استلام الفاتورة هيتم تفعيل الحساب بعد التحقق منها",
+            text: "تم استلام الفاتورة سيتم تفعيل الحساب بعد التحقق منها",
             state: ToastStates.success);
         return true;
       } else {

@@ -35,7 +35,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(
           isSubmitting: false,
           isSuccess: true,
-          loginData: loginData, // Save the data in the state
+          loginData: loginData,
         ));
       } else {
         emit(state.copyWith(
