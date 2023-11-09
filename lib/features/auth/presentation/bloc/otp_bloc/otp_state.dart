@@ -19,8 +19,8 @@ class OtpRessendSuccessRegister extends OtpState {
 }
 
 class OtpSendEmailSuccess extends OtpState {
-  final String message;
-  OtpSendEmailSuccess({required this.message});
+
+  OtpSendEmailSuccess();
 }
 
 class OtpSuccessResetPass extends OtpState {

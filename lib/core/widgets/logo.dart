@@ -7,8 +7,8 @@ class LogoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const logoWidth = 150.0;
-    const logoHeight = 150.0;
+    const logoWidth = 100.0;
+    const logoHeight = 100.0;
 
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;

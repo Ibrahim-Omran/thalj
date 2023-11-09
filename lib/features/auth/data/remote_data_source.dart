@@ -27,10 +27,9 @@ class AuthRemoteDataSource {
         final jsonResponse = jsonDecode(response.body);
 
         if (jsonResponse['data'] != null && jsonResponse['data'].isNotEmpty) {
-
           final loginModel = LoginModel.fromJson(jsonResponse);
 
-                  CacheHelper.saveData(key: 'loginToken', value: loginModel.token);
+          CacheHelper.saveData(key: 'loginToken', value: loginModel.token);
           CacheHelper.saveData(
               key: 'fullname', value: loginModel.data[0].fullname);
           CacheHelper.saveData(key: 'email', value: loginModel.data[0].email);
@@ -170,7 +169,6 @@ class AuthRemoteDataSource {
         final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
         showToast(
             text: errorMessageModel.statusMessage, state: ToastStates.error);
-
       }
     } catch (e) {
       if (kDebugMode) {
@@ -190,7 +188,7 @@ class AuthRemoteDataSource {
         body: ({'email': email}),
       );
       if (kDebugMode) {
-        print(email  );
+        print(email);
       }
       if (response.statusCode == 201) {
         if (kDebugMode) {
@@ -203,13 +201,12 @@ class AuthRemoteDataSource {
           print(response.body);
         }
 
-
         return false;
       }
     } catch (e) {
       if (kDebugMode) {
         print(
-          "otpppp To Mail failed code: ${e.hashCode} runtime${e.runtimeType}");
+            "otpppp To Mail failed code: ${e.hashCode} runtime${e.runtimeType}");
       }
       return false;
     }
@@ -247,7 +244,7 @@ class AuthRemoteDataSource {
     } catch (e) {
       if (kDebugMode) {
         print(
-          "otpppp With Mail failed code: ${e.hashCode} runtime${e.runtimeType} ");
+            "otpppp With Mail failed code: ${e.hashCode} runtime${e.runtimeType} ");
       }
       return false;
     }
@@ -274,7 +271,7 @@ class AuthRemoteDataSource {
     } catch (e) {
       if (kDebugMode) {
         print(
-          "otpppp To Mail Reset failed code: ${e.hashCode} runtime${e.runtimeType}");
+            "otpppp To Mail Reset failed code: ${e.hashCode} runtime${e.runtimeType}");
       }
       return false;
     }
@@ -305,7 +302,7 @@ class AuthRemoteDataSource {
     } catch (e) {
       if (kDebugMode) {
         print(
-          "otpppp Reset Pass failed code: ${e.hashCode} runtime${e.runtimeType}");
+            "otpppp Reset Pass failed code: ${e.hashCode} runtime${e.runtimeType}");
       }
       return false;
     }

@@ -74,7 +74,6 @@ class ProductInformationScreen extends StatelessWidget {
                       weight: state.ordersOneData.freightInfo.weight.toString(),
                       temp: state.ordersOneData.freightInfo.temperature.toString(),
                       humidity: state.ordersOneData.freightInfo.temperature.toString(),
-                      specialMarque: 's',
                     ),
                     SizedBox(
                       height: 32.h,

@@ -46,6 +46,7 @@ class AppStrings {
   static const String myProfile = 'حسابي';
 
   static const String verification = 'التحقق';
+  static const String  checkVerifi = ' تحقق من مجلد البريد الوارد أو الرسائل الغير مرغوب فيعا ( غير الهام). إذا كنت لا ترى البريد الإلكتروني اضغط علي اعد إرسال الرمز';
   static const String dontReceive = 'لم تستلم الرمز؟';
 
   // product information
@@ -66,6 +67,8 @@ class AppStrings {
   static const String temp = 'الحراره:';
   static const String humidity = 'الرطوبه:';
   static const String sendOffer = 'أرسل عرض';
+  static const String deliverdDone = 'تم التوصيل';
+  static const String deliverd= 'اضغط هنا اذا تم التوصيل';
   static const String productsFaild = 'لا توجد عروض';
 
   //Uploading Supporting Documents Screen

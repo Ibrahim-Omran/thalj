@@ -12,14 +12,12 @@ class CustomShippingInfo extends StatelessWidget {
     required this.weight,
     required this.temp,
     required this.humidity,
-    required this.specialMarque,
   });
   final String shippingDescription;
   final String shippingType;
   final String weight;
   final String temp;
   final String humidity;
-  final String specialMarque;
 
   @override
   Widget build(BuildContext context) {
@@ -106,14 +104,6 @@ class CustomShippingInfo extends StatelessWidget {
           ),
           SizedBox(
             height: 10.h,
-          ),
-          Text(
-            '${AppStrings.specialMarque} $specialMarque',
-            textDirection: TextDirection.rtl,
-            style: Theme.of(context)
-                .textTheme
-                .displayMedium!
-                .copyWith(fontSize: 14),
           ),
         ],
       ),

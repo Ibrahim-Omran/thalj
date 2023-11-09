@@ -35,6 +35,23 @@ class HomeRepository {
     return isSendOffer;
   }
 
+
+  Future<bool> deliveredOffer({
+
+    required String id,
+  }) async {
+    await NetworkInfoImpl().checkInternet();
+
+    bool delivered = false;
+    delivered = await homeRemoteDataSource.deliveredOffer(
+
+        id:id
+    );
+
+
+    return delivered;
+  }
+
   Future<Result<List<AcceptedOrdersModel>>> getOffer() async {
     await NetworkInfoImpl().checkInternet();
 

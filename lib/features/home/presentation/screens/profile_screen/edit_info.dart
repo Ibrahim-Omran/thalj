@@ -32,6 +32,7 @@ class EditInfo extends StatelessWidget {
   }
 
   String name = CacheHelper.getData(key: 'fullname');
+  String token = CacheHelper.getData(key: 'loginToken');
 
   String email = CacheHelper.getData(key: 'email');
 
@@ -186,9 +187,8 @@ class EditInfo extends StatelessWidget {
           ),
           TextButton(
               onPressed: () async {
-                await CacheHelper.clearData('fullname');
 
-                await CacheHelper.clearData('loginToken').then((value) {
+               await CacheHelper.clearAll().then((value) {
                   value = true;
                   if (value) {
                     Navigator.pushNamedAndRemoveUntil(
@@ -198,6 +198,7 @@ class EditInfo extends StatelessWidget {
                     );
                   }
                 });
+
               },
               child: Text(
                 "تسجيل الخروج",

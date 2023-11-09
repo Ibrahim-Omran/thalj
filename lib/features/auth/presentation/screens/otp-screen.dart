@@ -87,6 +87,11 @@ class OTPScreen extends StatelessWidget {
                   SizedBox(
                     height: 30.h,
                   ),
+                  Text(
+                    AppStrings.checkVerifi,
+                    style: regularStyle(),
+                    textAlign: TextAlign.center,
+                  ),
                   state is OtpLoading? const Center(child: CircularProgressIndicator.adaptive()):  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

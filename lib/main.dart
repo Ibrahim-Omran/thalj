@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thalj/features/auth/presentation/bloc/otp_bloc/otp_bloc.dart';
@@ -23,6 +24,12 @@ import 'features/splash/presentation/views/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.light,
+      statusBarColor: Colors.transparent,
+    ),
+  );
   await NetworkInfoImpl().checkInternet();
   await CacheHelper.init();
   Widget widget;
@@ -31,7 +38,7 @@ void main() async {
   String? adminToken = CacheHelper.getData(key: 'adminToken');
 
   if (loginToken != null) {
-    widget =  HomeScreen();
+    widget =  const HomeScreen();
   } else if (adminToken != null) {
     widget = const AdminOptionsScreen();
   }  else {

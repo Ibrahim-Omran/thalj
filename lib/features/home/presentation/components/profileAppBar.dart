@@ -35,6 +35,7 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
 
+
                 Column(children: [
                   Text('مرحبا بك',
                       style: boldStyle(color: Colors.white, fontSize: 20)),
@@ -51,7 +52,10 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
               ],
             ),
           ),
-        )
+        ),
+
+
+
       ],
     );
   }

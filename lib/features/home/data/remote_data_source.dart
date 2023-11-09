@@ -364,4 +364,45 @@ class HomeRemoteDataSource {
     }
   }
 
+
+  Future<bool> deliveredOffer({
+
+    required String id,
+  }) async {
+    try {
+      final response = await http.patch(
+        Uri.parse('${AppStrings.apiLink}drivers/delevired/$id'),
+        headers: {
+          "Content-Type": 'application/json',
+          'Accept': '*/*',
+          'Authorization': 'Bearer $loginToken',
+        },
+
+        );
+
+
+      if (response.statusCode == 200) {
+        // sent successful
+        if (kDebugMode) {
+          print(response.body);
+        }
+        return true;
+      } else {
+        if (kDebugMode) {
+          print(response.body);
+        }
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        final errorMessageModel = ErrorMessageModel.fromJson(jsonResponse);
+        showToast(
+            text: errorMessageModel.statusMessage, state: ToastStates.error);
+        return false;
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return false;
+    }
+  }
+
 }
