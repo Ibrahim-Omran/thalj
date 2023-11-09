@@ -14,7 +14,6 @@ import '../domain/models/accepted_OrderModel.dart';
 import '../domain/models/one_order_model.dart';
 
 class HomeRemoteDataSource {
-  String? loginToken = CacheHelper.getData(key: 'loginToken');
 
   Future<bool> sendOffer({
     required String name,
@@ -23,6 +22,8 @@ class HomeRemoteDataSource {
     required String id,
   }) async {
     try {
+      String? loginToken = CacheHelper.getData(key: 'loginToken');
+
       final response = await http.post(
         Uri.parse('${AppStrings.apiLink}offers/$id'),
         headers: {
@@ -64,6 +65,8 @@ class HomeRemoteDataSource {
   }
 
   Future<Result<List<AcceptedOrdersModel>>> getAcceptedOffers() async {
+    String? loginToken = CacheHelper.getData(key: 'loginToken');
+
     final response = await http
         .get(Uri.parse('${AppStrings.apiLink}drivers/orders'), headers: {
       'Content-Type': 'application/json',
@@ -98,6 +101,8 @@ class HomeRemoteDataSource {
   }
 
   Future<Result<List<OrdersModel>>> getDriversOrders() async {
+    String? loginToken = CacheHelper.getData(key: 'loginToken');
+
     var response = await http.get(
       Uri.parse('${AppStrings.apiLink}orders'),
       headers: {
@@ -135,6 +140,8 @@ class HomeRemoteDataSource {
   }
 
   Future<OneOrderModel> getDriversOneOrderInfo(String id) async {
+    String? loginToken = CacheHelper.getData(key: 'loginToken');
+
     final response = await http.get(
       Uri.parse('${AppStrings.apiLink}orders/$id'),
       headers: {
@@ -154,6 +161,8 @@ class HomeRemoteDataSource {
     required File billPhoto,
   }) async {
     try {
+      String? loginToken = CacheHelper.getData(key: 'loginToken');
+
       var request = http.MultipartRequest(
         'POST',
         Uri.parse('${AppStrings.apiLink}drivers/paySubscription'),
@@ -192,6 +201,8 @@ class HomeRemoteDataSource {
 
   }) async {
     try {
+      String? loginToken = CacheHelper.getData(key: 'loginToken');
+
       final response = await http.patch(
         Uri.parse('${AppStrings.apiLink}editProfile/driver'),
         headers: {
@@ -235,6 +246,8 @@ class HomeRemoteDataSource {
 
   }) async {
     try {
+      String? loginToken = CacheHelper.getData(key: 'loginToken');
+
       final response = await http.patch(
         Uri.parse('${AppStrings.apiLink}editProfile/driver'),
         headers: {
@@ -280,6 +293,8 @@ class HomeRemoteDataSource {
 
   }) async {
     try {
+      String? loginToken = CacheHelper.getData(key: 'loginToken');
+
       final response = await http.patch(
         Uri.parse('${AppStrings.apiLink}editProfile/driver'),
         headers: {
@@ -324,6 +339,8 @@ class HomeRemoteDataSource {
 
   }) async {
     try {
+      String? loginToken = CacheHelper.getData(key: 'loginToken');
+
       final response = await http.patch(
         Uri.parse('${AppStrings.apiLink}editProfile/driver'),
         headers: {
@@ -370,6 +387,8 @@ class HomeRemoteDataSource {
     required String id,
   }) async {
     try {
+      String? loginToken = CacheHelper.getData(key: 'loginToken');
+
       final response = await http.patch(
         Uri.parse('${AppStrings.apiLink}drivers/delevired/$id'),
         headers: {
