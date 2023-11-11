@@ -35,8 +35,8 @@ class AuthRemoteDataSource {
           CacheHelper.saveData(key: 'email', value: loginModel.data[0].email);
           CacheHelper.saveData(key: 'phone', value: loginModel.data[0].phone);
           CacheHelper.saveData(
-              key: 'subscriptionDate',
-              value: loginModel.data[0].subscriptionDate);
+              key: 'expiryDate',
+              value: loginModel.expiryDate);
           CacheHelper.saveData(key: 'status', value: loginModel.data[0].status);
           CacheHelper.saveData(
               key: 'daysUntilExpiry', value: loginModel.daysUntilExpiry);

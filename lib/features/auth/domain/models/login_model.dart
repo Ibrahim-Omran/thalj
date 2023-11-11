@@ -1,11 +1,13 @@
 class LoginModel {
   final List<UserInfo> data;
   final String token;
+  final String expiryDate;
   final int daysUntilExpiry;
 
   LoginModel({
     required this.data,
     required this.token,
+    required this.expiryDate,
     required this.daysUntilExpiry,
   });
 
@@ -18,6 +20,7 @@ class LoginModel {
     return LoginModel(
       data: userInfoList,
       token: json['token'] ?? "",
+      expiryDate: json['expiryDate'] ?? "",
       daysUntilExpiry: json['daysUntilExpiry'] ?? 0,
     );
   }

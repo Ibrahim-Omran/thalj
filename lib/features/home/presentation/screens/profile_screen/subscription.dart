@@ -30,7 +30,7 @@ class Subscription extends StatefulWidget {
 class _SubscriptionState extends State<Subscription> {
   final picker = ImagePicker();
 String? status = CacheHelper.getData(key: 'status');
-String? subscriptionDate = CacheHelper.getData(key: 'subscriptionDate');
+String? expiryDate = CacheHelper.getData(key: 'expiryDate');
 int? daysUntilExpiry = CacheHelper.getData(key: 'daysUntilExpiry');
 
 
@@ -49,7 +49,7 @@ int? daysUntilExpiry = CacheHelper.getData(key: 'daysUntilExpiry');
 
   @override
   Widget build(BuildContext context) {
-    List<String> parts = subscriptionDate!.split('T');
+    List<String> parts = expiryDate!.split('T');
     String datePart = parts[0];
 
 

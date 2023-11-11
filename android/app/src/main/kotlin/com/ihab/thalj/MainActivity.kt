@@ -1,4 +1,4 @@
-package com.example.thalj
+package com.ihab.thalj
 
 import io.flutter.embedding.android.FlutterActivity
 
