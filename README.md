@@ -12,11 +12,16 @@ THALJ is an Mobile application (IOS/Android) develop by flutter it serve on driv
 
 # Driver Layout
 
-Login Screen || Sign upScreen || Add user Screen
+Login Screen || Sign upScreen
 
 |<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/22339034-5108-456a-a710-8c88e9cdd511.jpeg" width="200"> | <img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/fbf6111b-ae68-426a-8945-79098f7f48bf.jpeg" width="200">|<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/7a25579c-c369-4714-b3f6-e7cd7b971116.jpeg" width="200"> | 
 --- |---|---|
 
+
+Main Screen
+
+|<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/24d89852-561a-471d-acb2-2895cbf1a6bd.jpeg" width="200"> | <img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/fbf6111b-ae68-426a-8945-79098f7f48bf.jpeg" width="200">|<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/ee4a675a-5424-4416-8b7d-f3a66825e383.jpeg" width="200"> | 
+--- |---|---|
 Manager Account View
 
 |<img src="https://github.com/Mohamedihab29592/Groups-Managament/assets/64233832/7ffff6a0-31b7-45ab-8b21-6ff415551ad7.jpeg" width="200"> | <img src="https://github.com/Mohamedihab29592/Groups-Managament/assets/64233832/d3ef4474-f8bc-454e-982d-cd7fe92b3c59.jpeg" width="200">|
