@@ -3,9 +3,7 @@
 THALJ is an Mobile application (IOS/Android) develop by flutter it serve on drivers and clinets that need to dliver products from place to other
 
 ## Yaml
-|<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/18ae0be3-ac84-4fca-a284-fbf8e4c3c7e5" width="400"> |
-
----|
+|<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/18ae0be3-ac84-4fca-a284-fbf8e4c3c7e5" width="400"> |---|
 
 ## ScreenShoots
 
