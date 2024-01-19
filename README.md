@@ -28,13 +28,14 @@ lib
 This folder contains all services and tools related to the application
 ```
 core
-├── compnent            
-├── error
+├── erros            
+├── function
 ├── local
 ├── network        
 ├── routes                  
-├── services                  
-└── utils                   
+├── theme                  
+├── utils
+└── widgets                 
 ```
 ### features
 This folder containes everything related to the screen of the application and the business logic of the application specificly state management.
@@ -42,9 +43,9 @@ This folder containes everything related to the screen of the application and th
 presentation
 ├── adminHome
 ├── auth
-└── documents
+├── documents
 ├── home
-├── splash/onbarding
+└──splash/onbarding
 ```
 
 
