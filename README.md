@@ -34,7 +34,7 @@ Details product screen
 
 Login and Main Screen
 
-|<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/416f8055-5ffd-4fc4-8f13-53caa66b6b04.jpeg" width="150"> | <img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/470a6251-bc1d-42d6-b302-1791403cf846.jpeg" width="200">|
+|<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/416f8055-5ffd-4fc4-8f13-53caa66b6b04.jpeg" width="170"> | <img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/470a6251-bc1d-42d6-b302-1791403cf846.jpeg" width="200">|
 --- |---|
 
 
