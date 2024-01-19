@@ -15,7 +15,7 @@ THALJ is an Mobile application (IOS/Android) develop by flutter it serve on driv
 
 Login Screen || Sign upScreen
 
-|<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/22339034-5108-456a-a710-8c88e9cdd511.jpeg" width="200"> | <img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/12cee538-0f03-4ecf-af74-82f20133e59b.jpeg" width="200">|<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/7a25579c-c369-4714-b3f6-e7cd7b971116.jpeg" width="200"> | 
+|<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/22339034-5108-456a-a710-8c88e9cdd511.jpeg" width="160"> | <img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/12cee538-0f03-4ecf-af74-82f20133e59b.jpeg" width="200">|<img src="https://github.com/Mohamedihab29592/thalj/assets/64233832/7a25579c-c369-4714-b3f6-e7cd7b971116.jpeg" width="200"> | 
 --- |---|---|
 
 
