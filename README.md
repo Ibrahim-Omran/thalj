@@ -3,7 +3,7 @@
 THALJ is an Mobile application (IOS/Android) develop by flutter it serve on drivers and clinets that need to dliver products from place to other
 
 ## Folder structure
-We have applied clean archeticture concept and here is the basic folder structure:
+We have applied MVVM archeticture concept and here is the basic folder structure:
 
 core folder structure that flutter provides:
 ```
